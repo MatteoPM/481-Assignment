@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    height: 100dvh;
+}
+
+#root {
+    height: 100%;
+}
+
+@layer base {
+    * {
+        @apply scrollbar
+    }
+
+    html {
+        @apply scrollbar-track-transparent scrollbar-thumb-stone-400
+    }
+}
