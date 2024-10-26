@@ -8,10 +8,13 @@ function App() {
       <div className="h-full flex flex-col">
         <div className="p-4 overflow-y-auto">
           <div className="grid grid-cols-3 items-center">
-            <UserCircle className="w-8 h-8" />
+            <div></div>
             <h1 className="text-center text-stone-700 font-semibold">
               Dashboard
             </h1>
+            <div className="justify-self-end">
+              <UserCircle className="w-8 h-8" />
+            </div>
           </div>
 
           <h2 className="font-semibold text-xl mt-8">Recent Posts</h2>

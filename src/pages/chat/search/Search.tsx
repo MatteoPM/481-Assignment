@@ -1,12 +1,14 @@
 import { MessageSquare, Plus, SearchIcon, UserCircle } from "lucide-react";
 import { FormEvent, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import Card from "../../components/card";
-import FooterNav from "../../components/footerNav";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
+import Card from "../../../components/card";
+import FooterNav from "../../../components/footerNav";
 
-function Groups() {
-  const [query, setQuery] = useState("");
+function ChatSearch() {
+  const [searchParams] = useSearchParams();
+  const q = searchParams.get("q");
   const navigate = useNavigate();
+  const [query, setQuery] = useState(q || "");
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
@@ -18,20 +20,20 @@ function Groups() {
 
   return (
     <>
-      <div className="flex h-full flex-col">
-        <div className="overflow-y-auto p-4">
+      <div className="h-full flex flex-col">
+        <div className="p-4 overflow-y-auto">
           <div className="grid grid-cols-3 items-center text-stone-700">
-            <UserCircle className="h-8 w-8" />
-            <h1 className="text-center font-semibold">Groups</h1>
+            <UserCircle className="w-8 h-8" />
+            <h1 className="text-center font-semibold">Chat</h1>
             <div className="justify-self-end">
-              <MessageSquare className="h-8 w-8" />
+              <MessageSquare className="w-8 h-8" />
             </div>
           </div>
 
-          <div className="mt-6 flex items-center gap-4">
+          <div className="flex gap-4 items-center mt-6">
             <form
               onSubmit={handleSubmit}
-              className="relative flex grow items-center rounded bg-stone-200 px-2 py-1.5 text-sm"
+              className="bg-stone-200 relative rounded flex items-center px-2 py-1.5 text-sm grow"
             >
               <button type="submit" className="cursor-pointer">
                 <SearchIcon className="mr-2 text-stone-500" />
@@ -44,24 +46,16 @@ function Groups() {
                 onChange={(e) => setQuery(e.target.value)}
               />
             </form>
-            <button className="rounded-full bg-white p-1 shadow">
+            <button className="bg-white rounded-full p-1 shadow">
               <Plus className="text-green-400" />
             </button>
           </div>
 
-          <h2 className="mt-6 text-xl font-semibold">Your Groups</h2>
-          <div className="mt-1 flex gap-2 overflow-x-auto rounded-md py-2 scrollbar">
-            <Link to="/groups/1" className="text-blue-400">
+          <h2 className="font-semibold text-xl mt-6">Results for "{query}"</h2>
+          <div className="grid grid-cols-2 mt-2 gap-3">
+            <Link to="/chat/1">
               <Card />
             </Link>
-            <Card />
-            <Card />
-            <Card />
-          </div>
-
-          <h2 className="mt-8 text-xl font-semibold">Suggested Groups</h2>
-          <div className="mt-1 flex gap-2 overflow-x-auto rounded-md py-2">
-            <Card />
             <Card />
             <Card />
             <Card />
@@ -74,4 +68,4 @@ function Groups() {
   );
 }
 
-export default Groups;
+export default ChatSearch;
