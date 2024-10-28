@@ -1,4 +1,4 @@
-import { ChatMessageType } from "../pages/chat/forum/Forum";
+import { ChatMessageType } from "@/placeholderData";
 
 const ChatMessage = ({ chatMessage }: { chatMessage: ChatMessageType }) => {
   return (

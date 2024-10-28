@@ -1,34 +1,38 @@
+import ChatMessage from "@/components/chatMessage";
+import FooterNav from "@/components/footerNav";
+import MessageInput from "@/components/messageInput";
 import {
   ChatMessageType,
   placeholderUser,
   placeholderUser2,
-  placeholderUser3,
 } from "@/placeholderData";
 import { UserCircle } from "lucide-react";
 import { useState } from "react";
-import ChatMessage from "../../../components/chatMessage";
-import FooterNav from "../../../components/footerNav";
-import MessageInput from "../../../components/messageInput";
 
 const initialChatMessages: ChatMessageType[] = [
   {
     user: placeholderUser,
     date: Date.now(),
-    message: "Hello world!",
+    message: "What is love",
+  },
+  {
+    user: placeholderUser,
+    date: Date.now(),
+    message: "Baby don't hurt me",
+  },
+  {
+    user: placeholderUser,
+    date: Date.now(),
+    message: "Don't hurt me",
   },
   {
     user: placeholderUser2,
     date: Date.now(),
-    message: "Yo wassup",
-  },
-  {
-    user: placeholderUser3,
-    date: Date.now(),
-    message: "Testing testing testing testing testing testing",
+    message: "No more",
   },
 ];
 
-function Forum() {
+function Dm() {
   const [chatMessages] = useState(initialChatMessages);
 
   return (
@@ -37,7 +41,7 @@ function Forum() {
         <div className="shrink-0 overflow-y-auto border-b p-4">
           <div className="grid grid-cols-3 items-center text-stone-700">
             <UserCircle className="h-8 w-8" />
-            <h1 className="text-center font-semibold">Renewable Energy</h1>
+            <h1 className="text-center font-semibold">John Smeeth</h1>
             <div className="justify-self-end"></div>
           </div>
         </div>
@@ -56,4 +60,4 @@ function Forum() {
   );
 }
 
-export default Forum;
+export default Dm;

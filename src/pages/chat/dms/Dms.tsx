@@ -1,10 +1,15 @@
-import { MessageSquare, Plus, SearchIcon, UserCircle } from "lucide-react";
+import DmCard from "@/components/dmCard";
+import FooterNav from "@/components/footerNav";
+import {
+  placeholderUser,
+  placeholderUser2,
+  placeholderUser3,
+} from "@/placeholderData";
+import { Plus, ScrollText, SearchIcon, UserCircle } from "lucide-react";
 import { FormEvent, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import Card from "../../components/card";
-import FooterNav from "../../components/footerNav";
 
-function Chat() {
+function Dms() {
   const [query, setQuery] = useState("");
   const navigate = useNavigate();
 
@@ -22,10 +27,10 @@ function Chat() {
         <div className="overflow-y-auto p-4">
           <div className="grid grid-cols-3 items-center text-stone-700">
             <UserCircle className="h-8 w-8" />
-            <h1 className="text-center font-semibold">Chat</h1>
+            <h1 className="text-center font-semibold">Private Messages</h1>
             <div className="justify-self-end">
-              <Link to={"/chat/dms"} className="hover:text-blue-400">
-                <MessageSquare className="h-8 w-8" />
+              <Link to={"/chat"} className="hover:text-blue-400">
+                <ScrollText className="h-8 w-8" />
               </Link>
             </div>
           </div>
@@ -50,32 +55,14 @@ function Chat() {
               <Plus className="text-green-400" />
             </button>
           </div>
+        </div>
 
-          <h2 className="mt-6 text-xl font-semibold">Infosec Club</h2>
-          <div className="mt-1 flex gap-2 overflow-x-auto rounded-md py-2 scrollbar">
-            <Link to="/chat/1" className="text-blue-400">
-              <Card />
-            </Link>
-            <Card />
-            <Card />
-            <Card />
-          </div>
-
-          <h2 className="mt-8 text-xl font-semibold">Powerlifting</h2>
-          <div className="mt-1 flex gap-2 overflow-x-auto rounded-md py-2">
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-          </div>
-
-          <h2 className="mt-8 text-xl font-semibold">BSD</h2>
-          <div className="mt-1 flex gap-2 overflow-x-auto rounded-md py-2">
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-          </div>
+        <div className="divide-y divide-solid">
+          <Link to={"/chat/dms/1"} className="text-blue-400">
+            <DmCard user={placeholderUser} />
+          </Link>
+          <DmCard user={placeholderUser2} />
+          <DmCard user={placeholderUser3} />
         </div>
 
         <FooterNav />
@@ -84,4 +71,4 @@ function Chat() {
   );
 }
 
-export default Chat;
+export default Dms;
