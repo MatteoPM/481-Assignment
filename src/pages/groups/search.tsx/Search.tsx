@@ -18,7 +18,7 @@ function Search() {
           </>
         }
       >
-        <div className="mt-6 flex items-center gap-4">
+        <div className="flex items-center gap-4">
           <SearchBar searchUrl="/groups/search" />
 
           <button className="rounded-full bg-white p-1 shadow">

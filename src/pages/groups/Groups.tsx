@@ -1,20 +1,13 @@
 import Page from "@/components/page";
 import SearchBar from "@/components/searchBar";
-import { MessageSquare, Plus } from "lucide-react";
+import { Plus } from "lucide-react";
 import { Link } from "react-router-dom";
 import Card from "../../components/card";
 
 function Groups() {
   return (
     <>
-      <Page
-        title="Groups"
-        rightHeaderButtons={
-          <>
-            <MessageSquare className="h-8 w-8" />
-          </>
-        }
-      >
+      <Page title="Groups">
         <div className="flex items-center gap-4">
           <SearchBar searchUrl="/groups/search" />
 
