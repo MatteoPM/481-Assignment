@@ -1,49 +1,34 @@
-import { UserCircle } from "lucide-react";
+import Page from "@/components/page";
 import Card from "../components/card";
-import FooterNav from "../components/footerNav";
 
 function App() {
   return (
     <>
-      <div className="h-full flex flex-col">
-        <div className="p-4 overflow-y-auto">
-          <div className="grid grid-cols-3 items-center">
-            <div></div>
-            <h1 className="text-center text-stone-700 font-semibold">
-              Dashboard
-            </h1>
-            <div className="justify-self-end">
-              <UserCircle className="w-8 h-8" />
-            </div>
-          </div>
-
-          <h2 className="font-semibold text-xl mt-8">Recent Posts</h2>
-          <div className="py-2 rounded-md mt-1 flex gap-2 overflow-x-auto scrollbar">
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-          </div>
-
-          <h2 className="font-semibold text-xl mt-8">Upcoming Events</h2>
-          <div className="py-2 rounded-md mt-1 flex gap-2 overflow-x-auto ">
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-          </div>
-
-          <h2 className="font-semibold text-xl mt-8">Suggested Groups</h2>
-          <div className="py-2 rounded-md mt-1 flex gap-2 overflow-x-auto ">
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-          </div>
+      <Page title="Dashboard">
+        <h2 className="text-xl font-semibold">Recent Posts</h2>
+        <div className="mt-1 flex gap-2 overflow-x-auto rounded-md py-2 scrollbar">
+          <Card />
+          <Card />
+          <Card />
+          <Card />
         </div>
 
-        <FooterNav />
-      </div>
+        <h2 className="mt-8 text-xl font-semibold">Upcoming Events</h2>
+        <div className="mt-1 flex gap-2 overflow-x-auto rounded-md py-2">
+          <Card />
+          <Card />
+          <Card />
+          <Card />
+        </div>
+
+        <h2 className="mt-8 text-xl font-semibold">Suggested Groups</h2>
+        <div className="mt-1 flex gap-2 overflow-x-auto rounded-md py-2">
+          <Card />
+          <Card />
+          <Card />
+          <Card />
+        </div>
+      </Page>
     </>
   );
 }
