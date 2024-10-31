@@ -27,7 +27,7 @@ const SearchBar = ({
         className="relative flex grow items-center rounded bg-stone-200 px-2 py-1.5 text-sm"
       >
         <button type="submit" className="cursor-pointer">
-          <Search className="mr-2 text-stone-500" />
+          <Search className="mr-2 size-5 text-stone-500" />
         </button>
         <input
           type="text"
