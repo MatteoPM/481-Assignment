@@ -36,7 +36,7 @@ function Dm() {
 
   return (
     <>
-      <Page title="John Smeeth">
+      <Page title="John Smeeth" showBackButton>
         <div className="flex h-full flex-col">
           <div className="my-3 flex grow flex-col gap-4 overflow-auto px-3">
             {chatMessages.map((chatMessage) => (
