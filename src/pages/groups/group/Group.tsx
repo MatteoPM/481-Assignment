@@ -45,13 +45,10 @@ function Group() {
         </div>
 
         <h2 className="mt-8 text-xl font-semibold">Events</h2>
-        <div className="mt-1 flex gap-2 overflow-x-auto rounded-md py-2">
+        <div className="mt-1 flex snap-x gap-2 overflow-x-auto rounded-md py-2">
           <Link to="/events/1" className="text-blue-400">
             <Card />
           </Link>
-          <Card />
-          <Card />
-          <Card />
         </div>
       </Page>
     </>
