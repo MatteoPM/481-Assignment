@@ -15,8 +15,8 @@ function Dms() {
       <Page
         title="Private Messages"
         rightHeaderButtons={
-          <Link to={"/chat"} className="hover:text-blue-400">
-            <ScrollText className="h-8 w-8" />
+          <Link to={"/chat"} className="text-stone-600 hover:text-blue-400">
+            <ScrollText className="size-7" />
           </Link>
         }
       >

@@ -11,8 +11,11 @@ function Chat() {
         title="Chat"
         rightHeaderButtons={
           <>
-            <Link to={"/chat/dms"} className="hover:text-blue-400">
-              <MessageSquare className="h-8 w-8 font-light" />
+            <Link
+              to={"/chat/dms"}
+              className="text-stone-600 hover:text-blue-400"
+            >
+              <MessageSquare className="size-7 font-light" />
             </Link>
           </>
         }
