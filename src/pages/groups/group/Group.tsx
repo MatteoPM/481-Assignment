@@ -1,5 +1,12 @@
+import ForumCard from "@/components/forumCard";
 import Page from "@/components/page";
 import { Button } from "@/components/ui/button";
+import User from "@/components/user";
+import {
+  placeholderUser,
+  placeholderUser2,
+  placeholderUser3,
+} from "@/placeholderData";
 import { Link } from "react-router-dom";
 import Card from "../../../components/card";
 
@@ -8,7 +15,7 @@ function Group() {
     <>
       <Page title="Group Details" showBackButton>
         <img
-          className="mt-4 h-[120px] rounded-lg object-cover"
+          className="h-[120px] rounded-lg object-cover"
           src="https://assets.ppy.sh/user-cover-presets/4/2fd772ad175c5687370e0aab50799a84adef7d0fff3f97dccfa5c94384ebb8af.jpeg"
         />
         <div className="mt-3 flex items-center gap-3">
@@ -28,20 +35,26 @@ function Group() {
           animi ut.
         </p>
 
-        <h2 className="mt-6 text-xl font-semibold">Members</h2>
-        <div className="mt-1 flex gap-2 overflow-x-auto rounded-md py-2 scrollbar">
-          <Card />
-          <Card />
-          <Card />
-          <Card />
+        <h2 className="mt-6 text-xl font-semibold">
+          Members <span className="font-normal text-muted-foreground">(3)</span>
+        </h2>
+        <div className="mt-1 grid grid-cols-2 gap-2 rounded-md py-2 scrollbar">
+          <User user={placeholderUser} />
+          <User user={placeholderUser2} />
+          <User user={placeholderUser3} />
         </div>
 
+        <Link to={""} className="py-2 text-sm text-muted-foreground">
+          View all
+        </Link>
+
         <h2 className="mt-8 text-xl font-semibold">Forums</h2>
-        <div className="mt-1 flex gap-2 overflow-x-auto rounded-md py-2">
-          <Card />
-          <Card />
-          <Card />
-          <Card />
+        <div className="mt-3 flex flex-col divide-y overflow-hidden rounded-md border bg-white shadow-sm">
+          <ForumCard />
+          <ForumCard />
+          <ForumCard />
+          <ForumCard />
+          <ForumCard />
         </div>
 
         <h2 className="mt-8 text-xl font-semibold">Events</h2>

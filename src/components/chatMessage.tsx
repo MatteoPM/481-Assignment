@@ -1,6 +1,6 @@
 import { Drawer, DrawerContent, DrawerTrigger } from "@/components/ui/drawer";
 import { ChatMessageType } from "@/placeholderData";
-import { Ban } from "lucide-react";
+import UserDrawerContent from "./userDrawerContent";
 
 const ChatMessage = ({ chatMessage }: { chatMessage: ChatMessageType }) => {
   return (
@@ -13,23 +13,7 @@ const ChatMessage = ({ chatMessage }: { chatMessage: ChatMessageType }) => {
           />
         </DrawerTrigger>
         <DrawerContent className="">
-          <div className="flex flex-col items-center p-8">
-            <img
-              src={chatMessage.user.avatarUrl}
-              className="size-[75px] rounded-full object-cover"
-            />
-
-            <div className="text-lg font-medium">
-              {chatMessage.user.username}
-            </div>
-
-            <div className="mt-10 flex w-full flex-col rounded-lg bg-stone-100">
-              <button className="flex items-center justify-between p-4 text-destructive">
-                <span className="font-medium">Block User</span>
-                <Ban />
-              </button>
-            </div>
-          </div>
+          <UserDrawerContent user={chatMessage.user} />
         </DrawerContent>
       </Drawer>
       <div>

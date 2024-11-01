@@ -35,7 +35,7 @@ const GroupCard = ({ compact }: { compact?: boolean }) => {
   return (
     <Link
       to={"/groups/1"}
-      className="flex h-[100px] shrink-0 snap-start snap-always justify-between overflow-hidden rounded-md border bg-white p-2 shadow-sm active:bg-stone-50"
+      className="flex h-[110px] shrink-0 snap-start snap-always justify-between overflow-hidden rounded-md border bg-white p-2 shadow-sm active:bg-stone-50"
     >
       <div>
         <div className="flex items-center gap-2">
@@ -49,8 +49,9 @@ const GroupCard = ({ compact }: { compact?: boolean }) => {
           </div>
         </div>
 
-        <p className="mt-2 text-sm text-muted-foreground">
-          Group Description blah blah.
+        <p className="mt-2 line-clamp-2 text-sm text-muted-foreground">
+          Group Description blah blah. Does it wrap? Does it truncate? Testing
+          testing testing join our group pls i beg of you
         </p>
       </div>
 
