@@ -1,3 +1,4 @@
+import ChatTabs from "@/components/chatTabs";
 import DmCard from "@/components/dmCard";
 import Page from "@/components/page";
 import SearchBar from "@/components/searchBar";
@@ -6,20 +7,13 @@ import {
   placeholderUser2,
   placeholderUser3,
 } from "@/placeholderData";
-import { Plus, ScrollText } from "lucide-react";
+import { Plus } from "lucide-react";
 import { Link } from "react-router-dom";
 
 function Dms() {
   return (
     <>
-      <Page
-        title="Private Messages"
-        rightHeaderButtons={
-          <Link to={"/chat"} className="text-stone-600 hover:text-blue-400">
-            <ScrollText className="size-7" />
-          </Link>
-        }
-      >
+      <Page title="Chat" headerContent={<ChatTabs value="private" />}>
         <div className="flex items-center gap-4">
           <SearchBar searchUrl="/chat/search" />
 

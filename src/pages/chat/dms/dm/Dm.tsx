@@ -1,11 +1,7 @@
 import ChatMessage from "@/components/chatMessage";
 import MessageInput from "@/components/messageInput";
 import Page from "@/components/page";
-import {
-  ChatMessageType,
-  placeholderUser,
-  placeholderUser2,
-} from "@/placeholderData";
+import { ChatMessageType, placeholderUser, testUser } from "@/placeholderData";
 import { useState } from "react";
 
 const initialChatMessages: ChatMessageType[] = [
@@ -25,7 +21,7 @@ const initialChatMessages: ChatMessageType[] = [
     message: "Don't hurt me",
   },
   {
-    user: placeholderUser2,
+    user: testUser,
     date: Date.now(),
     message: "No more",
   },

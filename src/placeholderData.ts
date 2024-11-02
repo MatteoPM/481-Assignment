@@ -10,6 +10,13 @@ export type ChatMessageType = {
   message: string;
 };
 
+export const testUser: UserType = {
+  avatarUrl:
+    "https://static.wikia.nocookie.net/b72e4978-1af8-49a8-ac03-ec0ef8a47d30/scale-to-width/370",
+  username: "Killer Kirb",
+  status: "online",
+};
+
 export const placeholderUser: UserType = {
   avatarUrl:
     "https://i.pinimg.com/564x/cd/aa/a1/cdaaa1c1b71ab63e8ed183e970f6e61c.jpg",

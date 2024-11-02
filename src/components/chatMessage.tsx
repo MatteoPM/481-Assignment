@@ -1,10 +1,13 @@
 import { Drawer, DrawerContent, DrawerTrigger } from "@/components/ui/drawer";
-import { ChatMessageType } from "@/placeholderData";
+import { cn } from "@/lib/utils";
+import { ChatMessageType, testUser } from "@/placeholderData";
 import UserDrawerContent from "./userDrawerContent";
 
 const ChatMessage = ({ chatMessage }: { chatMessage: ChatMessageType }) => {
+  const isOwnMessage = chatMessage.user.username === testUser.username;
+
   return (
-    <div className="flex gap-2">
+    <div className={cn("flex gap-2", isOwnMessage && "flex-row-reverse")}>
       <Drawer>
         <DrawerTrigger>
           <img
@@ -21,7 +24,12 @@ const ChatMessage = ({ chatMessage }: { chatMessage: ChatMessageType }) => {
           <span className="block font-medium">{chatMessage.user.username}</span>
           <span className="text-xs text-stone-500">Today at 8:27 PM</span>
         </div>
-        <div className="mt-1 rounded-md border bg-white p-2 text-sm text-stone-700">
+        <div
+          className={cn(
+            "mt-1 rounded-md border bg-white p-2 text-sm text-stone-700",
+            isOwnMessage && "bg-primary/5",
+          )}
+        >
           {chatMessage.message}
         </div>
       </div>
