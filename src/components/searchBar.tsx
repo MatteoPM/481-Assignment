@@ -1,6 +1,6 @@
-import { Search } from "lucide-react";
+import { Search, X } from "lucide-react";
 import { FormEvent, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const SearchBar = ({
   searchUrl,
@@ -11,6 +11,7 @@ const SearchBar = ({
 }) => {
   const [query, setQuery] = useState(initialValue || "");
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
@@ -36,6 +37,15 @@ const SearchBar = ({
           value={query}
           onChange={(e) => setQuery(e.target.value)}
         />
+
+        {location.pathname.includes("search") && (
+          <Link
+            to={searchUrl.replace("/search", "")}
+            className="flex items-center justify-center rounded-full bg-stone-400 p-0.5 text-white"
+          >
+            <X className="size-3.5 text-stone-300" />
+          </Link>
+        )}
       </form>
     </>
   );

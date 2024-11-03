@@ -24,7 +24,7 @@ function ChatSearch() {
         }
       >
         <div className="flex items-center gap-4">
-          <SearchBar searchUrl="/groups/search" initialValue={q} />
+          <SearchBar searchUrl="/chat/search" initialValue={q} />
 
           <button className="rounded-full bg-white p-1 shadow">
             <Plus className="text-green-400" />

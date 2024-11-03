@@ -11,6 +11,7 @@ import ChatSearch from "./pages/chat/search/Search.tsx";
 import CreateEvent from "./pages/events/create/CreateEvent.tsx";
 import Event from "./pages/events/event/Event.tsx";
 import Events from "./pages/events/Events.tsx";
+import SearchEvents from "./pages/events/search/searchEvents.tsx";
 import Group from "./pages/groups/group/Group.tsx";
 import GroupStats from "./pages/groups/group/stats/GroupStats.tsx";
 import Groups from "./pages/groups/Groups.tsx";
@@ -61,6 +62,10 @@ const router = createBrowserRouter([
   {
     path: "/events",
     element: <Events />,
+  },
+  {
+    path: "/events/search",
+    element: <SearchEvents />,
   },
   {
     path: "/events/:groupId",

@@ -55,7 +55,7 @@ const GroupCard = ({ compact }: { compact?: boolean }) => {
         </p>
       </div>
 
-      <ChevronRight className="self-center text-stone-500" />
+      <ChevronRight className="shrink-0 self-center text-stone-500" />
     </Link>
   );
 };
