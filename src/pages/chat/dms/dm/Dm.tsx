@@ -34,13 +34,13 @@ function Dm() {
     <>
       <Page title="John Smeeth" showBackButton>
         <div className="flex h-full flex-col">
-          <div className="my-3 flex grow flex-col gap-4 overflow-auto px-3">
+          <div className="flex grow flex-col gap-4 overflow-auto">
             {chatMessages.map((chatMessage) => (
               <ChatMessage chatMessage={chatMessage} />
             ))}
           </div>
 
-          <MessageInput className="mx-2 mb-2 grow-0" />
+          <MessageInput className="grow-0" />
         </div>
       </Page>
     </>

@@ -2,7 +2,7 @@ import Card from "@/components/card";
 import Page from "@/components/page";
 import SearchBar from "@/components/searchBar";
 import { Plus } from "lucide-react";
-import { useSearchParams } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 
 function SearchEvents() {
   const [searchParams] = useSearchParams();
@@ -21,7 +21,9 @@ function SearchEvents() {
 
         <h2 className="mt-6 text-xl font-semibold">Results for "{q}"</h2>
         <div className="mt-1 grid gap-2 rounded-md py-2">
-          <Card />
+          <Link to="/events/1" className="text-blue-400">
+            <Card />
+          </Link>
           <Card />
           <Card />
           <Card />

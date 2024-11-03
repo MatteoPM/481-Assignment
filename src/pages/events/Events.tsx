@@ -21,7 +21,9 @@ function Events() {
 
         <h2 className="mt-6 text-xl font-semibold">RSVP'd</h2>
         <div className="mt-1 flex gap-2 overflow-x-auto rounded-md py-2 scrollbar">
-          <Card />
+          <Link to="/events/1" className="text-blue-400">
+            <Card />
+          </Link>
           <Card />
           <Card />
           <Card />
