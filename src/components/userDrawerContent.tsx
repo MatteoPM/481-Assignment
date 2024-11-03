@@ -11,17 +11,20 @@ const UserDrawerContent = ({ user }: { user: UserType }) => {
       />
 
       <div className="text-lg font-medium">{user.username}</div>
-      {user.status === "online" && (
-        <div className="flex items-center gap-2">
-          <div
-            className={cn("ml-auto size-[8px] rounded-full bg-green-400")}
-          ></div>
+      <div className="flex items-center gap-2">
+        <div
+          className={cn(
+            "ml-auto size-[8px] rounded-full",
+            user.status === "online" && "bg-green-400",
+            user.status === "offline" && "bg-stone-400",
+            user.status === "away" && "bg-orange-400",
+          )}
+        ></div>
 
-          <span className="text-xs font-bold text-muted-foreground">
-            ONLINE
-          </span>
-        </div>
-      )}
+        <span className="block text-xs font-bold text-muted-foreground">
+          {user.status.toUpperCase()}
+        </span>
+      </div>
 
       <div className="mt-10 flex w-full flex-col rounded-lg bg-stone-100">
         <button className="flex items-center justify-between p-4 text-destructive">
