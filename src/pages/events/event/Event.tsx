@@ -1,9 +1,14 @@
 import Page from "@/components/page";
 import { Button } from "@/components/ui/button";
+import User from "@/components/user";
 import { cn } from "@/lib/utils";
+import {
+  placeholderUser,
+  placeholderUser2,
+  placeholderUser3,
+} from "@/placeholderData";
 import { format } from "date-fns";
 import { CalendarIcon } from "lucide-react";
-import Card from "../../../components/card";
 
 function Event() {
   const date = new Date();
@@ -39,12 +44,14 @@ function Event() {
           animi ut.
         </p>
 
-        <h2 className="mt-8 text-xl font-semibold">Attendees</h2>
-        <div className="mt-1 flex gap-2 overflow-x-auto rounded-md py-2">
-          <Card />
-          <Card />
-          <Card />
-          <Card />
+        <h2 className="mt-8 text-xl font-semibold">
+          Attendees{" "}
+          <span className="font-normal text-muted-foreground">(3)</span>
+        </h2>
+        <div className="mt-1 grid grid-cols-2 gap-2 rounded-md py-2 scrollbar">
+          <User user={placeholderUser} />
+          <User user={placeholderUser2} />
+          <User user={placeholderUser3} />
         </div>
       </Page>
     </>
