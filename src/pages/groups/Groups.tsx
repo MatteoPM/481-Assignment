@@ -15,6 +15,14 @@ function Groups() {
           </button>
         </div>
 
+        <h2 className="mt-6 text-xl font-semibold">Courses</h2>
+        <div className="mt-3 flex flex-col divide-y overflow-hidden rounded-md border bg-white shadow-sm">
+          <GroupCard compact />
+          <GroupCard compact />
+          <GroupCard compact />
+          <GroupCard compact />
+        </div>
+
         <h2 className="mt-6 text-xl font-semibold">Your Groups</h2>
         <div className="mt-3 flex flex-col divide-y overflow-hidden rounded-md border bg-white shadow-sm">
           <GroupCard compact />

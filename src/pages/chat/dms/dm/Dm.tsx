@@ -24,6 +24,7 @@ const initialChatMessages: ChatMessageType[] = [
     user: testUser,
     date: Date.now(),
     message: "No more",
+    read: Date.now(),
   },
 ];
 
@@ -32,7 +33,7 @@ function Dm() {
 
   return (
     <>
-      <Page title="John Smeeth" showBackButton>
+      <Page title="John Smeeth" showBackButton hideFooter>
         <div className="flex h-full flex-col">
           <div className="flex grow flex-col gap-4 overflow-auto">
             {chatMessages.map((chatMessage) => (

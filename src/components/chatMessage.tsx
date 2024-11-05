@@ -7,9 +7,14 @@ const ChatMessage = ({ chatMessage }: { chatMessage: ChatMessageType }) => {
   const isOwnMessage = chatMessage.user.username === testUser.username;
 
   return (
-    <div className={cn("flex gap-2", isOwnMessage && "flex-row-reverse")}>
+    <div
+      className={cn(
+        "flex items-start gap-2",
+        isOwnMessage && "flex-row-reverse",
+      )}
+    >
       <Drawer>
-        <DrawerTrigger>
+        <DrawerTrigger className="pt-2">
           <img
             src={chatMessage.user.avatarUrl}
             className="size-[50px] rounded-full object-cover"
@@ -32,6 +37,11 @@ const ChatMessage = ({ chatMessage }: { chatMessage: ChatMessageType }) => {
         >
           {chatMessage.message}
         </div>
+        {chatMessage.read && (
+          <div className="mt-0.5 text-end text-xs text-muted-foreground">
+            <span className="font-medium">Read</span> 11:28 AM
+          </div>
+        )}
       </div>
     </div>
   );

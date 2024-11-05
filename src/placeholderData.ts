@@ -8,6 +8,7 @@ export type ChatMessageType = {
   user: UserType;
   date: number;
   message: string;
+  read?: number;
 };
 
 export const testUser: UserType = {

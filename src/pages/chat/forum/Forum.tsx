@@ -32,7 +32,7 @@ function Forum() {
 
   return (
     <>
-      <Page title="Renewable Energy" showBackButton>
+      <Page title="Renewable Energy" showBackButton hideFooter>
         <div className="flex h-full flex-col">
           <div className="flex grow flex-col gap-4 overflow-auto">
             {chatMessages.map((chatMessage) => (

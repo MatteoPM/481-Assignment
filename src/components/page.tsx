@@ -1,8 +1,9 @@
-import { ChevronLeft, User } from "lucide-react";
+import { ChevronLeft } from "lucide-react";
 import { ReactNode } from "react";
 import { useNavigate } from "react-router-dom";
 import FooterNav from "../components/footerNav";
 import { Separator } from "./ui/separator";
+import UserDrawer from "./userDrawer";
 
 const Page = ({
   children,
@@ -11,6 +12,7 @@ const Page = ({
   rightHeaderButtons,
   showBackButton,
   headerContent,
+  hideFooter,
 }: {
   children: ReactNode;
   title: string;
@@ -18,6 +20,7 @@ const Page = ({
   rightHeaderButtons?: ReactNode;
   showBackButton?: boolean;
   headerContent?: ReactNode;
+  hideFooter?: boolean;
 }) => {
   const navigate = useNavigate();
 
@@ -49,9 +52,8 @@ const Page = ({
                 <Separator orientation="vertical" className="mx-3 h-6" />
               </>
             )}
-            <div className="rounded-full border bg-white p-1 text-stone-600">
-              <User className="size-7" />
-            </div>
+
+            <UserDrawer />
           </div>
         </div>
 
@@ -60,7 +62,7 @@ const Page = ({
 
       <div className="grow overflow-y-auto p-4">{children}</div>
 
-      <FooterNav />
+      {!hideFooter && <FooterNav />}
     </div>
   );
 };

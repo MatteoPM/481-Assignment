@@ -1,5 +1,7 @@
 import DatePicker from "@/components/datePicker";
 import Page from "@/components/page";
+import { Label } from "@/components/ui/label";
+import { Switch } from "@/components/ui/switch";
 import { useState } from "react";
 import Card from "../../../components/card";
 
@@ -14,7 +16,9 @@ function CreateEvent() {
         />
 
         <div className="mt-2">
-          <label className="text-sm font-medium">Title</label>
+          <label className="text-sm font-medium">
+            Title<span className="text-red-400">*</span>
+          </label>
           <input
             type="text"
             placeholder="Title"
@@ -23,11 +27,18 @@ function CreateEvent() {
         </div>
 
         <div className="mt-2">
-          <label className="text-sm font-medium">Description</label>
+          <label className="text-sm font-medium">
+            Description<span className="text-red-400">*</span>
+          </label>
           <textarea
             placeholder="Description"
             className="mt-0.5 w-full rounded bg-stone-200 px-2 py-1.5 text-sm text-stone-600"
           />
+        </div>
+
+        <div className="my-5 flex items-center space-x-2">
+          <Switch id="airplane-mode" />
+          <Label htmlFor="airplane-mode">Private Event</Label>
         </div>
 
         <div className="my-5 flex gap-6">
