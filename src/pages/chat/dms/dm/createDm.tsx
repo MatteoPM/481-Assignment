@@ -14,7 +14,7 @@ import { Link } from "react-router-dom";
 function CreateDm() {
   return (
     <>
-      <Page title="New Message">
+      <Page title="New Message" showBackButton>
         <div className="relative h-full">
           <div className="flex items-center gap-4">
             <SearchBar searchUrl="/chat/search" />
