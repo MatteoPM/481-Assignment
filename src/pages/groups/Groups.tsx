@@ -1,6 +1,7 @@
 import GroupCard from "@/components/groupCard";
 import Page from "@/components/page";
 import SearchBar from "@/components/searchBar";
+import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
 
 function Groups() {
@@ -8,16 +9,22 @@ function Groups() {
     <>
       <Page title="Groups">
         <div className="flex items-center gap-4">
-          <SearchBar searchUrl="/groups/search" />
+          <SearchBar
+            searchUrl="/groups/search"
+            placeholder="Search clubs, groups..."
+          />
 
           <button className="rounded-full bg-white p-1 shadow">
             <Plus className="text-green-400" />
           </button>
         </div>
 
+        <Button variant={"outline"} className="mt-2 w-full">
+          Filters
+        </Button>
+
         <h2 className="mt-6 text-xl font-semibold">Courses</h2>
         <div className="mt-3 flex flex-col divide-y overflow-hidden rounded-md border bg-white shadow-sm">
-          <GroupCard compact />
           <GroupCard compact />
           <GroupCard compact />
           <GroupCard compact />
@@ -25,8 +32,6 @@ function Groups() {
 
         <h2 className="mt-6 text-xl font-semibold">Your Groups</h2>
         <div className="mt-3 flex flex-col divide-y overflow-hidden rounded-md border bg-white shadow-sm">
-          <GroupCard compact />
-          <GroupCard compact />
           <GroupCard compact />
           <GroupCard compact />
         </div>

@@ -5,9 +5,11 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 const SearchBar = ({
   searchUrl,
   initialValue,
+  placeholder,
 }: {
   searchUrl: string;
   initialValue?: string | null;
+  placeholder?: string;
 }) => {
   const [query, setQuery] = useState(initialValue || "");
   const navigate = useNavigate();
@@ -32,7 +34,7 @@ const SearchBar = ({
         </button>
         <input
           type="text"
-          placeholder="Search"
+          placeholder={placeholder || "Search"}
           className="w-full bg-transparent placeholder:text-stone-400 focus:outline-none"
           value={query}
           onChange={(e) => setQuery(e.target.value)}

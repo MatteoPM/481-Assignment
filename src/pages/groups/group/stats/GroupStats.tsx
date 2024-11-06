@@ -57,8 +57,7 @@ function GroupStats() {
           </DropdownMenu>
         </div>
 
-        <p className="mt-6">Wowee look at these cool charts</p>
-        <img src={chartsUrl} className="" />
+        <img src={chartsUrl} className="mt-6" />
       </Page>
     </>
   );

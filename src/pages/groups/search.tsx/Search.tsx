@@ -1,6 +1,7 @@
 import GroupCard from "@/components/groupCard";
 import Page from "@/components/page";
 import SearchBar from "@/components/searchBar";
+import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
 import { useSearchParams } from "react-router-dom";
 
@@ -18,6 +19,10 @@ function Search() {
             <Plus className="text-green-400" />
           </button>
         </div>
+
+        <Button variant={"outline"} className="mt-2 w-full">
+          Filters
+        </Button>
 
         <h2 className="mt-6 text-xl font-semibold">Results for "{q}"</h2>
         <div className="mt-1 grid gap-2 rounded-md py-2">

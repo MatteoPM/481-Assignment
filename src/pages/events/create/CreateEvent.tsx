@@ -6,7 +6,7 @@ import { useState } from "react";
 import Card from "../../../components/card";
 
 function CreateEvent() {
-  const [date, setDate] = useState<Date>();
+  const [date, setDate] = useState<Date | undefined>(new Date());
   return (
     <>
       <Page title="Create Event" showBackButton>
@@ -25,6 +25,9 @@ function CreateEvent() {
             className="mt-0.5 w-full rounded bg-stone-200 px-2 py-1.5 text-sm placeholder:text-stone-400"
           />
         </div>
+        <p className="mt-0.5 text-xs font-semibold text-red-400">
+          Title is required.
+        </p>
 
         <div className="mt-2">
           <label className="text-sm font-medium">
