@@ -11,7 +11,7 @@ function CreateEvent() {
     <>
       <Page title="Create Event" showBackButton>
         <img
-          className="mt-4 h-[120px] rounded-lg object-cover"
+          className="h-[120px] rounded-lg object-cover"
           src="https://assets.ppy.sh/user-cover-presets/4/2fd772ad175c5687370e0aab50799a84adef7d0fff3f97dccfa5c94384ebb8af.jpeg"
         />
 
