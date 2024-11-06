@@ -17,9 +17,12 @@ function Dms() {
         <div className="flex items-center gap-4">
           <SearchBar searchUrl="/chat/search" />
 
-          <button className="rounded-full bg-white p-1 shadow">
+          <Link
+            to={"/chat/dms/create"}
+            className="rounded-full bg-white p-1 shadow"
+          >
             <Plus className="text-green-400" />
-          </button>
+          </Link>
         </div>
 
         <div className="my-2 divide-y divide-solid">

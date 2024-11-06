@@ -4,6 +4,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
 import App from "./pages/App.tsx";
 import Chat from "./pages/chat/Chat.tsx";
+import CreateDm from "./pages/chat/dms/dm/createDm.tsx";
 import Dm from "./pages/chat/dms/dm/Dm.tsx";
 import Dms from "./pages/chat/dms/Dms.tsx";
 import Forum from "./pages/chat/forum/Forum.tsx";
@@ -38,6 +39,10 @@ const router = createBrowserRouter([
   {
     path: "/chat/dms",
     element: <Dms />,
+  },
+  {
+    path: "/chat/dms/create",
+    element: <CreateDm />,
   },
   {
     path: "/chat/dms/:dmId",
