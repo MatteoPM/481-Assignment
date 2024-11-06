@@ -11,7 +11,7 @@ function Groups() {
         <div className="flex items-center gap-4">
           <SearchBar
             searchUrl="/groups/search"
-            placeholder="Search clubs, groups..."
+            placeholder="Search courses, clubs..."
           />
 
           <button className="rounded-full bg-white p-1 shadow">
