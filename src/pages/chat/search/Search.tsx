@@ -1,8 +1,8 @@
+import ForumCard from "@/components/forumCard";
 import Page from "@/components/page";
 import SearchBar from "@/components/searchBar";
 import { MessageSquare, Plus } from "lucide-react";
 import { Link, useSearchParams } from "react-router-dom";
-import Card from "../../../components/card";
 
 function ChatSearch() {
   const [searchParams] = useSearchParams();
@@ -32,13 +32,11 @@ function ChatSearch() {
         </div>
 
         <h2 className="mt-6 text-xl font-semibold">Results for "{q}"</h2>
-        <div className="mt-2 grid grid-cols-2 gap-3">
-          <Link to="/chat/1">
-            <Card />
-          </Link>
-          <Card />
-          <Card />
-          <Card />
+        <div className="mt-3 flex flex-col divide-y overflow-hidden rounded-md border bg-white shadow-sm">
+          <ForumCard />
+          <ForumCard />
+          <ForumCard />
+          <ForumCard />
         </div>
       </Page>
     </>

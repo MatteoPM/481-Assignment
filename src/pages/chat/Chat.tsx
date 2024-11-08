@@ -1,9 +1,9 @@
 import ChatTabs from "@/components/chatTabs";
+import ForumCard from "@/components/forumCard";
 import Page from "@/components/page";
 import SearchBar from "@/components/searchBar";
 import { Plus } from "lucide-react";
 import { Link } from "react-router-dom";
-import Card from "../../components/card";
 
 function Chat() {
   return (
@@ -21,29 +21,35 @@ function Chat() {
         </div>
 
         <h2 className="mt-6 text-xl font-semibold">Infosec Club</h2>
-        <div className="mt-1 flex gap-2 overflow-x-auto rounded-md py-2 scrollbar">
-          <Link to="/chat/1" className="text-blue-400">
-            <Card />
-          </Link>
-          <Card />
-          <Card />
-          <Card />
+        <div className="mt-3 flex flex-col divide-y overflow-hidden rounded-md border bg-white shadow-sm">
+          <ForumCard />
+          <ForumCard />
+          <ForumCard />
+          <ForumCard />
         </div>
 
-        <h2 className="mt-8 text-xl font-semibold">Powerlifting</h2>
-        <div className="mt-1 flex gap-2 overflow-x-auto rounded-md py-2">
-          <Card />
-          <Card />
-          <Card />
-          <Card />
+        <Link to={""} className="py-2 text-sm text-muted-foreground">
+          View all
+        </Link>
+
+        <h2 className="mt-6 text-xl font-semibold">Powerlifting</h2>
+        <div className="mt-3 flex flex-col divide-y overflow-hidden rounded-md border bg-white shadow-sm">
+          <ForumCard />
+          <ForumCard />
+          <ForumCard />
+          <ForumCard />
         </div>
 
-        <h2 className="mt-8 text-xl font-semibold">BSD</h2>
-        <div className="mt-1 flex gap-2 overflow-x-auto rounded-md py-2">
-          <Card />
-          <Card />
-          <Card />
-          <Card />
+        <Link to={""} className="py-2 text-sm text-muted-foreground">
+          View all
+        </Link>
+
+        <h2 className="mt-6 text-xl font-semibold">BSD</h2>
+        <div className="mt-3 flex flex-col divide-y overflow-hidden rounded-md border bg-white shadow-sm">
+          <ForumCard />
+          <ForumCard />
+          <ForumCard />
+          <ForumCard />
         </div>
       </Page>
     </>

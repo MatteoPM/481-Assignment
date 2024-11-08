@@ -26,9 +26,7 @@ function Dms() {
         </div>
 
         <div className="my-2 divide-y divide-solid">
-          <Link to={"/chat/dms/1"} className="text-blue-400">
-            <DmCard user={placeholderUser} />
-          </Link>
+          <DmCard user={placeholderUser} />
           <DmCard user={placeholderUser2} />
           <DmCard user={placeholderUser3} />
         </div>

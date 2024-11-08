@@ -22,6 +22,12 @@ export type Event = {
   perks: string[];
 };
 
+export type Forum = {
+  title: string;
+  creator: UserType;
+  messages: ChatMessageType[];
+};
+
 export const testUser: UserType = {
   avatarUrl:
     "https://static.wikia.nocookie.net/b72e4978-1af8-49a8-ac03-ec0ef8a47d30/scale-to-width/370",
@@ -82,3 +88,5 @@ export const events: Event[] = [
     perks: ["Free Drinks", "Swag"],
   },
 ];
+
+export const forumPosts = [];
