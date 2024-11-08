@@ -1,6 +1,8 @@
-import Card from "@/components/card";
+import EventCard from "@/components/eventCard";
+import EventFilter from "@/components/eventFilter";
 import Page from "@/components/page";
 import SearchBar from "@/components/searchBar";
+import { events } from "@/placeholderData";
 import { Plus } from "lucide-react";
 import { Link, useSearchParams } from "react-router-dom";
 
@@ -11,25 +13,24 @@ function SearchEvents() {
   return (
     <>
       <Page title="Events">
-        <div className="flex items-center gap-4">
+        <div className="top-0 flex items-center gap-4">
           <SearchBar searchUrl="/events/search" initialValue={q} />
 
-          <button className="rounded-full bg-white p-1 shadow">
+          <Link
+            to={"/events/create"}
+            className="rounded-full bg-white p-1 shadow"
+          >
             <Plus className="text-green-400" />
-          </button>
+          </Link>
         </div>
 
-        <h2 className="mt-6 text-xl font-semibold">Results for "{q}"</h2>
-        <div className="mt-1 grid gap-2 rounded-md py-2">
-          <Link to="/events/1" className="text-blue-400">
-            <Card />
-          </Link>
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
+        <EventFilter />
+
+        <h2 className="mt-4 text-xl font-semibold">Results for "{q}"</h2>
+        <div className="mt-3 space-y-3">
+          <EventCard event={events[0]} />
+          <EventCard event={events[1]} />
+          <EventCard event={events[2]} />
         </div>
 
         <p className="mt-2 text-center text-sm font-medium text-muted-foreground">
