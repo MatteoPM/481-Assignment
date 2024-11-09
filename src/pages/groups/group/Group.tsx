@@ -1,14 +1,15 @@
+import EventCard from "@/components/eventCard";
 import ForumCard from "@/components/forumCard";
 import Page from "@/components/page";
 import { Button } from "@/components/ui/button";
 import User from "@/components/user";
 import {
+  events,
   placeholderUser,
   placeholderUser2,
   placeholderUser3,
 } from "@/placeholderData";
 import { Link } from "react-router-dom";
-import Card from "../../../components/card";
 
 function Group() {
   return (
@@ -58,10 +59,10 @@ function Group() {
         </div>
 
         <h2 className="mt-8 text-xl font-semibold">Events</h2>
-        <div className="mt-1 flex snap-x gap-2 overflow-x-auto rounded-md py-2">
-          <Link to="/events/1" className="text-blue-400">
-            <Card />
-          </Link>
+        <div className="mt-3 space-y-3">
+          <EventCard event={events[0]} />
+          <EventCard event={events[1]} />
+          <EventCard event={events[2]} />
         </div>
       </Page>
     </>

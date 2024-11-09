@@ -25,9 +25,9 @@ function Groups() {
 
         <h2 className="mt-6 text-xl font-semibold">Courses</h2>
         <div className="mt-3 flex flex-col divide-y overflow-hidden rounded-md border bg-white shadow-sm">
-          <GroupCard compact />
-          <GroupCard compact />
-          <GroupCard compact />
+          <GroupCard compact group={{ name: "CPSC 481" }} />
+          <GroupCard compact group={{ name: "SENG 511" }} />
+          <GroupCard compact group={{ name: "ENEL 500" }} />
         </div>
 
         <h2 className="mt-6 text-xl font-semibold">Your Groups</h2>

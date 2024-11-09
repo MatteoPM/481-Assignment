@@ -13,6 +13,10 @@ const DmCard = ({ user }: { user: UserType }) => {
         <span className="block font-medium">{user.username}</span>
         <p className="text-sm text-stone-500">Information yada yada</p>
       </div>
+
+      <div className="ml-auto text-xs text-muted-foreground">
+        <span>5 mins</span>
+      </div>
     </Link>
   );
 };

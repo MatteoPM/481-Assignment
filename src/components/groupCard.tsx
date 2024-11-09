@@ -3,12 +3,18 @@ import { Link } from "react-router-dom";
 
 export type Group = {
   name: string;
-  bannerUrl: string;
-  description: string;
-  memberCount: number;
+  bannerUrl?: string;
+  description?: string;
+  memberCount?: number;
 };
 
-const GroupCard = ({ compact }: { compact?: boolean }) => {
+const GroupCard = ({
+  compact,
+  group,
+}: {
+  compact?: boolean;
+  group?: Group;
+}) => {
   if (compact) {
     return (
       <Link
@@ -22,7 +28,7 @@ const GroupCard = ({ compact }: { compact?: boolean }) => {
               src="https://assets.ppy.sh/user-cover-presets/4/2fd772ad175c5687370e0aab50799a84adef7d0fff3f97dccfa5c94384ebb8af.jpeg"
             />
             <div>
-              <div>Group Name</div>
+              <div>{group?.name || "Group Name"}</div>
             </div>
           </div>
         </div>

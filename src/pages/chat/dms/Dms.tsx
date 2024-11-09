@@ -13,8 +13,12 @@ import { Link } from "react-router-dom";
 function Dms() {
   return (
     <>
-      <Page title="Chat" headerContent={<ChatTabs value="private" />}>
-        <div className="flex items-center gap-4">
+      <Page
+        title="Chat"
+        headerContent={<ChatTabs value="private" />}
+        bodyClassname="p-0"
+      >
+        <div className="flex items-center gap-4 p-4">
           <SearchBar searchUrl="/chat/search" />
 
           <Link
@@ -25,7 +29,7 @@ function Dms() {
           </Link>
         </div>
 
-        <div className="my-2 divide-y divide-solid">
+        <div className="divide-y divide-solid">
           <DmCard user={placeholderUser} />
           <DmCard user={placeholderUser2} />
           <DmCard user={placeholderUser3} />

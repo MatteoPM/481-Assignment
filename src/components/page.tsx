@@ -1,3 +1,4 @@
+import { cn } from "@/lib/utils";
 import { ChevronLeft } from "lucide-react";
 import { ReactNode } from "react";
 import { useNavigate } from "react-router-dom";
@@ -13,6 +14,7 @@ const Page = ({
   showBackButton,
   headerContent,
   hideFooter,
+  bodyClassname,
 }: {
   children: ReactNode;
   title: string;
@@ -21,6 +23,7 @@ const Page = ({
   showBackButton?: boolean;
   headerContent?: ReactNode;
   hideFooter?: boolean;
+  bodyClassname?: string;
 }) => {
   const navigate = useNavigate();
 
@@ -60,7 +63,9 @@ const Page = ({
         {headerContent}
       </div>
 
-      <div className="grow overflow-y-auto p-4">{children}</div>
+      <div className={cn("grow overflow-y-auto p-4", bodyClassname)}>
+        {children}
+      </div>
 
       {!hideFooter && <FooterNav />}
     </div>
