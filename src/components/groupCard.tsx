@@ -1,34 +1,22 @@
+import { Group } from "@/placeholderData";
 import { ChevronRight } from "lucide-react";
 import { Link } from "react-router-dom";
 
-export type Group = {
-  name: string;
-  bannerUrl?: string;
-  description?: string;
-  memberCount?: number;
-};
-
-const GroupCard = ({
-  compact,
-  group,
-}: {
-  compact?: boolean;
-  group?: Group;
-}) => {
+const GroupCard = ({ compact, group }: { compact?: boolean; group: Group }) => {
   if (compact) {
     return (
       <Link
-        to={"/groups/1"}
+        to={`/groups/${group.id ?? 0}`}
         className="flex shrink-0 snap-start snap-always justify-between p-2 active:bg-stone-50"
       >
         <div>
           <div className="flex items-center gap-2">
             <img
               className="size-[35px] rounded-full object-cover"
-              src="https://assets.ppy.sh/user-cover-presets/4/2fd772ad175c5687370e0aab50799a84adef7d0fff3f97dccfa5c94384ebb8af.jpeg"
+              src={group.bannerUrl}
             />
             <div>
-              <div>{group?.name || "Group Name"}</div>
+              <div>{group.name || "Group Name"}</div>
             </div>
           </div>
         </div>
@@ -40,24 +28,23 @@ const GroupCard = ({
 
   return (
     <Link
-      to={"/groups/1"}
+      to={`/groups/${group.id ?? 0}`}
       className="flex h-[110px] shrink-0 snap-start snap-always justify-between overflow-hidden rounded-md border bg-white p-2 shadow-sm active:bg-stone-50"
     >
       <div>
         <div className="flex items-center gap-2">
           <img
             className="size-[35px] rounded-full object-cover"
-            src="https://assets.ppy.sh/user-cover-presets/4/2fd772ad175c5687370e0aab50799a84adef7d0fff3f97dccfa5c94384ebb8af.jpeg"
+            src={group.bannerUrl}
           />
           <div>
-            <div>Group Name</div>
+            <div>{group.name}</div>
             <div className="text-xs text-muted-foreground">15 members</div>
           </div>
         </div>
 
         <p className="mt-2 line-clamp-2 text-sm text-muted-foreground">
-          Group Description blah blah. Does it wrap? Does it truncate? Testing
-          testing testing join our group pls i beg of you
+          {group.description}
         </p>
       </div>
 

@@ -1,6 +1,7 @@
 import { cn } from "@/lib/utils";
 import { UserType } from "@/placeholderData";
-import { Ban } from "lucide-react";
+import { Ban, MessageSquare } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const UserDrawerContent = ({ user }: { user: UserType }) => {
   return (
@@ -26,8 +27,18 @@ const UserDrawerContent = ({ user }: { user: UserType }) => {
         </span>
       </div>
 
-      <div className="mt-10 flex w-full flex-col rounded-lg bg-stone-100">
-        <button className="flex items-center justify-between p-4 text-destructive">
+      <div className="mt-10 flex w-full flex-col rounded-lg">
+        <Link
+          to={"/chat/dms/1"}
+          className="flex items-center justify-between rounded-lg bg-stone-100 p-4 text-stone-700"
+        >
+          <span className="font-medium">Message</span>
+          <MessageSquare />
+        </Link>
+      </div>
+
+      <div className="mt-6 flex w-full flex-col rounded-lg">
+        <button className="flex items-center justify-between rounded-lg bg-stone-100 p-4 text-destructive">
           <span className="font-medium">Block User</span>
           <Ban />
         </button>

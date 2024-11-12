@@ -38,6 +38,15 @@ export type Notification = {
   time: string;
 };
 
+export type Group = {
+  id: number;
+  name: string;
+  bannerUrl?: string;
+  description: string;
+  memberCount?: number;
+  isCourse?: boolean;
+};
+
 export const testUser: UserType = {
   avatarUrl:
     "https://static.wikia.nocookie.net/b72e4978-1af8-49a8-ac03-ec0ef8a47d30/scale-to-width/370",
@@ -143,5 +152,100 @@ export const notifications: Notification[] = [
     title: "Webinar: UX Trends",
     description: "Starts in 30 minutes",
     time: "4h ago",
+  },
+];
+
+export const groups: Group[] = [
+  {
+    id: 0,
+    name: "Calgary Coders",
+    description:
+      "Join a dynamic community of UofC students passionate about coding and software development! Whether you're a beginner or an advanced programmer, Calgary Coders offers workshops, hackathons, and coding challenges to level up your skills and connect with fellow tech enthusiasts.",
+    bannerUrl: "/CalgaryCodersImage.jpg",
+  },
+  {
+    id: 1,
+    name: "UCalgary Art Collective",
+    description:
+      "Express yourself in the UCalgary Art Collective! From visual arts and dance to music and theater, this creative community brings together students who want to share their passion for the arts. Join us for workshops, collaborative projects, and showcases to inspire and be inspired.",
+    bannerUrl: "/art gallery opening.jpg",
+  },
+  {
+    id: 2,
+    name: "Global Connectors",
+    description:
+      "Embrace diversity with Global Connectors, a cultural exchange group where local and international students come together to celebrate each other's cultures. Through food, festivals, and meaningful conversations, we promote global awareness and lifelong friendships.",
+    bannerUrl: "/Global Connectors.jpg",
+  },
+  {
+    id: 3,
+    name: "Bookmarked",
+    description:
+      "Calling all book lovers! Bookmarked is UofC’s official book club, open to readers of all genres. Join us for monthly book discussions, author talks, and fun reading challenges. Escape into a new world of literature with us!",
+    bannerUrl: "/Bookmarked.jpg",
+  },
+  {
+    id: 4,
+    name: "The Midnight Society",
+    description:
+      "For the night owls of UofC, The Midnight Society is your haven! Join us for late-night study sessions, cozy movie marathons, and stargazing adventures. Meet like-minded students who thrive after dark!",
+    bannerUrl: "/The Midnight Society.jpg",
+  },
+  {
+    id: 5,
+    name: "Caffeine Crusaders",
+    description:
+      "If you’re a coffee enthusiast, Caffeine Crusaders is the group for you! We explore Calgary’s best coffee spots, talk all things caffeine, and host study jams to keep the energy flowing. Join us for a unique blend of coffee culture and camaraderie!",
+    bannerUrl: "/Caffeine Crusaders.jpg",
+  },
+  {
+    id: 6,
+    name: "Dinos on Wheels",
+    description:
+      "Discover Calgary on two wheels with Dinos on Wheels! Whether you’re into casual rides or intense trails, this cycling club is for students who love exploring the city and its surroundings. Meet new friends, stay active, and enjoy the ride!",
+    bannerUrl: "/Dinos on Wheels.jpg",
+  },
+  {
+    id: 7,
+    name: "Cinephiles of Calgary",
+    description:
+      "Film buffs, unite! Cinephiles of Calgary is the go-to group for watching classic and indie films, debating blockbusters, and even trying your hand at short filmmaking. Share your love for cinema with fellow film enthusiasts!",
+    bannerUrl: "/Cinephiles of Calgary.jpg",
+  },
+  {
+    id: 8,
+    name: "CPSC 481",
+    description:
+      "Fundamental theory and practice of the design, implementation, and evaluation of human-computer interfaces. Topics include: principles of design; methods for evaluating interfaces with or without user involvement; techniques for prototyping and implementing graphical user interfaces.",
+    bannerUrl:
+      "https://s.brightspace.com/course-images/images/9a6e566b-3c24-4b23-8bf1-d1e90be1a208/tile-high-density-max-size.jpg",
+    isCourse: true,
+  },
+  {
+    id: 9,
+    name: "SENG 511",
+    description:
+      "Analysis of methods, tools, and techniques for software process improvement and software project management as an effort to achieve quality software products.",
+    bannerUrl:
+      "https://s.brightspace.com/course-images/images/3df1f453-8388-488f-8670-6271097e9c81/tile-low-density-max-size.jpg",
+    isCourse: true,
+  },
+  {
+    id: 10,
+    name: "ENSF 545",
+    description:
+      "Introduce VR technologies. Emphasize on engineering methodologies of creating VR systems. Characterize VR systems, hardware and software, user 3D interaction, and VR applications and future.",
+    bannerUrl:
+      "https://s.brightspace.com/course-images/images/933f3bb9-b9e1-403e-82e9-e4a554ae6763/tile-low-density-max-size.jpg",
+    isCourse: true,
+  },
+  {
+    id: 11,
+    name: "ENEL 500",
+    description:
+      "Preliminary and detailed engineering design and implementation of an engineering system that applies engineering knowledge to solving a real-life problem. The emphasis is on the design process as it is associated with electrical, computer and software engineering, design methodology, general design principles for engineers, teamwork and project management.",
+    bannerUrl:
+      "https://s.brightspace.com/course-images/images/ed6d01d6-56ae-437e-85ac-4ec2c5a2f878/tile-low-density-max-size.jpg",
+    isCourse: true,
   },
 ];

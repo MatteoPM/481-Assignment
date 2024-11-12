@@ -13,10 +13,11 @@ import CreateEvent from "./pages/events/create/CreateEvent.tsx";
 import Event from "./pages/events/event/Event.tsx";
 import Events from "./pages/events/Events.tsx";
 import SearchEvents from "./pages/events/search/searchEvents.tsx";
+import CreateGroup from "./pages/groups/create/CreateGroup.tsx";
 import Group from "./pages/groups/group/Group.tsx";
 import GroupStats from "./pages/groups/group/stats/GroupStats.tsx";
 import Groups from "./pages/groups/Groups.tsx";
-import Search from "./pages/groups/search.tsx/Search.tsx";
+import SearchGroups from "./pages/groups/search.tsx/Search.tsx";
 import Notifications from "./pages/notifications/Notifications.tsx";
 
 const router = createBrowserRouter([
@@ -54,8 +55,12 @@ const router = createBrowserRouter([
     element: <Groups />,
   },
   {
+    path: "/groups/create",
+    element: <CreateGroup />,
+  },
+  {
     path: "/groups/search",
-    element: <Search />,
+    element: <SearchGroups />,
   },
   {
     path: "/groups/:groupId",

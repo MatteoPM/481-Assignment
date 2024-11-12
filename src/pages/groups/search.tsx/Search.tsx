@@ -2,12 +2,13 @@ import GroupCard from "@/components/groupCard";
 import Page from "@/components/page";
 import SearchBar from "@/components/searchBar";
 import { Button } from "@/components/ui/button";
+import { groups } from "@/placeholderData";
 import { Plus } from "lucide-react";
 import { useSearchParams } from "react-router-dom";
 
-function Search() {
+function SearchGroups() {
   const [searchParams] = useSearchParams();
-  const q = searchParams.get("q");
+  const q = searchParams.get("q")!;
 
   return (
     <>
@@ -26,14 +27,16 @@ function Search() {
 
         <h2 className="mt-6 text-xl font-semibold">Results for "{q}"</h2>
         <div className="mt-1 grid gap-2 rounded-md py-2">
-          <GroupCard />
-          <GroupCard />
-          <GroupCard />
-          <GroupCard />
-          <GroupCard />
-          <GroupCard />
-          <GroupCard />
-          <GroupCard />
+          {groups
+            .filter(
+              (group) =>
+                !group.isCourse &&
+                group.name.toLowerCase().includes(q?.toLowerCase()),
+            )
+            .sort((a, b) => a.name.localeCompare(b.name))
+            .map((group) => (
+              <GroupCard group={group} />
+            ))}
         </div>
 
         <p className="mt-2 text-center text-sm font-medium text-muted-foreground">
@@ -44,4 +47,4 @@ function Search() {
   );
 }
 
-export default Search;
+export default SearchGroups;

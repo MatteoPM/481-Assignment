@@ -5,22 +5,30 @@ import { Button } from "@/components/ui/button";
 import User from "@/components/user";
 import {
   events,
+  groups,
   placeholderUser,
   placeholderUser2,
   placeholderUser3,
 } from "@/placeholderData";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 function Group() {
+  const { groupId } = useParams();
+  const group = groups.find((group) => group.id === Number(groupId));
+
+  if (!group) {
+    throw new Error();
+  }
+
   return (
     <>
-      <Page title="Group Details" showBackButton>
+      <Page title={group.name} showBackButton>
         <img
-          className="h-[120px] rounded-lg object-cover"
-          src="https://assets.ppy.sh/user-cover-presets/4/2fd772ad175c5687370e0aab50799a84adef7d0fff3f97dccfa5c94384ebb8af.jpeg"
+          className="h-[120px] w-full rounded-lg object-cover"
+          src={group.bannerUrl}
         />
         <div className="mt-3 flex items-center gap-3">
-          <h1 className="text-lg font-semibold">Group Name</h1>
+          <h1 className="text-lg font-semibold">{group.name}</h1>
 
           <Button className="ml-auto">Join</Button>
 
@@ -29,12 +37,7 @@ function Group() {
           </Button>
         </div>
 
-        <p className="mt-2 text-stone-600">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio, enim
-          ipsum est architecto nisi nesciunt aperiam quisquam officia obcaecati
-          adipisci et? Voluptatem nulla, recusandae natus corporis quas hic
-          animi ut.
-        </p>
+        <p className="mt-2 text-stone-600">{group.description}</p>
 
         <h2 className="mt-6 text-xl font-semibold">
           Members <span className="font-normal text-muted-foreground">(3)</span>

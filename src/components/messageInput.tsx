@@ -18,7 +18,7 @@ const MessageInput = ({ className }: { className?: string }) => {
       />
 
       <button type="submit" className="cursor-pointer">
-        <Send className="mr-2 text-stone-500" />
+        <Send className="text-stone-500" />
       </button>
     </div>
   );

@@ -1,7 +1,7 @@
 import GroupCard from "@/components/groupCard";
 import Page from "@/components/page";
 import { Button } from "@/components/ui/button";
-import { events } from "@/placeholderData";
+import { events, groups } from "@/placeholderData";
 import {
   BookOpenText,
   CalendarIcon,
@@ -11,7 +11,6 @@ import {
 } from "lucide-react";
 
 function Event() {
-  // const date = new Date();
   return (
     <>
       <Page title="Event Page" showBackButton bodyClassname="p-0 flex flex-col">
@@ -84,7 +83,7 @@ function Event() {
             Hosting Group
           </h3>
           <div className="mb-4 mt-2">
-            <GroupCard />
+            <GroupCard group={groups[0]} />
           </div>
 
           <Button className="sticky bottom-4 mt-auto">RSVP</Button>

@@ -1,12 +1,16 @@
-import DatePicker from "@/components/datePicker";
+import EventFilterCheckbox from "@/components/eventFilterCheckbox";
 import Page from "@/components/page";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
-import { useState } from "react";
-import Card from "../../../components/card";
+import { Textarea } from "@/components/ui/textarea";
+
+const currentDate = new Date();
+const formattedDate = currentDate.toISOString().slice(0, 16);
 
 function CreateEvent() {
-  const [date, setDate] = useState<Date | undefined>(new Date());
+  // const [startTime, endTime] = useState(formattedDate);
   return (
     <>
       <Page title="Create Event" showBackButton>
@@ -19,10 +23,10 @@ function CreateEvent() {
           <label className="text-sm font-medium">
             Title<span className="text-red-400">*</span>
           </label>
-          <input
+          <Input
             type="text"
-            placeholder="Title"
-            className="mt-0.5 w-full rounded bg-stone-200 px-2 py-1.5 text-sm placeholder:text-stone-400"
+            placeholder="Enter a title..."
+            className="mt-0.5"
           />
         </div>
         <p className="mt-0.5 text-xs font-semibold text-red-400">
@@ -33,10 +37,34 @@ function CreateEvent() {
           <label className="text-sm font-medium">
             Description<span className="text-red-400">*</span>
           </label>
-          <textarea
-            placeholder="Description"
-            className="mt-0.5 w-full rounded bg-stone-200 px-2 py-1.5 text-sm text-stone-600"
-          />
+
+          <Textarea placeholder="Describe the event..." className="mt-0.5" />
+        </div>
+
+        <div className="mt-6">
+          <label className="text-sm font-medium">
+            Starts<span className="text-red-400">*</span>
+          </label>
+
+          <Input type="datetime-local" min={formattedDate} />
+        </div>
+
+        <div className="mt-4">
+          <label className="text-sm font-medium">
+            Ends<span className="text-red-400">*</span>
+          </label>
+
+          <Input type="datetime-local" />
+        </div>
+
+        <label className="mt-6 block text-sm font-medium">Categories</label>
+        <div className="mt-2 grid grid-cols-2 gap-y-1">
+          <EventFilterCheckbox value="Technology" />
+          <EventFilterCheckbox value="Art" />
+          <EventFilterCheckbox value="Music" />
+          <EventFilterCheckbox value="Sports" />
+          <EventFilterCheckbox value="Food" />
+          <EventFilterCheckbox value="Business" />
         </div>
 
         <div className="my-5 flex items-center space-x-2">
@@ -44,20 +72,7 @@ function CreateEvent() {
           <Label htmlFor="airplane-mode">Private Event</Label>
         </div>
 
-        <div className="my-5 flex gap-6">
-          <DatePicker date={date} setDate={setDate} className="grow" />
-          <button className="ml-auto rounded-md bg-blue-500 px-2 py-1 text-white">
-            Publish
-          </button>
-        </div>
-
-        <h2 className="mt-8 text-xl font-semibold">Categories</h2>
-        <div className="mt-1 flex gap-2 overflow-x-auto rounded-md py-2">
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-        </div>
+        <Button className="w-full">Publish</Button>
       </Page>
     </>
   );

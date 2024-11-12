@@ -2,7 +2,7 @@ import EventCard from "@/components/eventCard";
 import ForumCard from "@/components/forumCard";
 import GroupCard from "@/components/groupCard";
 import Page from "@/components/page";
-import { events } from "@/placeholderData";
+import { events, groups } from "@/placeholderData";
 import { Link } from "react-router-dom";
 
 function App() {
@@ -30,9 +30,12 @@ function App() {
 
         <h2 className="mt-8 text-xl font-semibold">Suggested Groups</h2>
         <div className="mt-3 flex flex-col divide-y overflow-hidden rounded-md border bg-white shadow-sm">
-          <GroupCard compact />
-          <GroupCard compact />
-          <GroupCard compact />
+          {groups
+            .filter((group) => !group.isCourse)
+            .sort((a, b) => a.name.localeCompare(b.name))
+            .map((group) => (
+              <GroupCard group={group} />
+            ))}
         </div>
       </Page>
     </>
