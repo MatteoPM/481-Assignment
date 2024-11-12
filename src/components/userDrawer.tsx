@@ -22,7 +22,7 @@ const UserDrawer = () => {
         </div>
 
         <Link
-          to={""}
+          to={"/notifications"}
           className="mx-auto flex items-center justify-center gap-2 rounded-full border border-orange-400 bg-orange-100 p-2 text-sm text-stone-500"
         >
           <span className="text-orange-400">Notifications</span>{" "}

@@ -28,6 +28,16 @@ export type Forum = {
   messages: ChatMessageType[];
 };
 
+export type NotificationType = "chat" | "group" | "event";
+
+export type Notification = {
+  id: number;
+  type: NotificationType;
+  title: string;
+  description: string;
+  time: string;
+};
+
 export const testUser: UserType = {
   avatarUrl:
     "https://static.wikia.nocookie.net/b72e4978-1af8-49a8-ac03-ec0ef8a47d30/scale-to-width/370",
@@ -90,3 +100,48 @@ export const events: Event[] = [
 ];
 
 export const forumPosts = [];
+
+export const notifications: Notification[] = [
+  {
+    id: 1,
+    type: "chat",
+    title: "New message from John",
+    description: "Hey, how are you doing?",
+    time: "2m ago",
+  },
+  {
+    id: 2,
+    type: "group",
+    title: "Project Team",
+    description: "Sarah shared a file: Q4 Report",
+    time: "15m ago",
+  },
+  {
+    id: 3,
+    type: "event",
+    title: "Team Building",
+    description: "Don't forget about the event tomorrow!",
+    time: "1h ago",
+  },
+  {
+    id: 4,
+    type: "chat",
+    title: "Alice mentioned you",
+    description: "In #general: @you can you check this?",
+    time: "2h ago",
+  },
+  {
+    id: 5,
+    type: "group",
+    title: "Design Team",
+    description: "New comment on your mockup",
+    time: "3h ago",
+  },
+  {
+    id: 6,
+    type: "event",
+    title: "Webinar: UX Trends",
+    description: "Starts in 30 minutes",
+    time: "4h ago",
+  },
+];

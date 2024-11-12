@@ -17,6 +17,7 @@ import Group from "./pages/groups/group/Group.tsx";
 import GroupStats from "./pages/groups/group/stats/GroupStats.tsx";
 import Groups from "./pages/groups/Groups.tsx";
 import Search from "./pages/groups/search.tsx/Search.tsx";
+import Notifications from "./pages/notifications/Notifications.tsx";
 
 const router = createBrowserRouter([
   {
@@ -79,6 +80,10 @@ const router = createBrowserRouter([
   {
     path: "/events/create",
     element: <CreateEvent />,
+  },
+  {
+    path: "/notifications",
+    element: <Notifications />,
   },
 ]);
 
