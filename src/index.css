@@ -12,7 +12,7 @@ body {
 
 @layer base {
   * {
-    @apply select-none scrollbar;
+    @apply scrollbar;
   }
 
   html {

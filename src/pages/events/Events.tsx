@@ -24,36 +24,12 @@ function Events() {
         <EventFilter />
 
         <div className="mt-6 space-y-3">
-          <EventCard event={events[0]} />
-          <EventCard event={events[1]} />
-          <EventCard event={events[2]} />
+          {events
+            .sort((a, b) => a.startDateTime.localeCompare(b.startDateTime))
+            .map((event) => (
+              <EventCard event={event} />
+            ))}
         </div>
-
-        {/* <h2 className="mt-6 text-xl font-semibold">RSVP'd</h2>
-        <div className="mt-1 flex gap-2 overflow-x-auto rounded-md py-2 scrollbar">
-          <Link to="/events/1" className="text-blue-400">
-            <Card />
-          </Link>
-          <Card />
-          <Card />
-          <Card />
-        </div>
-
-        <h2 className="mt-8 text-xl font-semibold">Upcoming Events</h2>
-        <div className="mt-1 flex gap-2 overflow-x-auto rounded-md py-2">
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-        </div>
-
-        <h2 className="mt-8 text-xl font-semibold">Suggested Events</h2>
-        <div className="mt-1 flex gap-2 overflow-x-auto rounded-md py-2">
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-        </div> */}
       </Page>
     </>
   );

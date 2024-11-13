@@ -14,12 +14,13 @@ export type ChatMessageType = {
 export type Event = {
   id: number;
   title: string;
-  dateTime: string;
+  description: string;
+  startDateTime: string;
+  endDateTime: string;
   location: string;
-  group: string;
-  theme: string;
-  category: string;
-  perks: string[];
+  groupId: number;
+  categories: string[];
+  bannerUrl: string;
 };
 
 export type Forum = {
@@ -77,34 +78,55 @@ export const placeholderUser3: UserType = {
 
 export const events: Event[] = [
   {
+    id: 0,
+    title: "Mystery & Thriller Book Night",
+    description:
+      "Join Bookmarked for an in-depth discussion on the gripping novel 'The Silent Patient' by Alex Michaelides. Dive into plot twists, character analysis, and predictions for the next month's genre pick. Enjoy snacks and connect with fellow book enthusiasts.",
+    startDateTime: "2023-11-30T12:00:00",
+    endDateTime: "2023-11-30T13:00:00",
+    location: "TFDL, Room 340",
+    groupId: 3,
+    categories: ["Literature", "Social", "Discussion"],
+    bannerUrl:
+      "https://www.novelsuspects.com/wp-content/uploads/2020/12/MysterySuspenseBooks2020_NovelSuspects.png",
+  },
+  {
     id: 1,
-    title: "Tech Meetup 2023",
-    dateTime: "2023-11-15T18:00:00",
-    location: "San Francisco, CA",
-    group: "SF Tech Enthusiasts",
-    theme: "Technology",
-    category: "Meetup",
-    perks: ["Free Food", "Networking Opportunities"],
+    title: "Late-Night Study Jam with Coffee Tasting",
+    description:
+      "Need motivation for your late-night study session? Join Caffeine Crusaders for an evening of productive studying with complimentary specialty coffees. Sample unique blends while staying focused in a supportive group setting.",
+    startDateTime: "2023-11-20T19:30:00",
+    endDateTime: "2023-11-20T21:00:00",
+    location: "MacKimmie Tower, 2nd Floor Lounge",
+    groupId: 5,
+    categories: ["Food & Drink", "Study Support", "Social"],
+    bannerUrl:
+      "https://t4.ftcdn.net/jpg/05/77/79/67/360_F_577796709_RnfoWC88Q60VMLvuiJ0SVcwq16Ec4YDa.jpg",
   },
   {
     id: 2,
-    title: "Art Gallery Opening",
-    dateTime: "2023-11-20T19:30:00",
-    location: "New York, NY",
-    group: "NYC Art Collective",
-    theme: "Art",
-    category: "Networking",
-    perks: ["Free Drinks"],
+    title: "Beginner Python Workshop",
+    description:
+      "Want to start coding or improve your skills? Calgary Coders presents a hands-on workshop for beginners on Python fundamentals. Learn the basics of programming, build simple projects, and get tips from experienced student mentors.",
+    startDateTime: "2023-11-18T09:00:00",
+    endDateTime: "2023-11-15T18:00:00",
+    location: "Engineering Building, Room ENE 233",
+    groupId: 0,
+    categories: ["Education", "Technology", "Workshop"],
+    bannerUrl: "https://www.linux.org/attachments/python-banner-png.7508/",
   },
   {
     id: 3,
-    title: "Yoga in the Park",
-    dateTime: "2023-11-18T09:00:00",
-    location: "Central Park, NY",
-    group: "Mindful Yogis",
-    theme: "Sports",
-    category: "Meetup",
-    perks: ["Free Drinks", "Swag"],
+    title: "Classic Movie Night: 'Casablanca' Screening",
+    description:
+      "Cinephiles of Calgary invites you to a special screening of the timeless classic, Casablanca. Following the film, there will be a group discussion on its cinematic impact and historical significance.",
+    startDateTime: "2023-11-18T09:00:00",
+    endDateTime: "2023-11-15T18:00:00",
+    location: "Rozsa Centre, Main Theatre",
+    groupId: 7,
+    categories: ["Arts", "Film", "Social"],
+    bannerUrl:
+      "https://prod-images.tcm.com/Master-Profile-Images/casablanca1942.610.jpg",
   },
 ];
 

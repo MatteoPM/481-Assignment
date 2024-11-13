@@ -79,7 +79,7 @@ const router = createBrowserRouter([
     element: <SearchEvents />,
   },
   {
-    path: "/events/:groupId",
+    path: "/events/:eventId",
     element: <Event />,
   },
   {
