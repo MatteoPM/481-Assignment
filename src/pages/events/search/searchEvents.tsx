@@ -8,7 +8,7 @@ import { Link, useSearchParams } from "react-router-dom";
 
 function SearchEvents() {
   const [searchParams] = useSearchParams();
-  const q = searchParams.get("q");
+  const q = searchParams.get("q")!;
 
   return (
     <>
@@ -28,9 +28,14 @@ function SearchEvents() {
 
         <h2 className="mt-4 text-xl font-semibold">Results for "{q}"</h2>
         <div className="mt-3 space-y-3">
-          <EventCard event={events[0]} />
-          <EventCard event={events[1]} />
-          <EventCard event={events[2]} />
+          {events
+            .filter((event) =>
+              event.title.toLowerCase().includes(q?.toLowerCase()),
+            )
+            .sort((a, b) => a.startDateTime.localeCompare(b.startDateTime))
+            .map((event) => (
+              <EventCard event={event} />
+            ))}
         </div>
 
         <p className="mt-2 text-center text-sm font-medium text-muted-foreground">
