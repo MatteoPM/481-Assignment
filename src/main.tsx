@@ -94,7 +94,7 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <div className="grid h-full sm:place-content-center">
+    <div className="grid h-full bg-gray-950 sm:place-content-center">
       <div className="overflow-hidden bg-stone-100 sm:h-[667px] sm:w-[375px] sm:rounded-lg sm:border sm:shadow">
         <RouterProvider router={router} />
       </div>
