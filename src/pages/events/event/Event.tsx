@@ -42,8 +42,10 @@ function Event() {
           src={event.bannerUrl}
         />
 
-        <div className="relative flex grow flex-col p-4">
-          <h2 className="text-2xl font-bold">{event.title}</h2>
+        <div className="p-4">
+          <h2 className="mb-4 border-b pb-4 text-2xl font-bold">
+            {event.title}
+          </h2>
 
           <h3 className="mt-4 flex items-center">
             <CalendarIcon className="mr-2 h-4 w-4" />
@@ -95,7 +97,7 @@ function Event() {
             <GroupCard group={group} />
           </div>
 
-          <Button className="sticky bottom-4 mt-auto">RSVP</Button>
+          <Button className="sticky bottom-4 mt-auto w-full">RSVP</Button>
         </div>
       </Page>
     </>

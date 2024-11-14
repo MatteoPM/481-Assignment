@@ -7,7 +7,7 @@ const UserDrawer = () => {
   return (
     <Drawer direction="right">
       <DrawerTrigger asChild>
-        <button className="overflow-hidden rounded-full border bg-white p-0 text-stone-600">
+        <button className="shrink-0 overflow-hidden rounded-full border bg-white p-0 text-stone-600">
           <img src={testUser.avatarUrl} className="size-[35px] object-cover" />
         </button>
       </DrawerTrigger>
