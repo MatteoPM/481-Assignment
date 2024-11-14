@@ -3,7 +3,7 @@ import SearchBar from "@/components/searchBar";
 import { Button } from "@/components/ui/button";
 import GroupCard from "@/pages/groups/_components/groupCard";
 import { groups } from "@/placeholderData";
-import { Plus } from "lucide-react";
+import { Filter, Plus } from "lucide-react";
 import { useSearchParams } from "react-router-dom";
 import GroupTabs from "../_components/groupTabs";
 
@@ -23,7 +23,8 @@ function SearchGroups() {
         </div>
 
         <Button variant={"outline"} className="mt-2 w-full">
-          Filters
+          <Filter className="w-[15px]" />
+          <span>Filters</span>
         </Button>
 
         <h2 className="mt-6 text-xl font-semibold">Results for "{q}"</h2>
