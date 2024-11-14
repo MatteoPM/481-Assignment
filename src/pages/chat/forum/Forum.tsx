@@ -6,8 +6,8 @@ import {
   placeholderUser3,
 } from "@/placeholderData";
 import { useState } from "react";
-import ChatMessage from "../../../components/chatMessage";
-import MessageInput from "../../../components/messageInput";
+import ChatMessage from "../_components/chatMessage";
+import MessageInput from "../_components/messageInput";
 
 const initialChatMessages: ChatMessageType[] = [
   {

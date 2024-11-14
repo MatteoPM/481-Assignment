@@ -1,7 +1,7 @@
-import EventCard from "@/components/eventCard";
-import EventFilter from "@/components/eventFilter";
 import Page from "@/components/page";
 import SearchBar from "@/components/searchBar";
+import EventCard from "@/pages/events/_components/eventCard";
+import EventFilter from "@/pages/events/_components/eventFilter";
 import { events } from "@/placeholderData";
 import { Plus } from "lucide-react";
 import { Link } from "react-router-dom";

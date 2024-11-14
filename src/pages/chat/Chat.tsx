@@ -1,7 +1,7 @@
-import ChatTabs from "@/components/chatTabs";
-import ForumCard from "@/components/forumCard";
 import Page from "@/components/page";
 import SearchBar from "@/components/searchBar";
+import ChatTabs from "@/pages/chat/_components/chatTabs";
+import ForumCard from "@/pages/chat/_components/forumCard";
 import { Plus } from "lucide-react";
 import { Link } from "react-router-dom";
 

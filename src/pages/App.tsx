@@ -1,7 +1,7 @@
-import EventCard from "@/components/eventCard";
-import ForumCard from "@/components/forumCard";
-import GroupCard from "@/components/groupCard";
 import Page from "@/components/page";
+import ForumCard from "@/pages/chat/_components/forumCard";
+import EventCard from "@/pages/events/_components/eventCard";
+import GroupCard from "@/pages/groups/_components/groupCard";
 import { events, groups } from "@/placeholderData";
 import { Link } from "react-router-dom";
 

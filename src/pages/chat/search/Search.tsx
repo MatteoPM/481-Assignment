@@ -1,6 +1,6 @@
-import ForumCard from "@/components/forumCard";
 import Page from "@/components/page";
 import SearchBar from "@/components/searchBar";
+import ForumCard from "@/pages/chat/_components/forumCard";
 import { MessageSquare, Plus } from "lucide-react";
 import { Link, useSearchParams } from "react-router-dom";
 

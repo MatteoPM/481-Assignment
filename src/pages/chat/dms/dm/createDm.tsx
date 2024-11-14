@@ -1,8 +1,8 @@
-import DmCard from "@/components/dmCard";
 import Page from "@/components/page";
 import SearchBar from "@/components/searchBar";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
+import DmCard from "@/pages/chat/_components/dmCard";
 import {
   placeholderUser,
   placeholderUser2,

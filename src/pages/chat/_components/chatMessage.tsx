@@ -1,7 +1,7 @@
 import { Drawer, DrawerContent, DrawerTrigger } from "@/components/ui/drawer";
 import { cn } from "@/lib/utils";
 import { ChatMessageType, testUser } from "@/placeholderData";
-import UserDrawerContent from "./userDrawerContent";
+import UserDrawerContent from "../../../components/userDrawerContent";
 
 const ChatMessage = ({ chatMessage }: { chatMessage: ChatMessageType }) => {
   const isOwnMessage = chatMessage.user.username === testUser.username;

@@ -1,7 +1,7 @@
-import GroupCard from "@/components/groupCard";
 import Page from "@/components/page";
 import SearchBar from "@/components/searchBar";
 import { Button } from "@/components/ui/button";
+import GroupCard from "@/pages/groups/_components/groupCard";
 import { groups } from "@/placeholderData";
 import { Plus } from "lucide-react";
 import { Link } from "react-router-dom";

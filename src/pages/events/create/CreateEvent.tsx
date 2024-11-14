@@ -1,10 +1,10 @@
-import EventFilterCheckbox from "@/components/eventFilterCheckbox";
 import Page from "@/components/page";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
+import EventFilterCheckbox from "@/pages/events/_components/eventFilterCheckbox";
 
 const currentDate = new Date();
 const formattedDate = currentDate.toISOString().slice(0, 16);

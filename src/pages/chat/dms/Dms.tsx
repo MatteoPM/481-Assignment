@@ -1,7 +1,7 @@
-import ChatTabs from "@/components/chatTabs";
-import DmCard from "@/components/dmCard";
 import Page from "@/components/page";
 import SearchBar from "@/components/searchBar";
+import ChatTabs from "@/pages/chat/_components/chatTabs";
+import DmCard from "@/pages/chat/_components/dmCard";
 import {
   placeholderUser,
   placeholderUser2,

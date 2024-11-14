@@ -1,7 +1,7 @@
 import { Drawer, DrawerContent, DrawerTrigger } from "@/components/ui/drawer";
 import { Filter } from "lucide-react";
+import { Button } from "../../../components/ui/button";
 import EventFilterCheckbox from "./eventFilterCheckbox";
-import { Button } from "./ui/button";
 
 const EventFilter = () => {
   return (

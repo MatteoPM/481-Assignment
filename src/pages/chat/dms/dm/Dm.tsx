@@ -1,6 +1,6 @@
-import ChatMessage from "@/components/chatMessage";
-import MessageInput from "@/components/messageInput";
 import Page from "@/components/page";
+import ChatMessage from "@/pages/chat/_components/chatMessage";
+import MessageInput from "@/pages/chat/_components/messageInput";
 import { ChatMessageType, placeholderUser, testUser } from "@/placeholderData";
 import { useState } from "react";
 

@@ -1,8 +1,8 @@
-import EventCard from "@/components/eventCard";
-import ForumCard from "@/components/forumCard";
 import Page from "@/components/page";
 import { Button } from "@/components/ui/button";
 import User from "@/components/user";
+import ForumCard from "@/pages/chat/_components/forumCard";
+import EventCard from "@/pages/events/_components/eventCard";
 import {
   events,
   groups,
