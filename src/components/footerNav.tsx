@@ -5,13 +5,13 @@ import { twMerge } from "tailwind-merge";
 const FooterNav = () => {
   return (
     <>
-      <footer className="grid grid-flow-col mt-auto border-t-2 bg-white w-full">
+      <footer className="mt-auto grid w-full grid-flow-col border-t-2 bg-white">
         <NavLink
           to={"/"}
           className={({ isActive }) =>
             twMerge(
               "flex flex-col items-center py-3",
-              isActive && "text-blue-500"
+              isActive && "text-blue-500",
             )
           }
         >
@@ -23,7 +23,7 @@ const FooterNav = () => {
           className={({ isActive }) =>
             twMerge(
               "flex flex-col items-center py-3",
-              isActive && "text-blue-500"
+              isActive && "text-blue-500",
             )
           }
         >
@@ -35,7 +35,7 @@ const FooterNav = () => {
           className={({ isActive }) =>
             twMerge(
               "flex flex-col items-center py-3",
-              isActive && "text-blue-500"
+              isActive && "text-blue-500",
             )
           }
         >
@@ -47,7 +47,7 @@ const FooterNav = () => {
           className={({ isActive }) =>
             twMerge(
               "flex flex-col items-center py-3",
-              isActive && "text-blue-500"
+              isActive && "text-blue-500",
             )
           }
         >

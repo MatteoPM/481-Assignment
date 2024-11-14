@@ -12,11 +12,13 @@ import ChatSearch from "./pages/chat/search/Search.tsx";
 import CreateEvent from "./pages/events/create/CreateEvent.tsx";
 import Event from "./pages/events/event/Event.tsx";
 import Events from "./pages/events/Events.tsx";
+import Rsvps from "./pages/events/rsvps/Rsvps.tsx";
 import SearchEvents from "./pages/events/search/searchEvents.tsx";
+import Clubs from "./pages/groups/clubs/Clubs.tsx";
+import Courses from "./pages/groups/courses/Courses.tsx";
 import CreateGroup from "./pages/groups/create/CreateGroup.tsx";
 import Group from "./pages/groups/group/Group.tsx";
 import GroupStats from "./pages/groups/group/stats/GroupStats.tsx";
-import Groups from "./pages/groups/Groups.tsx";
 import SearchGroups from "./pages/groups/search.tsx/Search.tsx";
 import Notifications from "./pages/notifications/Notifications.tsx";
 
@@ -52,14 +54,18 @@ const router = createBrowserRouter([
   },
   {
     path: "/groups",
-    element: <Groups />,
+    element: <Courses />,
+  },
+  {
+    path: "/groups/clubs",
+    element: <Clubs />,
   },
   {
     path: "/groups/create",
     element: <CreateGroup />,
   },
   {
-    path: "/groups/search",
+    path: "/groups/clubs/search",
     element: <SearchGroups />,
   },
   {
@@ -86,6 +92,11 @@ const router = createBrowserRouter([
     path: "/events/create",
     element: <CreateEvent />,
   },
+  {
+    path: "/events/rsvps",
+    element: <Rsvps />,
+  },
+
   {
     path: "/notifications",
     element: <Notifications />,

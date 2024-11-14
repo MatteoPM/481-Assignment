@@ -5,6 +5,7 @@ import GroupCard from "@/pages/groups/_components/groupCard";
 import { groups } from "@/placeholderData";
 import { Plus } from "lucide-react";
 import { useSearchParams } from "react-router-dom";
+import GroupTabs from "../_components/groupTabs";
 
 function SearchGroups() {
   const [searchParams] = useSearchParams();
@@ -12,9 +13,9 @@ function SearchGroups() {
 
   return (
     <>
-      <Page title="Groups">
+      <Page title="Groups" headerContent={<GroupTabs value="clubs" />}>
         <div className="flex items-center gap-4">
-          <SearchBar searchUrl="/groups/search" initialValue={q} />
+          <SearchBar searchUrl="/groups/clubs/search" initialValue={q} />
 
           <button className="rounded-full bg-white p-1 shadow">
             <Plus className="text-green-400" />

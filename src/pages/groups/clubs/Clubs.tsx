@@ -5,15 +5,15 @@ import GroupCard from "@/pages/groups/_components/groupCard";
 import { groups } from "@/placeholderData";
 import { Plus } from "lucide-react";
 import { Link } from "react-router-dom";
-import GroupTabs from "./_components/groupTabs";
+import GroupTabs from "../_components/groupTabs";
 
-function Groups() {
+function Clubs() {
   return (
     <>
-      <Page title="Groups" headerContent={<GroupTabs value="courses" />}>
+      <Page title="Groups" headerContent={<GroupTabs value="clubs" />}>
         <div className="flex items-center gap-4">
           <SearchBar
-            searchUrl="/groups/search"
+            searchUrl="/groups/clubs/search"
             placeholder="Search courses, clubs..."
           />
 
@@ -28,16 +28,6 @@ function Groups() {
         <Button variant={"outline"} className="mt-2 w-full">
           Filters
         </Button>
-
-        <h2 className="mt-6 text-xl font-semibold">Your Courses</h2>
-        <div className="mt-3 flex flex-col divide-y overflow-hidden rounded-md border bg-white shadow-sm">
-          {groups
-            .filter((group) => group.isCourse)
-            .sort((a, b) => a.name.localeCompare(b.name))
-            .map((group) => (
-              <GroupCard group={group} compact />
-            ))}
-        </div>
 
         <h2 className="mt-6 text-xl font-semibold">Your Groups</h2>
         <div className="mt-3 flex flex-col divide-y overflow-hidden rounded-md border bg-white shadow-sm">
@@ -63,4 +53,4 @@ function Groups() {
   );
 }
 
-export default Groups;
+export default Clubs;
