@@ -12,35 +12,36 @@ const EventCard = ({ event }: { event: Event }) => {
       className="block w-full overflow-hidden rounded-lg bg-card text-card-foreground shadow"
     >
       <div
-        className={`space-y-2 bg-black/75 bg-cover p-4 bg-blend-darken`}
+        className={`bg-black/75 bg-cover p-4 bg-blend-darken`}
         style={{
           backgroundImage: `url('${event.bannerUrl}')`,
         }}
       >
         <h3 className="text-lg font-semibold text-white">{event.title}</h3>
 
-        <div className="flex items-center text-sm text-stone-300">
-          <Calendar className="mr-2 h-4 w-4" />
-          {new Date(event.startDateTime).toLocaleString("en-US", {
-            weekday: "short",
-            month: "short",
-            day: "numeric",
-            hour: "numeric",
-            minute: "2-digit",
-          })}
-        </div>
+        <div className="mt-2 space-y-1">
+          <div className="flex items-center text-sm text-stone-300">
+            <Calendar className="mr-2 h-4 w-4" />
+            {new Date(event.startDateTime).toLocaleString("en-US", {
+              weekday: "short",
+              month: "short",
+              day: "numeric",
+              hour: "numeric",
+              minute: "2-digit",
+            })}
+          </div>
 
-        <div className="flex items-center text-sm text-stone-300">
-          <MapPin className="mr-2 h-4 w-4" />
-          {event.location}
-        </div>
+          <div className="flex items-center text-sm text-stone-300">
+            <MapPin className="mr-2 h-4 w-4" />
+            {event.location}
+          </div>
 
-        <div className="flex items-center text-sm text-stone-300">
-          <Users className="mr-2 h-4 w-4" />
-          {group.name}
+          <div className="flex items-center text-sm text-stone-300">
+            <Users className="mr-2 h-4 w-4" />
+            {group.name}
+          </div>
         </div>
       </div>
-
       <div className="flex flex-wrap gap-2 p-4">
         {event.categories.sort().map((category) => (
           <span
