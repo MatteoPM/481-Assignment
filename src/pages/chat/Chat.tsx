@@ -12,7 +12,7 @@ function Chat() {
         <div className="flex items-center gap-4">
           <SearchBar
             searchUrl="/chat/search"
-            placeholder="Search clubs, topics..."
+            placeholder="Search clubs/topics..."
           />
 
           <button className="rounded-full bg-white p-1 shadow">

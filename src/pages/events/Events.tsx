@@ -12,7 +12,10 @@ function Events() {
     <>
       <Page title="Events" headerContent={<EventTabs value="all" />}>
         <div className="top-0 flex items-center gap-4">
-          <SearchBar searchUrl="/events/search" />
+          <SearchBar
+            searchUrl="/events/search"
+            placeholder="Search events..."
+          />
 
           <Link
             to={"/events/create"}

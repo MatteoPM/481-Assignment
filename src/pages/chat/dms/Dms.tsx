@@ -19,7 +19,7 @@ function Dms() {
         bodyClassname="p-0"
       >
         <div className="flex items-center gap-4 p-4">
-          <SearchBar searchUrl="/chat/search" />
+          <SearchBar placeholder="Search users..." searchUrl="/chat/search" />
 
           <Link
             to={"/chat/dms/create"}

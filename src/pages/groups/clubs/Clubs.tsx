@@ -14,7 +14,7 @@ function Clubs() {
         <div className="flex items-center gap-4">
           <SearchBar
             searchUrl="/groups/clubs/search"
-            placeholder="Search courses, clubs..."
+            placeholder="Search clubs..."
           />
 
           <Link
