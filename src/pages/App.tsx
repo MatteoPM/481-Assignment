@@ -8,7 +8,18 @@ import { Link } from "react-router-dom";
 function App() {
   return (
     <>
-      <Page title="Dashboard">
+      <Page
+        title={
+          <div className="flex items-center justify-center gap-1">
+            <img
+              className="size-[25px] object-contain"
+              src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/University_of_Calgary_coat_of_arms_without_motto_scroll.svg/1200px-University_of_Calgary_coat_of_arms_without_motto_scroll.svg.png"
+            />
+
+            <span>uCal Engage</span>
+          </div>
+        }
+      >
         <h2 className="text-xl font-semibold">Recent Posts</h2>
         <div className="mt-3 flex flex-col divide-y overflow-hidden rounded-md border bg-white shadow-sm">
           <ForumCard />

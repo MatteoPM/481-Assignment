@@ -17,7 +17,7 @@ const Page = ({
   bodyClassname,
 }: {
   children: ReactNode;
-  title: string;
+  title: ReactNode;
   // leftHeaderButtons?: ReactNode;
   rightHeaderButtons?: ReactNode;
   showBackButton?: boolean;

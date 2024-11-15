@@ -10,7 +10,7 @@ const ForumCard = () => {
         <div>
           <h2 className="text-lg font-semibold leading-none">Topic Name</h2>
           <p className="text-sm text-muted-foreground">
-            in <span className="font-medium text-stone-700">Group</span>
+            in <span className="font-medium text-stone-700">Group Name</span>
           </p>
         </div>
         <div className="mt-2 flex items-center justify-between text-xs text-muted-foreground">
