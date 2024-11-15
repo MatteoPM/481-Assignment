@@ -36,7 +36,7 @@ const Page = ({
               <>
                 <button
                   onClick={() => navigate(-1)}
-                  className="flex items-center p-1 text-blue-400"
+                  className="flex items-center p-1 text-primary"
                 >
                   <ChevronLeft className="-ml-2" />
                 </button>

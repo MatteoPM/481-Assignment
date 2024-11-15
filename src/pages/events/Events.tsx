@@ -27,7 +27,11 @@ function Events() {
 
         <EventFilter />
 
-        <div className="mt-6 space-y-3">
+        <h2 className="mt-6 text-xl font-semibold">
+          {q ? `Events Matching "${q}"` : "All Events"}
+        </h2>
+
+        <div className="mt-3 space-y-3">
           {events
             .filter((event) =>
               event.title.toLowerCase().includes(q.toLowerCase()),

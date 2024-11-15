@@ -20,9 +20,8 @@ const SearchBar = ({ placeholder }: { placeholder?: string }) => {
   return (
     <>
       <div className="relative flex grow items-center rounded bg-stone-200 px-2 py-1.5 text-sm">
-        <button type="submit" className="cursor-pointer">
-          <Search className="mr-2 size-5 text-stone-500" />
-        </button>
+        <Search className="mr-2 size-5 text-stone-500" />
+
         <input
           type="text"
           value={searchParams.get("q") || ""}

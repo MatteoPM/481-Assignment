@@ -11,7 +11,7 @@ const FooterNav = () => {
           className={({ isActive }) =>
             twMerge(
               "flex flex-col items-center py-3",
-              isActive && "text-blue-500",
+              isActive && "text-primary",
             )
           }
         >
@@ -23,7 +23,7 @@ const FooterNav = () => {
           className={({ isActive }) =>
             twMerge(
               "flex flex-col items-center py-3",
-              isActive && "text-blue-500",
+              isActive && "text-primary",
             )
           }
         >
@@ -35,7 +35,7 @@ const FooterNav = () => {
           className={({ isActive }) =>
             twMerge(
               "flex flex-col items-center py-3",
-              isActive && "text-blue-500",
+              isActive && "text-primary",
             )
           }
         >
@@ -47,7 +47,7 @@ const FooterNav = () => {
           className={({ isActive }) =>
             twMerge(
               "flex flex-col items-center py-3",
-              isActive && "text-blue-500",
+              isActive && "text-primary",
             )
           }
         >
