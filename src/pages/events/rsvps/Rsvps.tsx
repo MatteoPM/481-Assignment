@@ -16,7 +16,7 @@ function Rsvps() {
   return (
     <>
       <Page title="Events" headerContent={<EventTabs value="rsvps" />}>
-        <SearchBar placeholder="Search all events..." />
+        <SearchBar placeholder="Search RSVPs..." />
 
         <h2 className="mt-6 text-xl font-semibold">
           {q ? `RSVPs Matching "${q}"` : "Your RSVPs"}

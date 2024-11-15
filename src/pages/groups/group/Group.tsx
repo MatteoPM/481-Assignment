@@ -1,4 +1,5 @@
 import Page from "@/components/page";
+import SubHeader from "@/components/subHeader";
 import { Button } from "@/components/ui/button";
 import User from "@/components/user";
 import ForumCard from "@/pages/chat/_components/forumCard";
@@ -10,7 +11,14 @@ import {
   placeholderUser2,
   placeholderUser3,
 } from "@/placeholderData";
-import { BookOpenText, Calendar, MessageSquareText, Users } from "lucide-react";
+import {
+  BookOpenText,
+  Calendar,
+  Expand,
+  MessageSquareText,
+  Plus,
+  Users,
+} from "lucide-react";
 import { Link, useParams } from "react-router-dom";
 
 function Group() {
@@ -34,10 +42,8 @@ function Group() {
             {group.name}
           </h2>
 
-          <h3 className="mt-4 flex items-center">
-            <BookOpenText className="mr-2 h-4 w-4" />
-            <span>Description</span>
-          </h3>
+          <SubHeader Icon={BookOpenText} text="Description" className="mt-4" />
+
           <p className="mt-1 text-sm text-gray-500">{group.description}</p>
 
           {!group.isCourse && (
@@ -54,24 +60,20 @@ function Group() {
             </div>
           )}
 
-          <h3 className="mt-6 flex items-center">
-            <Users className="mr-2 h-4 w-4" />
-            <span>Members</span>
-          </h3>
+          <SubHeader Icon={Users} text="Members" className="mt-6" />
+
           <div className="mt-1 grid grid-cols-2 gap-2 rounded-md py-2 scrollbar">
             <User user={placeholderUser} />
             <User user={placeholderUser2} />
             <User user={placeholderUser3} />
           </div>
 
-          <Link to={""} className="py-2 text-sm text-muted-foreground">
-            View all
-          </Link>
+          <Button size={"sm"} className="mt-2 w-full">
+            <Expand className="size-[15px]" />
+            <span className="leading-none">View All</span>
+          </Button>
 
-          <h3 className="mt-6 flex items-center">
-            <MessageSquareText className="mr-2 h-4 w-4" />
-            <span>Forums</span>
-          </h3>
+          <SubHeader Icon={MessageSquareText} text="Forums" className="mt-6" />
 
           <div className="mt-3 flex flex-col divide-y overflow-hidden rounded-md border bg-white shadow-sm">
             <ForumCard />
@@ -81,14 +83,19 @@ function Group() {
             <ForumCard />
           </div>
 
-          <Link to={""} className="py-2 text-sm text-muted-foreground">
-            View all
-          </Link>
+          <div className="mt-2 grid grid-cols-2 gap-3">
+            <Button size={"sm"}>
+              <Expand className="size-[20px]" />
+              <span className="leading-none">View All</span>
+            </Button>
 
-          <h3 className="mt-6 flex items-center">
-            <Calendar className="mr-2 h-4 w-4" />
-            <span>Events</span>
-          </h3>
+            <Button size={"sm"} className="bg-green-400 hover:bg-green-400/90">
+              <Plus className="size-[20px]" />
+              <span className="leading-none">Create</span>
+            </Button>
+          </div>
+
+          <SubHeader Icon={Calendar} text="Events" className="mt-6" />
 
           <div className="mt-3 space-y-3">
             <EventCard event={events[0]} />

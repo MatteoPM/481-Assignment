@@ -1,14 +1,9 @@
 import Page from "@/components/page";
+import SubHeader from "@/components/subHeader";
 import { Button } from "@/components/ui/button";
 import GroupCard from "@/pages/groups/_components/groupCard";
 import { events, groups } from "@/placeholderData";
-import {
-  BookOpenText,
-  CalendarIcon,
-  MapPinIcon,
-  Tags,
-  Users,
-} from "lucide-react";
+import { BookOpenText, Calendar, MapPin, Tags, Users } from "lucide-react";
 import { useParams } from "react-router-dom";
 
 const dateFormatter = new Intl.DateTimeFormat("en-US", {
@@ -47,10 +42,7 @@ function Event() {
             {event.title}
           </h2>
 
-          <h3 className="mt-4 flex items-center">
-            <CalendarIcon className="mr-2 h-4 w-4" />
-            <span>Date and Time (MST)</span>
-          </h3>
+          <SubHeader Icon={Calendar} text="Date and Time (MST)" />
           <div className="mt-1 text-sm text-gray-500">
             <div className="flex items-baseline">
               <span className="w-14 text-xs font-bold">STARTS</span>
@@ -62,22 +54,16 @@ function Event() {
             </div>
           </div>
 
-          <h3 className="mt-4 flex items-center">
-            <MapPinIcon className="mr-2 h-4 w-4" />
-            <span>Location</span>
-          </h3>
+          <SubHeader Icon={MapPin} text="Location" />
+
           <div className="mt-1 text-sm text-gray-500">{event.location}</div>
 
-          <h3 className="mt-4 flex items-center">
-            <BookOpenText className="mr-2 h-4 w-4" />
-            <span>Description</span>
-          </h3>
+          <SubHeader Icon={BookOpenText} text="Description" />
+
           <p className="mt-1 text-sm text-gray-500">{event.description}</p>
 
-          <h3 className="mt-4 flex items-center">
-            <Tags className="mr-2 h-4 w-4" />
-            <span>Categories</span>
-          </h3>
+          <SubHeader Icon={Tags} text="Categories" />
+
           <div className="mt-2 flex flex-wrap gap-2">
             {events[0].categories.sort().map((perk) => (
               <span
@@ -89,10 +75,7 @@ function Event() {
             ))}
           </div>
 
-          <h3 className="mt-4 flex items-center">
-            <Users className="mr-2 h-4 w-4" />
-            Hosting Group
-          </h3>
+          <SubHeader Icon={Users} text="Hosting Group" />
           <div className="mb-4 mt-2">
             <GroupCard group={group} />
           </div>

@@ -20,7 +20,7 @@ const SearchBar = ({ placeholder }: { placeholder?: string }) => {
   return (
     <>
       <div className="relative flex grow items-center rounded bg-stone-200 px-2 py-1.5 text-sm">
-        <Search className="mr-2 size-5 text-stone-500" />
+        <Search className="mr-2 size-5 shrink-0 text-stone-500" />
 
         <input
           type="text"
