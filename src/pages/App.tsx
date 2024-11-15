@@ -2,7 +2,7 @@ import Page from "@/components/page";
 import ForumCard from "@/pages/chat/_components/forumCard";
 import EventCard from "@/pages/events/_components/eventCard";
 import GroupCard from "@/pages/groups/_components/groupCard";
-import { events, groups } from "@/placeholderData";
+import { events, forums, groups } from "@/placeholderData";
 import { Link } from "react-router-dom";
 
 function App() {
@@ -22,10 +22,9 @@ function App() {
       >
         <h2 className="text-xl font-semibold">Recent Posts</h2>
         <div className="mt-3 flex flex-col divide-y overflow-hidden rounded-md border bg-white shadow-sm">
-          <ForumCard />
-          <ForumCard />
-          <ForumCard />
-          <ForumCard />
+          {forums.map((forum) => (
+            <ForumCard forum={forum} />
+          ))}
         </div>
 
         <Link to={""} className="py-2 text-sm text-muted-foreground">

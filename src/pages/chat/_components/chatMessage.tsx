@@ -1,6 +1,7 @@
 import { Drawer, DrawerContent, DrawerTrigger } from "@/components/ui/drawer";
 import { cn } from "@/lib/utils";
 import { ChatMessageType, testUser } from "@/placeholderData";
+import { formatRelative } from "date-fns";
 import UserDrawerContent from "../../../components/userDrawerContent";
 
 const ChatMessage = ({ chatMessage }: { chatMessage: ChatMessageType }) => {
@@ -14,7 +15,7 @@ const ChatMessage = ({ chatMessage }: { chatMessage: ChatMessageType }) => {
       )}
     >
       <Drawer>
-        <DrawerTrigger className="pt-2">
+        <DrawerTrigger className="shrink-0 pt-2">
           <img
             src={chatMessage.user.avatarUrl}
             className="size-[50px] rounded-full object-cover"
@@ -27,7 +28,9 @@ const ChatMessage = ({ chatMessage }: { chatMessage: ChatMessageType }) => {
       <div>
         <div className="flex items-baseline gap-2">
           <span className="block font-medium">{chatMessage.user.username}</span>
-          <span className="text-xs text-stone-500">Today at 8:27 PM</span>
+          <span className="text-xs text-stone-500">
+            {formatRelative(chatMessage.dateTime, new Date())}
+          </span>
         </div>
         <div
           className={cn(

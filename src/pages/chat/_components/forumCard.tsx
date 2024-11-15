@@ -1,16 +1,19 @@
+import { Forum, groups } from "@/placeholderData";
 import { Link } from "react-router-dom";
 
-const ForumCard = () => {
+const ForumCard = ({ forum }: { forum: Forum }) => {
+  const group = groups.find((group) => group.id === forum.groupId)!;
+
   return (
     <Link
-      to={"/chat/1"}
+      to={`/chat/${forum.id}`}
       className="flex items-center p-3 transition-colors hover:bg-muted/50"
     >
       <div className="">
         <div>
-          <h2 className="text-lg font-semibold leading-none">Topic Name</h2>
+          <h2 className="text-lg font-semibold leading-none">{forum.title}</h2>
           <p className="text-sm text-muted-foreground">
-            in <span className="font-medium text-stone-700">Group Name</span>
+            in <span className="font-medium text-stone-700">{group.name}</span>
           </p>
         </div>
         <div className="mt-2 flex items-center justify-between text-xs text-muted-foreground">
@@ -19,9 +22,7 @@ const ForumCard = () => {
       </div>
       <img
         className="ml-auto size-[40px] rounded-full object-cover"
-        src={
-          "https://s.brightspace.com/course-images/images/9a6e566b-3c24-4b23-8bf1-d1e90be1a208/tile-high-density-max-size.jpg"
-        }
+        src={group.bannerUrl}
       />
     </Link>
   );

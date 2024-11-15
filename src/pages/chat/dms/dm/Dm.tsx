@@ -7,22 +7,22 @@ import { useState } from "react";
 const initialChatMessages: ChatMessageType[] = [
   {
     user: placeholderUser,
-    date: Date.now(),
+    dateTime: Date.now(),
     message: "What is love",
   },
   {
     user: placeholderUser,
-    date: Date.now(),
+    dateTime: Date.now(),
     message: "Baby don't hurt me",
   },
   {
     user: placeholderUser,
-    date: Date.now(),
+    dateTime: Date.now(),
     message: "Don't hurt me",
   },
   {
     user: testUser,
-    date: Date.now(),
+    dateTime: Date.now(),
     message: "No more",
     read: Date.now(),
   },

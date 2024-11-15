@@ -6,6 +6,7 @@ import ForumCard from "@/pages/chat/_components/forumCard";
 import EventCard from "@/pages/events/_components/eventCard";
 import {
   events,
+  forums,
   groups,
   placeholderUser,
   placeholderUser2,
@@ -62,13 +63,13 @@ function Group() {
 
           <SubHeader Icon={Users} text="Members" className="mt-6" />
 
-          <div className="mt-1 grid grid-cols-2 gap-2 rounded-md py-2 scrollbar">
+          <div className="mt-3 grid grid-cols-2 gap-2 rounded-md scrollbar">
             <User user={placeholderUser} />
             <User user={placeholderUser2} />
             <User user={placeholderUser3} />
           </div>
 
-          <Button size={"sm"} className="mt-2 w-full">
+          <Button size={"sm"} className="mt-3 w-full">
             <Expand className="size-[15px]" />
             <span className="leading-none">View All</span>
           </Button>
@@ -76,14 +77,12 @@ function Group() {
           <SubHeader Icon={MessageSquareText} text="Forums" className="mt-6" />
 
           <div className="mt-3 flex flex-col divide-y overflow-hidden rounded-md border bg-white shadow-sm">
-            <ForumCard />
-            <ForumCard />
-            <ForumCard />
-            <ForumCard />
-            <ForumCard />
+            {forums.map((forum) => (
+              <ForumCard forum={forum} />
+            ))}
           </div>
 
-          <div className="mt-2 grid grid-cols-2 gap-3">
+          <div className="mt-3 grid grid-cols-2 gap-3">
             <Button size={"sm"}>
               <Expand className="size-[20px]" />
               <span className="leading-none">View All</span>
@@ -103,9 +102,23 @@ function Group() {
             <EventCard event={events[2]} />
           </div>
 
-          <Link to={""} className="py-2 text-sm text-muted-foreground">
-            View all
-          </Link>
+          <div className="mt-3 grid grid-cols-2 gap-3">
+            <Button size={"sm"}>
+              <Expand className="size-[20px]" />
+              <span className="leading-none">View All</span>
+            </Button>
+
+            <Button
+              size={"sm"}
+              className="bg-green-400 hover:bg-green-400/90"
+              asChild
+            >
+              <Link to={"/events/create"}>
+                <Plus className="size-[20px]" />
+                <span className="leading-none">Create</span>
+              </Link>
+            </Button>
+          </div>
         </div>
       </Page>
     </>

@@ -6,7 +6,7 @@ export type UserType = {
 
 export type ChatMessageType = {
   user: UserType;
-  date: number;
+  dateTime: string;
   message: string;
   read?: number;
 };
@@ -24,8 +24,9 @@ export type Event = {
 };
 
 export type Forum = {
+  id: number;
   title: string;
-  creator: UserType;
+  groupId: number;
   messages: ChatMessageType[];
 };
 
@@ -129,8 +130,6 @@ export const events: Event[] = [
       "https://prod-images.tcm.com/Master-Profile-Images/casablanca1942.610.jpg",
   },
 ];
-
-export const forumPosts = [];
 
 export const notifications: Notification[] = [
   {
@@ -269,5 +268,43 @@ export const groups: Group[] = [
     bannerUrl:
       "https://s.brightspace.com/course-images/images/ed6d01d6-56ae-437e-85ac-4ec2c5a2f878/tile-low-density-max-size.jpg",
     isCourse: true,
+  },
+];
+
+export const forums: Forum[] = [
+  {
+    id: 0,
+    title: "I LOVE COFFEE",
+    groupId: 5,
+    messages: [
+      {
+        user: placeholderUser,
+        message: "RRRRRGH COFFEEEEEE",
+        dateTime: "2024-11-14T19:30:00",
+      },
+      {
+        user: testUser,
+        message: "Bro chill",
+        dateTime: "2024-11-15T19:30:00",
+      },
+    ],
+  },
+  {
+    id: 1,
+    title: "How to Create Minecraft?",
+    groupId: 0,
+    messages: [
+      {
+        user: placeholderUser2,
+        message:
+          "like i learned how to print hellow world so i think i'm ready to make minecraft?",
+        dateTime: "2024-11-10T12:30:00",
+      },
+      {
+        user: placeholderUser3,
+        message: 'Just do "import Minecraft" smh my head',
+        dateTime: "2024-11-10T13:20:00",
+      },
+    ],
   },
 ];

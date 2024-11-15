@@ -2,6 +2,7 @@ import Page from "@/components/page";
 import SearchBar from "@/components/searchBar";
 import ChatTabs from "@/pages/chat/_components/chatTabs";
 import ForumCard from "@/pages/chat/_components/forumCard";
+import { forums } from "@/placeholderData";
 import { Plus } from "lucide-react";
 
 function Chat() {
@@ -17,10 +18,9 @@ function Chat() {
         </div>
 
         <div className="mt-3 flex flex-col divide-y overflow-hidden rounded-md border bg-white shadow-sm">
-          <ForumCard />
-          <ForumCard />
-          <ForumCard />
-          <ForumCard />
+          {forums.map((forum) => (
+            <ForumCard forum={forum} />
+          ))}
         </div>
 
         <p className="mt-2 text-center text-sm font-medium text-muted-foreground">

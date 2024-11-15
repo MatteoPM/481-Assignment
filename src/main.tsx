@@ -33,7 +33,7 @@ const router = createBrowserRouter([
     children: [],
   },
   {
-    path: "/chat/:chatId",
+    path: "/chat/:forumId",
     element: <Forum />,
   },
   {
