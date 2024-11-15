@@ -10,6 +10,7 @@ import {
   placeholderUser2,
   placeholderUser3,
 } from "@/placeholderData";
+import { BookOpenText, Calendar, MessageSquareText, Users } from "lucide-react";
 import { Link, useParams } from "react-router-dom";
 
 function Group() {
@@ -22,50 +23,72 @@ function Group() {
 
   return (
     <>
-      <Page title={group.name} showBackButton>
+      <Page title={group.name} showBackButton bodyClassname="p-0 flex flex-col">
         <img
-          className="h-[120px] w-full rounded-lg object-cover"
+          className="h-[150px] shrink-0 rounded-b-xl object-cover shadow-lg"
           src={group.bannerUrl}
         />
-        <div className="mt-3 flex items-center gap-3">
-          <h1 className="text-lg font-semibold">{group.name}</h1>
 
-          <Button className="ml-auto">Join</Button>
+        <div className="p-4">
+          <h2 className="mb-4 border-b pb-4 text-2xl font-bold">
+            {group.name}
+          </h2>
 
-          <Button variant={"outline"} asChild>
-            <Link to={"/groups/1/stats"}>Stats</Link>
-          </Button>
-        </div>
+          <h3 className="mt-4 flex items-center">
+            <BookOpenText className="mr-2 h-4 w-4" />
+            <span>Description</span>
+          </h3>
+          <p className="mt-1 text-sm text-gray-500">{group.description}</p>
 
-        <p className="mt-2 text-stone-600">{group.description}</p>
+          <div className="mt-6 flex items-center gap-3">
+            <Button className="">Join</Button>
 
-        <h2 className="mt-6 text-xl font-semibold">
-          Members <span className="font-normal text-muted-foreground">(3)</span>
-        </h2>
-        <div className="mt-1 grid grid-cols-2 gap-2 rounded-md py-2 scrollbar">
-          <User user={placeholderUser} />
-          <User user={placeholderUser2} />
-          <User user={placeholderUser3} />
-        </div>
+            <Button variant={"outline"} asChild>
+              <Link to={"/groups/1/stats"}>Stats</Link>
+            </Button>
 
-        <Link to={""} className="py-2 text-sm text-muted-foreground">
-          View all
-        </Link>
+            <Button variant={"outline"} asChild>
+              <Link to={"/events/create"}>Create Event</Link>
+            </Button>
+          </div>
 
-        <h2 className="mt-8 text-xl font-semibold">Forums</h2>
-        <div className="mt-3 flex flex-col divide-y overflow-hidden rounded-md border bg-white shadow-sm">
-          <ForumCard />
-          <ForumCard />
-          <ForumCard />
-          <ForumCard />
-          <ForumCard />
-        </div>
+          <h3 className="mt-6 flex items-center">
+            <Users className="mr-2 h-4 w-4" />
+            <span>Members</span>
+          </h3>
+          <div className="mt-1 grid grid-cols-2 gap-2 rounded-md py-2 scrollbar">
+            <User user={placeholderUser} />
+            <User user={placeholderUser2} />
+            <User user={placeholderUser3} />
+          </div>
 
-        <h2 className="mt-8 text-xl font-semibold">Events</h2>
-        <div className="mt-3 space-y-3">
-          <EventCard event={events[0]} />
-          <EventCard event={events[1]} />
-          <EventCard event={events[2]} />
+          <Link to={""} className="py-2 text-sm text-muted-foreground">
+            View all
+          </Link>
+
+          <h3 className="mt-6 flex items-center">
+            <MessageSquareText className="mr-2 h-4 w-4" />
+            <span>Forums</span>
+          </h3>
+
+          <div className="mt-3 flex flex-col divide-y overflow-hidden rounded-md border bg-white shadow-sm">
+            <ForumCard />
+            <ForumCard />
+            <ForumCard />
+            <ForumCard />
+            <ForumCard />
+          </div>
+
+          <h3 className="mt-6 flex items-center">
+            <Calendar className="mr-2 h-4 w-4" />
+            <span>Events</span>
+          </h3>
+
+          <div className="mt-3 space-y-3">
+            <EventCard event={events[0]} />
+            <EventCard event={events[1]} />
+            <EventCard event={events[2]} />
+          </div>
         </div>
       </Page>
     </>
