@@ -1,54 +1,48 @@
 import { Search, X } from "lucide-react";
-import { FormEvent, useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { ChangeEvent } from "react";
+import { useSearchParams } from "react-router-dom";
 
-const SearchBar = ({
-  searchUrl,
-  initialValue,
-  placeholder,
-}: {
-  searchUrl: string;
-  initialValue?: string | null;
-  placeholder?: string;
-}) => {
-  const [query, setQuery] = useState(initialValue || "");
-  const navigate = useNavigate();
-  const location = useLocation();
+const SearchBar = ({ placeholder }: { placeholder?: string }) => {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const q = searchParams.get("q");
 
-  const handleSubmit = (e: FormEvent) => {
-    e.preventDefault();
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
 
-    if (query) {
-      navigate(`${searchUrl}?q=${query}`);
+    if (value) {
+      setSearchParams({ q: value });
+    } else {
+      searchParams.delete("q");
+      setSearchParams(searchParams);
     }
   };
 
   return (
     <>
-      <form
-        onSubmit={handleSubmit}
-        className="relative flex grow items-center rounded bg-stone-200 px-2 py-1.5 text-sm"
-      >
+      <div className="relative flex grow items-center rounded bg-stone-200 px-2 py-1.5 text-sm">
         <button type="submit" className="cursor-pointer">
           <Search className="mr-2 size-5 text-stone-500" />
         </button>
         <input
           type="text"
+          value={searchParams.get("q") || ""}
           placeholder={placeholder || "Search"}
           className="w-full bg-transparent placeholder:text-stone-400 focus:outline-none"
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
+          onChange={handleChange}
         />
 
-        {location.pathname.includes("search") && (
-          <Link
-            to={searchUrl.replace("/search", "")}
+        {q && (
+          <button
+            onClick={() => {
+              searchParams.delete("q");
+              setSearchParams(searchParams);
+            }}
             className="flex items-center justify-center rounded-full bg-stone-400 p-0.5 text-white"
           >
             <X className="size-3.5 text-stone-300" />
-          </Link>
+          </button>
         )}
-      </form>
+      </div>
     </>
   );
 };

@@ -8,9 +8,17 @@ import {
   placeholderUser3,
 } from "@/placeholderData";
 import { Plus } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 
 function Dms() {
+  const [searchParams] = useSearchParams();
+  const q = searchParams.get("q") || "";
+  const users = [placeholderUser, placeholderUser2, placeholderUser3];
+
+  const filteredUsers = users.filter((user) =>
+    user.username.toLowerCase().includes(q.toLowerCase()),
+  );
+
   return (
     <>
       <Page
@@ -19,7 +27,7 @@ function Dms() {
         bodyClassname="p-0"
       >
         <div className="flex items-center gap-4 p-4">
-          <SearchBar placeholder="Search users..." searchUrl="/chat/search" />
+          <SearchBar placeholder="Search users..." />
 
           <Link
             to={"/chat/dms/create"}
@@ -29,11 +37,18 @@ function Dms() {
           </Link>
         </div>
 
-        <div className="divide-y divide-solid">
-          <DmCard user={placeholderUser} />
-          <DmCard user={placeholderUser2} />
-          <DmCard user={placeholderUser3} />
-        </div>
+        {filteredUsers.length > 0 && (
+          <div className="divide-y divide-solid">
+            {filteredUsers.map((user) => (
+              <DmCard user={user} key={user.username} />
+            ))}
+          </div>
+        )}
+        {filteredUsers.length === 0 && (
+          <div className="mt-8 text-center font-semibold text-muted-foreground">
+            No users found. Adjust your filters.
+          </div>
+        )}
       </Page>
     </>
   );

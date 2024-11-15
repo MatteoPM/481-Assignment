@@ -9,39 +9,44 @@ import {
   placeholderUser3,
 } from "@/placeholderData";
 import { Send } from "lucide-react";
-import { Link } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 
 function CreateDm() {
+  const [searchParams] = useSearchParams();
+  const q = searchParams.get("q") || "";
+  const users = [placeholderUser, placeholderUser2, placeholderUser3];
+
+  const filteredUsers = users.filter((user) =>
+    user.username.toLowerCase().includes(q.toLowerCase()),
+  );
+
   return (
     <>
-      <Page title="New Message" showBackButton>
+      <Page title="New Message" showBackButton bodyClassname="p-0">
         <div className="relative h-full">
-          <div className="flex items-center gap-4">
-            <SearchBar searchUrl="/chat/search" />
+          <div className="flex items-center gap-4 p-4">
+            <SearchBar placeholder="Search users..." />
           </div>
 
-          <div className="my-2 divide-y divide-solid">
-            <div className="flex items-center gap-2">
-              <Link to={"/chat/dms/1"} className="text-blue-400">
-                <DmCard user={placeholderUser} />
-              </Link>
+          {filteredUsers.length > 0 && (
+            <div className="divide-y divide-solid">
+              {filteredUsers.map((user) => (
+                <div className="flex items-center gap-2">
+                  <DmCard user={user} key={user.username} className="pr-0" />
 
-              <Checkbox className="ml-auto mr-3" />
+                  <Checkbox className="ml-auto mr-3" />
+                </div>
+              ))}
             </div>
-            <div className="flex items-center gap-2">
-              <DmCard user={placeholderUser2} />
-
-              <Checkbox className="ml-auto mr-3" />
+          )}
+          {filteredUsers.length === 0 && (
+            <div className="mt-8 text-center font-semibold text-muted-foreground">
+              No users found. Adjust your filters.
             </div>
-            <div className="flex items-center gap-2">
-              <DmCard user={placeholderUser3} />
-
-              <Checkbox className="ml-auto mr-3" />
-            </div>
-          </div>
+          )}
 
           <Button
-            className="absolute bottom-0 right-0 flex size-[50px] items-center justify-center rounded-full p-0"
+            className="absolute bottom-4 right-4 flex size-[50px] items-center justify-center rounded-full p-0"
             disabled
           >
             <Send className="relative right-[2px] top-[2px] size-[30px] text-stone-100" />

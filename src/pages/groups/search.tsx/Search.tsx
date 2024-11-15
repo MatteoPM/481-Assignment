@@ -15,7 +15,7 @@ function SearchGroups() {
     <>
       <Page title="Groups" headerContent={<GroupTabs value="clubs" />}>
         <div className="flex items-center gap-4">
-          <SearchBar searchUrl="/groups/clubs/search" initialValue={q} />
+          <SearchBar />
 
           <button className="rounded-full bg-white p-1 shadow">
             <Plus className="text-green-400" />

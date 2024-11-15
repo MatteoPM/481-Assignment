@@ -4,18 +4,23 @@ import { Button } from "@/components/ui/button";
 import GroupCard from "@/pages/groups/_components/groupCard";
 import { groups } from "@/placeholderData";
 import { Filter, Plus } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import GroupTabs from "../_components/groupTabs";
 
 function Clubs() {
+  const [searchParams] = useSearchParams();
+  const q = searchParams.get("q") || "";
+
+  const filteredJoinedGroups = groups
+    .filter((group) => !group.isCourse)
+    .filter((group) => group.name.toLowerCase().includes(q.toLowerCase()))
+    .sort((a, b) => a.name.localeCompare(b.name));
+
   return (
     <>
       <Page title="Groups" headerContent={<GroupTabs value="clubs" />}>
         <div className="flex items-center gap-4">
-          <SearchBar
-            searchUrl="/groups/clubs/search"
-            placeholder="Search clubs..."
-          />
+          <SearchBar placeholder="Search clubs..." />
 
           <Link
             to={"/groups/create"}

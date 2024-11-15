@@ -1,9 +1,16 @@
+import { cn } from "@/lib/utils";
 import { UserType } from "@/placeholderData";
 import { Link } from "react-router-dom";
 
-const DmCard = ({ user }: { user: UserType }) => {
+const DmCard = ({
+  user,
+  className,
+}: {
+  user: UserType;
+  className?: string;
+}) => {
   return (
-    <Link to={"/chat/dms/1"} className="flex gap-4 p-3">
+    <Link to={"/chat/dms/1"} className={cn("flex gap-4 px-4 py-3", className)}>
       <img
         src={user.avatarUrl}
         className="size-[50px] rounded-full object-cover"
@@ -11,11 +18,11 @@ const DmCard = ({ user }: { user: UserType }) => {
 
       <div>
         <span className="block font-medium">{user.username}</span>
-        <p className="text-sm text-stone-500">Information yada yada</p>
+        <p className="text-sm text-stone-500">Last message goes here</p>
       </div>
 
       <div className="ml-auto text-xs text-muted-foreground">
-        <span>5 mins</span>
+        <span>5 mins ago</span>
       </div>
     </Link>
   );
