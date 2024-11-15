@@ -40,17 +40,19 @@ function Group() {
           </h3>
           <p className="mt-1 text-sm text-gray-500">{group.description}</p>
 
-          <div className="mt-6 flex items-center gap-3">
-            <Button className="">Join</Button>
+          {!group.isCourse && (
+            <div className="mt-6 flex items-center gap-3">
+              <Button className="">Join</Button>
 
-            <Button variant={"outline"} asChild>
-              <Link to={"/groups/1/stats"}>Stats</Link>
-            </Button>
+              <Button variant={"outline"} asChild>
+                <Link to={"/groups/1/stats"}>Stats</Link>
+              </Button>
 
-            <Button variant={"outline"} asChild>
-              <Link to={"/events/create"}>Create Event</Link>
-            </Button>
-          </div>
+              <Button variant={"outline"} asChild>
+                <Link to={"/events/create"}>Create Event</Link>
+              </Button>
+            </div>
+          )}
 
           <h3 className="mt-6 flex items-center">
             <Users className="mr-2 h-4 w-4" />
@@ -79,6 +81,10 @@ function Group() {
             <ForumCard />
           </div>
 
+          <Link to={""} className="py-2 text-sm text-muted-foreground">
+            View all
+          </Link>
+
           <h3 className="mt-6 flex items-center">
             <Calendar className="mr-2 h-4 w-4" />
             <span>Events</span>
@@ -89,6 +95,10 @@ function Group() {
             <EventCard event={events[1]} />
             <EventCard event={events[2]} />
           </div>
+
+          <Link to={""} className="py-2 text-sm text-muted-foreground">
+            View all
+          </Link>
         </div>
       </Page>
     </>

@@ -12,7 +12,7 @@ const EventCard = ({ event }: { event: Event }) => {
       className="block w-full overflow-hidden rounded-lg bg-card text-card-foreground shadow"
     >
       <div
-        className={`bg-black/75 bg-cover p-4 bg-blend-darken`}
+        className={`bg-black/75 bg-cover bg-center p-4 bg-blend-darken`}
         style={{
           backgroundImage: `url('${event.bannerUrl}')`,
         }}
