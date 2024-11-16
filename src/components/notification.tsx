@@ -1,14 +1,14 @@
 import { Notification, NotificationType } from "@/placeholderData";
-import { Calendar, MessageCircle, Users } from "lucide-react";
+import { CalendarDays, MessageCircleMore, Users } from "lucide-react";
 
 const getIcon = (type: NotificationType) => {
   switch (type) {
     case "chat":
-      return <MessageCircle className="h-5 w-5" />;
+      return <MessageCircleMore className="h-5 w-5" />;
     case "group":
       return <Users className="h-5 w-5" />;
     case "event":
-      return <Calendar className="h-5 w-5" />;
+      return <CalendarDays className="h-5 w-5" />;
   }
 };
 
