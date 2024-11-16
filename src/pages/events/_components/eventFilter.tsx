@@ -13,7 +13,7 @@ import { Button } from "../../../components/ui/button";
 import EventFilterCheckbox from "./eventFilterCheckbox";
 
 const EventFilter = () => {
-  const [distance, setDistance] = useState([50]);
+  const [distance, setDistance] = useState([100]);
 
   return (
     <Drawer>
@@ -61,7 +61,7 @@ const EventFilter = () => {
               step={1}
             />
             <div className="text-right text-sm text-muted-foreground">
-              {distance[0]} km
+              {distance[0] < 100 ? distance[0] : "∞"} km
             </div>
           </div>
 
