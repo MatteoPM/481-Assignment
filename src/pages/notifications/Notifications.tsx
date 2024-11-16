@@ -4,6 +4,24 @@ import { cn } from "@/lib/utils";
 import { CalendarDays, MessageCircleMore, Users } from "lucide-react";
 import { useState } from "react";
 
+const types = [
+  {
+    label: "All",
+  },
+  {
+    label: "Chat",
+    Icon: <MessageCircleMore className="size-[20px]" />,
+  },
+  {
+    label: "Group",
+    Icon: <Users className="size-[20px]" />,
+  },
+  {
+    label: "Event",
+    Icon: <CalendarDays className="size-[20px]" />,
+  },
+];
+
 function Notifications() {
   const [type, setType] = useState("all");
 
@@ -11,16 +29,18 @@ function Notifications() {
     <>
       <Page title="Notifications" showBackButton hideFooter>
         <div className="flex flex-wrap gap-3">
-          {["All", "Chat", "Group", "Event"].map((type2) => (
+          {types.map((type2) => (
             <button
-              key={type2}
+              key={type2.label}
               className={cn(
-                `rounded-full bg-gray-200/50 px-3 py-1 text-gray-800`,
-                type === type2.toLowerCase() && "bg-primary/10 text-primary",
+                `flex items-center gap-1 rounded-full bg-gray-200/50 px-3 py-1 text-gray-800`,
+                type === type2.label.toLowerCase() &&
+                  "bg-primary/10 text-primary",
               )}
-              onClick={() => setType(type2.toLowerCase())}
+              onClick={() => setType(type2.label.toLowerCase())}
             >
-              {type2}
+              {type2.Icon}
+              {type2.label}
             </button>
           ))}
         </div>
