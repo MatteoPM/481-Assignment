@@ -14,6 +14,7 @@ import EventFilterCheckbox from "./eventFilterCheckbox";
 
 const EventFilter = () => {
   const [distance, setDistance] = useState([50]);
+
   return (
     <Drawer>
       <DrawerTrigger asChild>
@@ -52,8 +53,13 @@ const EventFilter = () => {
           </div>
 
           <div className="space-y-2">
-            <h2 className="mt-4 font-medium">Distance from You</h2>
-            <Slider defaultValue={[33]} max={100} step={1} />
+            <h2 className="mt-4 font-medium">Distance from You (km)</h2>
+            <Slider
+              value={distance}
+              onValueChange={setDistance}
+              max={100}
+              step={1}
+            />
             <div className="text-right text-sm text-muted-foreground">
               {distance[0]} km
             </div>
