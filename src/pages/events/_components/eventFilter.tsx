@@ -65,7 +65,7 @@ const EventFilter = () => {
             </div>
           </div>
 
-          <Button variant={"destructive"} className="mt-12">
+          <Button variant={"destructive"} className="mt-12 w-full">
             <span>Reset Filters</span>
           </Button>
         </div>

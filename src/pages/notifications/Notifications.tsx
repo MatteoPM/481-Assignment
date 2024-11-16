@@ -51,14 +51,15 @@ function Notifications() {
             </div>
             <div className="flex-grow">
               <h2 className="font-semibold">
-                <span className="text-primary">John Smeeth</span> sent a message
+                <span className="text-primary">Sergio Barnes</span> sent a
+                message
               </h2>
               <p className="text-sm text-muted-foreground">
-                Hey, how are you going?
+                Hey, how are you doing?
               </p>
-              <span className="mt-1 text-xs text-muted-foreground">2m ago</span>
+              <span className="text-xs text-muted-foreground">2m ago</span>
 
-              <Button size={"sm"} className="mt-2 block w-full">
+              <Button size={"sm"} className="mt-3 block w-full">
                 Reply
               </Button>
             </div>
@@ -70,15 +71,16 @@ function Notifications() {
             </div>
             <div className="flex-grow">
               <h2 className="font-semibold">
-                <span className="text-primary">Guy Fieri</span> requested to
-                join the <span className="text-primary">Jazz Band</span> club
+                <span className="text-primary">Debbie Hopkins</span> requested
+                to join the{" "}
+                <span className="text-primary">Caffeine Crusaders</span> club
               </h2>
 
-              <span className="mt-1 block text-xs text-muted-foreground">
+              <span className="block text-xs text-muted-foreground">
                 2m ago
               </span>
 
-              <div className="mt-2 grid grid-cols-2 gap-2">
+              <div className="mt-3 grid grid-cols-2 gap-2">
                 <Button size={"sm"}>Accept</Button>
                 <Button size={"sm"} variant={"destructive"}>
                   Reject
@@ -93,16 +95,19 @@ function Notifications() {
             </div>
             <div className="flex-grow">
               <h2 className="font-semibold">
-                <span className="text-primary">Ash Ketchum</span> requested to
+                <span className="text-primary">Brenda Pease</span> requested to
                 attend the{" "}
-                <span className="text-primary">Pokemon Go Meetup</span> event
+                <span className="text-primary">
+                  Late-Night Study Jam with Coffee Tasting
+                </span>{" "}
+                event
               </h2>
 
-              <span className="mt-1 block text-xs text-muted-foreground">
+              <span className="block text-xs text-muted-foreground">
                 2m ago
               </span>
 
-              <div className="mt-2 grid grid-cols-2 gap-2">
+              <div className="mt-3 grid grid-cols-2 gap-2">
                 <Button size={"sm"}>Accept</Button>
                 <Button size={"sm"} variant={"destructive"}>
                   Reject

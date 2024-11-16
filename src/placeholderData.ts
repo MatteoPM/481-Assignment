@@ -60,32 +60,30 @@ export type Group = {
 export const testUser: UserType = {
   id: 0,
   avatarUrl:
-    "https://static.wikia.nocookie.net/b72e4978-1af8-49a8-ac03-ec0ef8a47d30/scale-to-width/370",
-  username: "Killer Kirb",
+    "https://www.fakepersongenerator.com/Face/male/male20161086420389465.jpg",
+  username: "Joseph Ballance",
   status: "online",
 };
 
 export const placeholderUser: UserType = {
   id: 1,
-  avatarUrl:
-    "https://i.pinimg.com/564x/cd/aa/a1/cdaaa1c1b71ab63e8ed183e970f6e61c.jpg",
-  username: "John Smeeth",
+  avatarUrl: "https://randomuser.me/api/portraits/women/26.jpg",
+  username: "Debbie Hopkins",
   status: "online",
 };
 
 export const placeholderUser2: UserType = {
   id: 2,
   avatarUrl:
-    "https://i.pinimg.com/736x/99/27/90/99279086833d4d0662c19f294035630b.jpg",
-  username: "First Last",
+    "https://www.fakepersongenerator.com/Face/male/male1085778558166.jpg",
+  username: "Sergio Barnes",
   status: "offline",
 };
 
 export const placeholderUser3: UserType = {
   id: 3,
-  avatarUrl:
-    "https://wallpapers-clan.com/wp-content/uploads/2023/12/danny-phantom-pfp-33.jpg",
-  username: "Danny Phantom",
+  avatarUrl: "https://randomuser.me/api/portraits/women/18.jpg",
+  username: "Brenda Pease",
   status: "away",
 };
 
