@@ -10,7 +10,6 @@ import MessageInput from "../_components/messageInput";
 
 function Forum() {
   const { forumId } = useParams();
-  console.log(forumId);
 
   const forum = forums.find((forum) => forum.id === Number(forumId));
 

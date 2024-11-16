@@ -4,9 +4,16 @@ import ChatTabs from "@/pages/chat/_components/chatTabs";
 import ForumCard from "@/pages/chat/_components/forumCard";
 import { forums } from "@/placeholderData";
 import { Plus } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 
 function Chat() {
+  const [searchParams] = useSearchParams();
+  const q = searchParams.get("q") || "";
+
+  const filteredForums = forums.filter((forums) =>
+    forums.title.toLowerCase().includes(q.toLowerCase()),
+  );
+
   return (
     <>
       <Page title="Chat" headerContent={<ChatTabs value="forums" />}>
@@ -21,15 +28,25 @@ function Chat() {
           </Link>
         </div>
 
-        <div className="mt-3 flex flex-col divide-y overflow-hidden rounded-md border bg-white shadow-sm">
-          {forums.map((forum) => (
-            <ForumCard forum={forum} />
-          ))}
-        </div>
+        {filteredForums.length > 0 && (
+          <>
+            <div className="mt-3 flex flex-col divide-y overflow-hidden rounded-md border bg-white shadow-sm">
+              {filteredForums.map((forum) => (
+                <ForumCard forum={forum} />
+              ))}
+            </div>
 
-        <p className="mt-2 text-center text-sm font-medium text-muted-foreground">
-          End of results.
-        </p>
+            <p className="mt-2 text-center text-sm font-medium text-muted-foreground">
+              End of results.
+            </p>
+          </>
+        )}
+
+        {filteredForums.length === 0 && (
+          <div className="mt-8 text-center font-semibold text-muted-foreground">
+            No forums found. Adjust your filters.
+          </div>
+        )}
       </Page>
     </>
   );
