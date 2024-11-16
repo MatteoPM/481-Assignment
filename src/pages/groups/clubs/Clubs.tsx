@@ -1,8 +1,9 @@
 import Page from "@/components/page";
 import SearchBar from "@/components/searchBar";
+import SubHeader from "@/components/subHeader";
 import GroupCard from "@/pages/groups/_components/groupCard";
 import { groups } from "@/placeholderData";
-import { Plus } from "lucide-react";
+import { Crown, Plus, User } from "lucide-react";
 import { Link, useSearchParams } from "react-router-dom";
 import GroupTabs from "../_components/groupTabs";
 
@@ -14,6 +15,9 @@ function Clubs() {
     .filter((group) => !group.isCourse)
     .filter((group) => group.name.toLowerCase().includes(q.toLowerCase()))
     .sort((a, b) => a.name.localeCompare(b.name));
+
+  const leadingClubs = filteredClubs.filter((group) => group.leaderId === 0);
+  const memberClubs = filteredClubs.filter((group) => group.leaderId !== 0);
 
   return (
     <>
@@ -48,13 +52,19 @@ function Clubs() {
         ) : (
           <>
             <h2 className="mt-6 text-xl font-semibold">Your Clubs</h2>
+
+            <SubHeader Icon={Crown} text="Leader" />
             <div className="mt-3 flex flex-col divide-y overflow-hidden rounded-md border bg-white shadow-sm">
-              {groups
-                .filter((group) => !group.isCourse)
-                .sort((a, b) => a.name.localeCompare(b.name))
-                .map((group) => (
-                  <GroupCard group={group} compact />
-                ))}
+              {leadingClubs.map((group) => (
+                <GroupCard group={group} compact />
+              ))}
+            </div>
+
+            <SubHeader Icon={User} text="Member" />
+            <div className="mt-3 flex flex-col divide-y overflow-hidden rounded-md border bg-white shadow-sm">
+              {memberClubs.map((group) => (
+                <GroupCard group={group} compact />
+              ))}
             </div>
 
             <h2 className="mt-8 text-xl font-semibold">Suggested Clubs</h2>

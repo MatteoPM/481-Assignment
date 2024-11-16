@@ -15,9 +15,11 @@ import {
 import {
   BookOpenText,
   Calendar,
+  ChartArea,
   Expand,
   MessageSquareText,
   Plus,
+  SquarePlus,
   Users,
 } from "lucide-react";
 import { Link, useParams } from "react-router-dom";
@@ -48,15 +50,17 @@ function Group() {
           <p className="mt-1 text-sm text-gray-500">{group.description}</p>
 
           {!group.isCourse && (
-            <div className="mt-6 flex items-center gap-3">
-              <Button className="">Join</Button>
-
-              <Button variant={"outline"} asChild>
-                <Link to={"/groups/1/stats"}>Stats</Link>
+            <div className="mt-6 grid grid-cols-2 gap-3">
+              <Button size={"sm"}>
+                <SquarePlus className="size-[20px]" />
+                <span className="leading-none">Join</span>
               </Button>
 
-              <Button variant={"outline"} asChild>
-                <Link to={"/events/create"}>Create Event</Link>
+              <Button size={"sm"} variant={"outline"} asChild>
+                <Link to={"/chat/create"}>
+                  <ChartArea className="size-[20px]" />
+                  <span className="leading-none">Stats</span>
+                </Link>
               </Button>
             </div>
           )}
@@ -88,9 +92,15 @@ function Group() {
               <span className="leading-none">View All</span>
             </Button>
 
-            <Button size={"sm"} className="bg-green-400 hover:bg-green-400/90">
-              <Plus className="size-[20px]" />
-              <span className="leading-none">Create</span>
+            <Button
+              size={"sm"}
+              className="bg-green-400 hover:bg-green-400/90"
+              asChild
+            >
+              <Link to={"/chat/create"}>
+                <Plus className="size-[20px]" />
+                <span className="leading-none">Create</span>
+              </Link>
             </Button>
           </div>
 

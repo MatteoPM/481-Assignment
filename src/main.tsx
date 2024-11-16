@@ -7,6 +7,7 @@ import Chat from "./pages/chat/Chat.tsx";
 import CreateDm from "./pages/chat/dms/dm/createDm.tsx";
 import Dm from "./pages/chat/dms/dm/Dm.tsx";
 import Dms from "./pages/chat/dms/Dms.tsx";
+import CreateForum from "./pages/chat/forum/create/CreateForum.tsx";
 import Forum from "./pages/chat/forum/Forum.tsx";
 import ChatSearch from "./pages/chat/search/Search.tsx";
 import CreateEvent from "./pages/events/create/CreateEvent.tsx";
@@ -35,6 +36,11 @@ const router = createBrowserRouter([
   {
     path: "/chat",
     element: <Chat />,
+    children: [],
+  },
+  {
+    path: "/chat/create",
+    element: <CreateForum />,
     children: [],
   },
   {

@@ -11,6 +11,14 @@ function SearchGroups() {
   const [searchParams] = useSearchParams();
   const q = searchParams.get("q")!;
 
+  const filteredClubs = groups
+    .filter((group) => !group.isCourse)
+    .filter((group) => group.name.toLowerCase().includes(q.toLowerCase()))
+    .sort((a, b) => a.name.localeCompare(b.name));
+
+  const leadingClubs = filteredClubs.filter((group) => group.leaderId === 0);
+  const memberClubs = filteredClubs.filter((group) => group.leaderId !== 0);
+
   return (
     <>
       <Page title="Groups" headerContent={<GroupTabs value="clubs" />}>

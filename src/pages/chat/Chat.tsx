@@ -4,6 +4,7 @@ import ChatTabs from "@/pages/chat/_components/chatTabs";
 import ForumCard from "@/pages/chat/_components/forumCard";
 import { forums } from "@/placeholderData";
 import { Plus } from "lucide-react";
+import { Link } from "react-router-dom";
 
 function Chat() {
   return (
@@ -12,9 +13,12 @@ function Chat() {
         <div className="flex items-center gap-4">
           <SearchBar placeholder="Search groups/topics..." />
 
-          <button className="rounded-full bg-white p-1 shadow">
+          <Link
+            to={"/chat/create"}
+            className="rounded-full bg-white p-1 shadow"
+          >
             <Plus className="text-green-400" />
-          </button>
+          </Link>
         </div>
 
         <div className="mt-3 flex flex-col divide-y overflow-hidden rounded-md border bg-white shadow-sm">

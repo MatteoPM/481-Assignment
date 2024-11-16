@@ -6,6 +6,16 @@ import { events, groups } from "@/placeholderData";
 import { BookOpenText, Calendar, MapPin, Tags, Users } from "lucide-react";
 import { useParams } from "react-router-dom";
 
+import {
+  AlertDialog,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
+import { useState } from "react";
+
 const dateFormatter = new Intl.DateTimeFormat("en-US", {
   weekday: "short",
   month: "short",
@@ -17,6 +27,8 @@ const dateFormatter = new Intl.DateTimeFormat("en-US", {
 });
 
 function Event() {
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [isRSVPConfirmed, setIsRSVPConfirmed] = useState(false);
   const { eventId } = useParams();
   const event = events.find((event) => event.id === Number(eventId))!;
 
@@ -24,6 +36,15 @@ function Event() {
   const endDate = new Date(event.endDateTime);
 
   const group = groups.find((group) => group.id === Number(event.groupId))!;
+
+  const handleRSVP = () => {
+    setIsDialogOpen(true);
+  };
+
+  const confirmRSVP = () => {
+    setIsRSVPConfirmed(true);
+    setIsDialogOpen(false);
+  };
 
   return (
     <>
@@ -80,7 +101,65 @@ function Event() {
             <GroupCard group={group} />
           </div>
 
-          <Button className="sticky bottom-4 mt-auto w-full">RSVP</Button>
+          <Button
+            className="sticky bottom-4 mt-auto w-full"
+            onClick={handleRSVP}
+          >
+            RSVP
+          </Button>
+
+          <AlertDialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+            <AlertDialogContent className="max-w-[350px] rounded-lg">
+              <AlertDialogHeader>
+                <AlertDialogTitle>RSVP for this event?</AlertDialogTitle>
+                <AlertDialogDescription>
+                  {/* This action cannot be undone. This will permanently delete
+                  your account and remove your data from our servers. */}
+                </AlertDialogDescription>
+              </AlertDialogHeader>
+              <AlertDialogFooter className="grid grid-cols-2 gap-2">
+                <Button
+                  onClick={() => setIsDialogOpen(false)}
+                  variant={"outline"}
+                >
+                  Cancel
+                </Button>
+                <Button onClick={confirmRSVP}>Confirm</Button>
+              </AlertDialogFooter>
+            </AlertDialogContent>
+          </AlertDialog>
+
+          <AlertDialog open={isRSVPConfirmed} onOpenChange={setIsRSVPConfirmed}>
+            <AlertDialogContent className="max-w-[350px] rounded-lg">
+              <AlertDialogHeader>
+                <AlertDialogTitle>
+                  RSVP Confirmed for {event.title}!
+                </AlertDialogTitle>
+              </AlertDialogHeader>
+
+              <div>
+                <SubHeader
+                  Icon={Calendar}
+                  text="Date and Time (MST)"
+                  className="mt-0"
+                />
+                <div className="mt-1 text-sm text-gray-500">
+                  <div className="flex items-baseline">
+                    <span className="w-14 text-xs font-bold">STARTS</span>
+                    <span>{dateFormatter.format(startDate)}</span>
+                  </div>
+                  <div className="flex items-baseline">
+                    <span className="w-14 text-xs font-bold">ENDS</span>
+                    <span>{dateFormatter.format(endDate)}</span>
+                  </div>
+                </div>
+              </div>
+
+              <AlertDialogFooter>
+                <Button onClick={() => setIsRSVPConfirmed(false)}>Done</Button>
+              </AlertDialogFooter>
+            </AlertDialogContent>
+          </AlertDialog>
         </div>
       </Page>
     </>

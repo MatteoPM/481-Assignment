@@ -1,9 +1,10 @@
 import Page from "@/components/page";
+import { Button } from "@/components/ui/button";
 import ForumCard from "@/pages/chat/_components/forumCard";
 import EventCard from "@/pages/events/_components/eventCard";
 import GroupCard from "@/pages/groups/_components/groupCard";
 import { events, forums, groups } from "@/placeholderData";
-import { Link } from "react-router-dom";
+import { Expand } from "lucide-react";
 
 function App() {
   return (
@@ -27,9 +28,10 @@ function App() {
           ))}
         </div>
 
-        <Link to={""} className="py-2 text-sm text-muted-foreground">
-          View all
-        </Link>
+        <Button size={"sm"} className="mt-3 w-full">
+          <Expand className="size-[15px]" />
+          <span className="leading-none">View All</span>
+        </Button>
 
         <h2 className="mt-8 text-xl font-semibold">Upcoming Events</h2>
         <div className="mt-6 space-y-3">
@@ -37,6 +39,11 @@ function App() {
           <EventCard event={events[1]} />
           <EventCard event={events[2]} />
         </div>
+
+        <Button size={"sm"} className="mt-3 w-full">
+          <Expand className="size-[15px]" />
+          <span className="leading-none">View All</span>
+        </Button>
 
         <h2 className="mt-8 text-xl font-semibold">Suggested Groups</h2>
         <div className="mt-3 flex flex-col divide-y overflow-hidden rounded-md border bg-white shadow-sm">
@@ -47,6 +54,11 @@ function App() {
               <GroupCard group={group} />
             ))}
         </div>
+
+        <Button size={"sm"} className="mt-3 w-full">
+          <Expand className="size-[15px]" />
+          <span className="leading-none">View All</span>
+        </Button>
       </Page>
     </>
   );
