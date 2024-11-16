@@ -5,7 +5,7 @@ import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
 import EventFilterCheckbox from "@/pages/events/_components/eventFilterCheckbox";
-import { Check, ChevronsUpDown } from "lucide-react";
+import { Check, ChevronsUpDown, Edit } from "lucide-react";
 
 import {
   Command,
@@ -28,7 +28,6 @@ const currentDate = new Date();
 const formattedDate = currentDate.toISOString().slice(0, 16);
 
 function CreateEvent() {
-  // const [startTime, endTime] = useState(formattedDate);
   const [hostingClub, setHostingClub] = useState<null | Group>(null);
 
   const clubs = groups.filter((group) => !group.isCourse);
@@ -112,13 +111,15 @@ function CreateEvent() {
               className="h-[120px] rounded-lg object-cover"
               src="https://assets.ppy.sh/user-cover-presets/4/2fd772ad175c5687370e0aab50799a84adef7d0fff3f97dccfa5c94384ebb8af.jpeg"
             />
-            <Button className="absolute right-2 top-2">Edit</Button>
+            <Button className="absolute right-2 top-2" size={"icon"}>
+              <Edit className="size-[20px]" />
+            </Button>
           </div>
         </div>
 
         <div className="mt-6">
           <label className="text-sm font-medium">
-            Title<span className="text-red-400">*</span>
+            Event Title<span className="text-red-400">*</span>
           </label>
           <Input type="text" placeholder="Enter a title..." className="mt-1" />
         </div>

@@ -1,9 +1,8 @@
 import Page from "@/components/page";
 import SearchBar from "@/components/searchBar";
-import { Button } from "@/components/ui/button";
 import GroupCard from "@/pages/groups/_components/groupCard";
 import { groups } from "@/placeholderData";
-import { Filter, Plus } from "lucide-react";
+import { Plus } from "lucide-react";
 import { Link, useSearchParams } from "react-router-dom";
 import GroupTabs from "../_components/groupTabs";
 
@@ -29,11 +28,6 @@ function Clubs() {
             <Plus className="text-green-400" />
           </Link>
         </div>
-
-        <Button variant={"outline"} className="mt-2 w-full">
-          <Filter className="w-[15px]" />
-          <span>Filters</span>
-        </Button>
 
         {q ? (
           <>
