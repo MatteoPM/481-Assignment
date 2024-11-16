@@ -1,7 +1,8 @@
 import { Drawer, DrawerContent, DrawerTrigger } from "@/components/ui/drawer";
 import { testUser } from "@/placeholderData";
-import { CircleHelp, Settings } from "lucide-react";
+import { CircleHelp, LogOut, Settings } from "lucide-react";
 import { Link } from "react-router-dom";
+import { Separator } from "./ui/separator";
 
 const UserDrawer = () => {
   return (
@@ -37,6 +38,14 @@ const UserDrawer = () => {
           </Link>
           <Link to={""} className="flex gap-4 p-3 font-medium text-stone-800">
             <Settings /> <span>Settings</span>
+          </Link>
+
+          <Separator className="" />
+          <Link
+            to={"/login"}
+            className="flex items-center gap-4 p-3 font-medium text-stone-800"
+          >
+            <LogOut /> <span>Sign Out</span>
           </Link>
         </div>
       </DrawerContent>

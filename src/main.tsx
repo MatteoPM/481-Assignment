@@ -20,9 +20,14 @@ import CreateGroup from "./pages/groups/create/CreateGroup.tsx";
 import Group from "./pages/groups/group/Group.tsx";
 import GroupStats from "./pages/groups/group/stats/GroupStats.tsx";
 import SearchGroups from "./pages/groups/search.tsx/Search.tsx";
+import Login from "./pages/login/Login.tsx";
 import Notifications from "./pages/notifications/Notifications.tsx";
 
 const router = createBrowserRouter([
+  {
+    path: "/login",
+    element: <Login />,
+  },
   {
     path: "/",
     element: <App />,
