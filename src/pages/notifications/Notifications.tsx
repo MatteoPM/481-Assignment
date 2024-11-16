@@ -1,7 +1,7 @@
 import Page from "@/components/page";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { MessageCircleMore, Users } from "lucide-react";
+import { CalendarDays, MessageCircleMore, Users } from "lucide-react";
 import { useState } from "react";
 
 function Notifications() {
@@ -51,7 +51,31 @@ function Notifications() {
             <div className="flex-grow">
               <h2 className="font-semibold">
                 <span className="text-primary">Guy Fieri</span> requested to
-                join the <span className="text-primary">Jazz Band club</span>
+                join the <span className="text-primary">Jazz Band</span> club
+              </h2>
+
+              <span className="mt-1 block text-xs text-muted-foreground">
+                2m ago
+              </span>
+
+              <div className="mt-2 grid grid-cols-2 gap-2">
+                <Button size={"sm"}>Accept</Button>
+                <Button size={"sm"} variant={"destructive"}>
+                  Reject
+                </Button>
+              </div>
+            </div>
+          </div>
+
+          <div className="flex items-start space-x-4 rounded-lg bg-card p-4 shadow-sm">
+            <div className="rounded-full bg-primary/10 p-2">
+              <CalendarDays />
+            </div>
+            <div className="flex-grow">
+              <h2 className="font-semibold">
+                <span className="text-primary">Ash Ketchum</span> requested to
+                attend the{" "}
+                <span className="text-primary">Pokemon Go Meetup</span> event
               </h2>
 
               <span className="mt-1 block text-xs text-muted-foreground">
