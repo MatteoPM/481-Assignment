@@ -15,7 +15,7 @@ const ForumCard = ({ forum }: { forum: Forum }) => {
           <p className="text-sm text-muted-foreground">
             in{" "}
             <Link
-              to={`groups/${group.id}`}
+              to={`/groups/${group.id}`}
               className="font-medium text-primary"
             >
               {group.name}

@@ -77,7 +77,7 @@ function Group() {
                   asChild
                   className="w-full"
                 >
-                  <Link to={"/chat/create"}>
+                  <Link to={`/groups/${group.id}/stats`}>
                     <ChartArea className="size-[20px]" />
                     <span className="leading-none">Stats</span>
                   </Link>
@@ -137,9 +137,11 @@ function Group() {
           <SubHeader Icon={MessageSquareText} text="Forums" className="mt-6" />
 
           <div className="mt-3 flex flex-col divide-y overflow-hidden rounded-md border bg-white shadow-sm">
-            {forums.map((forum) => (
-              <ForumCard forum={forum} />
-            ))}
+            {forums
+              .filter((forum) => forum.groupId === group.id)
+              .map((forum) => (
+                <ForumCard forum={forum} />
+              ))}
           </div>
 
           <div className="mt-3 grid grid-cols-2 gap-3">
@@ -160,33 +162,39 @@ function Group() {
             </Button>
           </div>
 
-          <SubHeader Icon={Calendar} text="Events" className="mt-6" />
+          {!group.isCourse && (
+            <>
+              <SubHeader Icon={Calendar} text="Events" className="mt-6" />
 
-          <div className="mt-3 space-y-3">
-            <EventCard event={events[0]} />
-            <EventCard event={events[1]} />
-            <EventCard event={events[2]} />
-          </div>
+              <div className="mt-3 space-y-3">
+                {events
+                  .filter((event) => event.groupId === group.id)
+                  .map((event) => (
+                    <EventCard event={event} />
+                  ))}
+              </div>
 
-          <div className="mt-3 flex gap-3">
-            <Button size={"sm"} className="w-full">
-              <Expand className="size-[20px]" />
-              <span className="leading-none">View All</span>
-            </Button>
+              <div className="mt-3 flex gap-3">
+                <Button size={"sm"} className="w-full">
+                  <Expand className="size-[20px]" />
+                  <span className="leading-none">View All</span>
+                </Button>
 
-            {group.leaderId === 0 && (
-              <Button
-                size={"sm"}
-                className="w-full bg-green-400 hover:bg-green-400/90"
-                asChild
-              >
-                <Link to={"/events/create"}>
-                  <Plus className="size-[20px]" />
-                  <span className="leading-none">Create</span>
-                </Link>
-              </Button>
-            )}
-          </div>
+                {group.leaderId === 0 && (
+                  <Button
+                    size={"sm"}
+                    className="w-full bg-green-400 hover:bg-green-400/90"
+                    asChild
+                  >
+                    <Link to={"/events/create"}>
+                      <Plus className="size-[20px]" />
+                      <span className="leading-none">Create</span>
+                    </Link>
+                  </Button>
+                )}
+              </div>
+            </>
+          )}
         </div>
       </Page>
     </>

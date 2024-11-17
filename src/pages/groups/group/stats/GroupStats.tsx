@@ -15,7 +15,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Clock } from "lucide-react";
+import { Clock, Download } from "lucide-react";
 import chartsUrl from "/charts.png";
 
 function GroupStats() {
@@ -26,9 +26,13 @@ function GroupStats() {
 
         <div className="mt-4 flex gap-2">
           <Select>
-            <SelectTrigger className="bg-white">
+            <SelectTrigger className="justify-start bg-white">
               <Clock className="mr-2 size-[18px] shrink-0" />
-              <SelectValue placeholder="Time window" defaultValue={"light"} />
+              <SelectValue
+                placeholder="Last 7 Days"
+                defaultValue={"light"}
+                className="ml-auto"
+              />
             </SelectTrigger>
             <SelectContent>
               <SelectItem value="light">Last 7 Days</SelectItem>
@@ -41,10 +45,8 @@ function GroupStats() {
 
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button
-                variant={"outline"}
-                className="bg-green-300 hover:bg-green-300/90"
-              >
+              <Button className="">
+                <Download />
                 Export
               </Button>
             </DropdownMenuTrigger>

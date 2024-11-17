@@ -33,7 +33,7 @@ function Dm() {
 
   return (
     <>
-      <Page title="John Smeeth" showBackButton hideFooter>
+      <Page title="Debbie Hopkins" showBackButton hideFooter>
         <div className="flex h-full flex-col">
           <div className="flex grow flex-col gap-4 overflow-auto">
             {chatMessages.map((chatMessage) => (

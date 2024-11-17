@@ -70,27 +70,31 @@ function CreateEvent() {
                 <CommandList>
                   <CommandEmpty>No club found.</CommandEmpty>
                   <CommandGroup>
-                    {clubs.map((club) => (
-                      <CommandItem
-                        value={club.name}
-                        key={club.name}
-                        onSelect={() => {
-                          setHostingClub(club);
-                        }}
-                      >
-                        <img
-                          className="size-[25px] rounded-full object-cover"
-                          src={club.bannerUrl}
-                        />
-                        {club.name}
-                        <Check
-                          className={cn(
-                            "ml-auto",
-                            club === hostingClub ? "opacity-100" : "opacity-0",
-                          )}
-                        />
-                      </CommandItem>
-                    ))}
+                    {clubs
+                      .filter((club) => club.leaderId === 0)
+                      .map((club) => (
+                        <CommandItem
+                          value={club.name}
+                          key={club.name}
+                          onSelect={() => {
+                            setHostingClub(club);
+                          }}
+                        >
+                          <img
+                            className="size-[25px] rounded-full object-cover"
+                            src={club.bannerUrl}
+                          />
+                          {club.name}
+                          <Check
+                            className={cn(
+                              "ml-auto",
+                              club === hostingClub
+                                ? "opacity-100"
+                                : "opacity-0",
+                            )}
+                          />
+                        </CommandItem>
+                      ))}
                   </CommandGroup>
                 </CommandList>
               </Command>

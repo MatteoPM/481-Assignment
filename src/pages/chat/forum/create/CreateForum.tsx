@@ -101,17 +101,14 @@ function CreateForum() {
 
           <div className="mt-6">
             <label className="text-sm font-medium">
-              Forum Title<span className="text-red-400">*</span>
+              Forum Topic<span className="text-red-400">*</span>
             </label>
             <Input
               type="text"
-              placeholder="Enter a title..."
+              placeholder="Enter a topic..."
               className="mt-1"
             />
           </div>
-          {/* <p className="mt-0.5 text-xs font-semibold text-red-400">
-          Title is required.
-        </p> */}
 
           <div className="mt-6">
             <label className="text-sm font-medium">
@@ -119,6 +116,9 @@ function CreateForum() {
             </label>
 
             <Textarea placeholder="Write a message..." className="mt-1" />
+            {/* <p className="mt-0.5 text-xs font-semibold text-red-400">
+              Message is required.
+            </p> */}
 
             <div className="mt-2 text-xs text-muted-foreground">
               Write a message to kickstart the conversation.
