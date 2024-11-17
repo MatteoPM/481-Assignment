@@ -33,8 +33,8 @@ function App() {
           <span className="leading-none">View All</span>
         </Button>
 
-        <h2 className="mt-8 text-xl font-semibold">Upcoming Events</h2>
-        <div className="mt-6 space-y-3">
+        <h2 className="mt-6 text-xl font-semibold">Upcoming Events</h2>
+        <div className="mt-3 space-y-3">
           <EventCard event={events[0]} />
           <EventCard event={events[1]} />
           <EventCard event={events[2]} />
@@ -45,7 +45,7 @@ function App() {
           <span className="leading-none">View All</span>
         </Button>
 
-        <h2 className="mt-8 text-xl font-semibold">Suggested Groups</h2>
+        <h2 className="mt-6 text-xl font-semibold">Suggested Groups</h2>
         <div className="mt-3 flex flex-col divide-y overflow-hidden rounded-md border bg-white shadow-sm">
           {groups
             .filter((group) => !group.isCourse)
