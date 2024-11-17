@@ -20,7 +20,7 @@ const EventCard = ({ event }: { event: Event }) => {
         <h3 className="text-lg font-semibold text-white">{event.title}</h3>
 
         <div className="mt-2 space-y-1">
-          <div className="flex items-center text-sm text-stone-300">
+          <div className="flex items-center text-sm text-stone-200">
             <Calendar className="mr-2 h-4 w-4" />
             {new Date(event.startDateTime).toLocaleString("en-US", {
               weekday: "short",

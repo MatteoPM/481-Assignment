@@ -1,6 +1,13 @@
 import Page from "@/components/page";
 import SubHeader from "@/components/subHeader";
 import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 import User from "@/components/user";
 import ForumCard from "@/pages/chat/_components/forumCard";
 import EventCard from "@/pages/events/_components/eventCard";
@@ -16,11 +23,14 @@ import {
   BookOpenText,
   Calendar,
   ChartArea,
+  Check,
+  Contact,
   Expand,
   MessageSquareText,
   Plus,
   SquarePlus,
   Users,
+  X,
 } from "lucide-react";
 import { Link, useParams } from "react-router-dom";
 
@@ -77,6 +87,38 @@ function Group() {
             <Expand className="size-[15px]" />
             <span className="leading-none">View All</span>
           </Button>
+          <Dialog>
+            <DialogTrigger asChild>
+              <Button
+                size={"sm"}
+                className="mt-2 w-full bg-orange-400 hover:bg-orange-400/90"
+              >
+                <Contact className="size-[15px]" />
+                <span className="leading-none">
+                  Membership Applications (1)
+                </span>
+              </Button>
+            </DialogTrigger>
+            <DialogContent className="max-w-[350px] rounded-lg">
+              <DialogHeader>
+                <DialogTitle>Membership Requests</DialogTitle>
+              </DialogHeader>
+
+              <div className="flex items-center gap-2">
+                <User user={placeholderUser} />
+                <Button
+                  size={"icon"}
+                  variant={"destructive"}
+                  className="ml-auto"
+                >
+                  <X />
+                </Button>
+                <Button size={"icon"}>
+                  <Check />
+                </Button>
+              </div>
+            </DialogContent>
+          </Dialog>
 
           <SubHeader Icon={MessageSquareText} text="Forums" className="mt-6" />
 

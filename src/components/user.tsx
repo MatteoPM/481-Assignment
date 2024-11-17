@@ -19,7 +19,7 @@ const User = ({ user }: { user: UserType }) => {
 
           <div
             className={cn(
-              "ml-auto size-[8px] rounded-full",
+              "ml-auto size-[8px] shrink-0 rounded-full",
               user.status === "online" && "bg-green-400",
               user.status === "offline" && "bg-gray-400",
               user.status === "away" && "bg-orange-400",
