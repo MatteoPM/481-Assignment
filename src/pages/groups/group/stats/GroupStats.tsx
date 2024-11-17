@@ -21,8 +21,8 @@ import chartsUrl from "/charts.png";
 function GroupStats() {
   return (
     <>
-      <Page title="Group Stats" showBackButton>
-        <h2 className="text-lg font-semibold">Stats for Group Name</h2>
+      <Page title="Stats" showBackButton>
+        <h2 className="text-lg font-semibold">Stats for Caffeine Crusaders</h2>
 
         <div className="mt-4 flex gap-2">
           <Select>
