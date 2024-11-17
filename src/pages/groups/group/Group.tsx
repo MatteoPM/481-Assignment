@@ -60,18 +60,29 @@ function Group() {
           <p className="mt-1 text-sm text-gray-500">{group.description}</p>
 
           {!group.isCourse && (
-            <div className="mt-6 grid grid-cols-2 gap-3">
-              <Button size={"sm"}>
+            <div className="mt-6 flex gap-3">
+              <Button
+                size={"sm"}
+                disabled={group.leaderId === 0}
+                className="w-full"
+              >
                 <SquarePlus className="size-[20px]" />
                 <span className="leading-none">Join</span>
               </Button>
 
-              <Button size={"sm"} variant={"outline"} asChild>
-                <Link to={"/chat/create"}>
-                  <ChartArea className="size-[20px]" />
-                  <span className="leading-none">Stats</span>
-                </Link>
-              </Button>
+              {group.leaderId === 0 && (
+                <Button
+                  size={"sm"}
+                  variant={"outline"}
+                  asChild
+                  className="w-full"
+                >
+                  <Link to={"/chat/create"}>
+                    <ChartArea className="size-[20px]" />
+                    <span className="leading-none">Stats</span>
+                  </Link>
+                </Button>
+              )}
             </div>
           )}
 
@@ -87,38 +98,41 @@ function Group() {
             <Expand className="size-[15px]" />
             <span className="leading-none">View All</span>
           </Button>
-          <Dialog>
-            <DialogTrigger asChild>
-              <Button
-                size={"sm"}
-                className="mt-2 w-full bg-orange-400 hover:bg-orange-400/90"
-              >
-                <Contact className="size-[15px]" />
-                <span className="leading-none">
-                  Membership Applications (1)
-                </span>
-              </Button>
-            </DialogTrigger>
-            <DialogContent className="max-w-[350px] rounded-lg">
-              <DialogHeader>
-                <DialogTitle>Membership Requests</DialogTitle>
-              </DialogHeader>
 
-              <div className="flex items-center gap-2">
-                <User user={placeholderUser} />
+          {group.leaderId === 0 && (
+            <Dialog>
+              <DialogTrigger asChild>
                 <Button
-                  size={"icon"}
-                  variant={"destructive"}
-                  className="ml-auto"
+                  size={"sm"}
+                  className="mt-2 w-full bg-orange-400 hover:bg-orange-400/90"
                 >
-                  <X />
+                  <Contact className="size-[15px]" />
+                  <span className="leading-none">
+                    Membership Applications (1)
+                  </span>
                 </Button>
-                <Button size={"icon"}>
-                  <Check />
-                </Button>
-              </div>
-            </DialogContent>
-          </Dialog>
+              </DialogTrigger>
+              <DialogContent className="max-w-[350px] rounded-lg">
+                <DialogHeader>
+                  <DialogTitle>Membership Requests</DialogTitle>
+                </DialogHeader>
+
+                <div className="flex items-center gap-2">
+                  <User user={placeholderUser} />
+                  <Button
+                    size={"icon"}
+                    variant={"destructive"}
+                    className="ml-auto"
+                  >
+                    <X />
+                  </Button>
+                  <Button size={"icon"}>
+                    <Check />
+                  </Button>
+                </div>
+              </DialogContent>
+            </Dialog>
+          )}
 
           <SubHeader Icon={MessageSquareText} text="Forums" className="mt-6" />
 
@@ -154,22 +168,24 @@ function Group() {
             <EventCard event={events[2]} />
           </div>
 
-          <div className="mt-3 grid grid-cols-2 gap-3">
-            <Button size={"sm"}>
+          <div className="mt-3 flex gap-3">
+            <Button size={"sm"} className="w-full">
               <Expand className="size-[20px]" />
               <span className="leading-none">View All</span>
             </Button>
 
-            <Button
-              size={"sm"}
-              className="bg-green-400 hover:bg-green-400/90"
-              asChild
-            >
-              <Link to={"/events/create"}>
-                <Plus className="size-[20px]" />
-                <span className="leading-none">Create</span>
-              </Link>
-            </Button>
+            {group.leaderId === 0 && (
+              <Button
+                size={"sm"}
+                className="w-full bg-green-400 hover:bg-green-400/90"
+                asChild
+              >
+                <Link to={"/events/create"}>
+                  <Plus className="size-[20px]" />
+                  <span className="leading-none">Create</span>
+                </Link>
+              </Button>
+            )}
           </div>
         </div>
       </Page>
