@@ -68,10 +68,11 @@ const Login = () => {
             </Button>
           </CardContent>
           <CardFooter className="text-start text-xs text-gray-500">
-            <p>
-              By signing in, you agree to our Terms of Service and Privacy
-              Policy.
-            </p>
+            <img
+              src="/sso2.png"
+              // alt=""
+              className="h-full w-full object-contain"
+            />
           </CardFooter>
         </Card>
       </div>

@@ -13,7 +13,13 @@ const ForumCard = ({ forum }: { forum: Forum }) => {
         <div>
           <h2 className="text-lg font-semibold leading-none">{forum.title}</h2>
           <p className="text-sm text-muted-foreground">
-            in <span className="font-medium text-stone-700">{group.name}</span>
+            in{" "}
+            <Link
+              to={`groups/${group.id}`}
+              className="font-medium text-primary"
+            >
+              {group.name}
+            </Link>
           </p>
         </div>
         <div className="mt-2 flex items-center justify-between text-xs text-muted-foreground">
