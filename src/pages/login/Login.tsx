@@ -6,6 +6,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
 import { ArrowRight } from "lucide-react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
@@ -58,10 +59,22 @@ const Login = () => {
           <CardContent className="space-y-4">
             <div className="mx-auto">
               <img
-                src="/sso1.png"
+                src="https://aadcdn.msauthimages.net/dbd5a2dd-jbenuqrdektjjix2vbx-4j3kuj-pick7-wpf7gg39fm/logintenantbranding/0/bannerlogo?ts=638392464903350491"
                 alt="University of Calgary logo"
-                className="h-full w-full object-contain"
+                className="w-[150px] object-contain"
               />
+
+              <h1 className="mt-4 text-xl font-semibold">Sign in</h1>
+
+              <Input
+                type="text"
+                placeholder="someone@ucalgary.ca"
+                className="mt-3"
+              />
+
+              <Button variant={"link"} className="p-0">
+                Can't access your account?
+              </Button>
             </div>
             <Button className="w-full" asChild>
               <Link to={"/"}>Next</Link>
