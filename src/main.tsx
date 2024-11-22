@@ -1,6 +1,7 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { DataProvider } from "./hooks/useData.tsx";
 import "./index.css";
 import App from "./pages/App.tsx";
 import Chat from "./pages/chat/Chat.tsx";
@@ -9,18 +10,15 @@ import Dm from "./pages/chat/dms/dm/Dm.tsx";
 import Dms from "./pages/chat/dms/Dms.tsx";
 import CreateForum from "./pages/chat/forum/create/CreateForum.tsx";
 import Forum from "./pages/chat/forum/Forum.tsx";
-import ChatSearch from "./pages/chat/search/Search.tsx";
 import CreateEvent from "./pages/events/create/CreateEvent.tsx";
 import Event from "./pages/events/event/Event.tsx";
 import Events from "./pages/events/Events.tsx";
 import Rsvps from "./pages/events/rsvps/Rsvps.tsx";
-import SearchEvents from "./pages/events/search/searchEvents.tsx";
 import Clubs from "./pages/groups/clubs/Clubs.tsx";
 import Courses from "./pages/groups/courses/Courses.tsx";
 import CreateGroup from "./pages/groups/create/CreateGroup.tsx";
 import Group from "./pages/groups/group/Group.tsx";
 import GroupStats from "./pages/groups/group/stats/GroupStats.tsx";
-import SearchGroups from "./pages/groups/search.tsx/Search.tsx";
 import Login from "./pages/login/Login.tsx";
 import Notifications from "./pages/notifications/Notifications.tsx";
 
@@ -48,10 +46,6 @@ const router = createBrowserRouter([
     element: <Forum />,
   },
   {
-    path: "/chat/search",
-    element: <ChatSearch />,
-  },
-  {
     path: "/chat/dms",
     element: <Dms />,
   },
@@ -76,10 +70,6 @@ const router = createBrowserRouter([
     element: <CreateGroup />,
   },
   {
-    path: "/groups/clubs/search",
-    element: <SearchGroups />,
-  },
-  {
     path: "/groups/:groupId",
     element: <Group />,
   },
@@ -90,10 +80,6 @@ const router = createBrowserRouter([
   {
     path: "/events",
     element: <Events />,
-  },
-  {
-    path: "/events/search",
-    element: <SearchEvents />,
   },
   {
     path: "/events/:eventId",
@@ -116,10 +102,12 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <div className="grid h-full bg-gray-950 sm:place-content-center">
-      <div className="overflow-hidden bg-stone-100 sm:h-[667px] sm:w-[375px] sm:rounded-lg sm:border sm:shadow">
-        <RouterProvider router={router} />
+    <DataProvider>
+      <div className="grid h-full bg-gray-950 sm:place-content-center">
+        <div className="overflow-hidden bg-stone-100 sm:h-[667px] sm:w-[375px] sm:rounded-lg sm:border sm:shadow">
+          <RouterProvider router={router} />
+        </div>
       </div>
-    </div>
+    </DataProvider>
   </StrictMode>,
 );

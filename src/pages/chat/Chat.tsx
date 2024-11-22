@@ -1,16 +1,17 @@
 import Page from "@/components/page";
 import SearchBar from "@/components/searchBar";
+import { useData } from "@/hooks/useData";
 import ChatTabs from "@/pages/chat/_components/chatTabs";
 import ForumCard from "@/pages/chat/_components/forumCard";
-import { forums } from "@/placeholderData";
 import { Plus } from "lucide-react";
 import { Link, useSearchParams } from "react-router-dom";
 
 function Chat() {
+  const { data } = useData();
   const [searchParams] = useSearchParams();
   const q = searchParams.get("q") || "";
 
-  const filteredForums = forums.filter((forums) =>
+  const filteredForums = data.forums.filter((forums) =>
     forums.title.toLowerCase().includes(q.toLowerCase()),
   );
 
@@ -32,7 +33,7 @@ function Chat() {
           <>
             <div className="mt-3 flex flex-col divide-y overflow-hidden rounded-md border bg-white shadow-sm">
               {filteredForums.map((forum) => (
-                <ForumCard forum={forum} />
+                <ForumCard key={forum.id} forum={forum} />
               ))}
             </div>
 
@@ -44,7 +45,7 @@ function Chat() {
 
         {filteredForums.length === 0 && (
           <div className="mt-8 text-center font-semibold text-muted-foreground">
-            No forums found. Adjust your filters.
+            No forums found. Adjust your search query.
           </div>
         )}
       </Page>

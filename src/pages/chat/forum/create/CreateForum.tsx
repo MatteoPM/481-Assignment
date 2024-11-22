@@ -17,14 +17,16 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import { useData } from "@/hooks/useData";
 import { cn } from "@/lib/utils";
-import { Group, groups } from "@/placeholderData";
+import { Group } from "@/placeholderData";
 import { useState } from "react";
 
 function CreateForum() {
+  const { data } = useData();
   const [associatedClub, setAssociatedClub] = useState<null | Group>(null);
 
-  const clubs = groups.filter((group) => !group.isCourse);
+  const clubs = data.groups.filter((group) => !group.isCourse);
 
   return (
     <>

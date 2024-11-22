@@ -1,8 +1,12 @@
+import { Data } from "./hooks/useData";
+
 export type UserType = {
   id: number;
   avatarUrl: string;
   username: string;
   status: "online" | "offline" | "away";
+  leaderGroupIds: number[];
+  memberGroupIds: number[];
 };
 
 export type ChatMessageType = {
@@ -57,37 +61,47 @@ export type Group = {
   leaderId?: number;
 };
 
-export const testUser: UserType = {
+const testUser: UserType = {
   id: 0,
   avatarUrl:
     "https://www.fakepersongenerator.com/Face/male/male20161086420389465.jpg",
   username: "Joseph Ballance",
   status: "online",
+  leaderGroupIds: [5],
+  memberGroupIds: [0, 1],
 };
 
-export const placeholderUser: UserType = {
+const placeholderUser: UserType = {
   id: 1,
   avatarUrl: "https://randomuser.me/api/portraits/women/26.jpg",
   username: "Debbie Hopkins",
   status: "online",
+  leaderGroupIds: [],
+  memberGroupIds: [],
 };
 
-export const placeholderUser2: UserType = {
+const placeholderUser2: UserType = {
   id: 2,
   avatarUrl:
     "https://www.fakepersongenerator.com/Face/male/male1085778558166.jpg",
   username: "Sergio Barnes",
   status: "offline",
+  leaderGroupIds: [],
+  memberGroupIds: [],
 };
 
-export const placeholderUser3: UserType = {
+const placeholderUser3: UserType = {
   id: 3,
   avatarUrl: "https://randomuser.me/api/portraits/women/18.jpg",
   username: "Brenda Pease",
   status: "away",
+  leaderGroupIds: [],
+  memberGroupIds: [],
 };
 
-export const events: Event[] = [
+const users = [testUser, placeholderUser, placeholderUser2, placeholderUser3];
+
+const events: Event[] = [
   {
     id: 0,
     title: "Mystery & Thriller Book Night",
@@ -163,7 +177,7 @@ export const events: Event[] = [
 //   },
 // ];
 
-export const groups: Group[] = [
+const groups: Group[] = [
   {
     id: 0,
     name: "Calgary Coders",
@@ -259,7 +273,7 @@ export const groups: Group[] = [
   },
 ];
 
-export const forums: Forum[] = [
+const forums: Forum[] = [
   {
     id: 0,
     title: "I LOVE COFFEE",
@@ -296,3 +310,11 @@ export const forums: Forum[] = [
     ],
   },
 ];
+
+export const defaultData: Data = {
+  currentUser: testUser,
+  users,
+  groups,
+  forums,
+  events,
+};

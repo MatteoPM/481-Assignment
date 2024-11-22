@@ -9,26 +9,21 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import User from "@/components/user";
+import { useData } from "@/hooks/useData";
 import ForumCard from "@/pages/chat/_components/forumCard";
 import EventCard from "@/pages/events/_components/eventCard";
-import {
-  events,
-  forums,
-  groups,
-  placeholderUser,
-  placeholderUser2,
-  placeholderUser3,
-} from "@/placeholderData";
 import {
   BookOpenText,
   Calendar,
   ChartArea,
   Check,
   Contact,
+  Crown,
   Expand,
   MessageSquareText,
   Plus,
   SquarePlus,
+  UserIcon,
   Users,
   X,
 } from "lucide-react";
@@ -36,11 +31,13 @@ import { Link, useParams } from "react-router-dom";
 
 function Group() {
   const { groupId } = useParams();
-  const group = groups.find((group) => group.id === Number(groupId));
+  const { data, setData } = useData();
+  const group = data.groups.find((group) => group.id === Number(groupId));
 
   if (!group) {
     throw new Error();
   }
+  const forums = data.forums.filter((forum) => forum.groupId === group.id);
 
   return (
     <>
@@ -63,11 +60,36 @@ function Group() {
             <div className="mt-6 flex gap-3">
               <Button
                 size={"sm"}
-                disabled={group.leaderId === 0}
+                disabled={
+                  group.leaderId === data.currentUser.id ||
+                  data.currentUser.memberGroupIds.includes(group.id)
+                }
                 className="w-full"
+                onClick={() => {
+                  setData((draft) => {
+                    draft.currentUser.memberGroupIds.push(group.id);
+                  });
+                }}
               >
-                <SquarePlus className="size-[20px]" />
-                <span className="leading-none">Join</span>
+                {group.leaderId === data.currentUser.id && (
+                  <>
+                    <Crown className="size-[20px]" />
+                    <span className="leading-none">Leading</span>
+                  </>
+                )}
+                {data.currentUser.memberGroupIds.includes(group.id) && (
+                  <>
+                    <UserIcon className="size-[20px]" />
+                    <span className="leading-none">Joined</span>
+                  </>
+                )}
+                {group.leaderId !== data.currentUser.id &&
+                  !data.currentUser.memberGroupIds.includes(group.id) && (
+                    <>
+                      <SquarePlus className="size-[20px]" />
+                      <span className="leading-none">Join</span>
+                    </>
+                  )}
               </Button>
 
               {group.leaderId === 0 && (
@@ -89,9 +111,9 @@ function Group() {
           <SubHeader Icon={Users} text="Members" className="mt-6" />
 
           <div className="mt-3 grid grid-cols-2 gap-2 rounded-md scrollbar">
-            <User user={placeholderUser} />
-            <User user={placeholderUser2} />
-            <User user={placeholderUser3} />
+            <User user={data.users[1]} />
+            <User user={data.users[2]} />
+            <User user={data.users[3]} />
           </div>
 
           <Button size={"sm"} className="mt-3 w-full">
@@ -118,7 +140,7 @@ function Group() {
                 </DialogHeader>
 
                 <div className="flex items-center gap-2">
-                  <User user={placeholderUser} />
+                  <User user={data.users[1]} />
                   <Button
                     size={"icon"}
                     variant={"destructive"}
@@ -136,23 +158,31 @@ function Group() {
 
           <SubHeader Icon={MessageSquareText} text="Forums" className="mt-6" />
 
-          <div className="mt-3 flex flex-col divide-y overflow-hidden rounded-md border bg-white shadow-sm">
-            {forums
-              .filter((forum) => forum.groupId === group.id)
-              .map((forum) => (
-                <ForumCard forum={forum} />
+          {forums.length > 0 && (
+            <div className="mt-3 flex flex-col divide-y overflow-hidden rounded-md border bg-white shadow-sm">
+              {forums.map((forum) => (
+                <ForumCard key={forum.id} forum={forum} />
               ))}
-          </div>
+            </div>
+          )}
 
-          <div className="mt-3 grid grid-cols-2 gap-3">
-            <Button size={"sm"}>
-              <Expand className="size-[20px]" />
-              <span className="leading-none">View All</span>
-            </Button>
+          {forums.length === 0 && (
+            <div className="mb-6 mt-3 text-center font-semibold text-muted-foreground">
+              No forums exist.
+            </div>
+          )}
+
+          <div className="mt-3 flex gap-3">
+            {forums.length > 0 && (
+              <Button size={"sm"} className="w-full">
+                <Expand className="size-[20px]" />
+                <span className="leading-none">View All</span>
+              </Button>
+            )}
 
             <Button
               size={"sm"}
-              className="bg-green-400 hover:bg-green-400/90"
+              className="w-full bg-green-400 hover:bg-green-400/90"
               asChild
             >
               <Link to={"/chat/create"}>
@@ -167,10 +197,10 @@ function Group() {
               <SubHeader Icon={Calendar} text="Events" className="mt-6" />
 
               <div className="mt-3 space-y-3">
-                {events
+                {data.events
                   .filter((event) => event.groupId === group.id)
                   .map((event) => (
-                    <EventCard event={event} />
+                    <EventCard key={event.id} event={event} />
                   ))}
               </div>
 

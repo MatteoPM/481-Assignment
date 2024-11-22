@@ -1,34 +1,37 @@
 import Page from "@/components/page";
+import { useData } from "@/hooks/useData";
 import ChatMessage from "@/pages/chat/_components/chatMessage";
 import MessageInput from "@/pages/chat/_components/messageInput";
-import { ChatMessageType, placeholderUser, testUser } from "@/placeholderData";
+import { ChatMessageType } from "@/placeholderData";
 import { useState } from "react";
 
-const initialChatMessages: ChatMessageType[] = [
-  {
-    user: placeholderUser,
-    dateTime: Date.now(),
-    message: "What is love",
-  },
-  {
-    user: placeholderUser,
-    dateTime: Date.now(),
-    message: "Baby don't hurt me",
-  },
-  {
-    user: placeholderUser,
-    dateTime: Date.now(),
-    message: "Don't hurt me",
-  },
-  {
-    user: testUser,
-    dateTime: Date.now(),
-    message: "No more",
-    read: Date.now(),
-  },
-];
-
 function Dm() {
+  const { data } = useData();
+
+  const initialChatMessages: ChatMessageType[] = [
+    {
+      user: data.users[1],
+      dateTime: Date.now(),
+      message: "What is love",
+    },
+    {
+      user: data.users[1],
+      dateTime: Date.now(),
+      message: "Baby don't hurt me",
+    },
+    {
+      user: data.users[1],
+      dateTime: Date.now(),
+      message: "Don't hurt me",
+    },
+    {
+      user: data.currentUser,
+      dateTime: Date.now(),
+      message: "No more",
+      read: Date.now(),
+    },
+  ];
+
   const [chatMessages] = useState(initialChatMessages);
 
   return (

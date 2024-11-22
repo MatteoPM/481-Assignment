@@ -1,8 +1,10 @@
-import { Forum, groups } from "@/placeholderData";
+import { useData } from "@/hooks/useData";
+import { Forum } from "@/placeholderData";
 import { Link } from "react-router-dom";
 
 const ForumCard = ({ forum }: { forum: Forum }) => {
-  const group = groups.find((group) => group.id === forum.groupId)!;
+  const { data } = useData();
+  const group = data.groups.find((group) => group.id === forum.groupId)!;
 
   return (
     <Link

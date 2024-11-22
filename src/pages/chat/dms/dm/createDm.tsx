@@ -2,19 +2,16 @@ import Page from "@/components/page";
 import SearchBar from "@/components/searchBar";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
+import { useData } from "@/hooks/useData";
 import DmCard from "@/pages/chat/_components/dmCard";
-import {
-  placeholderUser,
-  placeholderUser2,
-  placeholderUser3,
-} from "@/placeholderData";
 import { Send } from "lucide-react";
 import { useSearchParams } from "react-router-dom";
 
 function CreateDm() {
+  const { data } = useData();
   const [searchParams] = useSearchParams();
   const q = searchParams.get("q") || "";
-  const users = [placeholderUser, placeholderUser2, placeholderUser3];
+  const users = data.users.slice(1);
 
   const filteredUsers = users.filter((user) =>
     user.username.toLowerCase().includes(q.toLowerCase()),
@@ -41,7 +38,7 @@ function CreateDm() {
           )}
           {filteredUsers.length === 0 && (
             <div className="mt-8 text-center font-semibold text-muted-foreground">
-              No users found. Adjust your filters.
+              No users found. Adjust your search query.
             </div>
           )}
 

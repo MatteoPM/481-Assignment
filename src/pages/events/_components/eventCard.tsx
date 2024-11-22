@@ -1,9 +1,13 @@
-import { Event, groups } from "@/placeholderData";
+import { useData } from "@/hooks/useData";
+import { Event } from "@/placeholderData";
 import { Calendar, MapPin, Users } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const EventCard = ({ event }: { event: Event }) => {
-  const group = groups.find((group) => group.id === Number(event.groupId))!;
+  const { data } = useData();
+  const group = data.groups.find(
+    (group) => group.id === Number(event.groupId),
+  )!;
 
   return (
     <Link
@@ -43,14 +47,17 @@ const EventCard = ({ event }: { event: Event }) => {
         </div>
       </div>
       <div className="flex flex-wrap gap-2 p-4">
-        {event.categories.sort().map((category) => (
-          <span
-            key={category}
-            className="rounded-full bg-primary/10 px-2 py-1 text-xs text-primary"
-          >
-            {category}
-          </span>
-        ))}
+        {event.categories
+          .slice()
+          .sort()
+          .map((category) => (
+            <span
+              key={category}
+              className="rounded-full bg-primary/10 px-2 py-1 text-xs text-primary"
+            >
+              {category}
+            </span>
+          ))}
       </div>
     </Link>
   );

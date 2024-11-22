@@ -2,7 +2,6 @@ import Page from "@/components/page";
 import SubHeader from "@/components/subHeader";
 import { Button } from "@/components/ui/button";
 import GroupCard from "@/pages/groups/_components/groupCard";
-import { events, groups } from "@/placeholderData";
 import { BookOpenText, Calendar, MapPin, Tags, Users } from "lucide-react";
 import { useParams } from "react-router-dom";
 
@@ -14,6 +13,7 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
+import { useData } from "@/hooks/useData";
 import { useState } from "react";
 
 const dateFormatter = new Intl.DateTimeFormat("en-US", {
@@ -27,15 +27,18 @@ const dateFormatter = new Intl.DateTimeFormat("en-US", {
 });
 
 function Event() {
+  const { data } = useData();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isRSVPConfirmed, setIsRSVPConfirmed] = useState(false);
   const { eventId } = useParams();
-  const event = events.find((event) => event.id === Number(eventId))!;
+  const event = data.events.find((event) => event.id === Number(eventId))!;
 
   const startDate = new Date(event.startDateTime);
   const endDate = new Date(event.endDateTime);
 
-  const group = groups.find((group) => group.id === Number(event.groupId))!;
+  const group = data.groups.find(
+    (group) => group.id === Number(event.groupId),
+  )!;
 
   const handleRSVP = () => {
     setIsDialogOpen(true);
@@ -86,14 +89,17 @@ function Event() {
           <SubHeader Icon={Tags} text="Categories" />
 
           <div className="mt-2 flex flex-wrap gap-2">
-            {events[0].categories.sort().map((perk) => (
-              <span
-                key={perk}
-                className="rounded-full bg-primary/10 px-2 py-1 text-xs text-primary"
-              >
-                {perk}
-              </span>
-            ))}
+            {data.events[0].categories
+              .slice()
+              .sort()
+              .map((perk) => (
+                <span
+                  key={perk}
+                  className="rounded-full bg-primary/10 px-2 py-1 text-xs text-primary"
+                >
+                  {perk}
+                </span>
+              ))}
           </div>
 
           <SubHeader Icon={Users} text="Hosting Group" />

@@ -1,13 +1,14 @@
 import Page from "@/components/page";
 import SearchBar from "@/components/searchBar";
+import { useData } from "@/hooks/useData";
 import EventCard from "@/pages/events/_components/eventCard";
 import EventFilter from "@/pages/events/_components/eventFilter";
-import { events } from "@/placeholderData";
 import { Plus } from "lucide-react";
 import { Link, useSearchParams } from "react-router-dom";
 import EventTabs from "./_components/eventTabs";
 
 function Events() {
+  const { data } = useData();
   const [searchParams] = useSearchParams();
   const q = searchParams.get("q") || "";
 
@@ -32,7 +33,7 @@ function Events() {
         </h2>
 
         <div className="mt-3 space-y-3">
-          {events
+          {data.events
             .filter((event) =>
               event.title.toLowerCase().includes(q.toLowerCase()),
             )

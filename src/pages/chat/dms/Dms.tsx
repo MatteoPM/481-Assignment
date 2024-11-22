@@ -1,19 +1,16 @@
 import Page from "@/components/page";
 import SearchBar from "@/components/searchBar";
+import { useData } from "@/hooks/useData";
 import ChatTabs from "@/pages/chat/_components/chatTabs";
 import DmCard from "@/pages/chat/_components/dmCard";
-import {
-  placeholderUser,
-  placeholderUser2,
-  placeholderUser3,
-} from "@/placeholderData";
 import { Plus } from "lucide-react";
 import { Link, useSearchParams } from "react-router-dom";
 
 function Dms() {
+  const { data } = useData();
   const [searchParams] = useSearchParams();
   const q = searchParams.get("q") || "";
-  const users = [placeholderUser, placeholderUser2, placeholderUser3];
+  const users = data.users.slice(1);
 
   const filteredUsers = users.filter((user) =>
     user.username.toLowerCase().includes(q.toLowerCase()),
@@ -43,7 +40,7 @@ function Dms() {
 
         {filteredUsers.length === 0 && (
           <div className="mt-8 text-center font-semibold text-muted-foreground">
-            No users found. Adjust your filters.
+            No users found. Adjust your search query.
           </div>
         )}
       </Page>

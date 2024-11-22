@@ -1,7 +1,7 @@
 import Page from "@/components/page";
 import SubHeader from "@/components/subHeader";
+import { useData } from "@/hooks/useData";
 import GroupCard from "@/pages/groups/_components/groupCard";
-import { forums, groups } from "@/placeholderData";
 import { Users } from "lucide-react";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
@@ -9,15 +9,16 @@ import ChatMessage from "../_components/chatMessage";
 import MessageInput from "../_components/messageInput";
 
 function Forum() {
+  const { data } = useData();
   const { forumId } = useParams();
 
-  const forum = forums.find((forum) => forum.id === Number(forumId));
+  const forum = data.forums.find((forum) => forum.id === Number(forumId));
 
   if (!forum) {
     throw new Error("forum not found");
   }
 
-  const group = groups.find((group) => group.id === forum.groupId)!;
+  const group = data.groups.find((group) => group.id === forum.groupId)!;
 
   const [chatMessages] = useState(forum.messages);
 

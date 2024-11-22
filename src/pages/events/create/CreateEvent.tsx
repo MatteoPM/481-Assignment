@@ -20,17 +20,19 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import { useData } from "@/hooks/useData";
 import { cn } from "@/lib/utils";
-import { Group, groups } from "@/placeholderData";
+import { Group } from "@/placeholderData";
 import { useState } from "react";
 
 const currentDate = new Date();
 const formattedDate = currentDate.toISOString().slice(0, 16);
 
 function CreateEvent() {
+  const { data } = useData();
   const [hostingClub, setHostingClub] = useState<null | Group>(null);
 
-  const clubs = groups.filter((group) => !group.isCourse);
+  const clubs = data.groups.filter((group) => !group.isCourse);
 
   return (
     <>

@@ -1,10 +1,19 @@
-import { Drawer, DrawerContent, DrawerTrigger } from "@/components/ui/drawer";
-import { testUser } from "@/placeholderData";
+import {
+  Drawer,
+  DrawerContent,
+  DrawerDescription,
+  DrawerTitle,
+  DrawerTrigger,
+} from "@/components/ui/drawer";
+import { useData } from "@/hooks/useData";
 import { CircleHelp, LogOut, Settings } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Separator } from "./ui/separator";
 
 const UserDrawer = () => {
+  const { data } = useData();
+  const testUser = data.currentUser;
+
   return (
     <Drawer direction="right">
       <DrawerTrigger asChild>
@@ -12,7 +21,12 @@ const UserDrawer = () => {
           <img src={testUser.avatarUrl} className="size-[35px] object-cover" />
         </button>
       </DrawerTrigger>
-      <DrawerContent className="top-0 flex w-[300px] flex-col rounded-r-none">
+      <DrawerContent
+        className="top-0 flex w-[300px] flex-col rounded-r-none"
+        aria-describedby="undefined"
+      >
+        <DrawerTitle className="sr-only" />
+        <DrawerDescription className="sr-only" />
         <div className="flex flex-col items-center p-4">
           <img
             src={testUser.avatarUrl}

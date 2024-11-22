@@ -1,17 +1,18 @@
 import Page from "@/components/page";
 import SearchBar from "@/components/searchBar";
 import SubHeader from "@/components/subHeader";
+import { useData } from "@/hooks/useData";
 import GroupCard from "@/pages/groups/_components/groupCard";
-import { groups } from "@/placeholderData";
 import { Crown, Plus, User } from "lucide-react";
 import { Link, useSearchParams } from "react-router-dom";
 import GroupTabs from "../_components/groupTabs";
 
 function Clubs() {
+  const { data } = useData();
   const [searchParams] = useSearchParams();
   const q = searchParams.get("q") || "";
 
-  const filteredClubs = groups
+  const filteredClubs = data.groups
     .filter((group) => !group.isCourse)
     .filter((group) => group.name.toLowerCase().includes(q.toLowerCase()))
     .sort((a, b) => a.name.localeCompare(b.name));
@@ -45,7 +46,7 @@ function Clubs() {
             )}
             {filteredClubs.length === 0 && (
               <div className="mt-8 text-center font-semibold text-muted-foreground">
-                No clubs found. Adjust your filters.
+                No clubs found. Adjust your search query.
               </div>
             )}
           </>
@@ -56,24 +57,24 @@ function Clubs() {
             <SubHeader Icon={Crown} text="Leader" />
             <div className="mt-3 flex flex-col divide-y overflow-hidden rounded-md border bg-white shadow-sm">
               {leadingClubs.map((group) => (
-                <GroupCard group={group} compact />
+                <GroupCard key={group.id} group={group} compact />
               ))}
             </div>
 
             <SubHeader Icon={User} text="Member" />
             <div className="mt-3 flex flex-col divide-y overflow-hidden rounded-md border bg-white shadow-sm">
               {memberClubs.map((group) => (
-                <GroupCard group={group} compact />
+                <GroupCard key={group.id} group={group} compact />
               ))}
             </div>
 
             <h2 className="mt-8 text-xl font-semibold">Suggested Clubs</h2>
             <div className="mt-1 grid snap-x snap-mandatory auto-cols-[300px] grid-flow-col grid-rows-2 gap-2 overflow-x-auto rounded-md py-2">
-              {groups
+              {data.groups
                 .filter((group) => !group.isCourse)
                 .sort((a, b) => a.name.localeCompare(b.name))
                 .map((group) => (
-                  <GroupCard group={group} />
+                  <GroupCard key={group.id} group={group} />
                 ))}
             </div>
           </>

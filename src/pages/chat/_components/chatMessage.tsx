@@ -1,10 +1,13 @@
 import { Drawer, DrawerContent, DrawerTrigger } from "@/components/ui/drawer";
+import { useData } from "@/hooks/useData";
 import { cn } from "@/lib/utils";
-import { ChatMessageType, testUser } from "@/placeholderData";
+import { ChatMessageType } from "@/placeholderData";
 import { formatRelative } from "date-fns";
 import UserDrawerContent from "../../../components/userDrawerContent";
 
 const ChatMessage = ({ chatMessage }: { chatMessage: ChatMessageType }) => {
+  const { data } = useData();
+  const testUser = data.currentUser;
   const isOwnMessage = chatMessage.user.username === testUser.username;
 
   return (
