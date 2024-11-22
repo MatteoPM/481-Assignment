@@ -22,16 +22,27 @@ import {
 } from "@/components/ui/popover";
 import { useData } from "@/hooks/useData";
 import { cn } from "@/lib/utils";
-import { Group } from "@/placeholderData";
 import { useState } from "react";
+import { useSearchParams } from "react-router-dom";
 
 const currentDate = new Date();
 const formattedDate = currentDate.toISOString().slice(0, 16);
 
 function CreateEvent() {
   const { data } = useData();
-  const [hostingClub, setHostingClub] = useState<null | Group>(null);
+  const [searchParams] = useSearchParams();
+  // const navigate = useNavigate();
+  const groupId = searchParams.get("groupId") || null;
+  const [hostingClub, setHostingClub] = useState<number | null>(
+    Number(groupId),
+  );
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [startTime, setStartTime] = useState("");
+  const [endTime, setEndTime] = useState("");
+  const [isPrivate, setIsPrivate] = useState(false);
 
+  const group = data.groups.find((group) => group.id === hostingClub);
   const clubs = data.groups.filter((group) => !group.isCourse);
 
   return (
@@ -49,16 +60,16 @@ function CreateEvent() {
                 role="combobox"
                 className={cn(
                   "mt-2 flex w-full justify-between",
-                  !hostingClub && "text-muted-foreground",
+                  !group && "text-muted-foreground",
                 )}
               >
-                {hostingClub ? (
+                {group ? (
                   <>
                     <img
                       className="size-[25px] rounded-full object-cover"
-                      src={hostingClub.bannerUrl}
+                      src={group.bannerUrl}
                     />
-                    <span>{hostingClub.name}</span>
+                    <span>{group.name}</span>
                   </>
                 ) : (
                   "Select Hosting Club"
@@ -79,7 +90,7 @@ function CreateEvent() {
                           value={club.name}
                           key={club.name}
                           onSelect={() => {
-                            setHostingClub(club);
+                            setHostingClub(club.id);
                           }}
                         >
                           <img
@@ -90,7 +101,7 @@ function CreateEvent() {
                           <Check
                             className={cn(
                               "ml-auto",
-                              club === hostingClub
+                              club.id === group?.id
                                 ? "opacity-100"
                                 : "opacity-0",
                             )}
@@ -127,7 +138,13 @@ function CreateEvent() {
           <label className="text-sm font-medium">
             Event Title<span className="text-red-400">*</span>
           </label>
-          <Input type="text" placeholder="Enter a title..." className="mt-1" />
+          <Input
+            type="text"
+            placeholder="Enter a title..."
+            className="mt-1"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+          />
         </div>
         {/* <p className="mt-0.5 text-xs font-semibold text-red-400">
           Title is required.
@@ -138,7 +155,12 @@ function CreateEvent() {
             Description<span className="text-red-400">*</span>
           </label>
 
-          <Textarea placeholder="Describe the event..." className="mt-1" />
+          <Textarea
+            placeholder="Describe the event..."
+            className="mt-1"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+          />
         </div>
 
         <div className="mt-6">
@@ -146,7 +168,13 @@ function CreateEvent() {
             Starts<span className="text-red-400">*</span>
           </label>
 
-          <Input type="datetime-local" min={formattedDate} className="mt-1" />
+          <Input
+            type="datetime-local"
+            min={formattedDate}
+            className="mt-1"
+            value={startTime}
+            onChange={(e) => setStartTime(e.target.value)}
+          />
         </div>
 
         <div className="mt-4">
@@ -154,7 +182,12 @@ function CreateEvent() {
             Ends<span className="text-red-400">*</span>
           </label>
 
-          <Input type="datetime-local" className="mt-1" />
+          <Input
+            type="datetime-local"
+            className="mt-1"
+            value={endTime}
+            onChange={(e) => setEndTime(e.target.value)}
+          />
         </div>
 
         <label className="mt-6 block text-sm font-medium">Categories</label>
@@ -168,7 +201,11 @@ function CreateEvent() {
         </div>
 
         <div className="mt-6 flex items-center space-x-2">
-          <Switch id="airplane-mode" />
+          <Switch
+            id="airplane-mode"
+            checked={isPrivate}
+            onCheckedChange={(checked) => setIsPrivate(checked)}
+          />
           <Label htmlFor="airplane-mode">Private Event</Label>
         </div>
 
