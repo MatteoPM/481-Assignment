@@ -3,7 +3,7 @@ import SubHeader from "@/components/subHeader";
 import { useData } from "@/hooks/useData";
 import GroupCard from "@/pages/groups/_components/groupCard";
 import { Users } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
 import ChatMessage from "../_components/chatMessage";
 import MessageInput from "../_components/messageInput";
@@ -11,6 +11,7 @@ import MessageInput from "../_components/messageInput";
 function Forum() {
   const { data } = useData();
   const { forumId } = useParams();
+  const ref = useRef<HTMLDivElement>(null);
 
   const forum = data.forums.find((forum) => forum.id === Number(forumId));
 
@@ -20,7 +21,11 @@ function Forum() {
 
   const group = data.groups.find((group) => group.id === forum.groupId)!;
 
-  const [chatMessages] = useState(forum.messages);
+  useEffect(() => {
+    if (ref.current) {
+      ref.current.scrollTop = ref.current.scrollHeight;
+    }
+  }, [forum.messages]);
 
   return (
     <>
@@ -32,13 +37,13 @@ function Forum() {
             <GroupCard group={group} />
           </div>
 
-          <div className="flex grow flex-col gap-4 overflow-auto">
-            {chatMessages.map((chatMessage) => (
+          <div ref={ref} className="flex grow flex-col gap-4 overflow-auto">
+            {forum.messages.map((chatMessage) => (
               <ChatMessage chatMessage={chatMessage} />
             ))}
           </div>
 
-          <MessageInput className="grow-0" />
+          <MessageInput className="mt-4 grow-0" />
         </div>
       </Page>
     </>

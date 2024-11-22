@@ -19,11 +19,11 @@ import {
   Check,
   Contact,
   Crown,
+  DoorOpen,
   Expand,
   MessageSquareText,
   Plus,
   SquarePlus,
-  UserIcon,
   Users,
   X,
 } from "lucide-react";
@@ -58,41 +58,51 @@ function Group() {
 
           {!group.isCourse && (
             <div className="mt-6 flex gap-3">
-              <Button
-                size={"sm"}
-                disabled={
-                  group.leaderId === data.currentUser.id ||
-                  data.currentUser.memberGroupIds.includes(group.id)
-                }
-                className="w-full"
-                onClick={() => {
-                  setData((draft) => {
-                    draft.currentUser.memberGroupIds.push(group.id);
-                  });
-                }}
-              >
-                {group.leaderId === data.currentUser.id && (
-                  <>
-                    <Crown className="size-[20px]" />
-                    <span className="leading-none">Leading</span>
-                  </>
+              {group.leaderId === data.currentUser.id && (
+                <Button size={"sm"} disabled className="w-full">
+                  <Crown className="size-[20px]" />
+                  <span className="leading-none">Leading</span>
+                </Button>
+              )}
+              {data.currentUser.memberGroupIds.includes(group.id) && (
+                <Button
+                  size={"sm"}
+                  className="w-full"
+                  onClick={() => {
+                    setData((draft) => {
+                      draft.currentUser.memberGroupIds =
+                        draft.currentUser.memberGroupIds.filter(
+                          (id) => id !== group.id,
+                        );
+                    });
+                  }}
+                  variant={"destructive"}
+                >
+                  <DoorOpen className="size-[20px]" />
+                  <span className="leading-none">Leave</span>
+                </Button>
+              )}
+              {group.leaderId !== data.currentUser.id &&
+                !data.currentUser.memberGroupIds.includes(group.id) && (
+                  <Button
+                    size={"sm"}
+                    disabled={
+                      group.leaderId === data.currentUser.id ||
+                      data.currentUser.memberGroupIds.includes(group.id)
+                    }
+                    className="w-full"
+                    onClick={() => {
+                      setData((draft) => {
+                        draft.currentUser.memberGroupIds.push(group.id);
+                      });
+                    }}
+                  >
+                    <SquarePlus className="size-[20px]" />
+                    <span className="leading-none">Join</span>
+                  </Button>
                 )}
-                {data.currentUser.memberGroupIds.includes(group.id) && (
-                  <>
-                    <UserIcon className="size-[20px]" />
-                    <span className="leading-none">Joined</span>
-                  </>
-                )}
-                {group.leaderId !== data.currentUser.id &&
-                  !data.currentUser.memberGroupIds.includes(group.id) && (
-                    <>
-                      <SquarePlus className="size-[20px]" />
-                      <span className="leading-none">Join</span>
-                    </>
-                  )}
-              </Button>
 
-              {group.leaderId === 0 && (
+              {group.leaderId === data.currentUser.id && (
                 <Button
                   size={"sm"}
                   variant={"outline"}
@@ -185,7 +195,7 @@ function Group() {
               className="w-full bg-green-400 hover:bg-green-400/90"
               asChild
             >
-              <Link to={"/chat/create"}>
+              <Link to={`/chat/create?groupId=${group.id}`}>
                 <Plus className="size-[20px]" />
                 <span className="leading-none">Create</span>
               </Link>

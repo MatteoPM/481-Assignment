@@ -17,8 +17,15 @@ function Clubs() {
     .filter((group) => group.name.toLowerCase().includes(q.toLowerCase()))
     .sort((a, b) => a.name.localeCompare(b.name));
 
-  const leadingClubs = filteredClubs.filter((group) => group.leaderId === 0);
-  const memberClubs = filteredClubs.filter((group) => group.leaderId !== 0);
+  const leadingClubs = data.currentUser.leaderGroupIds
+    .map((id) => data.groups.find((group) => group.id === id)!)
+    .filter((group) => group.name.toLowerCase().includes(q.toLowerCase()))
+    .sort((a, b) => a.name.localeCompare(b.name));
+
+  const memberClubs = data.currentUser.memberGroupIds
+    .map((id) => data.groups.find((group) => group.id === id)!)
+    .filter((group) => group.name.toLowerCase().includes(q.toLowerCase()))
+    .sort((a, b) => a.name.localeCompare(b.name));
 
   return (
     <>
@@ -72,6 +79,11 @@ function Clubs() {
             <div className="mt-1 grid snap-x snap-mandatory auto-cols-[300px] grid-flow-col grid-rows-2 gap-2 overflow-x-auto rounded-md py-2">
               {data.groups
                 .filter((group) => !group.isCourse)
+                .filter(
+                  (group) =>
+                    !data.currentUser.leaderGroupIds.includes(group.id) &&
+                    !data.currentUser.memberGroupIds.includes(group.id),
+                )
                 .sort((a, b) => a.name.localeCompare(b.name))
                 .map((group) => (
                   <GroupCard key={group.id} group={group} />

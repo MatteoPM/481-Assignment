@@ -19,14 +19,63 @@ import {
 } from "@/components/ui/popover";
 import { useData } from "@/hooks/useData";
 import { cn } from "@/lib/utils";
-import { Group } from "@/placeholderData";
 import { useState } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 function CreateForum() {
-  const { data } = useData();
-  const [associatedClub, setAssociatedClub] = useState<null | Group>(null);
+  const { data, setData } = useData();
+  const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
+  const groupId = searchParams.get("groupId") || null;
+
+  const [associatedClub, setAssociatedClub] = useState<number | null>(
+    Number(groupId),
+  );
+
+  const [topic, setTopic] = useState("");
+  const [message, setMessage] = useState("");
+
+  const group = data.groups.find((group) => group.id === associatedClub);
 
   const clubs = data.groups.filter((group) => !group.isCourse);
+
+  const createForum = () => {
+    if (!group) {
+      return;
+    }
+
+    if (!topic) {
+      return;
+    }
+
+    if (!message) {
+      return;
+    }
+
+    const now = new Date();
+    const nowString = now.toISOString();
+
+    const id = data.forums.length;
+
+    setData((draft) => {
+      draft.forums.push({
+        groupId: Number(groupId),
+        id,
+        title: topic,
+        messages: [
+          {
+            user: data.currentUser,
+            dateTime: nowString,
+            message,
+          },
+        ],
+      });
+    });
+
+    navigate(`/chat/${id}`, {
+      replace: true,
+    });
+  };
 
   return (
     <>
@@ -44,16 +93,16 @@ function CreateForum() {
                   role="combobox"
                   className={cn(
                     "mt-2 flex w-full justify-between",
-                    !associatedClub && "text-muted-foreground",
+                    !group && "text-muted-foreground",
                   )}
                 >
-                  {associatedClub ? (
+                  {group ? (
                     <>
                       <img
                         className="size-[25px] rounded-full object-cover"
-                        src={associatedClub.bannerUrl}
+                        src={group.bannerUrl}
                       />
-                      <span>{associatedClub.name}</span>
+                      <span>{group.name}</span>
                     </>
                   ) : (
                     "Select Group"
@@ -70,9 +119,9 @@ function CreateForum() {
                       {clubs.map((club) => (
                         <CommandItem
                           value={club.name}
-                          key={club.name}
+                          key={club.id}
                           onSelect={() => {
-                            setAssociatedClub(club);
+                            setAssociatedClub(club.id);
                           }}
                         >
                           <img
@@ -83,7 +132,7 @@ function CreateForum() {
                           <Check
                             className={cn(
                               "ml-auto",
-                              club === associatedClub
+                              club.id === group?.id
                                 ? "opacity-100"
                                 : "opacity-0",
                             )}
@@ -109,6 +158,8 @@ function CreateForum() {
               type="text"
               placeholder="Enter a topic..."
               className="mt-1"
+              value={topic}
+              onChange={(e) => setTopic(e.target.value)}
             />
           </div>
 
@@ -117,7 +168,12 @@ function CreateForum() {
               Your Message<span className="text-red-400">*</span>
             </label>
 
-            <Textarea placeholder="Write a message..." className="mt-1" />
+            <Textarea
+              placeholder="Write a message..."
+              className="mt-1"
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+            />
             {/* <p className="mt-0.5 text-xs font-semibold text-red-400">
               Message is required.
             </p> */}
@@ -127,7 +183,9 @@ function CreateForum() {
             </div>
           </div>
 
-          <Button className="mt-auto w-full">Create</Button>
+          <Button className="mt-auto w-full" onClick={() => createForum()}>
+            Create
+          </Button>
         </div>
       </Page>
     </>
