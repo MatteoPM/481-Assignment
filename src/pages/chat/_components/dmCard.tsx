@@ -1,4 +1,5 @@
-import { cn } from "@/lib/utils";
+import { useData } from "@/hooks/useData";
+import { cn, hasSameValues } from "@/lib/utils";
 import { UserType } from "@/placeholderData";
 import { Link } from "react-router-dom";
 
@@ -9,9 +10,18 @@ const DmCard = ({
   user: UserType;
   className?: string;
 }) => {
+  const { data } = useData();
+
+  const dmId =
+    data.privateChats.find((privateChat) => {
+      console.log(privateChat);
+
+      return hasSameValues(privateChat.participantIds, [0, 1]);
+    })?.id || -1;
+
   return (
     <Link
-      to={"/chat/dms/1"}
+      to={`/chat/dms/${dmId}`}
       className={cn(
         "flex items-center gap-2 p-3 transition-colors hover:bg-muted/50",
         className,

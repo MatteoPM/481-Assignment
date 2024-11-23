@@ -1,4 +1,11 @@
-import { defaultData, Event, Forum, Group, UserType } from "@/placeholderData";
+import {
+  defaultData,
+  Event,
+  Forum,
+  Group,
+  PrivateChat,
+  UserType,
+} from "@/placeholderData";
 import { createContext, ReactNode, useContext, useEffect } from "react";
 import { Updater, useImmer } from "use-immer";
 
@@ -8,6 +15,7 @@ export type Data = {
   groups: Group[];
   forums: Forum[];
   events: Event[];
+  privateChats: PrivateChat[];
 };
 
 type DataContextType = {

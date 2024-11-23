@@ -9,7 +9,7 @@ import ChatMessage from "../_components/chatMessage";
 import MessageInput from "../_components/messageInput";
 
 function Forum() {
-  const { data } = useData();
+  const { data, setData } = useData();
   const { forumId } = useParams();
   const ref = useRef<HTMLDivElement>(null);
 
@@ -27,6 +27,21 @@ function Forum() {
     }
   }, [forum.messages]);
 
+  const sendMessage = (message: string) => {
+    const now = new Date();
+    const nowString = now.toISOString();
+
+    setData((draft) => {
+      draft.forums
+        .find((forum) => forum.id === Number(forumId))!
+        .messages.push({
+          message,
+          user: data.currentUser,
+          dateTime: nowString,
+        });
+    });
+  };
+
   return (
     <>
       <Page title={forum.title} showBackButton hideFooter>
@@ -43,7 +58,7 @@ function Forum() {
             ))}
           </div>
 
-          <MessageInput className="mt-4 grow-0" />
+          <MessageInput sendMessage={sendMessage} className="mt-4 grow-0" />
         </div>
       </Page>
     </>

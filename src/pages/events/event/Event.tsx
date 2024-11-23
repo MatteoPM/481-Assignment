@@ -110,6 +110,7 @@ function Event() {
           <Button
             className="sticky bottom-4 mt-auto w-full"
             onClick={handleRSVP}
+            disabled={group.leaderId === data.currentUser.id}
           >
             RSVP
           </Button>

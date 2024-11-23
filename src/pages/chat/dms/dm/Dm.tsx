@@ -2,37 +2,37 @@ import Page from "@/components/page";
 import { useData } from "@/hooks/useData";
 import ChatMessage from "@/pages/chat/_components/chatMessage";
 import MessageInput from "@/pages/chat/_components/messageInput";
-import { ChatMessageType } from "@/placeholderData";
-import { useState } from "react";
+import { useParams } from "react-router-dom";
 
 function Dm() {
-  const { data } = useData();
+  const { data, setData } = useData();
+  const { dmId } = useParams();
+  console.log(dmId);
 
-  const initialChatMessages: ChatMessageType[] = [
-    {
-      user: data.users[1],
-      dateTime: Date.now(),
-      message: "What is love",
-    },
-    {
-      user: data.users[1],
-      dateTime: Date.now(),
-      message: "Baby don't hurt me",
-    },
-    {
-      user: data.users[1],
-      dateTime: Date.now(),
-      message: "Don't hurt me",
-    },
-    {
-      user: data.currentUser,
-      dateTime: Date.now(),
-      message: "No more",
-      read: Date.now(),
-    },
-  ];
+  const dm = data.privateChats.find(
+    (privateChat) => privateChat.id === Number(dmId),
+  );
 
-  const [chatMessages] = useState(initialChatMessages);
+  if (!dm) {
+    throw new Error("DM not found");
+  }
+
+  const chatMessages = dm?.messages;
+
+  const sendMessage = (message: string) => {
+    const now = new Date();
+    const nowString = now.toISOString();
+
+    setData((draft) => {
+      draft.forums
+        .find((forum) => forum.id === Number(forumId))!
+        .messages.push({
+          message,
+          user: data.currentUser,
+          dateTime: nowString,
+        });
+    });
+  };
 
   return (
     <>

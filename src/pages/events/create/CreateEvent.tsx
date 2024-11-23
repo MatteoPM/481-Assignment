@@ -23,27 +23,55 @@ import {
 import { useData } from "@/hooks/useData";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 const currentDate = new Date();
 const formattedDate = currentDate.toISOString().slice(0, 16);
 
 function CreateEvent() {
-  const { data } = useData();
+  const { data, setData } = useData();
   const [searchParams] = useSearchParams();
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const groupId = searchParams.get("groupId") || null;
   const [hostingClub, setHostingClub] = useState<number | null>(
-    Number(groupId),
+    groupId ? Number(groupId) : null,
   );
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const [location, setLocation] = useState("");
   const [startTime, setStartTime] = useState("");
   const [endTime, setEndTime] = useState("");
   const [isPrivate, setIsPrivate] = useState(false);
 
   const group = data.groups.find((group) => group.id === hostingClub);
   const clubs = data.groups.filter((group) => !group.isCourse);
+
+  const createEvent = () => {
+    if (!group) {
+      return;
+    }
+
+    const id = data.events.length;
+
+    setData((draft) => {
+      draft.events.push({
+        groupId: Number(groupId),
+        id,
+        title,
+        description,
+        bannerUrl:
+          "https://assets.ppy.sh/user-cover-presets/4/2fd772ad175c5687370e0aab50799a84adef7d0fff3f97dccfa5c94384ebb8af.jpeg",
+        categories: [],
+        location,
+        startDateTime: startTime,
+        endDateTime: endTime,
+      });
+    });
+
+    navigate(`/events/${id}`, {
+      replace: true,
+    });
+  };
 
   return (
     <>
@@ -165,6 +193,19 @@ function CreateEvent() {
 
         <div className="mt-6">
           <label className="text-sm font-medium">
+            Location<span className="text-red-400">*</span>
+          </label>
+          <Input
+            type="text"
+            placeholder="Enter a location..."
+            className="mt-1"
+            value={location}
+            onChange={(e) => setLocation(e.target.value)}
+          />
+        </div>
+
+        <div className="mt-6">
+          <label className="text-sm font-medium">
             Starts<span className="text-red-400">*</span>
           </label>
 
@@ -209,7 +250,9 @@ function CreateEvent() {
           <Label htmlFor="airplane-mode">Private Event</Label>
         </div>
 
-        <Button className="mt-6 w-full">Create</Button>
+        <Button className="mt-6 w-full" onClick={() => createEvent()}>
+          Create
+        </Button>
       </Page>
     </>
   );

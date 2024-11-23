@@ -35,6 +35,12 @@ export type Forum = {
   messages: ChatMessageType[];
 };
 
+export type PrivateChat = {
+  id: number;
+  participantIds: number[];
+  messages: ChatMessageType[];
+};
+
 export type NotificationType = "chat" | "group" | "event";
 
 export type Notification = {
@@ -311,10 +317,41 @@ const forums: Forum[] = [
   },
 ];
 
+const privateChats: PrivateChat[] = [
+  {
+    id: 1,
+    participantIds: [0, 1],
+    messages: [
+      {
+        user: placeholderUser,
+        dateTime: "2024-11-14T19:30:00",
+        message: "What is love",
+      },
+      {
+        user: placeholderUser,
+        dateTime: "2024-11-14T19:30:00",
+        message: "Baby don't hurt me",
+      },
+      {
+        user: placeholderUser,
+        dateTime: "2024-11-14T19:30:00",
+        message: "Don't hurt me",
+      },
+      {
+        user: testUser,
+        dateTime: "2024-11-14T19:30:00",
+        message: "No more",
+        read: Date.now(),
+      },
+    ],
+  },
+];
+
 export const defaultData: Data = {
   currentUser: testUser,
   users,
   groups,
   forums,
   events,
+  privateChats,
 };
