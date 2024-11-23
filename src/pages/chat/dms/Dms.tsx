@@ -1,6 +1,7 @@
 import Page from "@/components/page";
 import SearchBar from "@/components/searchBar";
 import { useData } from "@/hooks/useData";
+import { hasSameValues } from "@/lib/utils";
 import ChatTabs from "@/pages/chat/_components/chatTabs";
 import DmCard from "@/pages/chat/_components/dmCard";
 import { Plus } from "lucide-react";
@@ -10,11 +11,15 @@ function Dms() {
   const { data } = useData();
   const [searchParams] = useSearchParams();
   const q = searchParams.get("q") || "";
-  const users = data.users.slice(1);
 
-  const filteredUsers = users.filter((user) =>
-    user.username.toLowerCase().includes(q.toLowerCase()),
-  );
+  const users = data.users.slice(1);
+  const filteredUsers = users
+    .filter((user) => user.username.toLowerCase().includes(q.toLowerCase()))
+    .filter((user) =>
+      data.privateChats.some((chat) =>
+        hasSameValues(chat.participantIds, [data.currentUser.id, user.id]),
+      ),
+    );
 
   return (
     <>

@@ -118,12 +118,26 @@ function Group() {
             </div>
           )}
 
+          {!group.isCourse && (
+            <>
+              <SubHeader Icon={Crown} text="Leader" className="mt-6" />
+
+              <div className="mt-3 grid grid-cols-2 gap-2 rounded-md scrollbar">
+                <User
+                  user={data.users.find((user) => user.id === group.leaderId)!}
+                />
+              </div>
+            </>
+          )}
+
           <SubHeader Icon={Users} text="Members" className="mt-6" />
 
           <div className="mt-3 grid grid-cols-2 gap-2 rounded-md scrollbar">
-            <User user={data.users[1]} />
-            <User user={data.users[2]} />
-            <User user={data.users[3]} />
+            {data.users
+              .filter((user) => user.memberGroupIds.includes(group.id))
+              .map((user) => (
+                <User key={user.id} user={user} />
+              ))}
           </div>
 
           <Button size={"sm"} className="mt-3 w-full">

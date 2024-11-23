@@ -24,8 +24,8 @@ function Dm() {
     const nowString = now.toISOString();
 
     setData((draft) => {
-      draft.forums
-        .find((forum) => forum.id === Number(forumId))!
+      draft.privateChats
+        .find((chat) => chat.id === Number(dmId))!
         .messages.push({
           message,
           user: data.currentUser,
@@ -44,7 +44,7 @@ function Dm() {
             ))}
           </div>
 
-          <MessageInput className="grow-0" />
+          <MessageInput sendMessage={sendMessage} className="grow-0" />
         </div>
       </Page>
     </>

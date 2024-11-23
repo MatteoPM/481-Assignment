@@ -29,7 +29,7 @@ function CreateForum() {
   const groupId = searchParams.get("groupId") || null;
 
   const [associatedClub, setAssociatedClub] = useState<number | null>(
-    Number(groupId),
+    groupId ? Number(groupId) : null,
   );
 
   const [topic, setTopic] = useState("");
@@ -37,10 +37,10 @@ function CreateForum() {
 
   const group = data.groups.find((group) => group.id === associatedClub);
 
-  const clubs = data.groups.filter((group) => !group.isCourse);
+  const clubs = data.groups;
 
   const createForum = () => {
-    if (!group) {
+    if (!associatedClub) {
       return;
     }
 
@@ -59,7 +59,7 @@ function CreateForum() {
 
     setData((draft) => {
       draft.forums.push({
-        groupId: Number(groupId),
+        groupId: associatedClub,
         id,
         title: topic,
         messages: [
@@ -114,7 +114,7 @@ function CreateForum() {
                 <Command>
                   <CommandInput placeholder="Search club..." className="h-9" />
                   <CommandList>
-                    <CommandEmpty>No club found.</CommandEmpty>
+                    <CommandEmpty>No group found.</CommandEmpty>
                     <CommandGroup>
                       {clubs.map((club) => (
                         <CommandItem
