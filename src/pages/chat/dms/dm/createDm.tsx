@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useData } from "@/hooks/useData";
 import { hasSameValues } from "@/lib/utils";
-import { Send } from "lucide-react";
+import { RotateCw, Send } from "lucide-react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useImmer } from "use-immer";
 
@@ -22,10 +22,25 @@ function CreateDm() {
 
   return (
     <>
-      <Page title="Message" showBackButton bodyClassname="p-0">
+      <Page title="Send Message" showBackButton bodyClassname="p-0">
         <div className="relative h-full">
           <div className="flex items-center gap-4 p-4">
             <SearchBar placeholder="Search users..." />
+          </div>
+
+          <div className="flex items-center justify-end gap-4 px-4 text-sm text-muted-foreground">
+            <span>
+              {ids.length} user{ids.length !== 1 ? "s" : ""} selected
+            </span>
+            <Button
+              size={"icon"}
+              variant={"destructive"}
+              disabled={ids.length === 0}
+              className="size-[30px]"
+              onClick={() => setIds([])}
+            >
+              <RotateCw className="size-[18px]" />
+            </Button>
           </div>
 
           {filteredUsers.length > 0 && (
@@ -79,7 +94,9 @@ function CreateDm() {
               );
 
               if (existingDm) {
-                navigate(`/chat/dms/${existingDm.id}`);
+                navigate(`/chat/dms/${existingDm.id}`, {
+                  replace: true,
+                });
               } else {
                 const id = data.privateChats.length;
 

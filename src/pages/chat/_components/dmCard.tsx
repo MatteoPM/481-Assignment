@@ -26,7 +26,10 @@ const DmCard = ({ dm, className }: { dm: PrivateChat; className?: string }) => {
 
       <div className="truncate">
         <span className="block truncate font-medium">
-          {participants.map((participant) => participant.username).join(", ")}
+          {participants
+            .map((participant) => participant.username)
+            .sort()
+            .join(", ")}
         </span>
         <p className="truncate text-sm text-stone-500">{lastMessage.message}</p>
       </div>
