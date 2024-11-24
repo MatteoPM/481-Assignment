@@ -331,7 +331,7 @@ const forums: Forum[] = [
 
 const privateChats: PrivateChat[] = [
   {
-    id: 1,
+    id: 0,
     participantIds: [0, 1],
     messages: [
       {

@@ -1,46 +1,40 @@
 import { useData } from "@/hooks/useData";
-import { cn, hasSameValues } from "@/lib/utils";
-import { UserType } from "@/placeholderData";
-import { Link } from "react-router-dom";
+import { cn } from "@/lib/utils";
+import { PrivateChat } from "@/placeholderData";
+import { formatRelative } from "date-fns";
 
-const DmCard = ({
-  user,
-  className,
-}: {
-  user: UserType;
-  className?: string;
-}) => {
+const DmCard = ({ dm, className }: { dm: PrivateChat; className?: string }) => {
   const { data } = useData();
 
-  const dmId =
-    data.privateChats.find((privateChat) => {
-      console.log(privateChat);
+  const participants = dm.participantIds
+    .filter((id) => id !== data.currentUser.id)
+    .map((id) => data.users.find((user) => user.id === id)!);
 
-      return hasSameValues(privateChat.participantIds, [0, 1]);
-    })?.id || -1;
+  const lastMessage = dm.messages[dm.messages.length - 1];
 
   return (
-    <Link
-      to={`/chat/dms/${dmId}`}
+    <div
       className={cn(
-        "flex items-center gap-2 p-3 transition-colors hover:bg-muted/50",
+        "grid grid-cols-[auto_1fr_auto] gap-2 p-3 transition-colors hover:bg-muted/50",
         className,
       )}
     >
       <img
-        src={user.avatarUrl}
+        src={participants[0].avatarUrl}
         className="size-[40px] rounded-full object-cover"
       />
 
-      <div>
-        <span className="block font-medium">{user.username}</span>
-        <p className="text-sm text-stone-500">Last message goes here</p>
+      <div className="truncate">
+        <span className="block truncate font-medium">
+          {participants.map((participant) => participant.username).join(", ")}
+        </span>
+        <p className="truncate text-sm text-stone-500">{lastMessage.message}</p>
       </div>
 
-      <div className="ml-auto self-start text-xs text-muted-foreground">
-        <span>5 mins ago</span>
+      <div className="ml-auto shrink-0 self-start text-xs text-muted-foreground">
+        {formatRelative(lastMessage.dateTime, new Date())}
       </div>
-    </Link>
+    </div>
   );
 };
 

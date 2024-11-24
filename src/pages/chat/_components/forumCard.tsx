@@ -1,10 +1,13 @@
 import { useData } from "@/hooks/useData";
 import { Forum } from "@/placeholderData";
+import { formatRelative } from "date-fns";
 import { Link } from "react-router-dom";
 
 const ForumCard = ({ forum }: { forum: Forum }) => {
   const { data } = useData();
   const group = data.groups.find((group) => group.id === forum.groupId)!;
+
+  const lastMessage = forum.messages[forum.messages.length - 1];
 
   return (
     <Link
@@ -25,7 +28,9 @@ const ForumCard = ({ forum }: { forum: Forum }) => {
           </p>
         </div>
         <div className="mt-2 flex items-center justify-between text-xs text-muted-foreground">
-          <span>Last reply 1 day ago</span>
+          <span>
+            Last reply {formatRelative(lastMessage.dateTime, new Date())}
+          </span>
         </div>
       </div>
       <img

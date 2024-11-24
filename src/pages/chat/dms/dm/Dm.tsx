@@ -7,7 +7,6 @@ import { useParams } from "react-router-dom";
 function Dm() {
   const { data, setData } = useData();
   const { dmId } = useParams();
-  console.log(dmId);
 
   const dm = data.privateChats.find(
     (privateChat) => privateChat.id === Number(dmId),
@@ -16,6 +15,10 @@ function Dm() {
   if (!dm) {
     throw new Error("DM not found");
   }
+
+  const participants = dm.participantIds
+    .filter((id) => id !== data.currentUser.id)
+    .map((id) => data.users.find((user) => user.id === id)!);
 
   const chatMessages = dm?.messages;
 
@@ -36,11 +39,20 @@ function Dm() {
 
   return (
     <>
-      <Page title="Debbie Hopkins" showBackButton hideFooter>
+      <Page
+        title={participants
+          .map((participant) => participant.username)
+          .join(", ")}
+        showBackButton
+        hideFooter
+      >
         <div className="flex h-full flex-col">
           <div className="flex grow flex-col gap-4 overflow-auto">
             {chatMessages.map((chatMessage) => (
-              <ChatMessage chatMessage={chatMessage} />
+              <ChatMessage
+                key={chatMessage.dateTime}
+                chatMessage={chatMessage}
+              />
             ))}
           </div>
 

@@ -12,14 +12,16 @@ function Dms() {
   const [searchParams] = useSearchParams();
   const q = searchParams.get("q") || "";
 
-  const users = data.users.slice(1);
-  const filteredUsers = users
-    .filter((user) => user.username.toLowerCase().includes(q.toLowerCase()))
-    .filter((user) =>
-      data.privateChats.some((chat) =>
-        hasSameValues(chat.participantIds, [data.currentUser.id, user.id]),
-      ),
-    );
+  const filteredDms = data.privateChats.filter((dm) => {
+    const participantTitle = dm.participantIds
+      .filter((id) => id !== data.currentUser.id)
+      .map((id) =>
+        data.users.find((user) => user.id === id)!.username.toLowerCase(),
+      )
+      .join(", ");
+
+    return participantTitle.includes(q.toLowerCase());
+  });
 
   return (
     <>
@@ -35,15 +37,24 @@ function Dms() {
           </Link>
         </div>
 
-        {filteredUsers.length > 0 && (
+        {filteredDms.length > 0 && (
           <div className="mt-3 flex flex-col divide-y overflow-hidden rounded-md border bg-white shadow-sm">
-            {filteredUsers.map((user) => (
-              <DmCard user={user} key={user.username} />
-            ))}
+            {filteredDms.map((dm) => {
+              const dmId =
+                data.privateChats.find((privateChat) =>
+                  hasSameValues(privateChat.participantIds, dm.participantIds),
+                )?.id ?? -1;
+
+              return (
+                <Link to={`/chat/dms/${dmId}`}>
+                  <DmCard dm={dm} key={dm.id} />
+                </Link>
+              );
+            })}
           </div>
         )}
 
-        {filteredUsers.length === 0 && (
+        {filteredDms.length === 0 && (
           <div className="mt-8 text-center font-semibold text-muted-foreground">
             No users found. Adjust your search query.
           </div>

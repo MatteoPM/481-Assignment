@@ -6,9 +6,6 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export function hasSameValues(array: number[], values: number[]) {
-  console.log(array);
-  console.log(values);
-
   if (array.length !== values.length) {
     return false;
   }

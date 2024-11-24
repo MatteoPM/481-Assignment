@@ -3,15 +3,18 @@ import SearchBar from "@/components/searchBar";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useData } from "@/hooks/useData";
-import DmCard from "@/pages/chat/_components/dmCard";
+import { hasSameValues } from "@/lib/utils";
 import { Send } from "lucide-react";
-import { useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import { useImmer } from "use-immer";
 
 function CreateDm() {
-  const { data } = useData();
+  const { data, setData } = useData();
   const [searchParams] = useSearchParams();
+  const [ids, setIds] = useImmer<number[]>([]);
   const q = searchParams.get("q") || "";
   const users = data.users.slice(1);
+  const navigate = useNavigate();
 
   const filteredUsers = users.filter((user) =>
     user.username.toLowerCase().includes(q.toLowerCase()),
@@ -19,7 +22,7 @@ function CreateDm() {
 
   return (
     <>
-      <Page title="New Message" showBackButton bodyClassname="p-0">
+      <Page title="Message" showBackButton bodyClassname="p-0">
         <div className="relative h-full">
           <div className="flex items-center gap-4 p-4">
             <SearchBar placeholder="Search users..." />
@@ -28,11 +31,36 @@ function CreateDm() {
           {filteredUsers.length > 0 && (
             <div className="divide-y divide-solid">
               {filteredUsers.map((user) => (
-                <div className="flex items-center gap-2">
-                  <DmCard user={user} key={user.username} className="pr-0" />
+                <label
+                  className="flex items-center gap-2"
+                  htmlFor={`dm-${user.id}`}
+                >
+                  <div className="flex items-center gap-2 p-3 transition-colors hover:bg-muted/50">
+                    <img
+                      src={user.avatarUrl}
+                      className="size-[40px] rounded-full object-cover"
+                    />
 
-                  <Checkbox className="ml-auto mr-3" />
-                </div>
+                    <div>
+                      <span className="block font-medium">{user.username}</span>
+                    </div>
+                  </div>
+
+                  <Checkbox
+                    className="ml-auto mr-3"
+                    id={`dm-${user.id}`}
+                    checked={ids.includes(user.id)}
+                    onCheckedChange={(checked) => {
+                      setIds((draft) => {
+                        if (checked) {
+                          draft.push(user.id);
+                        } else {
+                          return draft.filter((id) => id !== user.id);
+                        }
+                      });
+                    }}
+                  />
+                </label>
               ))}
             </div>
           )}
@@ -44,9 +72,32 @@ function CreateDm() {
 
           <Button
             className="absolute bottom-4 right-4 flex size-[50px] items-center justify-center rounded-full p-0"
-            disabled
+            disabled={ids.length === 0}
+            onClick={() => {
+              const existingDm = data.privateChats.find((privateChat) =>
+                hasSameValues(privateChat.participantIds, ids),
+              );
+
+              if (existingDm) {
+                navigate(`/chat/dms/${existingDm.id}`);
+              } else {
+                const id = data.privateChats.length;
+
+                setData((draft) => {
+                  draft.privateChats.push({
+                    id,
+                    participantIds: ids,
+                    messages: [],
+                  });
+                });
+
+                navigate(`/chat/dms/${id}`, {
+                  replace: true,
+                });
+              }
+            }}
           >
-            <Send className="relative right-[2px] top-[2px] size-[30px] text-stone-100" />
+            <Send className="relative right-[2px] top-[2px] size-[25px] text-stone-100" />
           </Button>
         </div>
       </Page>
