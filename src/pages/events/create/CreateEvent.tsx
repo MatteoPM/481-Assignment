@@ -1,12 +1,6 @@
 import Page from "@/components/page";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Switch } from "@/components/ui/switch";
-import { Textarea } from "@/components/ui/textarea";
-import EventFilterCheckbox from "@/pages/events/_components/eventFilterCheckbox";
-import { Check, ChevronsUpDown, Edit } from "lucide-react";
-
+import { Checkbox } from "@/components/ui/checkbox";
 import {
   Command,
   CommandEmpty,
@@ -16,52 +10,118 @@ import {
   CommandList,
 } from "@/components/ui/command";
 import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import { Switch } from "@/components/ui/switch";
+import { Textarea } from "@/components/ui/textarea";
 import { useData } from "@/hooks/useData";
 import { cn } from "@/lib/utils";
-import { useState } from "react";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Check, ChevronsUpDown, Edit } from "lucide-react";
+import { useForm } from "react-hook-form";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import { z } from "zod";
 
-const currentDate = new Date();
-const formattedDate = currentDate.toISOString().slice(0, 16);
+const categories = ["Sports", "Music", "Tech", "Art", "Travel"];
+
+const today = new Date();
+today.setHours(0, 0, 0, 0); // Ensure the time part is cleared for "current day" comparison.
+
+const formSchema = z
+  .object({
+    bannerUrl: z.string(),
+    hostingClub: z.number(),
+    title: z.string().min(2).max(50),
+    description: z.string().min(2).max(50),
+    location: z.string().min(2).max(50),
+    startTime: z.string().refine(
+      (value) => {
+        const date = new Date(value);
+        return date > today;
+      },
+      { message: "Start time must be later than today." },
+    ),
+    endTime: z.string().refine(
+      (value) => {
+        const date = new Date(value);
+        return date > today;
+      },
+      { message: "End time must be later than today." },
+    ),
+    categories: z
+      .array(z.string())
+      .nonempty({ message: "At least one category must be selected." }), // Require at least one category
+    isPrivate: z.boolean(),
+  })
+  .refine(
+    (data) => {
+      const start = new Date(data.startTime);
+      const end = new Date(data.endTime);
+      return end > start;
+    },
+    { message: "End time must be after start time.", path: ["endTime"] },
+  );
 
 function CreateEvent() {
   const { data, setData } = useData();
   const [searchParams] = useSearchParams();
+  const initialGroupId = searchParams.get("groupId");
   const navigate = useNavigate();
-  const groupId = searchParams.get("groupId") || null;
-  const [hostingClub, setHostingClub] = useState<number | null>(
-    groupId ? Number(groupId) : null,
-  );
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [location, setLocation] = useState("");
-  const [startTime, setStartTime] = useState("");
-  const [endTime, setEndTime] = useState("");
-  const [isPrivate, setIsPrivate] = useState(false);
 
-  const group = data.groups.find((group) => group.id === hostingClub);
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      title: "",
+      description: "",
+      startTime: "",
+      endTime: "",
+      hostingClub: initialGroupId ? Number(initialGroupId) : undefined,
+      isPrivate: false,
+      location: "",
+      categories: [],
+      bannerUrl:
+        "https://assets.ppy.sh/user-cover-presets/4/2fd772ad175c5687370e0aab50799a84adef7d0fff3f97dccfa5c94384ebb8af.jpeg",
+    },
+  });
+
+  const groupId = form.getValues("hostingClub");
+  const group = data.groups.find((group) => group.id === groupId);
   const clubs = data.groups.filter((group) => !group.isCourse);
 
-  const createEvent = () => {
-    if (!group) {
-      return;
-    }
+  const createEvent = (values: z.infer<typeof formSchema>) => {
+    const {
+      bannerUrl,
+      categories,
+      description,
+      endTime,
+      hostingClub,
+      isPrivate,
+      location,
+      startTime,
+      title,
+    } = values;
 
     const id = data.events.length;
 
     setData((draft) => {
       draft.events.push({
-        groupId: Number(groupId),
+        groupId: hostingClub,
         id,
         title,
         description,
-        bannerUrl:
-          "https://assets.ppy.sh/user-cover-presets/4/2fd772ad175c5687370e0aab50799a84adef7d0fff3f97dccfa5c94384ebb8af.jpeg",
-        categories: [],
+        bannerUrl,
+        categories,
         location,
         startDateTime: startTime,
         endDateTime: endTime,
@@ -76,183 +136,286 @@ function CreateEvent() {
   return (
     <>
       <Page title="Create Event" showBackButton>
-        <div>
-          <label className="text-sm font-medium">
-            Hosting Club<span className="text-red-400">*</span>
-          </label>
-
-          <Popover>
-            <PopoverTrigger asChild>
-              <Button
-                variant="outline"
-                role="combobox"
-                className={cn(
-                  "mt-2 flex w-full justify-between",
-                  !group && "text-muted-foreground",
-                )}
-              >
-                {group ? (
-                  <>
-                    <img
-                      className="size-[25px] rounded-full object-cover"
-                      src={group.bannerUrl}
-                    />
-                    <span>{group.name}</span>
-                  </>
-                ) : (
-                  "Select Hosting Club"
-                )}
-                <ChevronsUpDown className="ml-auto size-[20px] opacity-50" />
-              </Button>
-            </PopoverTrigger>
-            <PopoverContent className="w-[300px] p-0">
-              <Command>
-                <CommandInput placeholder="Search club..." className="h-9" />
-                <CommandList>
-                  <CommandEmpty>No club found.</CommandEmpty>
-                  <CommandGroup>
-                    {clubs
-                      .filter((club) => club.leaderId === 0)
-                      .map((club) => (
-                        <CommandItem
-                          value={club.name}
-                          key={club.name}
-                          onSelect={() => {
-                            setHostingClub(club.id);
-                          }}
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(createEvent)}>
+            <FormField
+              control={form.control}
+              name="hostingClub"
+              render={({ field }) => (
+                <FormItem className="">
+                  <FormLabel>
+                    Hosting Club<span className="text-red-400">*</span>
+                  </FormLabel>
+                  <FormControl>
+                    <Popover>
+                      <PopoverTrigger asChild>
+                        <Button
+                          variant="outline"
+                          role="combobox"
+                          className={cn(
+                            "mt-2 flex w-full justify-between",
+                            !group && "text-muted-foreground",
+                          )}
                         >
-                          <img
-                            className="size-[25px] rounded-full object-cover"
-                            src={club.bannerUrl}
+                          {group ? (
+                            <>
+                              <img
+                                className="size-[25px] rounded-full object-cover"
+                                src={group.bannerUrl}
+                              />
+                              <span>{group.name}</span>
+                            </>
+                          ) : (
+                            "Select Hosting Club"
+                          )}
+                          <ChevronsUpDown className="ml-auto size-[20px] opacity-50" />
+                        </Button>
+                      </PopoverTrigger>
+                      <PopoverContent className="w-[300px] p-0">
+                        <Command>
+                          <CommandInput
+                            placeholder="Search club..."
+                            className="h-9"
                           />
-                          {club.name}
-                          <Check
-                            className={cn(
-                              "ml-auto",
-                              club.id === group?.id
-                                ? "opacity-100"
-                                : "opacity-0",
-                            )}
-                          />
-                        </CommandItem>
-                      ))}
-                  </CommandGroup>
-                </CommandList>
-              </Command>
-            </PopoverContent>
-          </Popover>
-
-          <div className="mt-2 text-xs text-muted-foreground">
-            You can only create events for clubs you are leading.
-          </div>
-        </div>
-
-        <div className="mt-6">
-          <label className="text-sm font-medium">
-            Banner Image<span className="text-red-400">*</span>
-          </label>
-          <div className="relative mt-2">
-            <img
-              className="h-[120px] rounded-lg object-cover"
-              src="https://assets.ppy.sh/user-cover-presets/4/2fd772ad175c5687370e0aab50799a84adef7d0fff3f97dccfa5c94384ebb8af.jpeg"
+                          <CommandList>
+                            <CommandEmpty>No club found.</CommandEmpty>
+                            <CommandGroup>
+                              {clubs
+                                .filter((club) => club.leaderId === 0)
+                                .map((club) => (
+                                  <CommandItem
+                                    value={club.name}
+                                    key={club.name}
+                                    onSelect={() => {
+                                      field.onChange(club.id);
+                                      // setHostingClub(club.id);
+                                    }}
+                                  >
+                                    <img
+                                      className="size-[25px] rounded-full object-cover"
+                                      src={club.bannerUrl}
+                                    />
+                                    {club.name}
+                                    <Check
+                                      className={cn(
+                                        "ml-auto",
+                                        club.id === group?.id
+                                          ? "opacity-100"
+                                          : "opacity-0",
+                                      )}
+                                    />
+                                  </CommandItem>
+                                ))}
+                            </CommandGroup>
+                          </CommandList>
+                        </Command>
+                      </PopoverContent>
+                    </Popover>
+                  </FormControl>
+                  {/* <FormDescription>
+                  This is your public display name.
+                  </FormDescription> */}
+                  <FormMessage />
+                </FormItem>
+              )}
             />
-            <Button className="absolute right-2 top-2" size={"icon"}>
-              <Edit className="size-[20px]" />
+
+            <FormField
+              control={form.control}
+              name="bannerUrl"
+              render={({ field }) => (
+                <FormItem className="mt-6">
+                  <FormLabel>
+                    Banner Image<span className="text-red-400">*</span>
+                  </FormLabel>
+                  <FormControl className="">
+                    <div className="relative mt-2">
+                      <img
+                        className="h-[120px] w-full rounded-lg object-cover"
+                        src={field.value}
+                      />
+                      <Button
+                        className="absolute right-2 top-2 shadow"
+                        size={"icon"}
+                        type="button"
+                        onClick={() => {
+                          field.onChange(
+                            "https://d7hftxdivxxvm.cloudfront.net/?quality=80&resize_to=width&src=https%3A%2F%2Fartsy-media-uploads.s3.amazonaws.com%2F2RNK1P0BYVrSCZEy_Sd1Ew%252F3417757448_4a6bdf36ce_o.jpg&width=910",
+                          );
+                        }}
+                      >
+                        <Edit className="size-[20px]" />
+                      </Button>
+                    </div>
+                  </FormControl>
+                  {/* <FormDescription>
+                    This is your public display name.
+                  </FormDescription> */}
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="title"
+              render={({ field }) => (
+                <FormItem className="mt-6">
+                  <FormLabel>
+                    Event Title<span className="text-red-400">*</span>
+                  </FormLabel>
+                  <FormControl>
+                    <Input placeholder="Enter a title..." {...field} />
+                  </FormControl>
+                  {/* <FormDescription>
+                    This is your public display name.
+                  </FormDescription> */}
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="description"
+              render={({ field }) => (
+                <FormItem className="mt-6">
+                  <FormLabel>
+                    Description<span className="text-red-400">*</span>
+                  </FormLabel>
+                  <FormControl>
+                    <Textarea placeholder="Enter a description..." {...field} />
+                  </FormControl>
+                  {/* <FormDescription>
+                    This is your public display name.
+                  </FormDescription> */}
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="location"
+              render={({ field }) => (
+                <FormItem className="mt-6">
+                  <FormLabel>
+                    Location<span className="text-red-400">*</span>
+                  </FormLabel>
+                  <FormControl>
+                    <Input placeholder="Enter the location..." {...field} />
+                  </FormControl>
+                  {/* <FormDescription>
+                    This is your public display name.
+                  </FormDescription> */}
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="startTime"
+              render={({ field }) => (
+                <FormItem className="mt-6">
+                  <FormLabel>
+                    Starts<span className="text-red-400">*</span>
+                  </FormLabel>
+                  <FormControl>
+                    <Input type="datetime-local" {...field} />
+                  </FormControl>
+                  {/* <FormDescription>
+                    This is your public display name.
+                  </FormDescription> */}
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="endTime"
+              render={({ field }) => (
+                <FormItem className="mt-6">
+                  <FormLabel>
+                    Ends<span className="text-red-400">*</span>
+                  </FormLabel>
+                  <FormControl>
+                    <Input type="datetime-local" {...field} />
+                  </FormControl>
+                  {/* <FormDescription>
+                    This is your public display name.
+                  </FormDescription> */}
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="categories"
+              render={({ field }) => (
+                <FormItem className="mt-6">
+                  <FormLabel>Categories</FormLabel>
+
+                  <div className="mt-2 grid grid-cols-2 gap-y-1">
+                    {categories.map((category) => (
+                      <FormControl key={category}>
+                        <div className="flex items-center space-x-2">
+                          <Checkbox
+                            value={category}
+                            checked={field.value.includes(category)}
+                            onCheckedChange={(checked) => {
+                              if (checked) {
+                                field.onChange([...field.value, category]);
+                              } else {
+                                field.onChange(
+                                  field.value.filter((cat) => cat !== category),
+                                );
+                              }
+                            }}
+                            id={category}
+                          />
+                          <label htmlFor={category} className="text-sm">
+                            {category}
+                          </label>
+                        </div>
+                      </FormControl>
+                    ))}
+                  </div>
+                  {/* <FormDescription>
+                    This is your public display name.
+                  </FormDescription> */}
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="isPrivate"
+              render={({ field }) => (
+                <FormItem className="mt-6 flex items-center gap-2 space-y-0">
+                  <FormControl>
+                    <Switch
+                      checked={field.value}
+                      onCheckedChange={field.onChange}
+                    />
+                  </FormControl>
+                  <FormLabel className="mt-0">Private Event</FormLabel>
+                  {/* <FormDescription>
+                    This is your public display name.
+                  </FormDescription> */}
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <Button className="mt-6 w-full" type="submit">
+              Create
             </Button>
-          </div>
-        </div>
-
-        <div className="mt-6">
-          <label className="text-sm font-medium">
-            Event Title<span className="text-red-400">*</span>
-          </label>
-          <Input
-            type="text"
-            placeholder="Enter a title..."
-            className="mt-1"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-          />
-        </div>
-        {/* <p className="mt-0.5 text-xs font-semibold text-red-400">
-          Title is required.
-        </p> */}
-
-        <div className="mt-6">
-          <label className="text-sm font-medium">
-            Description<span className="text-red-400">*</span>
-          </label>
-
-          <Textarea
-            placeholder="Describe the event..."
-            className="mt-1"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-          />
-        </div>
-
-        <div className="mt-6">
-          <label className="text-sm font-medium">
-            Location<span className="text-red-400">*</span>
-          </label>
-          <Input
-            type="text"
-            placeholder="Enter a location..."
-            className="mt-1"
-            value={location}
-            onChange={(e) => setLocation(e.target.value)}
-          />
-        </div>
-
-        <div className="mt-6">
-          <label className="text-sm font-medium">
-            Starts<span className="text-red-400">*</span>
-          </label>
-
-          <Input
-            type="datetime-local"
-            min={formattedDate}
-            className="mt-1"
-            value={startTime}
-            onChange={(e) => setStartTime(e.target.value)}
-          />
-        </div>
-
-        <div className="mt-4">
-          <label className="text-sm font-medium">
-            Ends<span className="text-red-400">*</span>
-          </label>
-
-          <Input
-            type="datetime-local"
-            className="mt-1"
-            value={endTime}
-            onChange={(e) => setEndTime(e.target.value)}
-          />
-        </div>
-
-        <label className="mt-6 block text-sm font-medium">Categories</label>
-        <div className="mt-2 grid grid-cols-2 gap-y-1">
-          <EventFilterCheckbox value="Technology" />
-          <EventFilterCheckbox value="Art" />
-          <EventFilterCheckbox value="Music" />
-          <EventFilterCheckbox value="Sports" />
-          <EventFilterCheckbox value="Food" />
-          <EventFilterCheckbox value="Business" />
-        </div>
-
-        <div className="mt-6 flex items-center space-x-2">
-          <Switch
-            id="airplane-mode"
-            checked={isPrivate}
-            onCheckedChange={(checked) => setIsPrivate(checked)}
-          />
-          <Label htmlFor="airplane-mode">Private Event</Label>
-        </div>
-
-        <Button className="mt-6 w-full" onClick={() => createEvent()}>
-          Create
-        </Button>
+          </form>
+        </Form>
       </Page>
     </>
   );

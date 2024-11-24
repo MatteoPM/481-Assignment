@@ -27,7 +27,7 @@ const dateFormatter = new Intl.DateTimeFormat("en-US", {
 });
 
 function Event() {
-  const { data } = useData();
+  const { data, setData } = useData();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isRSVPConfirmed, setIsRSVPConfirmed] = useState(false);
   const { eventId } = useParams();
@@ -40,11 +40,16 @@ function Event() {
     (group) => group.id === Number(event.groupId),
   )!;
 
+  const rsvpd = data.currentUser.rsvpIds.includes(event.id);
+
   const handleRSVP = () => {
     setIsDialogOpen(true);
   };
 
   const confirmRSVP = () => {
+    setData((draft) => {
+      draft.currentUser.rsvpIds.push(event.id);
+    });
     setIsRSVPConfirmed(true);
     setIsDialogOpen(false);
   };
@@ -89,7 +94,7 @@ function Event() {
           <SubHeader Icon={Tags} text="Categories" />
 
           <div className="mt-2 flex flex-wrap gap-2">
-            {data.events[0].categories
+            {event.categories
               .slice()
               .sort()
               .map((perk) => (
@@ -110,19 +115,20 @@ function Event() {
           <Button
             className="sticky bottom-4 mt-auto w-full"
             onClick={handleRSVP}
-            disabled={group.leaderId === data.currentUser.id}
+            disabled={
+              group.leaderId === data.currentUser.id ||
+              data.currentUser.rsvpIds.includes(event.id)
+            }
           >
-            RSVP
+            {!rsvpd && "RSVP"}
+            {rsvpd && "RSVP'd"}
           </Button>
 
           <AlertDialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
             <AlertDialogContent className="max-w-[350px] rounded-lg">
               <AlertDialogHeader>
                 <AlertDialogTitle>RSVP for this event?</AlertDialogTitle>
-                <AlertDialogDescription>
-                  {/* This action cannot be undone. This will permanently delete
-                  your account and remove your data from our servers. */}
-                </AlertDialogDescription>
+                <AlertDialogDescription></AlertDialogDescription>
               </AlertDialogHeader>
               <AlertDialogFooter className="grid grid-cols-2 gap-2">
                 <Button

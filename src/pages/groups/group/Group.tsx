@@ -240,7 +240,7 @@ function Group() {
                     className="w-full bg-green-400 hover:bg-green-400/90"
                     asChild
                   >
-                    <Link to={"/events/create"}>
+                    <Link to={`/events/create?groupId=${group.id}`}>
                       <Plus className="size-[20px]" />
                       <span className="leading-none">Create</span>
                     </Link>

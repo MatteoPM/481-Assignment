@@ -4,6 +4,9 @@ import { Drawer, DrawerContent, DrawerTrigger } from "./ui/drawer";
 import UserDrawerContent from "./userDrawerContent";
 
 const User = ({ user }: { user: UserType }) => {
+  if (!user) {
+    throw new Error("wafsehj");
+  }
   return (
     <Drawer>
       <DrawerTrigger asChild>

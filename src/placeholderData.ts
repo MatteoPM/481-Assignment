@@ -7,6 +7,7 @@ export type UserType = {
   status: "online" | "offline" | "away";
   leaderGroupIds: number[];
   memberGroupIds: number[];
+  rsvpIds: number[];
 };
 
 export type ChatMessageType = {
@@ -75,6 +76,7 @@ const testUser: UserType = {
   status: "online",
   leaderGroupIds: [5],
   memberGroupIds: [0, 1],
+  rsvpIds: [],
 };
 
 const placeholderUser: UserType = {
@@ -84,6 +86,7 @@ const placeholderUser: UserType = {
   status: "online",
   leaderGroupIds: [],
   memberGroupIds: [],
+  rsvpIds: [],
 };
 
 const placeholderUser2: UserType = {
@@ -94,6 +97,7 @@ const placeholderUser2: UserType = {
   status: "offline",
   leaderGroupIds: [],
   memberGroupIds: [],
+  rsvpIds: [],
 };
 
 const placeholderUser3: UserType = {
@@ -103,6 +107,7 @@ const placeholderUser3: UserType = {
   status: "away",
   leaderGroupIds: [],
   memberGroupIds: [],
+  rsvpIds: [],
 };
 
 const users = [testUser, placeholderUser, placeholderUser2, placeholderUser3];
@@ -190,6 +195,7 @@ const groups: Group[] = [
     description:
       "Join a dynamic community of UofC students passionate about coding and software development! Whether you're a beginner or an advanced programmer, Calgary Coders offers workshops, hackathons, and coding challenges to level up your skills and connect with fellow tech enthusiasts.",
     bannerUrl: "/CalgaryCodersImage.jpg",
+    leaderId: 2,
   },
   {
     id: 1,
@@ -197,6 +203,7 @@ const groups: Group[] = [
     description:
       "Express yourself in the UCalgary Art Collective! From visual arts and dance to music and theater, this creative community brings together students who want to share their passion for the arts. Join us for workshops, collaborative projects, and showcases to inspire and be inspired.",
     bannerUrl: "/art gallery opening.jpg",
+    leaderId: 2,
   },
   {
     id: 2,
@@ -204,6 +211,7 @@ const groups: Group[] = [
     description:
       "Embrace diversity with Global Connectors, a cultural exchange group where local and international students come together to celebrate each other's cultures. Through food, festivals, and meaningful conversations, we promote global awareness and lifelong friendships.",
     bannerUrl: "/Global Connectors.jpg",
+    leaderId: 2,
   },
   {
     id: 3,
@@ -211,6 +219,7 @@ const groups: Group[] = [
     description:
       "Calling all book lovers! Bookmarked is UofC’s official book club, open to readers of all genres. Join us for monthly book discussions, author talks, and fun reading challenges. Escape into a new world of literature with us!",
     bannerUrl: "/Bookmarked.jpg",
+    leaderId: 2,
   },
   {
     id: 4,
@@ -218,6 +227,7 @@ const groups: Group[] = [
     description:
       "For the night owls of UofC, The Midnight Society is your haven! Join us for late-night study sessions, cozy movie marathons, and stargazing adventures. Meet like-minded students who thrive after dark!",
     bannerUrl: "/The Midnight Society.jpg",
+    leaderId: 2,
   },
   {
     id: 5,
@@ -233,6 +243,7 @@ const groups: Group[] = [
     description:
       "Discover Calgary on two wheels with Dinos on Wheels! Whether you’re into casual rides or intense trails, this cycling club is for students who love exploring the city and its surroundings. Meet new friends, stay active, and enjoy the ride!",
     bannerUrl: "/Dinos on Wheels.jpg",
+    leaderId: 2,
   },
   {
     id: 7,
@@ -240,6 +251,7 @@ const groups: Group[] = [
     description:
       "Film buffs, unite! Cinephiles of Calgary is the go-to group for watching classic and indie films, debating blockbusters, and even trying your hand at short filmmaking. Share your love for cinema with fellow film enthusiasts!",
     bannerUrl: "/Cinephiles of Calgary.jpg",
+    leaderId: 2,
   },
   {
     id: 8,

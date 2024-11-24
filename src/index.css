@@ -81,6 +81,6 @@ body {
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply max-h-[100dvh] overflow-hidden bg-background text-foreground;
   }
 }
