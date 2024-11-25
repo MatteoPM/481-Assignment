@@ -1,6 +1,6 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createHashRouter, RouterProvider } from "react-router-dom";
 import AuthLayout from "./components/authLayout.tsx";
 import { DataProvider } from "./hooks/useData.tsx";
 import "./index.css";
@@ -23,7 +23,7 @@ import GroupStats from "./pages/groups/group/stats/GroupStats.tsx";
 import Login from "./pages/login/Login.tsx";
 import Notifications from "./pages/notifications/Notifications.tsx";
 
-const router = createBrowserRouter([
+const router = createHashRouter([
   {
     path: "/login",
     element: <Login />,
