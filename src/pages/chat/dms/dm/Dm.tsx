@@ -17,7 +17,7 @@ function Dm() {
   }
 
   const participants = dm.participantIds
-    .filter((id) => id !== data.currentUser.id)
+    .filter((id) => id !== data.currentUser!.id)
     .map((id) => data.users.find((user) => user.id === id)!);
 
   const chatMessages = dm?.messages;
@@ -31,7 +31,7 @@ function Dm() {
         .find((chat) => chat.id === Number(dmId))!
         .messages.push({
           message,
-          user: data.currentUser,
+          user: data.currentUser!,
           dateTime: nowString,
         });
     });

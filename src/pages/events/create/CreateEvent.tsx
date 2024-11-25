@@ -106,7 +106,7 @@ function CreateEvent() {
       description,
       endTime,
       hostingClub,
-      isPrivate,
+      // isPrivate,
       location,
       startTime,
       title,

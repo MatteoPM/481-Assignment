@@ -40,7 +40,7 @@ function Event() {
     (group) => group.id === Number(event.groupId),
   )!;
 
-  const rsvpd = data.currentUser.rsvpIds.includes(event.id);
+  const rsvpd = data.currentUser!.rsvpIds.includes(event.id);
 
   const handleRSVP = () => {
     setIsDialogOpen(true);
@@ -48,7 +48,7 @@ function Event() {
 
   const confirmRSVP = () => {
     setData((draft) => {
-      draft.currentUser.rsvpIds.push(event.id);
+      draft.currentUser!.rsvpIds.push(event.id);
     });
     setIsRSVPConfirmed(true);
     setIsDialogOpen(false);
@@ -116,8 +116,8 @@ function Event() {
             className="sticky bottom-4 mt-auto w-full"
             onClick={handleRSVP}
             disabled={
-              group.leaderId === data.currentUser.id ||
-              data.currentUser.rsvpIds.includes(event.id)
+              group.leaderId === data.currentUser!.id ||
+              data.currentUser!.rsvpIds.includes(event.id)
             }
           >
             {!rsvpd && "RSVP"}

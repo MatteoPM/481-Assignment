@@ -36,7 +36,7 @@ function Forum() {
         .find((forum) => forum.id === Number(forumId))!
         .messages.push({
           message,
-          user: data.currentUser,
+          user: data.currentUser!,
           dateTime: nowString,
         });
     });

@@ -64,7 +64,7 @@ function CreateForum() {
         title: topic,
         messages: [
           {
-            user: data.currentUser,
+            user: data.currentUser!,
             dateTime: nowString,
             message,
           },

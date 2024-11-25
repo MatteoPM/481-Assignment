@@ -24,7 +24,7 @@ const NotificationCard = ({ notification }: { notification: Notification }) => {
       <div className="flex-grow">
         <h2 className="font-semibold">{notification.title}</h2>
         <p className="text-sm text-muted-foreground">
-          {notification.description}
+          {/* {notification.description!} */}
         </p>
         <span className="mt-1 text-xs text-muted-foreground">
           {notification.time}
