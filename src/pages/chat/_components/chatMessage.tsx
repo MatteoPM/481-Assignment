@@ -7,7 +7,7 @@ import UserDrawerContent from "../../../components/userDrawerContent";
 
 const ChatMessage = ({ chatMessage }: { chatMessage: ChatMessageType }) => {
   const { data } = useData();
-  const testUser = data.currentUser;
+  const testUser = data.currentUser!;
   const isOwnMessage = chatMessage.user.username === testUser.username;
 
   return (

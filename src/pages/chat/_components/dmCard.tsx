@@ -7,7 +7,7 @@ const DmCard = ({ dm, className }: { dm: PrivateChat; className?: string }) => {
   const { data } = useData();
 
   const participants = dm.participantIds
-    .filter((id) => id !== data.currentUser.id)
+    .filter((id) => id !== data.currentUser!.id)
     .map((id) => data.users.find((user) => user.id === id)!);
 
   const lastMessage = dm.messages[dm.messages.length - 1];

@@ -1,13 +1,14 @@
 import { useData } from "@/hooks/useData";
-import { cn } from "@/lib/utils";
+import { cn, hasSameValues } from "@/lib/utils";
 import GroupCard from "@/pages/groups/_components/groupCard";
 import { UserType } from "@/placeholderData";
 import { Ban, Crown, MessageSquare, School, User } from "lucide-react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import SubHeader from "./subHeader";
 
 const UserDrawerContent = ({ user }: { user: UserType }) => {
-  const { data } = useData();
+  const { data, setData } = useData();
+  const navigate = useNavigate();
 
   const courses = user.memberGroupIds
     .map((id) => data.groups.find((group) => group.id === id)!)
@@ -89,13 +90,35 @@ const UserDrawerContent = ({ user }: { user: UserType }) => {
       )}
 
       <div className="mt-10 flex w-full flex-col rounded-lg">
-        <Link
-          to={"/chat/dms/1"}
+        <button
           className="flex items-center justify-between rounded-lg bg-stone-100 p-4 text-stone-700"
+          onClick={() => {
+            const ids = [data.currentUser!.id, user.id];
+
+            const existingDm = data.privateChats.find((privateChat) =>
+              hasSameValues(privateChat.participantIds, ids),
+            );
+
+            if (existingDm) {
+              navigate(`/chat/dms/${existingDm.id}`, {});
+            } else {
+              const id = data.privateChats.length;
+
+              setData((draft) => {
+                draft.privateChats.push({
+                  id,
+                  participantIds: ids,
+                  messages: [],
+                });
+              });
+
+              navigate(`/chat/dms/${id}`, {});
+            }
+          }}
         >
           <span className="font-medium">Message</span>
           <MessageSquare />
-        </Link>
+        </button>
       </div>
 
       <div className="mt-6 flex w-full flex-col rounded-lg">

@@ -100,7 +100,7 @@ const placeholderUser2: UserType = {
   username: "Sergio Barnes",
   status: "offline",
   leaderGroupIds: [],
-  memberGroupIds: [],
+  memberGroupIds: [5],
   rsvpIds: [],
 };
 
