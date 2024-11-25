@@ -2,6 +2,8 @@ import { CalendarDays, Home, MessageCircleMore, Users } from "lucide-react";
 import { NavLink } from "react-router-dom";
 import { twMerge } from "tailwind-merge";
 
+//
+
 const FooterNav = () => {
   return (
     <>
