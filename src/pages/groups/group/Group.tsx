@@ -37,6 +37,11 @@ function Group() {
   if (!group) {
     throw new Error();
   }
+
+  if (!data.currentUser) {
+    throw new Error("No user");
+  }
+
   const forums = data.forums.filter((forum) => forum.groupId === group.id);
 
   return (
@@ -70,8 +75,8 @@ function Group() {
                   className="w-full"
                   onClick={() => {
                     setData((draft) => {
-                      draft.currentUser.memberGroupIds =
-                        draft.currentUser.memberGroupIds.filter(
+                      draft.currentUser!.memberGroupIds =
+                        draft.currentUser!.memberGroupIds.filter(
                           (id) => id !== group.id,
                         );
                     });
@@ -93,7 +98,7 @@ function Group() {
                     className="w-full"
                     onClick={() => {
                       setData((draft) => {
-                        draft.currentUser.memberGroupIds.push(group.id);
+                        draft.currentUser!.memberGroupIds.push(group.id);
                       });
                     }}
                   >
@@ -145,7 +150,7 @@ function Group() {
             <span className="leading-none">View All</span>
           </Button>
 
-          {group.leaderId === 0 && (
+          {group.leaderId === data.currentUser.id && (
             <Dialog>
               <DialogTrigger asChild>
                 <Button

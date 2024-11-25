@@ -11,8 +11,8 @@ import { Link } from "react-router-dom";
 import { Separator } from "./ui/separator";
 
 const UserDrawer = () => {
-  const { data } = useData();
-  const testUser = data.currentUser;
+  const { data, setData } = useData();
+  const testUser = data.currentUser!;
 
   return (
     <Drawer direction="right">
@@ -55,12 +55,17 @@ const UserDrawer = () => {
           </Link>
 
           <Separator className="" />
-          <Link
-            to={"/login"}
+          <button
+            // to={"/login"}
             className="flex items-center gap-4 p-3 font-medium text-stone-800"
+            onClick={() => {
+              setData((draft) => {
+                draft.currentUser = null;
+              });
+            }}
           >
             <LogOut /> <span>Sign Out</span>
-          </Link>
+          </button>
         </div>
       </DrawerContent>
     </Drawer>

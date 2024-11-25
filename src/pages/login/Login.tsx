@@ -7,12 +7,21 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
+import { useData } from "@/hooks/useData";
 import { ArrowRight } from "lucide-react";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+  const { data, setData } = useData();
   const [step, setStep] = useState(1);
+  const [email, setEmail] = useState("");
+  const navigate = useNavigate();
+
+  if (data.currentUser) {
+    navigate("/");
+  }
+
   if (step === 1) {
     return (
       <div className="flex h-full flex-col items-center justify-center p-4">
@@ -70,14 +79,27 @@ const Login = () => {
                 type="text"
                 placeholder="someone@ucalgary.ca"
                 className="mt-3"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
               />
 
               <Button variant={"link"} className="p-0">
                 Can't access your account?
               </Button>
             </div>
-            <Button className="w-full" asChild>
-              <Link to={"/"}>Next</Link>
+            <Button
+              className="w-full"
+              onClick={() => {
+                setData((draft) => {
+                  const user = data.users.find((user) => user.email === email);
+
+                  if (user) {
+                    draft.currentUser = user;
+                  }
+                });
+              }}
+            >
+              Next
             </Button>
           </CardContent>
           <CardFooter className="text-start text-xs text-gray-500">
@@ -88,6 +110,15 @@ const Login = () => {
             />
           </CardFooter>
         </Card>
+
+        <div className="mt-4 text-muted-foreground">
+          <span>Try:</span>
+          <ul className="list-disc">
+            {data.users.map((user) => (
+              <li className="select-all">{user.email}</li>
+            ))}
+          </ul>
+        </div>
       </div>
     );
   }

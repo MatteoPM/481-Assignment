@@ -1,14 +1,14 @@
 import { cn } from "@/lib/utils";
 import { UserType } from "@/placeholderData";
+import { useLocation } from "react-router-dom";
 import { Drawer, DrawerContent, DrawerTrigger } from "./ui/drawer";
 import UserDrawerContent from "./userDrawerContent";
 
 const User = ({ user }: { user: UserType }) => {
-  if (!user) {
-    throw new Error("wafsehj");
-  }
+  const location = useLocation();
+
   return (
-    <Drawer>
+    <Drawer key={`drawer-${location.pathname}-${user.id}`}>
       <DrawerTrigger asChild>
         <button className="flex items-center gap-2 rounded-full border bg-white p-1.5 pr-3 shadow-sm">
           <img
@@ -31,7 +31,7 @@ const User = ({ user }: { user: UserType }) => {
         </button>
       </DrawerTrigger>
 
-      <DrawerContent>
+      <DrawerContent key={`drawerContent-${location.pathname}-${user.id}`}>
         <UserDrawerContent user={user} />
       </DrawerContent>
     </Drawer>

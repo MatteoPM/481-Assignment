@@ -18,7 +18,7 @@ function Dms() {
     }
 
     const participantTitle = dm.participantIds
-      .filter((id) => id !== data.currentUser.id)
+      .filter((id) => id !== data.currentUser!.id)
       .map((id) =>
         data.users.find((user) => user.id === id)!.username.toLowerCase(),
       )

@@ -1,6 +1,7 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import AuthLayout from "./components/authLayout.tsx";
 import { DataProvider } from "./hooks/useData.tsx";
 import "./index.css";
 import App from "./pages/App.tsx";
@@ -29,74 +30,80 @@ const router = createBrowserRouter([
   },
   {
     path: "/",
-    element: <App />,
-  },
-  {
-    path: "/chat",
-    element: <Chat />,
-    children: [],
-  },
-  {
-    path: "/chat/create",
-    element: <CreateForum />,
-    children: [],
-  },
-  {
-    path: "/chat/:forumId",
-    element: <Forum />,
-  },
-  {
-    path: "/chat/dms",
-    element: <Dms />,
-  },
-  {
-    path: "/chat/dms/create",
-    element: <CreateDm />,
-  },
-  {
-    path: "/chat/dms/:dmId",
-    element: <Dm />,
-  },
-  {
-    path: "/groups",
-    element: <Courses />,
-  },
-  {
-    path: "/groups/clubs",
-    element: <Clubs />,
-  },
-  {
-    path: "/groups/create",
-    element: <CreateGroup />,
-  },
-  {
-    path: "/groups/:groupId",
-    element: <Group />,
-  },
-  {
-    path: "/groups/:groupId/stats",
-    element: <GroupStats />,
-  },
-  {
-    path: "/events",
-    element: <Events />,
-  },
-  {
-    path: "/events/:eventId",
-    element: <Event />,
-  },
-  {
-    path: "/events/create",
-    element: <CreateEvent />,
-  },
-  {
-    path: "/events/rsvps",
-    element: <Rsvps />,
-  },
+    element: <AuthLayout />,
+    children: [
+      {
+        path: "/",
+        element: <App />,
+      },
+      {
+        path: "/chat",
+        element: <Chat />,
+        children: [],
+      },
+      {
+        path: "/chat/create",
+        element: <CreateForum />,
+        children: [],
+      },
+      {
+        path: "/chat/:forumId",
+        element: <Forum />,
+      },
+      {
+        path: "/chat/dms",
+        element: <Dms />,
+      },
+      {
+        path: "/chat/dms/create",
+        element: <CreateDm />,
+      },
+      {
+        path: "/chat/dms/:dmId",
+        element: <Dm />,
+      },
+      {
+        path: "/groups",
+        element: <Courses />,
+      },
+      {
+        path: "/groups/clubs",
+        element: <Clubs />,
+      },
+      {
+        path: "/groups/create",
+        element: <CreateGroup />,
+      },
+      {
+        path: "/groups/:groupId",
+        element: <Group />,
+      },
+      {
+        path: "/groups/:groupId/stats",
+        element: <GroupStats />,
+      },
+      {
+        path: "/events",
+        element: <Events />,
+      },
+      {
+        path: "/events/:eventId",
+        element: <Event />,
+      },
+      {
+        path: "/events/create",
+        element: <CreateEvent />,
+      },
+      {
+        path: "/events/rsvps",
+        element: <Rsvps />,
+      },
 
-  {
-    path: "/notifications",
-    element: <Notifications />,
+      {
+        path: "/notifications",
+        element: <Notifications />,
+      },
+    ],
   },
 ]);
 

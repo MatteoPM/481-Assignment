@@ -2,6 +2,7 @@ import { Data } from "./hooks/useData";
 
 export type UserType = {
   id: number;
+  email: string;
   avatarUrl: string;
   username: string;
   status: "online" | "offline" | "away";
@@ -70,17 +71,19 @@ export type Group = {
 
 const testUser: UserType = {
   id: 0,
+  email: "joseph.ballance@ucalgary.ca",
   avatarUrl:
     "https://www.fakepersongenerator.com/Face/male/male20161086420389465.jpg",
   username: "Joseph Ballance",
   status: "online",
   leaderGroupIds: [5],
-  memberGroupIds: [0, 1],
+  memberGroupIds: [0, 1, 8],
   rsvpIds: [],
 };
 
 const placeholderUser: UserType = {
   id: 1,
+  email: "debbie.hopkins@ucalgary.ca",
   avatarUrl: "https://randomuser.me/api/portraits/women/26.jpg",
   username: "Debbie Hopkins",
   status: "online",
@@ -91,6 +94,7 @@ const placeholderUser: UserType = {
 
 const placeholderUser2: UserType = {
   id: 2,
+  email: "sergio.barnes@ucalgary.ca",
   avatarUrl:
     "https://www.fakepersongenerator.com/Face/male/male1085778558166.jpg",
   username: "Sergio Barnes",
@@ -102,6 +106,7 @@ const placeholderUser2: UserType = {
 
 const placeholderUser3: UserType = {
   id: 3,
+  email: "brenda.pease@ucalgary.ca",
   avatarUrl: "https://randomuser.me/api/portraits/women/18.jpg",
   username: "Brenda Pease",
   status: "away",

@@ -10,7 +10,7 @@ import { createContext, ReactNode, useContext, useEffect } from "react";
 import { Updater, useImmer } from "use-immer";
 
 export type Data = {
-  currentUser: UserType;
+  currentUser: UserType | null;
   users: UserType[];
   groups: Group[];
   forums: Forum[];
