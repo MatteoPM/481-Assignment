@@ -11,9 +11,14 @@ function Chat() {
   const [searchParams] = useSearchParams();
   const q = searchParams.get("q") || "";
 
-  const filteredForums = data.forums.filter((forums) =>
-    forums.title.toLowerCase().includes(q.toLowerCase()),
-  );
+  const filteredForums = data.forums.filter((forum) => {
+    const group = data.groups.find((group) => group.id === forum.groupId)!;
+
+    return (
+      forum.title.toLowerCase().includes(q.toLowerCase()) ||
+      group.name.toLowerCase().includes(q.toLowerCase())
+    );
+  });
 
   return (
     <>
@@ -37,9 +42,11 @@ function Chat() {
               ))}
             </div>
 
-            <p className="mt-2 text-center text-sm font-medium text-muted-foreground">
-              End of results.
-            </p>
+            {q && (
+              <p className="mt-2 text-center text-sm font-medium text-muted-foreground">
+                End of results.
+              </p>
+            )}
           </>
         )}
 

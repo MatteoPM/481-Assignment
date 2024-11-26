@@ -43,29 +43,37 @@ function Dms() {
         </div>
 
         {filteredDms.length > 0 && (
-          <div className="mt-3 flex flex-col divide-y overflow-hidden rounded-md border bg-white shadow-sm">
-            {filteredDms
-              .sort((a, b) =>
-                b.messages
-                  .at(-1)!
-                  .dateTime.localeCompare(a.messages.at(-1)!.dateTime),
-              )
-              .map((dm) => {
-                const dmId =
-                  data.privateChats.find((privateChat) =>
-                    hasSameValues(
-                      privateChat.participantIds,
-                      dm.participantIds,
-                    ),
-                  )?.id ?? -1;
+          <>
+            <div className="mt-3 flex flex-col divide-y overflow-hidden rounded-md border bg-white shadow-sm">
+              {filteredDms
+                .sort((a, b) =>
+                  b.messages
+                    .at(-1)!
+                    .dateTime.localeCompare(a.messages.at(-1)!.dateTime),
+                )
+                .map((dm) => {
+                  const dmId =
+                    data.privateChats.find((privateChat) =>
+                      hasSameValues(
+                        privateChat.participantIds,
+                        dm.participantIds,
+                      ),
+                    )?.id ?? -1;
 
-                return (
-                  <Link to={`/chat/dms/${dmId}`}>
-                    <DmCard dm={dm} key={dm.id} />
-                  </Link>
-                );
-              })}
-          </div>
+                  return (
+                    <Link to={`/chat/dms/${dmId}`}>
+                      <DmCard dm={dm} key={dm.id} />
+                    </Link>
+                  );
+                })}
+            </div>
+
+            {q && (
+              <p className="mt-2 text-center text-sm font-medium text-muted-foreground">
+                End of results.
+              </p>
+            )}
+          </>
         )}
 
         {filteredDms.length === 0 && (

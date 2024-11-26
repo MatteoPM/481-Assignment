@@ -156,8 +156,7 @@ const events: Event[] = [
     location: "Engineering Building, Room ENE 233",
     groupId: 0,
     categories: ["Education", "Technology", "Workshop"],
-    bannerUrl:
-      BASE_URL + "https://www.linux.org/attachments/python-banner-png.7508/",
+    bannerUrl: "https://www.linux.org/attachments/python-banner-png.7508/",
   },
   {
     id: 3,

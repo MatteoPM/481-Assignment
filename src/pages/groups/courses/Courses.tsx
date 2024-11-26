@@ -24,15 +24,22 @@ function Courses() {
           {q ? `Courses Matching "${q}"` : "Your Courses"}
         </h2>
         {filteredCourses.length > 0 && (
-          <div className="mt-3 flex flex-col divide-y overflow-hidden rounded-md border bg-white shadow-sm">
-            {filteredCourses.map((group) => (
-              <GroupCard key={group.id} group={group} compact />
-            ))}
-          </div>
+          <>
+            <div className="mt-3 flex flex-col divide-y overflow-hidden rounded-md border bg-white shadow-sm">
+              {filteredCourses.map((group) => (
+                <GroupCard key={group.id} group={group} compact />
+              ))}
+            </div>
+            {q && (
+              <p className="mt-2 text-center text-sm font-medium text-muted-foreground">
+                End of results.
+              </p>
+            )}
+          </>
         )}
         {filteredCourses.length === 0 && (
           <div className="mt-8 text-center font-semibold text-muted-foreground">
-            No clubs found. Adjust your search query.
+            No courses found. Adjust your search query.
           </div>
         )}
       </Page>

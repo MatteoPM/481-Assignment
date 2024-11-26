@@ -50,11 +50,18 @@ function Clubs() {
           <>
             <h2 className="mt-6 text-xl font-semibold">Clubs Matching "{q}"</h2>
             {filteredClubs.length > 0 && (
-              <div className="mt-3 flex flex-col divide-y overflow-hidden rounded-md border bg-white shadow-sm">
-                {filteredClubs.map((group) => (
-                  <GroupCard group={group} compact />
-                ))}
-              </div>
+              <>
+                <div className="mt-3 flex flex-col divide-y overflow-hidden rounded-md border bg-white shadow-sm">
+                  {filteredClubs.map((group) => (
+                    <GroupCard group={group} compact />
+                  ))}
+                </div>
+                {q && (
+                  <p className="mt-2 text-center text-sm font-medium text-muted-foreground">
+                    End of results.
+                  </p>
+                )}
+              </>
             )}
             {filteredClubs.length === 0 && (
               <div className="mt-8 text-center font-semibold text-muted-foreground">

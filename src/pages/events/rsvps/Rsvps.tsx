@@ -12,7 +12,14 @@ function Rsvps() {
   const q = searchParams.get("q") || "";
 
   const filteredRsvps = data.events
-    .filter((event) => event.title.toLowerCase().includes(q.toLowerCase()))
+    .filter((event) => {
+      const group = data.groups.find((group) => group.id === event.groupId)!;
+
+      return (
+        event.title.toLowerCase().includes(q.toLowerCase()) ||
+        group.name.toLowerCase().includes(q.toLowerCase())
+      );
+    })
     .sort((a, b) => a.startDateTime.localeCompare(b.startDateTime));
 
   return (
@@ -27,15 +34,27 @@ function Rsvps() {
         </h2>
 
         {filteredRsvps.length > 0 && (
-          <div className="mt-3 space-y-3">
-            {filteredRsvps.map((event) => (
-              <EventCard key={event.id} event={event} />
-            ))}
-          </div>
+          <>
+            <div className="mt-3 space-y-3">
+              {data.events
+                .filter((event) =>
+                  event.title.toLowerCase().includes(q.toLowerCase()),
+                )
+                .sort((a, b) => a.startDateTime.localeCompare(b.startDateTime))
+                .map((event) => (
+                  <EventCard event={event} key={event.id} />
+                ))}
+            </div>
+            {q && (
+              <p className="mt-2 text-center text-sm font-medium text-muted-foreground">
+                End of results.
+              </p>
+            )}
+          </>
         )}
         {filteredRsvps.length === 0 && (
           <div className="mt-8 text-center font-semibold text-muted-foreground">
-            No RSVPs found. Adjust your search query.
+            No events found. Adjust your search query.
           </div>
         )}
       </Page>

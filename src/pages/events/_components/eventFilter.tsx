@@ -6,15 +6,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Slider } from "@/components/ui/slider";
 import { Filter } from "lucide-react";
-import { useState } from "react";
 import { Button } from "../../../components/ui/button";
 import EventFilterCheckbox from "./eventFilterCheckbox";
 
 const EventFilter = () => {
-  const [distance, setDistance] = useState([100]);
-
   return (
     <Drawer>
       <DrawerTrigger asChild>
@@ -50,19 +46,6 @@ const EventFilter = () => {
             <EventFilterCheckbox value="Literature" />
             <EventFilterCheckbox value="Social" />
             <EventFilterCheckbox value="Study Support" />
-          </div>
-
-          <div className="space-y-2">
-            <h2 className="mt-4 font-medium">Distance from You (km)</h2>
-            <Slider
-              value={distance}
-              onValueChange={setDistance}
-              max={100}
-              step={1}
-            />
-            <div className="text-right text-sm text-muted-foreground">
-              {distance[0] < 100 ? distance[0] : "∞"} km
-            </div>
           </div>
 
           <Button variant={"destructive"} className="mt-12 w-full">
