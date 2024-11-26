@@ -8,6 +8,7 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { useData } from "@/hooks/useData";
+import { BASE_URL } from "@/placeholderData";
 import { ArrowRight } from "lucide-react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -104,7 +105,7 @@ const Login = () => {
           </CardContent>
           <CardFooter className="text-start text-xs text-gray-500">
             <img
-              src="/sso2.png"
+              src={`${BASE_URL}/sso2.png`}
               // alt=""
               className="h-full w-full object-contain"
             />

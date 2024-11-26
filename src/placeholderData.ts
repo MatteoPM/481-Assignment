@@ -1,5 +1,7 @@
 import { Data } from "./hooks/useData";
 
+export const BASE_URL = "/481-Assignment";
+
 export type UserType = {
   id: number;
   email: string;
@@ -154,7 +156,8 @@ const events: Event[] = [
     location: "Engineering Building, Room ENE 233",
     groupId: 0,
     categories: ["Education", "Technology", "Workshop"],
-    bannerUrl: "https://www.linux.org/attachments/python-banner-png.7508/",
+    bannerUrl:
+      BASE_URL + "https://www.linux.org/attachments/python-banner-png.7508/",
   },
   {
     id: 3,
@@ -199,7 +202,7 @@ const groups: Group[] = [
     name: "Calgary Coders",
     description:
       "Join a dynamic community of UofC students passionate about coding and software development! Whether you're a beginner or an advanced programmer, Calgary Coders offers workshops, hackathons, and coding challenges to level up your skills and connect with fellow tech enthusiasts.",
-    bannerUrl: "/CalgaryCodersImage.jpg",
+    bannerUrl: BASE_URL + "/CalgaryCodersImage.jpg",
     leaderId: 2,
   },
   {
@@ -207,7 +210,7 @@ const groups: Group[] = [
     name: "UCalgary Art Collective",
     description:
       "Express yourself in the UCalgary Art Collective! From visual arts and dance to music and theater, this creative community brings together students who want to share their passion for the arts. Join us for workshops, collaborative projects, and showcases to inspire and be inspired.",
-    bannerUrl: "/art gallery opening.jpg",
+    bannerUrl: BASE_URL + "/art gallery opening.jpg",
     leaderId: 2,
   },
   {
@@ -215,7 +218,7 @@ const groups: Group[] = [
     name: "Global Connectors",
     description:
       "Embrace diversity with Global Connectors, a cultural exchange group where local and international students come together to celebrate each other's cultures. Through food, festivals, and meaningful conversations, we promote global awareness and lifelong friendships.",
-    bannerUrl: "/Global Connectors.jpg",
+    bannerUrl: BASE_URL + "/Global Connectors.jpg",
     leaderId: 2,
   },
   {
@@ -223,7 +226,7 @@ const groups: Group[] = [
     name: "Bookmarked",
     description:
       "Calling all book lovers! Bookmarked is UofC’s official book club, open to readers of all genres. Join us for monthly book discussions, author talks, and fun reading challenges. Escape into a new world of literature with us!",
-    bannerUrl: "/Bookmarked.jpg",
+    bannerUrl: BASE_URL + "/Bookmarked.jpg",
     leaderId: 2,
   },
   {
@@ -231,7 +234,7 @@ const groups: Group[] = [
     name: "The Midnight Society",
     description:
       "For the night owls of UofC, The Midnight Society is your haven! Join us for late-night study sessions, cozy movie marathons, and stargazing adventures. Meet like-minded students who thrive after dark!",
-    bannerUrl: "/The Midnight Society.jpg",
+    bannerUrl: BASE_URL + "/The Midnight Society.jpg",
     leaderId: 2,
   },
   {
@@ -239,7 +242,7 @@ const groups: Group[] = [
     name: "Caffeine Crusaders",
     description:
       "If you’re a coffee enthusiast, Caffeine Crusaders is the group for you! We explore Calgary’s best coffee spots, talk all things caffeine, and host study jams to keep the energy flowing. Join us for a unique blend of coffee culture and camaraderie!",
-    bannerUrl: "/Caffeine Crusaders.jpg",
+    bannerUrl: BASE_URL + "/Caffeine Crusaders.jpg",
     leaderId: 0,
   },
   {
@@ -247,7 +250,7 @@ const groups: Group[] = [
     name: "Dinos on Wheels",
     description:
       "Discover Calgary on two wheels with Dinos on Wheels! Whether you’re into casual rides or intense trails, this cycling club is for students who love exploring the city and its surroundings. Meet new friends, stay active, and enjoy the ride!",
-    bannerUrl: "/Dinos on Wheels.jpg",
+    bannerUrl: BASE_URL + "/Dinos on Wheels.jpg",
     leaderId: 2,
   },
   {
@@ -255,7 +258,7 @@ const groups: Group[] = [
     name: "Cinephiles of Calgary",
     description:
       "Film buffs, unite! Cinephiles of Calgary is the go-to group for watching classic and indie films, debating blockbusters, and even trying your hand at short filmmaking. Share your love for cinema with fellow film enthusiasts!",
-    bannerUrl: "/Cinephiles of Calgary.jpg",
+    bannerUrl: BASE_URL + "/Cinephiles of Calgary.jpg",
     leaderId: 2,
   },
   {
