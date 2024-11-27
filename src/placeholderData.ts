@@ -70,7 +70,7 @@ export type Group = {
   leaderId?: number;
 };
 
-const now = new Date();
+// const now = new Date();
 const hour = 60 * 60 * 1000;
 const day = hour * 24;
 const week = day * 7;

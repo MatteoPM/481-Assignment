@@ -12,21 +12,25 @@ function Dms() {
   const [searchParams] = useSearchParams();
   const q = searchParams.get("q") || "";
 
-  const filteredDms = data.privateChats.filter((dm) => {
-    if (dm.messages.length === 0) {
-      return false;
-    }
+  const filteredDms = data.privateChats
+    .filter((dm) => {
+      if (dm.messages.length === 0) {
+        return false;
+      }
 
-    const participantTitle = dm.participantIds
-      .filter((id) => id !== data.currentUser!.id)
-      .map((id) =>
-        data.users.find((user) => user.id === id)!.username.toLowerCase(),
-      )
-      .sort()
-      .join(", ");
+      const participantTitle = dm.participantIds
+        .filter((id) => id !== data.currentUser!.id)
+        .map((id) =>
+          data.users.find((user) => user.id === id)!.username.toLowerCase(),
+        )
+        .sort()
+        .join(", ");
 
-    return participantTitle.includes(q.toLowerCase());
-  });
+      return participantTitle.includes(q.toLowerCase());
+    })
+    .sort((a, b) =>
+      b.messages.at(-1)!.dateTime.localeCompare(a.messages.at(-1)!.dateTime),
+    );
 
   return (
     <>
@@ -45,27 +49,21 @@ function Dms() {
         {filteredDms.length > 0 && (
           <>
             <div className="mt-3 flex flex-col divide-y overflow-hidden rounded-md border bg-white shadow-sm">
-              {filteredDms
-                .sort((a, b) =>
-                  b.messages
-                    .at(-1)!
-                    .dateTime.localeCompare(a.messages.at(-1)!.dateTime),
-                )
-                .map((dm) => {
-                  const dmId =
-                    data.privateChats.find((privateChat) =>
-                      hasSameValues(
-                        privateChat.participantIds,
-                        dm.participantIds,
-                      ),
-                    )?.id ?? -1;
+              {filteredDms.map((dm) => {
+                const dmId =
+                  data.privateChats.find((privateChat) =>
+                    hasSameValues(
+                      privateChat.participantIds,
+                      dm.participantIds,
+                    ),
+                  )?.id ?? -1;
 
-                  return (
-                    <Link to={`/chat/dms/${dmId}`}>
-                      <DmCard dm={dm} key={dm.id} />
-                    </Link>
-                  );
-                })}
+                return (
+                  <Link to={`/chat/dms/${dmId}`}>
+                    <DmCard dm={dm} key={dm.id} />
+                  </Link>
+                );
+              })}
             </div>
 
             {q && (

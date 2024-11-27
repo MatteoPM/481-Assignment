@@ -49,6 +49,8 @@ function CreateGroup() {
         bannerUrl: values.bannerUrl,
         leaderId: data.currentUser!.id,
       });
+
+      draft.currentUser!.leaderGroupIds.push(id);
     });
 
     navigate(`/groups/${id}`, {

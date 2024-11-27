@@ -33,7 +33,18 @@ import { useForm } from "react-hook-form";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { z } from "zod";
 
-export const eventCategories = ["Sports", "Music", "Tech", "Art", "Travel"];
+export const eventCategories = [
+  "Arts",
+  "Discussion",
+  "Education",
+  "Film",
+  "Food & Drink",
+  "Literature",
+  "Social",
+  "Study Support",
+  "Technology",
+  "Workshop",
+];
 
 const today = new Date();
 today.setHours(0, 0, 0, 0); // Ensure the time part is cleared for "current day" comparison.

@@ -7,6 +7,7 @@ import { Plus } from "lucide-react";
 import { useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import EventTabs from "./_components/eventTabs";
+import { eventCategories } from "./create/CreateEvent";
 
 const now = new Date();
 const startOfToday = new Date(now.getFullYear(), now.getMonth(), now.getDate());
@@ -32,7 +33,7 @@ function Events() {
 
   const [type, setType] = useState(typeParam);
   const [date, setDate] = useState("any");
-  const [categories, setCategories] = useState<string[]>([]);
+  const [categories, setCategories] = useState<string[]>(eventCategories);
 
   const filteredEvents = data.events
     .filter(
@@ -65,6 +66,11 @@ function Events() {
         default:
           return false; // Invalid range
       }
+    })
+    .filter((event) => {
+      return event.categories.every((category) =>
+        categories.includes(category),
+      );
     })
     .filter((event) => {
       const group = data.groups.find((group) => group.id === event.groupId)!;
@@ -120,7 +126,7 @@ function Events() {
         )}
         {filteredEvents.length === 0 && (
           <div className="mt-8 text-center font-semibold text-muted-foreground">
-            No events found. Adjust your search query.
+            No events found. Adjust your search query and/or filters.
           </div>
         )}
       </Page>

@@ -71,16 +71,19 @@ const EventFilter = ({
                 </label>
               </div>
             ))}
-            {/* <EventFilterCheckbox value="Arts" />
-            <EventFilterCheckbox value="Discussion" />
-            <EventFilterCheckbox value="Film" />
-            <EventFilterCheckbox value="Food & Drink" />
-            <EventFilterCheckbox value="Literature" />
-            <EventFilterCheckbox value="Social" />
-            <EventFilterCheckbox value="Study Support" /> */}
           </div>
 
-          <Button variant={"destructive"} className="mt-12 w-full">
+          <Button
+            variant={"destructive"}
+            className="mt-12 w-full"
+            onClick={() => {
+              setDate("any");
+              setCategories(eventCategories);
+            }}
+            disabled={
+              date === "any" && categories.length === eventCategories.length
+            }
+          >
             <span>Reset Filters</span>
           </Button>
         </div>

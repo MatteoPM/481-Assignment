@@ -11,15 +11,18 @@ function Chat() {
   const [searchParams] = useSearchParams();
   const q = searchParams.get("q") || "";
 
-  const filteredForums = data.forums.filter((forum) => {
-    const group = data.groups.find((group) => group.id === forum.groupId)!;
+  const filteredForums = data.forums
+    .filter((forum) => {
+      const group = data.groups.find((group) => group.id === forum.groupId)!;
 
-    return (
-      forum.title.toLowerCase().includes(q.toLowerCase()) ||
-      group.name.toLowerCase().includes(q.toLowerCase())
+      return (
+        forum.title.toLowerCase().includes(q.toLowerCase()) ||
+        group.name.toLowerCase().includes(q.toLowerCase())
+      );
+    })
+    .sort((a, b) =>
+      b.messages.at(-1)!.dateTime.localeCompare(a.messages.at(-1)!.dateTime),
     );
-  });
-
   return (
     <>
       <Page title="Chat" headerContent={<ChatTabs value="forums" />}>
