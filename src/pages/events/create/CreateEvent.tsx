@@ -95,7 +95,7 @@ function CreateEvent() {
     },
   });
 
-  const groupId = form.getValues("hostingClub");
+  const groupId = form.watch("hostingClub");
   const group = data.groups.find((group) => group.id === groupId);
   const clubs = data.groups.filter((group) => !group.isCourse);
 
