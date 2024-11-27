@@ -1,15 +1,40 @@
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Link } from "react-router-dom";
+import { Dispatch, SetStateAction } from "react";
+import { useSearchParams } from "react-router-dom";
 
-const EventTabs = ({ value }: { value: string }) => {
+const EventTabs = ({
+  value,
+  setValue,
+}: {
+  value: string;
+  setValue: Dispatch<SetStateAction<string>>;
+}) => {
+  const [searchParams, setSearchParams] = useSearchParams();
+
   return (
-    <Tabs value={value} className="mt-3">
+    <Tabs
+      value={value}
+      className="mt-3"
+      onValueChange={(newValue) => setValue(newValue)}
+    >
       <TabsList className="grid grid-cols-2">
-        <TabsTrigger value="all" asChild>
-          <Link to={"/events"}>All Events</Link>
+        <TabsTrigger
+          value="all"
+          onClick={() => {
+            searchParams.set("type", "all");
+            setSearchParams(searchParams);
+          }}
+        >
+          All Events
         </TabsTrigger>
-        <TabsTrigger value="rsvps" asChild>
-          <Link to={"/events/rsvps"}>Your RSVPs</Link>
+        <TabsTrigger
+          value="rsvps"
+          onClick={() => {
+            searchParams.set("type", "rsvps");
+            setSearchParams(searchParams);
+          }}
+        >
+          Your RSVPs
         </TabsTrigger>
       </TabsList>
     </Tabs>

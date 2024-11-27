@@ -9,7 +9,11 @@ const AuthLayout = () => {
     navigate("/login");
   }
 
-  return <Outlet />;
+  return (
+    <>
+      <Outlet />
+    </>
+  );
 };
 
 export default AuthLayout;

@@ -1,3 +1,4 @@
+import { Checkbox } from "@/components/ui/checkbox";
 import { Drawer, DrawerContent, DrawerTrigger } from "@/components/ui/drawer";
 import {
   Select,
@@ -7,10 +8,21 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Filter } from "lucide-react";
+import { Dispatch, SetStateAction } from "react";
 import { Button } from "../../../components/ui/button";
-import EventFilterCheckbox from "./eventFilterCheckbox";
+import { eventCategories } from "../create/CreateEvent";
 
-const EventFilter = () => {
+const EventFilter = ({
+  date,
+  setDate,
+  categories,
+  setCategories,
+}: {
+  date: string;
+  setDate: Dispatch<SetStateAction<string>>;
+  categories: string[];
+  setCategories: Dispatch<SetStateAction<string[]>>;
+}) => {
   return (
     <Drawer>
       <DrawerTrigger asChild>
@@ -23,7 +35,7 @@ const EventFilter = () => {
       <DrawerContent>
         <div className="p-4">
           <h2 className="font-medium">Date</h2>
-          <Select>
+          <Select value={date} onValueChange={(value) => setDate(value)}>
             <SelectTrigger className="mt-2 w-full">
               <SelectValue placeholder="Any" />
             </SelectTrigger>
@@ -39,13 +51,33 @@ const EventFilter = () => {
 
           <h2 className="mt-4 font-medium">Categories</h2>
           <div className="mt-2 grid grid-cols-2 gap-y-1">
-            <EventFilterCheckbox value="Arts" />
+            {eventCategories.map((category) => (
+              <div className="flex items-center space-x-2">
+                <Checkbox
+                  id={category}
+                  checked={categories.includes(category)}
+                  onCheckedChange={(checked) => {
+                    if (checked) {
+                      setCategories([...categories, category]);
+                    } else {
+                      setCategories((prev) =>
+                        prev.filter((item) => item !== category),
+                      );
+                    }
+                  }}
+                />
+                <label htmlFor={category} className="text-sm">
+                  {category}
+                </label>
+              </div>
+            ))}
+            {/* <EventFilterCheckbox value="Arts" />
             <EventFilterCheckbox value="Discussion" />
             <EventFilterCheckbox value="Film" />
             <EventFilterCheckbox value="Food & Drink" />
             <EventFilterCheckbox value="Literature" />
             <EventFilterCheckbox value="Social" />
-            <EventFilterCheckbox value="Study Support" />
+            <EventFilterCheckbox value="Study Support" /> */}
           </div>
 
           <Button variant={"destructive"} className="mt-12 w-full">

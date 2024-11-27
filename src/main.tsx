@@ -14,7 +14,6 @@ import Forum from "./pages/chat/forum/Forum.tsx";
 import CreateEvent from "./pages/events/create/CreateEvent.tsx";
 import Event from "./pages/events/event/Event.tsx";
 import Events from "./pages/events/Events.tsx";
-import Rsvps from "./pages/events/rsvps/Rsvps.tsx";
 import Clubs from "./pages/groups/clubs/Clubs.tsx";
 import Courses from "./pages/groups/courses/Courses.tsx";
 import CreateGroup from "./pages/groups/create/CreateGroup.tsx";
@@ -94,11 +93,6 @@ const router = createHashRouter([
         path: "/events/create",
         element: <CreateEvent />,
       },
-      {
-        path: "/events/rsvps",
-        element: <Rsvps />,
-      },
-
       {
         path: "/notifications",
         element: <Notifications />,

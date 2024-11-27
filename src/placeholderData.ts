@@ -71,6 +71,12 @@ export type Group = {
   leaderId?: number;
 };
 
+const now = new Date();
+const hour = 60 * 60 * 1000;
+const day = hour * 24;
+const week = day * 7;
+const month = day * 30;
+
 const testUser: UserType = {
   id: 0,
   email: "joseph.ballance@ucalgary.ca",
@@ -80,7 +86,7 @@ const testUser: UserType = {
   status: "online",
   leaderGroupIds: [5],
   memberGroupIds: [0, 1, 8],
-  rsvpIds: [],
+  rsvpIds: [0],
 };
 
 const placeholderUser: UserType = {
@@ -125,8 +131,8 @@ const events: Event[] = [
     title: "Mystery & Thriller Book Night",
     description:
       "Join Bookmarked for an in-depth discussion on the gripping novel 'The Silent Patient' by Alex Michaelides. Dive into plot twists, character analysis, and predictions for the next month's genre pick. Enjoy snacks and connect with fellow book enthusiasts.",
-    startDateTime: "2023-11-30T12:00:00",
-    endDateTime: "2023-11-30T13:00:00",
+    startDateTime: new Date(Date.now() + day).toISOString(),
+    endDateTime: new Date(Date.now() + day + hour).toISOString(),
     location: "TFDL, Room 340",
     groupId: 3,
     categories: ["Literature", "Social", "Discussion"],
@@ -138,8 +144,8 @@ const events: Event[] = [
     title: "Late-Night Study Jam with Coffee Tasting",
     description:
       "Need motivation for your late-night study session? Join Caffeine Crusaders for an evening of productive studying with complimentary specialty coffees. Sample unique blends while staying focused in a supportive group setting.",
-    startDateTime: "2023-11-20T19:30:00",
-    endDateTime: "2023-11-20T21:00:00",
+    startDateTime: new Date(Date.now() + week).toISOString(),
+    endDateTime: new Date(Date.now() + week + hour).toISOString(),
     location: "MacKimmie Tower, 2nd Floor Lounge",
     groupId: 5,
     categories: ["Food & Drink", "Study Support", "Social"],
@@ -151,8 +157,8 @@ const events: Event[] = [
     title: "Beginner Python Workshop",
     description:
       "Want to start coding or improve your skills? Calgary Coders presents a hands-on workshop for beginners on Python fundamentals. Learn the basics of programming, build simple projects, and get tips from experienced student mentors.",
-    startDateTime: "2023-11-18T09:00:00",
-    endDateTime: "2023-11-15T18:00:00",
+    startDateTime: new Date(Date.now() + month).toISOString(),
+    endDateTime: new Date(Date.now() + month + hour).toISOString(),
     location: "Engineering Building, Room ENE 233",
     groupId: 0,
     categories: ["Education", "Technology", "Workshop"],
@@ -163,8 +169,8 @@ const events: Event[] = [
     title: "Classic Movie Night: 'Casablanca' Screening",
     description:
       "Cinephiles of Calgary invites you to a special screening of the timeless classic, Casablanca. Following the film, there will be a group discussion on its cinematic impact and historical significance.",
-    startDateTime: "2023-11-18T09:00:00",
-    endDateTime: "2023-11-15T18:00:00",
+    startDateTime: new Date(Date.now() + week).toISOString(),
+    endDateTime: new Date(Date.now() + week + hour).toISOString(),
     location: "Rozsa Centre, Main Theatre",
     groupId: 7,
     categories: ["Arts", "Film", "Social"],

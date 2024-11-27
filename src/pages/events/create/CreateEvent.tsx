@@ -33,7 +33,7 @@ import { useForm } from "react-hook-form";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { z } from "zod";
 
-const categories = ["Sports", "Music", "Tech", "Art", "Travel"];
+export const eventCategories = ["Sports", "Music", "Tech", "Art", "Travel"];
 
 const today = new Date();
 today.setHours(0, 0, 0, 0); // Ensure the time part is cleared for "current day" comparison.
@@ -359,7 +359,7 @@ function CreateEvent() {
                   <FormLabel>Categories</FormLabel>
 
                   <div className="mt-2 grid grid-cols-2 gap-y-1">
-                    {categories.map((category) => (
+                    {eventCategories.map((category) => (
                       <FormControl key={category}>
                         <div className="flex items-center space-x-2">
                           <Checkbox
