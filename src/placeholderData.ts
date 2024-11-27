@@ -66,7 +66,6 @@ export type Group = {
   name: string;
   bannerUrl?: string;
   description: string;
-  memberCount?: number;
   isCourse?: boolean;
   leaderId?: number;
 };

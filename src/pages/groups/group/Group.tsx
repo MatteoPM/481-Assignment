@@ -43,6 +43,7 @@ function Group() {
   }
 
   const forums = data.forums.filter((forum) => forum.groupId === group.id);
+  const events = data.events.filter((event) => event.groupId === group.id);
 
   return (
     <>
@@ -145,45 +146,45 @@ function Group() {
               ))}
           </div>
 
-          <Button size={"sm"} className="mt-3 w-full">
-            <Expand className="size-[15px]" />
-            <span className="leading-none">View All</span>
-          </Button>
+          <div className="mt-3 flex gap-3">
+            <Button size={"sm"} className="w-full">
+              <Expand className="size-[15px]" />
+              <span className="leading-none">View All</span>
+            </Button>
 
-          {group.leaderId === data.currentUser.id && (
-            <Dialog>
-              <DialogTrigger asChild>
-                <Button
-                  size={"sm"}
-                  className="mt-2 w-full bg-orange-400 hover:bg-orange-400/90"
-                >
-                  <Contact className="size-[15px]" />
-                  <span className="leading-none">
-                    Membership Applications (1)
-                  </span>
-                </Button>
-              </DialogTrigger>
-              <DialogContent className="max-w-[350px] rounded-lg">
-                <DialogHeader>
-                  <DialogTitle>Membership Requests</DialogTitle>
-                </DialogHeader>
-
-                <div className="flex items-center gap-2">
-                  <User user={data.users[1]} />
+            {group.leaderId === data.currentUser.id && (
+              <Dialog>
+                <DialogTrigger asChild>
                   <Button
-                    size={"icon"}
-                    variant={"destructive"}
-                    className="ml-auto"
+                    size={"sm"}
+                    className="w-full bg-orange-400 hover:bg-orange-400/90"
                   >
-                    <X />
+                    <Contact className="size-[15px]" />
+                    <span className="leading-none">Applications (1)</span>
                   </Button>
-                  <Button size={"icon"}>
-                    <Check />
-                  </Button>
-                </div>
-              </DialogContent>
-            </Dialog>
-          )}
+                </DialogTrigger>
+                <DialogContent className="max-w-[350px] rounded-lg">
+                  <DialogHeader>
+                    <DialogTitle>Membership Requests</DialogTitle>
+                  </DialogHeader>
+
+                  <div className="flex items-center gap-2">
+                    <User user={data.users[1]} />
+                    <Button
+                      size={"icon"}
+                      variant={"destructive"}
+                      className="ml-auto"
+                    >
+                      <X />
+                    </Button>
+                    <Button size={"icon"}>
+                      <Check />
+                    </Button>
+                  </div>
+                </DialogContent>
+              </Dialog>
+            )}
+          </div>
 
           <SubHeader Icon={MessageSquareText} text="Forums" className="mt-6" />
 
@@ -202,12 +203,14 @@ function Group() {
           )}
 
           <div className="mt-3 flex gap-3">
-            {forums.length > 0 && (
-              <Button size={"sm"} className="w-full">
-                <Expand className="size-[20px]" />
-                <span className="leading-none">View All</span>
-              </Button>
-            )}
+            <Button
+              size={"sm"}
+              className="w-full"
+              disabled={forums.length === 0}
+            >
+              <Expand className="size-[20px]" />
+              <span className="leading-none">View All</span>
+            </Button>
 
             <Button
               size={"sm"}
@@ -225,16 +228,25 @@ function Group() {
             <>
               <SubHeader Icon={Calendar} text="Events" className="mt-6" />
 
-              <div className="mt-3 space-y-3">
-                {data.events
-                  .filter((event) => event.groupId === group.id)
-                  .map((event) => (
+              {events.length > 0 && (
+                <div className="mt-3 space-y-3">
+                  {events.map((event) => (
                     <EventCard key={event.id} event={event} />
                   ))}
-              </div>
+                </div>
+              )}
+              {events.length === 0 && (
+                <div className="mb-6 mt-3 text-center font-semibold text-muted-foreground">
+                  No events exist.
+                </div>
+              )}
 
               <div className="mt-3 flex gap-3">
-                <Button size={"sm"} className="w-full">
+                <Button
+                  size={"sm"}
+                  className="w-full"
+                  disabled={events.length === 0}
+                >
                   <Expand className="size-[20px]" />
                   <span className="leading-none">View All</span>
                 </Button>
