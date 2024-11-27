@@ -6,7 +6,7 @@ import { formatRelative } from "date-fns";
 const DmCard = ({ dm, className }: { dm: PrivateChat; className?: string }) => {
   const { data } = useData();
 
-  const participants = dm.participantIds
+  const otherParticipants = dm.participantIds
     .filter((id) => id !== data.currentUser!.id)
     .map((id) => data.users.find((user) => user.id === id)!);
 
@@ -19,14 +19,28 @@ const DmCard = ({ dm, className }: { dm: PrivateChat; className?: string }) => {
         className,
       )}
     >
-      <img
-        src={participants[0].avatarUrl}
-        className="size-[40px] rounded-full object-cover"
-      />
+      {otherParticipants.length === 1 && (
+        <img
+          src={otherParticipants[0].avatarUrl}
+          className="size-[40px] rounded-full object-cover"
+        />
+      )}
+      {otherParticipants.length > 1 && (
+        <div className="relative size-[40px]">
+          <img
+            src={otherParticipants[0].avatarUrl}
+            className="size-[30px] rounded-full object-cover"
+          />
+          <img
+            src={otherParticipants[1].avatarUrl}
+            className="absolute bottom-0 right-0 size-[32px] rounded-full border-2 border-white object-cover"
+          />
+        </div>
+      )}
 
       <div className="truncate">
         <span className="block truncate font-medium">
-          {participants
+          {otherParticipants
             .map((participant) => participant.username)
             .sort()
             .join(", ")}
