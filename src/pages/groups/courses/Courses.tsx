@@ -12,6 +12,7 @@ function Courses() {
 
   const filteredCourses = data.groups
     .filter((group) => group.isCourse)
+    .filter((group) => data.currentUser!.memberGroupIds.includes(group.id))
     .filter((group) => group.name.toLowerCase().includes(q.toLowerCase()))
     .sort((a, b) => a.name.localeCompare(b.name));
 

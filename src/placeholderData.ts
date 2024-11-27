@@ -84,7 +84,7 @@ const testUser: UserType = {
   username: "Joseph Ballance",
   status: "online",
   leaderGroupIds: [5],
-  memberGroupIds: [0, 1, 8],
+  memberGroupIds: [0, 1, 8, 9, 10, 11],
   rsvpIds: [0],
 };
 
@@ -95,7 +95,7 @@ const placeholderUser: UserType = {
   username: "Debbie Hopkins",
   status: "online",
   leaderGroupIds: [],
-  memberGroupIds: [],
+  memberGroupIds: [8],
   rsvpIds: [],
 };
 
@@ -107,7 +107,7 @@ const placeholderUser2: UserType = {
   username: "Sergio Barnes",
   status: "offline",
   leaderGroupIds: [],
-  memberGroupIds: [5],
+  memberGroupIds: [5, 8],
   rsvpIds: [],
 };
 
@@ -312,12 +312,12 @@ const forums: Forum[] = [
       {
         user: placeholderUser,
         message: "RRRRRGH COFFEEEEEE",
-        dateTime: "2024-11-14T19:30:00",
+        dateTime: new Date(Date.now() - 2 * hour).toISOString(),
       },
       {
         user: testUser,
         message: "Bro chill",
-        dateTime: "2024-11-15T19:30:00",
+        dateTime: new Date(Date.now() - 0.5 * hour).toISOString(),
       },
     ],
   },
@@ -330,12 +330,12 @@ const forums: Forum[] = [
         user: placeholderUser2,
         message:
           "like i learned how to print hellow world so i think i'm ready to make minecraft?",
-        dateTime: "2024-11-10T12:30:00",
+        dateTime: new Date(Date.now() - 1.5 * day).toISOString(),
       },
       {
         user: placeholderUser3,
         message: 'Just do "import Minecraft" smh my head',
-        dateTime: "2024-11-10T13:20:00",
+        dateTime: new Date(Date.now() - 1.4 * day).toISOString(),
       },
     ],
   },
@@ -348,22 +348,22 @@ const privateChats: PrivateChat[] = [
     messages: [
       {
         user: placeholderUser,
-        dateTime: "2024-11-14T19:30:00",
+        dateTime: new Date(Date.now() - 1.4 * hour).toISOString(),
         message: "What is love",
       },
       {
         user: placeholderUser,
-        dateTime: "2024-11-14T19:30:00",
+        dateTime: new Date(Date.now() - 1.3 * hour).toISOString(),
         message: "Baby don't hurt me",
       },
       {
         user: placeholderUser,
-        dateTime: "2024-11-14T19:30:00",
+        dateTime: new Date(Date.now() - 1.2 * hour).toISOString(),
         message: "Don't hurt me",
       },
       {
         user: testUser,
-        dateTime: "2024-11-14T19:30:00",
+        dateTime: new Date(Date.now() - 1.0 * hour).toISOString(),
         message: "No more",
         read: Date.now(),
       },

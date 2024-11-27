@@ -106,9 +106,17 @@ function Events() {
           setCategories={setCategories}
         />
 
-        <h2 className="mt-6 text-xl font-semibold">
-          {q ? `Events Matching "${q}"` : "All Events"}
-        </h2>
+        {type === "all" && (
+          <h2 className="mt-6 text-xl font-semibold">
+            {q ? `Events Matching "${q}"` : "All Events"}
+          </h2>
+        )}
+
+        {type === "rsvps" && (
+          <h2 className="mt-6 text-xl font-semibold">
+            {q ? `RSVPs Matching "${q}"` : "Your RSVPs"}
+          </h2>
+        )}
 
         {filteredEvents.length > 0 && (
           <>
@@ -124,9 +132,16 @@ function Events() {
             )}
           </>
         )}
-        {filteredEvents.length === 0 && (
+        {type === "all" && filteredEvents.length === 0 && (
           <div className="mt-8 text-center font-semibold text-muted-foreground">
             No events found. Adjust your search query and/or filters.
+          </div>
+        )}
+        {type === "rsvps" && filteredEvents.length === 0 && (
+          <div className="mt-8 text-center font-semibold text-muted-foreground">
+            {data.currentUser?.rsvpIds.length === 0
+              ? "Events that you RSVP for will appear here."
+              : "No RSVPs found. Adjust your search query and/or filters."}
           </div>
         )}
       </Page>

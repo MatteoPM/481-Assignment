@@ -67,18 +67,32 @@ function Clubs() {
             <h2 className="mt-6 text-xl font-semibold">Your Clubs</h2>
 
             <SubHeader Icon={Crown} text="Leader" />
-            <div className="mt-3 flex flex-col divide-y overflow-hidden rounded-md border bg-white shadow-sm">
-              {leadingClubs.map((group) => (
-                <GroupCard key={group.id} group={group} compact />
-              ))}
-            </div>
+            {leadingClubs.length === 0 && (
+              <div className="mt-4 text-center font-semibold text-muted-foreground">
+                You are not leading any clubs.
+              </div>
+            )}
+            {leadingClubs.length > 0 && (
+              <div className="mt-3 flex flex-col divide-y overflow-hidden rounded-md border bg-white shadow-sm">
+                {leadingClubs.map((group) => (
+                  <GroupCard key={group.id} group={group} compact />
+                ))}
+              </div>
+            )}
 
             <SubHeader Icon={User} text="Member" />
-            <div className="mt-3 flex flex-col divide-y overflow-hidden rounded-md border bg-white shadow-sm">
-              {memberClubs.map((group) => (
-                <GroupCard key={group.id} group={group} compact />
-              ))}
-            </div>
+            {memberClubs.length === 0 && (
+              <div className="mt-4 text-center font-semibold text-muted-foreground">
+                You are not a member of any clubs.
+              </div>
+            )}
+            {memberClubs.length > 0 && (
+              <div className="mt-3 flex flex-col divide-y overflow-hidden rounded-md border bg-white shadow-sm">
+                {memberClubs.map((group) => (
+                  <GroupCard key={group.id} group={group} compact />
+                ))}
+              </div>
+            )}
 
             <h2 className="mt-8 text-xl font-semibold">Suggested Clubs</h2>
             <div className="mt-1 grid snap-x snap-mandatory auto-cols-[300px] grid-flow-col grid-rows-2 gap-2 overflow-x-auto rounded-md py-2">
