@@ -21,3 +21,17 @@ export function hasSameValues(array: number[], values: number[]) {
 
   return true;
 }
+
+export function joinNames(names: string[]): string {
+  if (names.length === 0) {
+    return "";
+  }
+  if (names.length === 1) {
+    return names[0];
+  }
+  if (names.length === 2) {
+    return names.join(" and ");
+  }
+  // More than 2 names
+  return names.slice(0, -1).join(", ") + ", and " + names[names.length - 1];
+}

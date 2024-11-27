@@ -37,8 +37,8 @@ const ChatMessage = ({ chatMessage }: { chatMessage: ChatMessageType }) => {
         </div>
         <div
           className={cn(
-            "mt-1 rounded-md border bg-white p-2 text-sm text-stone-700",
-            isOwnMessage && "bg-primary/5",
+            "mt-1 w-fit rounded-md border bg-white p-2 text-sm text-stone-700",
+            isOwnMessage && "ml-auto bg-primary/5",
           )}
         >
           {chatMessage.message}

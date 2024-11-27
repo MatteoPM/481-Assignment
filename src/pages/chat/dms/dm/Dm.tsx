@@ -1,5 +1,6 @@
 import Page from "@/components/page";
 import { useData } from "@/hooks/useData";
+import { joinNames } from "@/lib/utils";
 import ChatMessage from "@/pages/chat/_components/chatMessage";
 import MessageInput from "@/pages/chat/_components/messageInput";
 import { useParams } from "react-router-dom";
@@ -47,6 +48,15 @@ function Dm() {
         hideFooter
       >
         <div className="flex h-full flex-col">
+          <p className="mb-4 text-balance text-center text-sm text-muted-foreground">
+            This is the start of your message history with{" "}
+            <span className="font-medium">
+              {joinNames(
+                participants.map((participant) => participant.username),
+              )}
+            </span>
+            .
+          </p>
           <div className="flex grow flex-col gap-4 overflow-auto">
             {chatMessages.map((chatMessage) => (
               <ChatMessage

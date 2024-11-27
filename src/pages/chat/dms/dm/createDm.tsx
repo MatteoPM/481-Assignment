@@ -16,9 +16,9 @@ function CreateDm() {
   const users = data.users.slice(1);
   const navigate = useNavigate();
 
-  const filteredUsers = users.filter((user) =>
-    user.username.toLowerCase().includes(q.toLowerCase()),
-  );
+  const filteredUsers = users
+    .filter((user) => user.username.toLowerCase().includes(q.toLowerCase()))
+    .sort((a, b) => a.username.localeCompare(b.username));
 
   return (
     <>
