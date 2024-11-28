@@ -1,4 +1,5 @@
 import { useData } from "@/hooks/useData";
+import { cn } from "@/lib/utils";
 import { Forum } from "@/placeholderData";
 import { formatRelative } from "date-fns";
 import { Link } from "react-router-dom";
@@ -16,7 +17,15 @@ const ForumCard = ({ forum }: { forum: Forum }) => {
     >
       <div className="">
         <div>
-          <h2 className="text-lg font-semibold leading-none">{forum.title}</h2>
+          <h2
+            className={cn(
+              "text-lg font-semibold leading-none",
+              data.currentUser!.seenForumIds.includes(forum.id) &&
+                "text-foreground/50",
+            )}
+          >
+            {forum.title}
+          </h2>
           <p className="text-sm text-muted-foreground">
             in{" "}
             <Link

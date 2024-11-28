@@ -11,6 +11,7 @@ export type UserType = {
   leaderGroupIds: number[];
   memberGroupIds: number[];
   rsvpIds: number[];
+  seenForumIds: number[];
 };
 
 export type ChatMessageType = {
@@ -86,6 +87,7 @@ const testUser: UserType = {
   leaderGroupIds: [5],
   memberGroupIds: [0, 1, 8, 9, 10, 11],
   rsvpIds: [0],
+  seenForumIds: [],
 };
 
 const placeholderUser: UserType = {
@@ -97,6 +99,7 @@ const placeholderUser: UserType = {
   leaderGroupIds: [],
   memberGroupIds: [8],
   rsvpIds: [],
+  seenForumIds: [],
 };
 
 const placeholderUser2: UserType = {
@@ -109,6 +112,7 @@ const placeholderUser2: UserType = {
   leaderGroupIds: [],
   memberGroupIds: [5, 8],
   rsvpIds: [],
+  seenForumIds: [],
 };
 
 const placeholderUser3: UserType = {
@@ -120,6 +124,7 @@ const placeholderUser3: UserType = {
   leaderGroupIds: [],
   memberGroupIds: [],
   rsvpIds: [],
+  seenForumIds: [],
 };
 
 const users = [testUser, placeholderUser, placeholderUser2, placeholderUser3];
@@ -336,6 +341,19 @@ const forums: Forum[] = [
         user: placeholderUser3,
         message: 'Just do "import Minecraft" smh my head',
         dateTime: new Date(Date.now() - 1.4 * day).toISOString(),
+      },
+    ],
+  },
+  {
+    id: 2,
+    title: "Dictionary Speed-reading",
+    groupId: 3,
+    messages: [
+      {
+        user: placeholderUser3,
+        message:
+          "If I learned how to read faster, could I theoretically speed-read a dictionary and learn the entire English vocabulary?",
+        dateTime: new Date(Date.now() - 1.5 * day).toISOString(),
       },
     ],
   },

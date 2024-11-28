@@ -39,8 +39,20 @@ function Forum() {
           user: data.currentUser!,
           dateTime: nowString,
         });
+
+      draft.users.forEach((user) => {
+        if (user !== data.currentUser) {
+          user.seenForumIds = user.seenForumIds.filter((id) => id !== forum.id);
+        }
+      });
     });
   };
+
+  useEffect(() => {
+    setData((draft) => {
+      draft.currentUser!.seenForumIds.push(Number(forumId));
+    });
+  }, [setData, forumId]);
 
   return (
     <>
