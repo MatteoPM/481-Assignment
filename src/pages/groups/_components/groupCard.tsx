@@ -29,7 +29,7 @@ const GroupCard = ({ compact, group }: { compact?: boolean; group: Group }) => {
   return (
     <Link
       to={`/groups/${group.id ?? 0}`}
-      className="flex h-[110px] shrink-0 snap-start snap-always justify-between overflow-hidden rounded-md border bg-white p-2 shadow-sm active:bg-stone-50"
+      className="flex h-[110px] shrink-0 snap-start snap-always justify-between overflow-hidden bg-white p-2 active:bg-stone-50"
     >
       <div>
         <div className="flex items-center gap-2">

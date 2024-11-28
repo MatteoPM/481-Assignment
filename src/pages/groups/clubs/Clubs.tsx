@@ -21,10 +21,11 @@ function Clubs() {
     (id) => data.groups.find((group) => group.id === id)!,
   );
 
-  const memberClubs = data.currentUser!.memberGroupIds.map(
-    (id) => data.groups.find((group) => group.id === id)!,
-  );
-
+  const memberClubs = data
+    .currentUser!.memberGroupIds.map(
+      (id) => data.groups.find((group) => group.id === id)!,
+    )
+    .filter((group) => !group.isCourse);
   return (
     <>
       <Page title="Groups" headerContent={<GroupTabs value="clubs" />}>
@@ -94,8 +95,10 @@ function Clubs() {
               </div>
             )}
 
-            <h2 className="mt-8 text-xl font-semibold">Suggested Clubs</h2>
-            <div className="mt-1 grid snap-x snap-mandatory auto-cols-[300px] grid-flow-col grid-rows-2 gap-2 overflow-x-auto rounded-md py-2">
+            <h2 className="mt-8 text-xl font-semibold" id="test">
+              Suggested Clubs
+            </h2>
+            <div className="mt-3 flex flex-col divide-y overflow-hidden rounded-md border bg-white shadow-sm">
               {data.groups
                 .filter((group) => !group.isCourse)
                 .filter(

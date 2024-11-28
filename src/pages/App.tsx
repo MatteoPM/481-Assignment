@@ -4,7 +4,8 @@ import { useData } from "@/hooks/useData";
 import ForumCard from "@/pages/chat/_components/forumCard";
 import EventCard from "@/pages/events/_components/eventCard";
 import GroupCard from "@/pages/groups/_components/groupCard";
-import { Expand } from "lucide-react";
+import { CalendarDays, MessageCircleMore, Users } from "lucide-react";
+import { Link } from "react-router-dom";
 
 function App() {
   const { data } = useData();
@@ -23,43 +24,50 @@ function App() {
           </div>
         }
       >
-        <h2 className="text-xl font-semibold">Recent Posts</h2>
+        <h2 className="text-xl font-semibold">Recent Forums</h2>
         <div className="mt-3 flex flex-col divide-y overflow-hidden rounded-md border bg-white shadow-sm">
-          {data.forums.map((forum) => (
+          {data.forums.slice(0, 3).map((forum) => (
             <ForumCard key={forum.id} forum={forum} />
           ))}
         </div>
 
-        <Button size={"sm"} className="mt-3 w-full">
-          <Expand className="size-[15px]" />
-          <span className="leading-none">View All</span>
+        <Button size={"sm"} className="mt-3 w-full" asChild>
+          <Link to={"/chat"}>
+            <MessageCircleMore className="size-[15px]" />
+            <span className="leading-none">View all</span>
+          </Link>
         </Button>
 
         <h2 className="mt-6 text-xl font-semibold">Upcoming Events</h2>
         <div className="mt-3 space-y-3">
-          <EventCard event={data.events[0]} />
-          <EventCard event={data.events[1]} />
-          <EventCard event={data.events[2]} />
+          {data.events.slice(0, 3).map((event) => (
+            <EventCard event={event} />
+          ))}
         </div>
 
-        <Button size={"sm"} className="mt-3 w-full">
-          <Expand className="size-[15px]" />
-          <span className="leading-none">View All</span>
+        <Button size={"sm"} className="mt-3 w-full" asChild>
+          <Link to={"/events"}>
+            <CalendarDays className="size-[15px]" />
+            <span className="leading-none">View all</span>
+          </Link>
         </Button>
 
-        <h2 className="mt-6 text-xl font-semibold">Suggested Groups</h2>
+        <h2 className="mt-6 text-xl font-semibold">Suggested Clubs</h2>
         <div className="mt-3 flex flex-col divide-y overflow-hidden rounded-md border bg-white shadow-sm">
           {data.groups
             .filter((group) => !group.isCourse)
             .sort((a, b) => a.name.localeCompare(b.name))
+            .slice(0, 3)
             .map((group) => (
               <GroupCard key={group.id} group={group} />
             ))}
         </div>
 
-        <Button size={"sm"} className="mt-3 w-full">
-          <Expand className="size-[15px]" />
-          <span className="leading-none">View All</span>
+        <Button size={"sm"} className="mt-3 w-full" asChild>
+          <Link to={"/groups/clubs#test"}>
+            <Users className="size-[15px]" />
+            <span className="leading-none">View all</span>
+          </Link>
         </Button>
       </Page>
     </>
