@@ -20,10 +20,20 @@ const DmCard = ({ dm, className }: { dm: PrivateChat; className?: string }) => {
       )}
     >
       {otherParticipants.length === 1 && (
-        <img
-          src={otherParticipants[0].avatarUrl}
-          className="size-[40px] rounded-full object-cover"
-        />
+        <div className="relative">
+          <img
+            src={otherParticipants[0].avatarUrl}
+            className="size-[40px] rounded-full object-cover"
+          />
+          <div
+            className={cn(
+              "absolute bottom-[3px] right-[3px] size-[12px] rounded-full border-2 border-white",
+              otherParticipants[0].status === "online" && "bg-green-400",
+              otherParticipants[0].status === "offline" && "bg-stone-400",
+              otherParticipants[0].status === "away" && "bg-orange-400",
+            )}
+          ></div>
+        </div>
       )}
       {otherParticipants.length > 1 && (
         <div className="relative size-[40px]">
