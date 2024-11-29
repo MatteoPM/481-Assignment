@@ -402,7 +402,7 @@ const privateChats: PrivateChat[] = [
         read: Date.now(),
       },
     ],
-    seenIds: [0],
+    seenIds: [1],
   },
 ];
 
