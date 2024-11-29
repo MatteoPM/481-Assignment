@@ -34,7 +34,7 @@ const UserDrawerContent = ({ user }: { user: UserType }) => {
     .sort((a, b) => a.name.localeCompare(b.name));
 
   return (
-    <div className="p-8">
+    <div className="max-h-[600px] overflow-auto p-8">
       <img
         src={user.avatarUrl}
         className="mx-auto size-[75px] rounded-full object-cover"
