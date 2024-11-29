@@ -1,9 +1,16 @@
 import Page from "@/components/page";
 import SubHeader from "@/components/subHeader";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+} from "@/components/ui/accordion";
+import { Button } from "@/components/ui/button";
 import { useData } from "@/hooks/useData";
+import { cn } from "@/lib/utils";
 import GroupCard from "@/pages/groups/_components/groupCard";
-import { Users } from "lucide-react";
-import { useEffect, useRef } from "react";
+import { ChevronDown, Users } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import ChatMessage from "../_components/chatMessage";
 import MessageInput from "../_components/messageInput";
@@ -12,6 +19,7 @@ function Forum() {
   const { data, setData } = useData();
   const { forumId } = useParams();
   const ref = useRef<HTMLDivElement>(null);
+  const [accordion, setAccordion] = useState("");
 
   const forum = data.forums.find((forum) => forum.id === Number(forumId));
 
@@ -56,14 +64,53 @@ function Forum() {
 
   return (
     <>
-      <Page title={forum.title} showBackButton hideFooter>
+      <Page
+        title={forum.title}
+        showBackButton
+        hideFooter
+        rightHeaderButtons={
+          <Button
+            size={"icon"}
+            variant={"ghost"}
+            className="shrink-0 rounded-full"
+            onClick={() => {
+              if (accordion === "participants") {
+                setAccordion("");
+              } else {
+                setAccordion("participants");
+              }
+            }}
+          >
+            <ChevronDown
+              className={cn(
+                "transition-transform",
+                accordion === "participants" && "rotate-180",
+              )}
+            />
+          </Button>
+        }
+        headerContent={
+          <>
+            <Accordion
+              type="single"
+              collapsible
+              value={accordion}
+              onValueChange={(value) => setAccordion(value)}
+            >
+              <AccordionItem value="participants" className="border-b-0">
+                <AccordionContent className="p-0">
+                  <SubHeader Icon={Users} text="Group" className="mt-2" />
+
+                  <div className="mt-2">
+                    <GroupCard group={group} showBorder />
+                  </div>
+                </AccordionContent>
+              </AccordionItem>
+            </Accordion>
+          </>
+        }
+      >
         <div className="flex h-full flex-col">
-          <SubHeader Icon={Users} text="Group" className="mt-0" />
-
-          <div className="mb-4 mt-2 border-b pb-4">
-            <GroupCard group={group} showBorder />
-          </div>
-
           <div ref={ref} className="flex grow flex-col gap-4 overflow-auto">
             {forum.messages.map((chatMessage) => (
               <ChatMessage chatMessage={chatMessage} />
