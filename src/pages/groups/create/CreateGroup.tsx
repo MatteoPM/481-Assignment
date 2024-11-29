@@ -3,12 +3,14 @@ import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
 import { useData } from "@/hooks/useData";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -19,9 +21,9 @@ import { z } from "zod";
 
 const formSchema = z.object({
   bannerUrl: z.string(),
-
   name: z.string().min(2).max(50),
   description: z.string().min(2).max(50),
+  isPrivate: z.boolean(),
 });
 
 function CreateGroup() {
@@ -35,6 +37,7 @@ function CreateGroup() {
       description: "",
       bannerUrl:
         "https://assets.ppy.sh/user-cover-presets/4/2fd772ad175c5687370e0aab50799a84adef7d0fff3f97dccfa5c94384ebb8af.jpeg",
+      isPrivate: false,
     },
   });
 
@@ -48,6 +51,8 @@ function CreateGroup() {
         description: values.description,
         bannerUrl: values.bannerUrl,
         leaderId: data.currentUser!.id,
+        isPrivate: values.isPrivate,
+        applicationIds: [],
       });
 
       draft.currentUser!.leaderGroupIds.push(id);
@@ -135,6 +140,30 @@ function CreateGroup() {
                   {/* <FormDescription>
                     This is your public display name.
                   </FormDescription> */}
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="isPrivate"
+              render={({ field }) => (
+                <FormItem className="mb-6 mt-6">
+                  <div className="flex items-center gap-2">
+                    <FormControl>
+                      <Switch
+                        checked={field.value}
+                        onCheckedChange={field.onChange}
+                      />
+                    </FormControl>
+                    <FormLabel className="mt-0">Private Club</FormLabel>
+                  </div>
+                  <FormDescription>
+                    Private clubs require an application to join. Members,
+                    forums, and events in a private club are only visible to its
+                    members.
+                  </FormDescription>
                   <FormMessage />
                 </FormItem>
               )}

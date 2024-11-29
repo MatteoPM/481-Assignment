@@ -2,13 +2,14 @@ import { useData } from "@/hooks/useData";
 import { cn, hasSameValues } from "@/lib/utils";
 import GroupCard from "@/pages/groups/_components/groupCard";
 import { UserType } from "@/placeholderData";
-import { Ban, Crown, MessageSquare, School, User } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { Ban, Crown, MessageSquare, School, User, UserX } from "lucide-react";
+import { useNavigate, useParams } from "react-router-dom";
 import SubHeader from "./subHeader";
 
 const UserDrawerContent = ({ user }: { user: UserType }) => {
   const { data, setData } = useData();
   const navigate = useNavigate();
+  const { groupId } = useParams();
 
   const courses = user.memberGroupIds
     .map((id) => data.groups.find((group) => group.id === id)!)
@@ -89,44 +90,69 @@ const UserDrawerContent = ({ user }: { user: UserType }) => {
         </div>
       )}
 
-      <div className="mt-10 flex w-full flex-col rounded-lg">
-        <button
-          className="flex items-center justify-between rounded-lg bg-stone-100 p-4 text-stone-700"
-          onClick={() => {
-            const ids = [data.currentUser!.id, user.id];
+      {user.id !== data.currentUser.id && (
+        <>
+          <div className="mt-10 flex w-full flex-col rounded-lg">
+            <button
+              className="flex items-center justify-between rounded-lg bg-stone-100 p-4 text-stone-700"
+              onClick={() => {
+                const ids = [data.currentUser!.id, user.id];
 
-            const existingDm = data.privateChats.find((privateChat) =>
-              hasSameValues(privateChat.participantIds, ids),
-            );
+                const existingDm = data.privateChats.find((privateChat) =>
+                  hasSameValues(privateChat.participantIds, ids),
+                );
 
-            if (existingDm) {
-              navigate(`/chat/dms/${existingDm.id}`, {});
-            } else {
-              const id = data.privateChats.length;
+                if (existingDm) {
+                  navigate(`/chat/dms/${existingDm.id}`, {});
+                } else {
+                  const id = data.privateChats.length;
 
-              setData((draft) => {
-                draft.privateChats.push({
-                  id,
-                  participantIds: ids,
-                  messages: [],
-                });
-              });
+                  setData((draft) => {
+                    draft.privateChats.push({
+                      id,
+                      participantIds: ids,
+                      messages: [],
+                    });
+                  });
 
-              navigate(`/chat/dms/${id}`, {});
-            }
-          }}
-        >
-          <span className="font-medium">Message</span>
-          <MessageSquare />
-        </button>
-      </div>
+                  navigate(`/chat/dms/${id}`, {});
+                }
+              }}
+            >
+              <span className="font-medium">Message</span>
+              <MessageSquare />
+            </button>
+          </div>
 
-      <div className="mt-6 flex w-full flex-col rounded-lg">
-        <button className="flex items-center justify-between rounded-lg bg-stone-100 p-4 text-destructive">
-          <span className="font-medium">Block User</span>
-          <Ban />
-        </button>
-      </div>
+          {groupId &&
+            data.currentUser?.leaderGroupIds.includes(Number(groupId)) && (
+              <div className="mt-6 flex w-full flex-col rounded-lg">
+                <button
+                  className="flex items-center justify-between rounded-lg bg-stone-100 p-4 text-destructive"
+                  onClick={() => {
+                    const id = user.id;
+                    setData((draft) => {
+                      const user = draft.users.find((user) => user.id === id)!;
+                      user.memberGroupIds = user.memberGroupIds.filter(
+                        (id) => id !== Number(groupId),
+                      );
+                    });
+                  }}
+                >
+                  <span className="font-medium">Remove from Club</span>
+                  <UserX />
+                </button>
+              </div>
+            )}
+
+          <div className="mt-6 flex w-full flex-col rounded-lg">
+            <button className="flex items-center justify-between rounded-lg bg-stone-100 p-4 text-destructive">
+              <span className="font-medium">Block User</span>
+              <Ban />
+            </button>
+          </div>
+        </>
+      )}
     </div>
   );
 };
