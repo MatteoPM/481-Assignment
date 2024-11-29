@@ -64,7 +64,12 @@ function Group() {
       });
     } else {
       setData((draft) => {
-        draft.currentUser!.memberGroupIds.push(group.id);
+        const user = draft.users.find(
+          (user) => user.id === draft.currentUser!.id,
+        )!;
+        draft.currentUser = user;
+
+        user.memberGroupIds.push(group.id);
       });
     }
   };
@@ -105,10 +110,14 @@ function Group() {
                   className="w-full"
                   onClick={() => {
                     setData((draft) => {
-                      draft.currentUser!.memberGroupIds =
-                        draft.currentUser!.memberGroupIds.filter(
-                          (id) => id !== group.id,
-                        );
+                      const user = draft.users.find(
+                        (user) => user.id === draft.currentUser!.id,
+                      )!;
+                      draft.currentUser = user;
+
+                      user.memberGroupIds = user.memberGroupIds.filter(
+                        (id) => id !== group.id,
+                      );
                     });
                   }}
                   variant={"destructive"}

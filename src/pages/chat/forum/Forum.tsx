@@ -58,7 +58,12 @@ function Forum() {
 
   useEffect(() => {
     setData((draft) => {
-      draft.currentUser!.seenForumIds.push(Number(forumId));
+      const user = draft.users.find(
+        (user) => user.id === draft.currentUser!.id,
+      )!;
+      draft.currentUser = user;
+
+      user.seenForumIds.push(Number(forumId));
     });
   }, [setData, forumId]);
 

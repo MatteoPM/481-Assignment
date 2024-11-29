@@ -80,7 +80,7 @@ function App() {
         </div>
 
         <Button size={"sm"} className="mt-3 w-full" asChild>
-          <Link to={"/groups/clubs#test"}>
+          <Link to={"/groups/clubs"}>
             <Users className="size-[15px]" />
             <span className="leading-none">View all</span>
           </Link>

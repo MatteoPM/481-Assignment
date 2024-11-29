@@ -55,7 +55,12 @@ function CreateGroup() {
         applicationIds: [],
       });
 
-      draft.currentUser!.leaderGroupIds.push(id);
+      const user = draft.users.find(
+        (user) => user.id === draft.currentUser!.id,
+      )!;
+      draft.currentUser = user;
+
+      user!.leaderGroupIds.push(id);
     });
 
     navigate(`/groups/${id}`, {

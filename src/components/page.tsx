@@ -36,7 +36,7 @@ const Page = ({
             rightHeaderButtons && "grid-cols-[24px_1fr_auto]",
           )}
         >
-          <div className="flex items-center">
+          <div className="flex min-w-[32px] items-center">
             {showBackButton && (
               <>
                 <button

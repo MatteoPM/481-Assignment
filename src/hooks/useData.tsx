@@ -39,7 +39,6 @@ export const DataProvider = ({ children }: { children: ReactNode }) => {
         draft.currentUser = draft.users.find(
           (user) => user.id === data.currentUser!.id,
         )!;
-        draft.currentUser.username = "asdfhkerlgl";
       });
     } else {
       setData(defaultData);

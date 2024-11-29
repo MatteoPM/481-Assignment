@@ -95,9 +95,7 @@ function Clubs() {
               </div>
             )}
 
-            <h2 className="mt-8 text-xl font-semibold" id="test">
-              Suggested Clubs
-            </h2>
+            <h2 className="mt-8 text-xl font-semibold">Suggested Clubs</h2>
             <div className="mt-3 flex flex-col divide-y overflow-hidden rounded-md border bg-white shadow-sm">
               {data.groups
                 .filter((group) => !group.isCourse)

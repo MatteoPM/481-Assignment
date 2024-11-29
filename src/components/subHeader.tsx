@@ -1,5 +1,6 @@
 import { cn } from "@/lib/utils";
 import { LucideIcon } from "lucide-react";
+import { ReactNode } from "react";
 
 const SubHeader = ({
   Icon,
@@ -7,7 +8,7 @@ const SubHeader = ({
   className,
 }: {
   Icon: LucideIcon;
-  text: string;
+  text: ReactNode;
   className?: string;
 }) => {
   return (

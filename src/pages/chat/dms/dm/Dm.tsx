@@ -28,9 +28,13 @@ function Dm() {
     throw new Error("DM not found");
   }
 
-  const participants = dm.participantIds
-    .filter((id) => id !== data.currentUser!.id)
-    .map((id) => data.users.find((user) => user.id === id)!);
+  const participants = dm.participantIds.map(
+    (id) => data.users.find((user) => user.id === id)!,
+  );
+
+  const otherParticipants = participants.filter(
+    (user) => user.id !== data.currentUser!.id,
+  );
 
   const chatMessages = dm?.messages;
 
@@ -66,7 +70,7 @@ function Dm() {
   return (
     <>
       <Page
-        title={participants
+        title={otherParticipants
           .map((participant) => participant.username)
           .join(", ")}
         showBackButton
@@ -105,7 +109,14 @@ function Dm() {
                 <AccordionContent className="p-0">
                   <SubHeader
                     Icon={Users}
-                    text="Participants"
+                    text={
+                      <span>
+                        Participants{" "}
+                        <span className="font-normal">
+                          ({participants.length})
+                        </span>
+                      </span>
+                    }
                     className="mt-2"
                   />
 
@@ -126,7 +137,7 @@ function Dm() {
               This is the start of your message history with{" "}
               <span className="font-medium">
                 {joinNames(
-                  participants.map((participant) => participant.username),
+                  otherParticipants.map((participant) => participant.username),
                 )}
               </span>
               .

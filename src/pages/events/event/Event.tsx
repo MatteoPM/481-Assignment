@@ -60,7 +60,12 @@ function Event() {
 
   const confirmRSVP = () => {
     setData((draft) => {
-      draft.currentUser!.rsvpIds.push(event.id);
+      const user = draft.users.find(
+        (user) => user.id === draft.currentUser!.id,
+      )!;
+      draft.currentUser = user;
+
+      user.rsvpIds.push(event.id);
     });
     setIsRSVPConfirmed(true);
     setIsDialogOpen(false);
@@ -120,28 +125,38 @@ function Event() {
           </div>
 
           <SubHeader Icon={Users} text="Hosting Group" />
-          <div className="mb-4 mt-2">
-            <GroupCard group={group} />
+          <div className="mt-2">
+            <GroupCard group={group} showBorder />
           </div>
 
           {group.leaderId === data.currentUser!.id && (
             <>
-              <SubHeader Icon={UserIcon} text="Attendees" />
+              <div className="mb-4">
+                <SubHeader
+                  Icon={UserIcon}
+                  text={
+                    <span>
+                      Attendees{" "}
+                      <span className="font-normal">({attendees.length})</span>
+                    </span>
+                  }
+                />
 
-              {attendees.length === 0 && (
-                <div className="mb-6 mt-3 text-center font-semibold text-muted-foreground">
-                  No one RSVP'd for this event yet.
-                </div>
-              )}
-              {attendees.length > 0 && (
-                <div className="mt-3 grid grid-cols-2 gap-2 rounded-md scrollbar">
-                  {data.users
-                    .filter((user) => user.rsvpIds.includes(event.id))
-                    .map((user) => (
-                      <User key={user.id} user={user} />
-                    ))}
-                </div>
-              )}
+                {attendees.length === 0 && (
+                  <div className="mb-6 mt-3 text-center font-semibold text-muted-foreground">
+                    No one RSVP'd for this event yet.
+                  </div>
+                )}
+                {attendees.length > 0 && (
+                  <div className="mt-3 grid grid-cols-2 gap-2 rounded-md scrollbar">
+                    {data.users
+                      .filter((user) => user.rsvpIds.includes(event.id))
+                      .map((user) => (
+                        <User key={user.id} user={user} />
+                      ))}
+                  </div>
+                )}
+              </div>
             </>
           )}
 

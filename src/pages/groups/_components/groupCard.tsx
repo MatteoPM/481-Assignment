@@ -39,8 +39,8 @@ const GroupCard = ({
     <Link
       to={`/groups/${group.id ?? 0}`}
       className={cn(
-        "flex h-[110px] shrink-0 snap-start snap-always justify-between overflow-hidden rounded-md border bg-white p-2 shadow-sm active:bg-stone-50",
-        showBorder && "",
+        "flex h-[110px] shrink-0 snap-start snap-always justify-between overflow-hidden bg-white p-2 active:bg-stone-50",
+        showBorder && "rounded-md border shadow-sm",
       )}
     >
       <div>
