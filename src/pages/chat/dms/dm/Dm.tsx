@@ -3,6 +3,7 @@ import { useData } from "@/hooks/useData";
 import { joinNames } from "@/lib/utils";
 import ChatMessage from "@/pages/chat/_components/chatMessage";
 import MessageInput from "@/pages/chat/_components/messageInput";
+import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 
 function Dm() {
@@ -28,15 +29,29 @@ function Dm() {
     const nowString = now.toISOString();
 
     setData((draft) => {
-      draft.privateChats
-        .find((chat) => chat.id === Number(dmId))!
-        .messages.push({
-          message,
-          user: data.currentUser!,
-          dateTime: nowString,
-        });
+      const privateChat = draft.privateChats.find(
+        (chat) => chat.id === Number(dmId),
+      )!;
+
+      privateChat.messages.push({
+        message,
+        user: data.currentUser!,
+        dateTime: nowString,
+      });
+
+      privateChat.seenIds = [data.currentUser!.id];
     });
   };
+
+  useEffect(() => {
+    setData((draft) => {
+      const privateChat = draft.privateChats.find(
+        (chat) => chat.id === Number(dmId),
+      )!;
+
+      privateChat.seenIds.push(data.currentUser!.id);
+    });
+  }, [setData, data.currentUser, dmId]);
 
   return (
     <>

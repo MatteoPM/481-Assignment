@@ -90,7 +90,7 @@ const UserDrawerContent = ({ user }: { user: UserType }) => {
         </div>
       )}
 
-      {user.id !== data.currentUser.id && (
+      {user.id !== data.currentUser!.id && (
         <>
           <div className="mt-10 flex w-full flex-col rounded-lg">
             <button

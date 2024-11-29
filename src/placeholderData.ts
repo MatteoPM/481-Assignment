@@ -44,6 +44,7 @@ export type PrivateChat = {
   id: number;
   participantIds: number[];
   messages: ChatMessageType[];
+  seenIds: number[];
 };
 
 export type NotificationType = "chat" | "group" | "event";
@@ -401,6 +402,7 @@ const privateChats: PrivateChat[] = [
         read: Date.now(),
       },
     ],
+    seenIds: [0],
   },
 ];
 

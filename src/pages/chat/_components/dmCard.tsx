@@ -49,7 +49,13 @@ const DmCard = ({ dm, className }: { dm: PrivateChat; className?: string }) => {
       )}
 
       <div className="truncate">
-        <span className="block truncate font-medium">
+        <span
+          className={cn(
+            "block truncate font-medium",
+            dm.seenIds.includes(data.currentUser!.id) &&
+              "text-muted-foreground",
+          )}
+        >
           {otherParticipants
             .map((participant) => participant.username)
             .sort()

@@ -1,8 +1,16 @@
+import { useData } from "@/hooks/useData";
 import { CalendarDays, Home, MessageCircleMore, Users } from "lucide-react";
 import { NavLink } from "react-router-dom";
 import { twMerge } from "tailwind-merge";
 
 const FooterNav = () => {
+  const { data } = useData();
+
+  const hasUnreadMessages = data.privateChats
+    .filter((dm) => dm.messages.length > 0)
+    .filter((dm) => dm.participantIds.includes(data.currentUser!.id))
+    .some((dm) => !dm.seenIds.includes(data.currentUser!.id));
+
   return (
     <>
       <footer className="mt-auto grid w-full grid-flow-col border-t-2 bg-white">
@@ -22,13 +30,16 @@ const FooterNav = () => {
           to={"/chat"}
           className={({ isActive }) =>
             twMerge(
-              "flex flex-col items-center py-3",
+              "relative flex flex-col items-center py-3",
               isActive && "text-primary",
             )
           }
         >
-          <MessageCircleMore />
-          Chat
+          <MessageCircleMore className="relative"></MessageCircleMore>
+          <span>Chat</span>
+          {hasUnreadMessages && (
+            <div className="absolute right-[20px] top-[10px] size-[10px] rounded-full bg-red-400"></div>
+          )}
         </NavLink>
         <NavLink
           to={"/groups"}

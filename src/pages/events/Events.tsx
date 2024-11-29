@@ -138,9 +138,9 @@ function Events() {
           </div>
         )}
         {type === "rsvps" && filteredEvents.length === 0 && (
-          <div className="mt-8 text-center font-semibold text-muted-foreground">
+          <div className="mt-8 text-balance text-center font-semibold text-muted-foreground">
             {data.currentUser?.rsvpIds.length === 0
-              ? "Events that you RSVP for will appear here."
+              ? "You have no RSVPs. Events that you RSVP for will appear here."
               : "No RSVPs found. Adjust your search query and/or filters."}
           </div>
         )}
