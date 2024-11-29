@@ -112,7 +112,7 @@ function Dm() {
                     text={
                       <span>
                         Participants{" "}
-                        <span className="font-normal">
+                        <span className="font-normal text-muted-foreground">
                           ({participants.length})
                         </span>
                       </span>

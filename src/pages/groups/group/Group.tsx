@@ -202,7 +202,18 @@ function Group() {
             </div>
           ) : (
             <>
-              <SubHeader Icon={Users} text="Members" className="mt-6" />
+              <SubHeader
+                Icon={Users}
+                text={
+                  <span>
+                    Members{" "}
+                    <span className="font-normal text-muted-foreground">
+                      ({members.length})
+                    </span>
+                  </span>
+                }
+                className="mt-6"
+              />
 
               {members.length === 0 && (
                 <div className="mb-6 mt-3 text-center font-semibold text-muted-foreground">
@@ -304,7 +315,14 @@ function Group() {
 
               <SubHeader
                 Icon={MessageSquareText}
-                text="Forums"
+                text={
+                  <span>
+                    Forums{" "}
+                    <span className="font-normal text-muted-foreground">
+                      ({forums.length})
+                    </span>
+                  </span>
+                }
                 className="mt-6"
               />
 
@@ -346,7 +364,18 @@ function Group() {
 
               {!group.isCourse && (
                 <>
-                  <SubHeader Icon={Calendar} text="Events" className="mt-6" />
+                  <SubHeader
+                    Icon={Calendar}
+                    text={
+                      <span>
+                        Events{" "}
+                        <span className="font-normal text-muted-foreground">
+                          ({events.length})
+                        </span>
+                      </span>
+                    }
+                    className="mt-6"
+                  />
 
                   {events.length > 0 && (
                     <div className="mt-3 space-y-3">
