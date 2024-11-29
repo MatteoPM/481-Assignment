@@ -31,7 +31,16 @@ export const DataProvider = ({ children }: { children: ReactNode }) => {
   useEffect(() => {
     const storedData = sessionStorage.getItem("appData");
     if (storedData) {
-      setData(JSON.parse(storedData));
+      const data: Data = JSON.parse(storedData);
+
+      setData(data);
+
+      setData((draft) => {
+        draft.currentUser = draft.users.find(
+          (user) => user.id === data.currentUser!.id,
+        )!;
+        draft.currentUser.username = "asdfhkerlgl";
+      });
     } else {
       setData(defaultData);
     }

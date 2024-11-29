@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils";
-import { ChevronLeft } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import { ReactNode } from "react";
 import { useNavigate } from "react-router-dom";
 import FooterNav from "../components/footerNav";
@@ -32,7 +32,7 @@ const Page = ({
       <div className="sticky top-0 gap-4 border-b-2 bg-white p-3">
         <div
           className={cn(
-            "grid grid-cols-[38px_1fr_38px] items-center",
+            "grid grid-cols-[auto_1fr_auto] items-center gap-3",
             rightHeaderButtons && "grid-cols-[24px_1fr_auto]",
           )}
         >
@@ -43,7 +43,7 @@ const Page = ({
                   onClick={() => navigate(-1)}
                   className="flex items-center p-1 text-primary"
                 >
-                  <ChevronLeft className="-ml-2" />
+                  <ArrowLeft />
                 </button>
               </>
             )}

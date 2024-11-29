@@ -92,7 +92,7 @@ const Login = () => {
               className="w-full"
               onClick={() => {
                 setData((draft) => {
-                  const user = data.users.find((user) => user.email === email);
+                  const user = draft.users.find((user) => user.email === email);
 
                   if (user) {
                     draft.currentUser = user;

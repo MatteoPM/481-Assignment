@@ -2,7 +2,14 @@ import Page from "@/components/page";
 import SubHeader from "@/components/subHeader";
 import { Button } from "@/components/ui/button";
 import GroupCard from "@/pages/groups/_components/groupCard";
-import { BookOpenText, Calendar, MapPin, Tags, Users } from "lucide-react";
+import {
+  BookOpenText,
+  Calendar,
+  MapPin,
+  Tags,
+  UserIcon,
+  Users,
+} from "lucide-react";
 import { useParams } from "react-router-dom";
 
 import {
@@ -13,6 +20,7 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
+import User from "@/components/user";
 import { useData } from "@/hooks/useData";
 import { useState } from "react";
 
@@ -41,6 +49,10 @@ function Event() {
   )!;
 
   const rsvpd = data.currentUser!.rsvpIds.includes(event.id);
+
+  const attendees = data.users.filter((user) =>
+    user.rsvpIds.includes(event.id),
+  );
 
   const handleRSVP = () => {
     setIsDialogOpen(true);
@@ -111,6 +123,27 @@ function Event() {
           <div className="mb-4 mt-2">
             <GroupCard group={group} />
           </div>
+
+          {group.leaderId === data.currentUser!.id && (
+            <>
+              <SubHeader Icon={UserIcon} text="Attendees" />
+
+              {attendees.length === 0 && (
+                <div className="mb-6 mt-3 text-center font-semibold text-muted-foreground">
+                  No one RSVP'd for this event yet.
+                </div>
+              )}
+              {attendees.length > 0 && (
+                <div className="mt-3 grid grid-cols-2 gap-2 rounded-md scrollbar">
+                  {data.users
+                    .filter((user) => user.rsvpIds.includes(event.id))
+                    .map((user) => (
+                      <User key={user.id} user={user} />
+                    ))}
+                </div>
+              )}
+            </>
+          )}
 
           <Button
             className="sticky bottom-4 mt-auto w-full"
