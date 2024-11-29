@@ -10,10 +10,10 @@ const SearchBar = ({ placeholder }: { placeholder?: string }) => {
     const value = e.target.value;
 
     if (value) {
-      setSearchParams({ q: value });
+      setSearchParams({ q: value }, { replace: true });
     } else {
       searchParams.delete("q");
-      setSearchParams(searchParams);
+      setSearchParams(searchParams, { replace: true });
     }
   };
 
