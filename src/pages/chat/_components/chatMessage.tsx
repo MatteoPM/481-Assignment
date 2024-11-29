@@ -43,11 +43,11 @@ const ChatMessage = ({ chatMessage }: { chatMessage: ChatMessageType }) => {
         >
           {chatMessage.message}
         </div>
-        {chatMessage.read && (
+        {/* {chatMessage.read && (
           <div className="mt-0.5 text-end text-xs text-muted-foreground">
             <span className="font-medium">Read</span> 11:28 AM
           </div>
-        )}
+        )} */}
       </div>
     </div>
   );

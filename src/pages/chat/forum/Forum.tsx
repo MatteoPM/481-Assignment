@@ -61,7 +61,7 @@ function Forum() {
           <SubHeader Icon={Users} text="Group" className="mt-0" />
 
           <div className="mb-4 mt-2 border-b pb-4">
-            <GroupCard group={group} />
+            <GroupCard group={group} showBorder />
           </div>
 
           <div ref={ref} className="flex grow flex-col gap-4 overflow-auto">

@@ -30,7 +30,12 @@ const Page = ({
   return (
     <div className="flex h-full flex-col">
       <div className="sticky top-0 gap-4 border-b-2 bg-white p-3">
-        <div className="grid grid-cols-[38px_1fr_38px] items-center gap-4">
+        <div
+          className={cn(
+            "grid grid-cols-[38px_1fr_38px] items-center gap-4",
+            rightHeaderButtons && "grid-cols-[38px_1fr_auto]",
+          )}
+        >
           <div className="flex items-center">
             {showBackButton && (
               <>

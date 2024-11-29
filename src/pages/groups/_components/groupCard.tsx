@@ -1,8 +1,17 @@
+import { cn } from "@/lib/utils";
 import { Group } from "@/placeholderData";
 import { ChevronRight } from "lucide-react";
 import { Link } from "react-router-dom";
 
-const GroupCard = ({ compact, group }: { compact?: boolean; group: Group }) => {
+const GroupCard = ({
+  compact,
+  group,
+  showBorder,
+}: {
+  compact?: boolean;
+  group: Group;
+  showBorder?: boolean;
+}) => {
   if (compact) {
     return (
       <Link
@@ -29,7 +38,10 @@ const GroupCard = ({ compact, group }: { compact?: boolean; group: Group }) => {
   return (
     <Link
       to={`/groups/${group.id ?? 0}`}
-      className="flex h-[110px] shrink-0 snap-start snap-always justify-between overflow-hidden bg-white p-2 active:bg-stone-50"
+      className={cn(
+        "flex h-[110px] shrink-0 snap-start snap-always justify-between overflow-hidden rounded-md border bg-white p-2 shadow-sm active:bg-stone-50",
+        showBorder && "",
+      )}
     >
       <div>
         <div className="flex items-center gap-2">

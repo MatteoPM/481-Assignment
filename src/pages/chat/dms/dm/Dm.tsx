@@ -1,14 +1,24 @@
 import Page from "@/components/page";
+import SubHeader from "@/components/subHeader";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+} from "@/components/ui/accordion";
+import { Button } from "@/components/ui/button";
+import User from "@/components/user";
 import { useData } from "@/hooks/useData";
-import { joinNames } from "@/lib/utils";
+import { cn, joinNames } from "@/lib/utils";
 import ChatMessage from "@/pages/chat/_components/chatMessage";
 import MessageInput from "@/pages/chat/_components/messageInput";
-import { useEffect } from "react";
+import { ChevronDown, Users } from "lucide-react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 function Dm() {
   const { data, setData } = useData();
   const { dmId } = useParams();
+  const [accordion, setAccordion] = useState("");
 
   const dm = data.privateChats.find(
     (privateChat) => privateChat.id === Number(dmId),
@@ -62,6 +72,53 @@ function Dm() {
         showBackButton
         hideFooter
         bodyClassname="pt-0"
+        rightHeaderButtons={
+          <Button
+            size={"icon"}
+            variant={"ghost"}
+            className="shrink-0 rounded-full"
+            onClick={() => {
+              if (accordion === "participants") {
+                setAccordion("");
+              } else {
+                setAccordion("participants");
+              }
+            }}
+          >
+            <ChevronDown
+              className={cn(
+                "transition-transform",
+                accordion === "participants" && "rotate-180",
+              )}
+            />
+          </Button>
+        }
+        headerContent={
+          <>
+            <Accordion
+              type="single"
+              collapsible
+              value={accordion}
+              onValueChange={(value) => setAccordion(value)}
+            >
+              <AccordionItem value="participants" className="border-b-0">
+                <AccordionContent className="p-0">
+                  <SubHeader
+                    Icon={Users}
+                    text="Participants"
+                    className="mt-2"
+                  />
+
+                  <div className="mt-3 grid grid-cols-2 gap-2 rounded-md scrollbar">
+                    {participants.map((user) => (
+                      <User key={user.id} user={user} />
+                    ))}
+                  </div>
+                </AccordionContent>
+              </AccordionItem>
+            </Accordion>
+          </>
+        }
       >
         <div className="flex h-full flex-col">
           <div className="mb-4 flex grow flex-col gap-4 overflow-auto">
