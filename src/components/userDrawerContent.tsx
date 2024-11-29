@@ -3,6 +3,7 @@ import { cn, hasSameValues } from "@/lib/utils";
 import GroupCard from "@/pages/groups/_components/groupCard";
 import { UserType } from "@/placeholderData";
 import {
+  ArrowLeftRight,
   Ban,
   BookOpenText,
   Crown,
@@ -13,6 +14,7 @@ import {
 } from "lucide-react";
 import { useNavigate, useParams } from "react-router-dom";
 import SubHeader from "./subHeader";
+import { Separator } from "./ui/separator";
 
 const UserDrawerContent = ({ user }: { user: UserType }) => {
   const { data, setData } = useData();
@@ -107,7 +109,36 @@ const UserDrawerContent = ({ user }: { user: UserType }) => {
 
       {user.id !== data.currentUser!.id && (
         <>
-          <div className="mt-10 flex w-full flex-col rounded-lg">
+          <Separator className="my-8" />
+          {groupId &&
+            data.currentUser?.leaderGroupIds.includes(Number(groupId)) && (
+              <div className="mt-6 flex w-full flex-col divide-y rounded-lg bg-stone-100">
+                <button
+                  className="flex items-center justify-between p-4"
+                  onClick={() => {}}
+                >
+                  <span className="font-medium">Transfer Club Leadership</span>
+                  <ArrowLeftRight />
+                </button>
+                <button
+                  className="flex items-center justify-between p-4 text-destructive"
+                  onClick={() => {
+                    const id = user.id;
+                    setData((draft) => {
+                      const user = draft.users.find((user) => user.id === id)!;
+                      user.memberGroupIds = user.memberGroupIds.filter(
+                        (id) => id !== Number(groupId),
+                      );
+                    });
+                  }}
+                >
+                  <span className="font-medium">Remove from Club</span>
+                  <UserX />
+                </button>
+              </div>
+            )}
+
+          <div className="mt-6 flex w-full flex-col rounded-lg">
             <button
               className="flex items-center justify-between rounded-lg bg-stone-100 p-4 text-stone-700"
               onClick={() => {
@@ -139,27 +170,6 @@ const UserDrawerContent = ({ user }: { user: UserType }) => {
               <MessageSquare />
             </button>
           </div>
-
-          {groupId &&
-            data.currentUser?.leaderGroupIds.includes(Number(groupId)) && (
-              <div className="mt-6 flex w-full flex-col rounded-lg">
-                <button
-                  className="flex items-center justify-between rounded-lg bg-stone-100 p-4 text-destructive"
-                  onClick={() => {
-                    const id = user.id;
-                    setData((draft) => {
-                      const user = draft.users.find((user) => user.id === id)!;
-                      user.memberGroupIds = user.memberGroupIds.filter(
-                        (id) => id !== Number(groupId),
-                      );
-                    });
-                  }}
-                >
-                  <span className="font-medium">Remove from Club</span>
-                  <UserX />
-                </button>
-              </div>
-            )}
 
           <div className="mt-6 flex w-full flex-col rounded-lg">
             <button className="flex items-center justify-between rounded-lg bg-stone-100 p-4 text-destructive">
