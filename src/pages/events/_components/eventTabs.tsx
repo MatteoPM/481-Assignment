@@ -1,4 +1,5 @@
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { useData } from "@/hooks/useData";
 import { Dispatch, SetStateAction } from "react";
 import { useSearchParams } from "react-router-dom";
 
@@ -10,6 +11,9 @@ const EventTabs = ({
   setValue: Dispatch<SetStateAction<string>>;
 }) => {
   const [searchParams, setSearchParams] = useSearchParams();
+  const { data } = useData();
+
+  const rsvpdEvents = data.currentUser!.rsvpIds.length;
 
   return (
     <Tabs
@@ -35,6 +39,11 @@ const EventTabs = ({
           }}
         >
           Your RSVPs
+          {rsvpdEvents > 0 && (
+            <div className="ml-2 flex size-[18px] items-center justify-center rounded-full bg-foreground/10 text-xs text-foreground">
+              {rsvpdEvents}
+            </div>
+          )}
         </TabsTrigger>
       </TabsList>
     </Tabs>
