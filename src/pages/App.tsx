@@ -24,7 +24,23 @@ function App() {
           </div>
         }
       >
-        <h2 className="text-xl font-semibold">Recent Forums</h2>
+        <div className="mb-4 border-b pb-4">
+          <h2 className="text-center text-xl font-semibold text-muted-foreground">
+            Welcome back, {data.currentUser?.username.split(" ")[0]}.
+          </h2>
+
+          <Link
+            to={"/notifications"}
+            className="mx-auto mt-4 flex w-fit items-center justify-center gap-2 rounded-full border border-orange-400 bg-orange-100 p-2 text-sm text-stone-500"
+          >
+            <span className="text-orange-400">Notifications</span>{" "}
+            <span className="flex size-[20px] items-center justify-center rounded-full bg-red-400 text-white">
+              3
+            </span>
+          </Link>
+        </div>
+
+        <h2 className="mt-6 text-xl font-semibold">Recent Forums</h2>
         <div className="mt-3 flex flex-col divide-y overflow-hidden rounded-md border bg-white shadow-sm">
           {data.forums.slice(0, 3).map((forum) => (
             <ForumCard key={forum.id} forum={forum} />
