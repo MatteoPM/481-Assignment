@@ -61,10 +61,11 @@ function Dm() {
           .join(", ")}
         showBackButton
         hideFooter
+        bodyClassname="pt-0"
       >
         <div className="flex h-full flex-col">
           <div className="mb-4 flex grow flex-col gap-4 overflow-auto">
-            <p className="mb-4 text-balance text-center text-sm text-muted-foreground">
+            <p className="mb-4 mt-2 text-balance text-center text-sm text-muted-foreground">
               This is the start of your message history with{" "}
               <span className="font-medium">
                 {joinNames(

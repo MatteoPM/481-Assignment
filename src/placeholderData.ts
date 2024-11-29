@@ -12,6 +12,7 @@ export type UserType = {
   memberGroupIds: number[];
   rsvpIds: number[];
   seenForumIds: number[];
+  bio: string;
 };
 
 export type ChatMessageType = {
@@ -91,6 +92,7 @@ const testUser: UserType = {
   memberGroupIds: [0, 1, 8, 9, 10, 11],
   rsvpIds: [0],
   seenForumIds: [],
+  bio: "I'm the leader of the Caffeine Crusaders! Ask me about anything related to coffee!",
 };
 
 const placeholderUser: UserType = {
@@ -103,6 +105,7 @@ const placeholderUser: UserType = {
   memberGroupIds: [8],
   rsvpIds: [],
   seenForumIds: [],
+  bio: "Coffee cofeeeee cofFlfffe cOoofe CCCOOOOFFFFEEEE",
 };
 
 const placeholderUser2: UserType = {
@@ -116,6 +119,7 @@ const placeholderUser2: UserType = {
   memberGroupIds: [5, 8],
   rsvpIds: [],
   seenForumIds: [],
+  bio: "Just trying to get by",
 };
 
 const placeholderUser3: UserType = {
@@ -128,6 +132,7 @@ const placeholderUser3: UserType = {
   memberGroupIds: [],
   rsvpIds: [],
   seenForumIds: [],
+  bio: "Nice to meet you!",
 };
 
 const users = [testUser, placeholderUser, placeholderUser2, placeholderUser3];

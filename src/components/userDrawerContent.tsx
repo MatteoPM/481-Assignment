@@ -2,7 +2,15 @@ import { useData } from "@/hooks/useData";
 import { cn, hasSameValues } from "@/lib/utils";
 import GroupCard from "@/pages/groups/_components/groupCard";
 import { UserType } from "@/placeholderData";
-import { Ban, Crown, MessageSquare, School, User, UserX } from "lucide-react";
+import {
+  Ban,
+  BookOpenText,
+  Crown,
+  MessageSquare,
+  School,
+  User,
+  UserX,
+} from "lucide-react";
 import { useNavigate, useParams } from "react-router-dom";
 import SubHeader from "./subHeader";
 
@@ -47,6 +55,13 @@ const UserDrawerContent = ({ user }: { user: UserType }) => {
           {user.status.toUpperCase()}
         </span>
       </div>
+
+      <SubHeader Icon={BookOpenText} text="About Me" />
+      <div className="mt-1 text-sm text-gray-500">{user.bio}</div>
+
+      {/* <div className="mt-6 rounded-md bg-stone-100 p-4 text-stone-600">
+        {user.bio}
+      </div> */}
 
       <SubHeader Icon={School} text="Courses" />
       {courses.length === 0 && (
@@ -112,6 +127,7 @@ const UserDrawerContent = ({ user }: { user: UserType }) => {
                       id,
                       participantIds: ids,
                       messages: [],
+                      seenIds: [],
                     });
                   });
 

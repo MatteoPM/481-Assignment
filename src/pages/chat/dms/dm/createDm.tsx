@@ -105,6 +105,7 @@ function CreateDm() {
                     id,
                     participantIds: ids,
                     messages: [],
+                    seenIds: [],
                   });
                 });
 
