@@ -18,11 +18,13 @@ const EventFilter = ({
   setDate,
   categories,
   setCategories,
+  resetFilters,
 }: {
   date: string;
   setDate: Dispatch<SetStateAction<string>>;
   categories: string[];
   setCategories: Dispatch<SetStateAction<string[]>>;
+  resetFilters: () => void;
 }) => {
   const isFiltersChanged =
     date !== "any" || categories.length !== eventCategories.length;
@@ -89,8 +91,7 @@ const EventFilter = ({
             variant={"destructive"}
             className="mt-6 w-full"
             onClick={() => {
-              setDate("any");
-              setCategories(eventCategories);
+              resetFilters();
             }}
             disabled={
               date === "any" && categories.length === eventCategories.length

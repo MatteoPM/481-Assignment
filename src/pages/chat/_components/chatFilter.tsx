@@ -30,6 +30,7 @@ const ChatFilter = ({
   setClubFilter,
   involvementFilter,
   setInvolvementFilter,
+  resetFilters,
 }: {
   courseFilter: CourseFilter;
   setCourseFilter: Dispatch<SetStateAction<CourseFilter>>;
@@ -37,6 +38,7 @@ const ChatFilter = ({
   setClubFilter: Dispatch<SetStateAction<ClubFilter>>;
   involvementFilter: InvolvementFilter;
   setInvolvementFilter: Dispatch<SetStateAction<InvolvementFilter>>;
+  resetFilters: () => void;
 }) => {
   const filtersChanged =
     courseFilter !== "All Courses" ||
@@ -116,9 +118,7 @@ const ChatFilter = ({
           variant={"destructive"}
           className="mt-6 w-full"
           onClick={() => {
-            setCourseFilter("All Courses");
-            setClubFilter("All Clubs");
-            setInvolvementFilter("All Forums");
+            resetFilters();
           }}
           disabled={!filtersChanged}
         >

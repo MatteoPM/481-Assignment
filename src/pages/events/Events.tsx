@@ -27,13 +27,18 @@ const startOfNextMonth = new Date(now.getFullYear(), now.getMonth() + 1, 1); // 
 
 function Events() {
   const { data } = useData();
-  const [searchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
   const q = searchParams.get("q") || "";
   const typeParam = searchParams.get("type") || "all";
 
   const [type, setType] = useState(typeParam);
   const [date, setDate] = useState("any");
   const [categories, setCategories] = useState<string[]>(eventCategories);
+
+  const resetFilters = () => {
+    setDate("any");
+    setCategories(eventCategories);
+  };
 
   const filteredEvents = data.events
     .filter(
@@ -104,6 +109,7 @@ function Events() {
           setDate={setDate}
           categories={categories}
           setCategories={setCategories}
+          resetFilters={resetFilters}
         />
 
         {type === "all" && (
@@ -133,15 +139,43 @@ function Events() {
           </>
         )}
         {type === "all" && filteredEvents.length === 0 && (
-          <div className="mt-8 text-center font-semibold text-muted-foreground">
-            No events found. Adjust your search query and/or filters.
+          <div className="mt-8 text-balance text-center font-semibold text-muted-foreground">
+            No events found. Adjust or{" "}
+            <button
+              className="text-primary"
+              onClick={() => {
+                searchParams.delete("q");
+                setSearchParams(searchParams);
+
+                resetFilters();
+              }}
+            >
+              reset
+            </button>{" "}
+            your search query and filters.
           </div>
         )}
         {type === "rsvps" && filteredEvents.length === 0 && (
           <div className="mt-8 text-balance text-center font-semibold text-muted-foreground">
-            {data.currentUser?.rsvpIds.length === 0
-              ? "You have no RSVPs. Events that you RSVP for will appear here."
-              : "No RSVPs found. Adjust your search query and/or filters."}
+            {data.currentUser?.rsvpIds.length === 0 ? (
+              "You have no RSVPs. Events that you RSVP for will appear here."
+            ) : (
+              <span>
+                No RSVPs found. Adjust or{" "}
+                <button
+                  className="text-primary"
+                  onClick={() => {
+                    searchParams.delete("q");
+                    setSearchParams(searchParams);
+
+                    resetFilters();
+                  }}
+                >
+                  reset
+                </button>{" "}
+                your search query and filters.
+              </span>
+            )}
           </div>
         )}
       </Page>

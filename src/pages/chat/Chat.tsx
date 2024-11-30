@@ -14,7 +14,7 @@ import ChatFilter, {
 
 function Chat() {
   const { data } = useData();
-  const [searchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
   const q = searchParams.get("q") || "";
   const [courseFilter, setCourseFilter] =
     useState<(typeof courseFilters)[number]>("All Courses");
@@ -22,6 +22,12 @@ function Chat() {
     useState<(typeof clubFilters)[number]>("All Clubs");
   const [involvementFilter, setInvolvementFilter] =
     useState<(typeof involvementFilters)[number]>("All Forums");
+
+  const resetFilters = () => {
+    setCourseFilter("All Courses");
+    setClubFilter("All Clubs");
+    setInvolvementFilter("All Forums");
+  };
 
   const filteredForums = data.forums
     .filter((forum) => {
@@ -84,6 +90,7 @@ function Chat() {
           setClubFilter={setClubFilter}
           involvementFilter={involvementFilter}
           setInvolvementFilter={setInvolvementFilter}
+          resetFilters={resetFilters}
         />
 
         {filteredForums.length > 0 && (
@@ -104,7 +111,19 @@ function Chat() {
 
         {filteredForums.length === 0 && (
           <div className="mt-8 text-center font-semibold text-muted-foreground">
-            No forums found. Adjust your search query and/or filters.
+            No forums found. Adjust or{" "}
+            <button
+              className="text-primary"
+              onClick={() => {
+                searchParams.delete("q");
+                setSearchParams(searchParams);
+
+                resetFilters();
+              }}
+            >
+              reset
+            </button>{" "}
+            your search query and filters.
           </div>
         )}
       </Page>
