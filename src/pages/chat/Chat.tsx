@@ -36,7 +36,11 @@ function Chat() {
         if (clubFilter === "No Clubs") {
           return false;
         } else if (clubFilter === "My Clubs") {
-          return data.currentUser!.memberGroupIds.includes(group.id);
+          return data
+            .currentUser!.leaderGroupIds.concat(
+              data.currentUser!.memberGroupIds,
+            )
+            .includes(group.id);
         }
       }
 
