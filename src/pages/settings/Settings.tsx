@@ -49,7 +49,7 @@ function Settings() {
                     <div className="relative">
                       <img
                         src={data.currentUser?.avatarUrl}
-                        className="size-[100px] rounded-full"
+                        className="size-[100px] rounded-full border shadow-sm"
                       />
                       <Button
                         size={"icon"}

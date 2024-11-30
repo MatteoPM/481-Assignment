@@ -20,7 +20,7 @@ const ChatMessage = ({ chatMessage }: { chatMessage: ChatMessageType }) => {
         <DrawerTrigger className="shrink-0 pt-2">
           <img
             src={chatMessage.user.avatarUrl}
-            className="size-[50px] rounded-full object-cover"
+            className="size-[50px] rounded-full object-cover shadow"
           />
         </DrawerTrigger>
         <DrawerContent className="">

@@ -378,6 +378,19 @@ const forums: Forum[] = [
       },
     ],
   },
+  {
+    id: 3,
+    title: "For Members of Midnight Society",
+    groupId: 4,
+    messages: [
+      {
+        user: placeholderUser2,
+        message:
+          "This club is private, so only members of the Midnight Society should be able to see this forum.",
+        dateTime: new Date(Date.now() - 1.5 * day).toISOString(),
+      },
+    ],
+  },
 ];
 
 const privateChats: PrivateChat[] = [

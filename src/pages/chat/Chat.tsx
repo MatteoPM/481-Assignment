@@ -33,6 +33,14 @@ function Chat() {
     .filter((forum) => {
       const group = data.groups.find((group) => group.id === forum.groupId)!;
 
+      const isUserInGroup = data
+        .currentUser!.leaderGroupIds.concat(data.currentUser!.memberGroupIds)
+        .includes(group.id);
+
+      if (group.isPrivate && !isUserInGroup) {
+        return false;
+      }
+
       if (group.isCourse) {
         if (courseFilter === "No Courses") {
           return false;
@@ -45,11 +53,7 @@ function Chat() {
         if (clubFilter === "No Clubs") {
           return false;
         } else if (clubFilter === "My Clubs") {
-          return data
-            .currentUser!.leaderGroupIds.concat(
-              data.currentUser!.memberGroupIds,
-            )
-            .includes(group.id);
+          return isUserInGroup;
         }
       }
 
