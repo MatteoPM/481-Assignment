@@ -16,19 +16,32 @@ export type CourseFilter = (typeof courseFilters)[number];
 export const clubFilters = ["All Clubs", "My Clubs", "No Clubs"] as const;
 export type ClubFilter = (typeof clubFilters)[number];
 
+export const involvementFilters = [
+  "All Forums",
+  "Forums I Participated In",
+  "Forums I Started",
+] as const;
+export type InvolvementFilter = (typeof involvementFilters)[number];
+
 const ChatFilter = ({
   courseFilter,
   setCourseFilter,
   clubFilter,
   setClubFilter,
+  involvementFilter,
+  setInvolvementFilter,
 }: {
   courseFilter: CourseFilter;
   setCourseFilter: Dispatch<SetStateAction<CourseFilter>>;
   clubFilter: ClubFilter;
   setClubFilter: Dispatch<SetStateAction<ClubFilter>>;
+  involvementFilter: InvolvementFilter;
+  setInvolvementFilter: Dispatch<SetStateAction<InvolvementFilter>>;
 }) => {
   const filtersChanged =
-    courseFilter !== "All Courses" || clubFilter !== "All Clubs";
+    courseFilter !== "All Courses" ||
+    clubFilter !== "All Clubs" ||
+    involvementFilter !== "All Forums";
 
   return (
     <Drawer>
@@ -49,7 +62,7 @@ const ChatFilter = ({
         <h2 className="text-lg font-medium">Forum Filters</h2>
         <div className="mt-4 grid grid-cols-2">
           <div>
-            <h2 className="font-medium">Courses</h2>
+            <h2 className="font-medium">Course Forums</h2>
             <RadioGroup
               value={courseFilter}
               onValueChange={(value: CourseFilter) => setCourseFilter(value)}
@@ -65,7 +78,7 @@ const ChatFilter = ({
           </div>
 
           <div>
-            <h2 className="font-medium">Clubs</h2>
+            <h2 className="font-medium">Club Forums</h2>
             <RadioGroup
               value={clubFilter}
               onValueChange={(value: ClubFilter) => setClubFilter(value)}
@@ -81,12 +94,31 @@ const ChatFilter = ({
           </div>
         </div>
 
+        <div className="mt-4">
+          <h2 className="font-medium">Involvement</h2>
+          <RadioGroup
+            value={involvementFilter}
+            onValueChange={(value: InvolvementFilter) =>
+              setInvolvementFilter(value)
+            }
+            className="mt-2"
+          >
+            {involvementFilters.map((involvementType) => (
+              <div className="flex items-center space-x-2">
+                <RadioGroupItem value={involvementType} id={involvementType} />
+                <Label htmlFor={involvementType}>{involvementType}</Label>
+              </div>
+            ))}
+          </RadioGroup>
+        </div>
+
         <Button
           variant={"destructive"}
-          className="mt-12 w-full"
+          className="mt-6 w-full"
           onClick={() => {
             setCourseFilter("All Courses");
             setClubFilter("All Clubs");
+            setInvolvementFilter("All Forums");
           }}
           disabled={!filtersChanged}
         >

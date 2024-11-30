@@ -9,6 +9,7 @@ import { Link, useSearchParams } from "react-router-dom";
 import ChatFilter, {
   clubFilters,
   courseFilters,
+  involvementFilters,
 } from "./_components/chatFilter";
 
 function Chat() {
@@ -19,6 +20,8 @@ function Chat() {
     useState<(typeof courseFilters)[number]>("All Courses");
   const [clubFilter, setClubFilter] =
     useState<(typeof clubFilters)[number]>("All Clubs");
+  const [involvementFilter, setInvolvementFilter] =
+    useState<(typeof involvementFilters)[number]>("All Forums");
 
   const filteredForums = data.forums
     .filter((forum) => {
@@ -42,6 +45,14 @@ function Chat() {
             )
             .includes(group.id);
         }
+      }
+
+      if (involvementFilter === "Forums I Started") {
+        return forum.messages[0].user.id === data.currentUser!.id;
+      } else if (involvementFilter === "Forums I Participated In") {
+        return forum.messages.some(
+          (message) => message.user.id === data.currentUser!.id,
+        );
       }
 
       return (
@@ -71,6 +82,8 @@ function Chat() {
           setCourseFilter={setCourseFilter}
           clubFilter={clubFilter}
           setClubFilter={setClubFilter}
+          involvementFilter={involvementFilter}
+          setInvolvementFilter={setInvolvementFilter}
         />
 
         {filteredForums.length > 0 && (

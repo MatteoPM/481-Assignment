@@ -87,7 +87,7 @@ const EventFilter = ({
 
           <Button
             variant={"destructive"}
-            className="mt-12 w-full"
+            className="mt-6 w-full"
             onClick={() => {
               setDate("any");
               setCategories(eventCategories);
