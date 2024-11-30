@@ -24,7 +24,7 @@ function App() {
           </div>
         }
       >
-        <div className="mb-4 border-b pb-4">
+        {/* <div className="mb-4 border-b pb-4">
           <h2 className="text-center text-xl font-semibold text-muted-foreground">
             Welcome back, {data.currentUser?.username.split(" ")[0]}.
           </h2>
@@ -38,9 +38,9 @@ function App() {
               3
             </span>
           </Link>
-        </div>
+        </div> */}
 
-        <h2 className="mt-6 text-xl font-semibold">Recent Forums</h2>
+        <h2 className="text-xl font-semibold">Recent Forums</h2>
         <div className="mt-3 flex flex-col divide-y overflow-hidden rounded-md border bg-white shadow-sm">
           {data.forums.slice(0, 3).map((forum) => (
             <ForumCard key={forum.id} forum={forum} />
