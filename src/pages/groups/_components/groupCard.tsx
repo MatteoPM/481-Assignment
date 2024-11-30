@@ -1,3 +1,4 @@
+import { useData } from "@/hooks/useData";
 import { cn } from "@/lib/utils";
 import { Group } from "@/placeholderData";
 import { ChevronRight } from "lucide-react";
@@ -12,6 +13,12 @@ const GroupCard = ({
   group: Group;
   showBorder?: boolean;
 }) => {
+  const { data } = useData();
+
+  const memberCount = data.users.filter((user) => {
+    return user.leaderGroupIds.concat(user.memberGroupIds).includes(group.id);
+  }).length;
+
   if (compact) {
     return (
       <Link
@@ -51,7 +58,9 @@ const GroupCard = ({
           />
           <div>
             <div>{group.name}</div>
-            <div className="text-xs text-muted-foreground">15 members</div>
+            <div className="text-xs text-muted-foreground">
+              {memberCount} member{memberCount !== 1 ? "s" : ""}
+            </div>
           </div>
         </div>
 
