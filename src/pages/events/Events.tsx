@@ -1,11 +1,20 @@
 import Page from "@/components/page";
 import SearchBar from "@/components/searchBar";
+import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import { useData } from "@/hooks/useData";
 import EventCard from "@/pages/events/_components/eventCard";
 import EventFilter from "@/pages/events/_components/eventFilter";
 import { Plus } from "lucide-react";
 import { useState } from "react";
-import { Link, useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import EventTabs from "./_components/eventTabs";
 import { eventCategories } from "./create/CreateEvent";
 
@@ -30,6 +39,8 @@ function Events() {
   const [searchParams, setSearchParams] = useSearchParams();
   const q = searchParams.get("q") || "";
   const typeParam = searchParams.get("type") || "all";
+  const navigate = useNavigate();
+  const [showCreationDialog, setShowCreationDialog] = useState(false);
 
   const [type, setType] = useState(typeParam);
   const [date, setDate] = useState("any");
@@ -96,12 +107,18 @@ function Events() {
         <div className="top-0 flex items-center gap-4">
           <SearchBar placeholder="Search groups / event names..." />
 
-          <Link
-            to={"/events/create"}
+          <button
             className="rounded-full bg-white p-1 shadow"
+            onClick={() => {
+              if (data.currentUser!.leaderGroupIds.length > 0) {
+                navigate("/events/create");
+              } else {
+                setShowCreationDialog(true);
+              }
+            }}
           >
             <Plus className="text-green-400" />
-          </Link>
+          </button>
         </div>
 
         <EventFilter
@@ -178,6 +195,35 @@ function Events() {
             )}
           </div>
         )}
+
+        <Dialog open={showCreationDialog} onOpenChange={setShowCreationDialog}>
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle>You Must Lead a Club to Create Events</DialogTitle>
+              <DialogDescription>
+                You can only create events for clubs that you are leading.
+                Currently, you are not leading any clubs.
+              </DialogDescription>
+            </DialogHeader>
+            <DialogFooter>
+              <Button
+                onClick={() => {
+                  setShowCreationDialog(false);
+                }}
+                variant={"outline"}
+              >
+                Okay
+              </Button>
+              <Button
+                onClick={() => {
+                  navigate("/groups/create");
+                }}
+              >
+                Create Club
+              </Button>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
       </Page>
     </>
   );

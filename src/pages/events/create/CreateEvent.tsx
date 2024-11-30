@@ -12,6 +12,7 @@ import {
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -223,9 +224,9 @@ function CreateEvent() {
                       </PopoverContent>
                     </Popover>
                   </FormControl>
-                  {/* <FormDescription>
-                  This is your public display name.
-                  </FormDescription> */}
+                  <FormDescription>
+                    You can only create events for clubs that you are leading.
+                  </FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
