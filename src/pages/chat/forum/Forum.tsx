@@ -109,6 +109,12 @@ function Forum() {
                   <div className="mt-2">
                     <GroupCard group={group} showBorder />
                   </div>
+
+                  {forum.messages[0].user.id === data.currentUser!.id && (
+                    <Button className="mt-4 w-full" variant={"destructive"}>
+                      Delete Forum
+                    </Button>
+                  )}
                 </AccordionContent>
               </AccordionItem>
             </Accordion>

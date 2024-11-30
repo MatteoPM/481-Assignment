@@ -7,6 +7,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { cn } from "@/lib/utils";
 import { Filter } from "lucide-react";
 import { Dispatch, SetStateAction } from "react";
 import { Button } from "../../../components/ui/button";
@@ -23,10 +24,19 @@ const EventFilter = ({
   categories: string[];
   setCategories: Dispatch<SetStateAction<string[]>>;
 }) => {
+  const isFiltersChanged =
+    date !== "any" || categories.length !== eventCategories.length;
+
   return (
     <Drawer>
       <DrawerTrigger asChild>
-        <Button variant={"outline"} className="mt-2 w-full">
+        <Button
+          variant={"outline"}
+          className={cn(
+            "mt-2 w-full",
+            isFiltersChanged && "text-primary hover:text-primary",
+          )}
+        >
           <Filter className="w-[15px]" />
           <span>Filters</span>
         </Button>
@@ -34,7 +44,9 @@ const EventFilter = ({
 
       <DrawerContent>
         <div className="p-4">
-          <h2 className="font-medium">Date</h2>
+          <h2 className="text-lg font-medium">Event Filters</h2>
+
+          <h2 className="mt-4 font-medium">Date</h2>
           <Select value={date} onValueChange={(value) => setDate(value)}>
             <SelectTrigger className="mt-2 w-full">
               <SelectValue placeholder="Any" />
