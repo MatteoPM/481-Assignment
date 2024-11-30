@@ -89,8 +89,10 @@ function CreateDm() {
             className="absolute bottom-4 right-4 flex size-[50px] items-center justify-center rounded-full p-0"
             disabled={ids.length === 0}
             onClick={() => {
+              const allIds = [...ids, data.currentUser!.id];
+
               const existingDm = data.privateChats.find((privateChat) =>
-                hasSameValues(privateChat.participantIds, ids),
+                hasSameValues(privateChat.participantIds, allIds),
               );
 
               if (existingDm) {
@@ -103,7 +105,7 @@ function CreateDm() {
                 setData((draft) => {
                   draft.privateChats.push({
                     id,
-                    participantIds: ids,
+                    participantIds: allIds,
                     messages: [],
                     seenIds: [],
                   });
