@@ -189,6 +189,19 @@ const events: Event[] = [
     bannerUrl:
       "https://prod-images.tcm.com/Master-Profile-Images/casablanca1942.610.jpg",
   },
+  {
+    id: 4,
+    title: "Midnight Meetup",
+    description:
+      "This event is hosted by a private group, so only members of the The Midnight Society should be able to see this.",
+    startDateTime: new Date(Date.now() + week).toISOString(),
+    endDateTime: new Date(Date.now() + week + hour).toISOString(),
+    location: "Tonken Plaza",
+    groupId: 4,
+    categories: ["Social"],
+    bannerUrl:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4xK-EXpM8Pec036XLlu5crmx9fqFBM5sElg&s",
+  },
 ];
 
 // export const notifications: (Notification | ChatNotification)[] = [

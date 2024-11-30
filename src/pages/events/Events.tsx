@@ -56,6 +56,15 @@ function Events() {
       (event) => type === "all" || data.currentUser!.rsvpIds.includes(event.id),
     )
     .filter((event) => {
+      const group = data.groups.find((group) => group.id === event.groupId)!;
+      const userGroupIds = data.currentUser!.leaderGroupIds.concat(
+        data.currentUser!.memberGroupIds,
+      );
+
+      if (group.isPrivate && !userGroupIds.includes(group.id)) {
+        return false;
+      }
+
       const itemDate = new Date(event.startDateTime);
 
       switch (date) {
