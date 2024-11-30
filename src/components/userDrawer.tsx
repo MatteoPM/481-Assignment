@@ -50,7 +50,10 @@ const UserDrawer = () => {
           <Link to={""} className="flex gap-4 p-3 font-medium text-stone-800">
             <CircleHelp /> <span>Help</span>
           </Link>
-          <Link to={""} className="flex gap-4 p-3 font-medium text-stone-800">
+          <Link
+            to={"/settings"}
+            className="flex gap-4 p-3 font-medium text-stone-800"
+          >
             <Settings /> <span>Settings</span>
           </Link>
 

@@ -22,6 +22,7 @@ import Group from "./pages/groups/group/Group.tsx";
 import GroupStats from "./pages/groups/group/stats/GroupStats.tsx";
 import Login from "./pages/login/Login.tsx";
 import Notifications from "./pages/notifications/Notifications.tsx";
+import Settings from "./pages/settings/Settings.tsx";
 
 const router = createHashRouter([
   {
@@ -97,6 +98,10 @@ const router = createHashRouter([
       {
         path: "/notifications",
         element: <Notifications />,
+      },
+      {
+        path: "/settings",
+        element: <Settings />,
       },
     ],
   },
