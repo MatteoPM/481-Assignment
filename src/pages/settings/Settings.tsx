@@ -42,7 +42,7 @@ function Settings() {
             <FormField
               control={form.control}
               name="aboutMe"
-              render={({ field }) => (
+              render={() => (
                 <FormItem className="flex flex-col items-center">
                   <FormLabel>Profile Image</FormLabel>
                   <FormControl>
