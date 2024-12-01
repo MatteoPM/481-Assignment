@@ -1,7 +1,13 @@
 import { cn } from "@/lib/utils";
 import { UserType } from "@/placeholderData";
 import { useLocation } from "react-router-dom";
-import { Drawer, DrawerContent, DrawerTrigger } from "./ui/drawer";
+import {
+  Drawer,
+  DrawerContent,
+  DrawerDescription,
+  DrawerTitle,
+  DrawerTrigger,
+} from "./ui/drawer";
 import UserDrawerContent from "./userDrawerContent";
 
 const User = ({ user }: { user: UserType }) => {
@@ -32,6 +38,8 @@ const User = ({ user }: { user: UserType }) => {
       </DrawerTrigger>
 
       <DrawerContent key={`drawerContent-${location.pathname}-${user.id}`}>
+        <DrawerTitle className="sr-only" />
+        <DrawerDescription className="sr-only" />
         <UserDrawerContent user={user} />
       </DrawerContent>
     </Drawer>

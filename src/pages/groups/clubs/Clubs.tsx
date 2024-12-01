@@ -17,15 +17,17 @@ function Clubs() {
     .filter((group) => group.name.toLowerCase().includes(q.toLowerCase()))
     .sort((a, b) => a.name.localeCompare(b.name));
 
-  const leadingClubs = data.currentUser!.leaderGroupIds.map(
-    (id) => data.groups.find((group) => group.id === id)!,
-  );
-
+  const leadingClubs = data
+    .currentUser!.leaderGroupIds.map(
+      (id) => data.groups.find((group) => group.id === id)!,
+    )
+    .sort((a, b) => a.name.localeCompare(b.name));
   const memberClubs = data
     .currentUser!.memberGroupIds.map(
       (id) => data.groups.find((group) => group.id === id)!,
     )
-    .filter((group) => !group.isCourse);
+    .filter((group) => !group.isCourse)
+    .sort((a, b) => a.name.localeCompare(b.name));
   return (
     <>
       <Page title="Groups" headerContent={<GroupTabs value="clubs" />}>

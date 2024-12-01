@@ -24,7 +24,6 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
 import { useData } from "@/hooks/useData";
 import { cn } from "@/lib/utils";
@@ -74,7 +73,6 @@ const formSchema = z
     categories: z
       .array(z.string())
       .nonempty({ message: "At least one category must be selected." }), // Require at least one category
-    isPrivate: z.boolean(),
   })
   .refine(
     (data) => {
@@ -99,7 +97,6 @@ function CreateEvent() {
       startTime: "",
       endTime: "",
       hostingClub: initialGroupId ? Number(initialGroupId) : undefined,
-      isPrivate: false,
       location: "",
       categories: [],
       bannerUrl:
@@ -118,7 +115,6 @@ function CreateEvent() {
       description,
       endTime,
       hostingClub,
-      // isPrivate,
       location,
       startTime,
       title,
@@ -395,26 +391,6 @@ function CreateEvent() {
                       </FormControl>
                     ))}
                   </div>
-                  {/* <FormDescription>
-                    This is your public display name.
-                  </FormDescription> */}
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={form.control}
-              name="isPrivate"
-              render={({ field }) => (
-                <FormItem className="mt-6 flex items-center gap-2 space-y-0">
-                  <FormControl>
-                    <Switch
-                      checked={field.value}
-                      onCheckedChange={field.onChange}
-                    />
-                  </FormControl>
-                  <FormLabel className="mt-0">Private Event</FormLabel>
                   {/* <FormDescription>
                     This is your public display name.
                   </FormDescription> */}
