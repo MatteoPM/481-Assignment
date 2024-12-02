@@ -34,9 +34,15 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { z } from "zod";
 
 const formSchema = z.object({
-  groupId: z.number(),
-  topic: z.string().min(2).max(50),
-  message: z.string().min(2).max(200),
+  groupId: z.number({ required_error: "Group is required." }),
+  topic: z
+    .string()
+    .min(2, { message: "Forum Topic must be at least 2 characters." })
+    .max(50, { message: "Forum Topic must not be longer than 30 characters." }),
+  message: z
+    .string()
+    .min(2, { message: "Message must be at least 1 character." })
+    .max(200, { message: "Message must not be longer than 200 characters." }),
 });
 
 function CreateForum() {

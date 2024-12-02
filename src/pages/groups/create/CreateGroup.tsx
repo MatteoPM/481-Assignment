@@ -14,15 +14,21 @@ import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
 import { useData } from "@/hooks/useData";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Edit } from "lucide-react";
+import { Camera, Edit } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { z } from "zod";
 
 const formSchema = z.object({
-  bannerUrl: z.string(),
-  name: z.string().min(2).max(50),
-  description: z.string().min(2).max(50),
+  bannerUrl: z.string().min(1, { message: "Banner Image is required." }),
+  name: z
+    .string()
+    .min(5, { message: "Event Title must be at least 5 characters." })
+    .max(30, { message: "Event Title must not be longer than 30 characters." }),
+  description: z
+    .string()
+    .min(20, { message: "Description must be at least 20 characters." })
+    .max(50, { message: "Description must not be longer than 50 characters." }),
   isPrivate: z.boolean(),
 });
 
@@ -35,8 +41,7 @@ function CreateGroup() {
     defaultValues: {
       name: "",
       description: "",
-      bannerUrl:
-        "https://assets.ppy.sh/user-cover-presets/4/2fd772ad175c5687370e0aab50799a84adef7d0fff3f97dccfa5c94384ebb8af.jpeg",
+      bannerUrl: "",
       isPrivate: false,
     },
   });
@@ -86,10 +91,16 @@ function CreateGroup() {
                   </FormLabel>
                   <FormControl className="">
                     <div className="relative mt-2">
-                      <img
-                        className="h-[120px] w-full rounded-lg object-cover"
-                        src={field.value}
-                      />
+                      {field.value ? (
+                        <img
+                          className="h-[120px] w-full rounded-lg object-cover"
+                          src={field.value}
+                        />
+                      ) : (
+                        <div className="flex h-[120px] w-full items-center justify-center rounded-lg bg-stone-200 object-cover">
+                          <Camera className="size-[70px] text-stone-300" />
+                        </div>
+                      )}
                       <Button
                         className="absolute right-2 top-2 shadow"
                         size={"icon"}
@@ -118,7 +129,7 @@ function CreateGroup() {
               render={({ field }) => (
                 <FormItem className="mt-6">
                   <FormLabel>
-                    Event Title<span className="text-red-400">*</span>
+                    Club Name<span className="text-red-400">*</span>
                   </FormLabel>
                   <FormControl>
                     <Input placeholder="Enter a title..." {...field} />
