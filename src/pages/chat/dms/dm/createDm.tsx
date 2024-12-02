@@ -13,7 +13,7 @@ function CreateDm() {
   const [searchParams] = useSearchParams();
   const [ids, setIds] = useImmer<number[]>([]);
   const q = searchParams.get("q") || "";
-  const users = data.users.slice(1);
+  const users = data.users.filter((user) => user.id !== data.currentUser!.id);
   const navigate = useNavigate();
 
   const filteredUsers = users

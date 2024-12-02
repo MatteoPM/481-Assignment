@@ -13,6 +13,7 @@ export type UserType = {
   rsvpIds: number[];
   seenForumIds: number[];
   bio: string;
+  notifications: Notification[];
 };
 
 export type ChatMessageType = {
@@ -52,12 +53,32 @@ export type NotificationType = "chat" | "group" | "event";
 
 export type Notification = {
   id: number;
-  type: NotificationType;
-  subtype: string;
-  title: string;
-  // description: string;
-  time: string;
-};
+  category: NotificationType;
+  // time: string;
+} & (
+  | {
+      category: "chat";
+      type: "message";
+      data: {
+        senderId: number;
+        chatId: number;
+        message: string;
+      };
+    }
+  | {
+      type: "joinRequest";
+      data: {
+        requesterId: number;
+        clubId: number;
+      };
+    }
+  | {
+      type: "eventReminder";
+      data: {
+        eventId: number;
+      };
+    }
+);
 
 export type ChatNotification = Notification & {
   type: "chat";
@@ -93,6 +114,35 @@ const testUser: UserType = {
   rsvpIds: [0],
   seenForumIds: [],
   bio: "I'm the leader of the Caffeine Crusaders! Ask me about anything related to coffee!",
+  notifications: [
+    {
+      id: 0,
+      category: "chat",
+      type: "message",
+      data: {
+        senderId: 0,
+        chatId: 0,
+        message: "Wassup dude",
+      },
+    },
+    {
+      id: 1,
+      category: "group",
+      type: "joinRequest",
+      data: {
+        requesterId: 0,
+        clubId: 0,
+      },
+    },
+    {
+      id: 2,
+      category: "event",
+      type: "eventReminder",
+      data: {
+        eventId: 0,
+      },
+    },
+  ],
 };
 
 const placeholderUser: UserType = {
@@ -106,6 +156,7 @@ const placeholderUser: UserType = {
   rsvpIds: [],
   seenForumIds: [],
   bio: "Coffee cofeeeee cofFlfffe cOoofe CCCOOOOFFFFEEEE",
+  notifications: [],
 };
 
 const placeholderUser2: UserType = {
@@ -120,6 +171,7 @@ const placeholderUser2: UserType = {
   rsvpIds: [],
   seenForumIds: [],
   bio: "Just trying to get by",
+  notifications: [],
 };
 
 const placeholderUser3: UserType = {
@@ -133,6 +185,7 @@ const placeholderUser3: UserType = {
   rsvpIds: [],
   seenForumIds: [],
   bio: "Nice to meet you!",
+  notifications: [],
 };
 
 const users = [testUser, placeholderUser, placeholderUser2, placeholderUser3];

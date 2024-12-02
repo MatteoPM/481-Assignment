@@ -1,8 +1,17 @@
 import Page from "@/components/page";
 import { Button } from "@/components/ui/button";
+import { Drawer, DrawerContent, DrawerTrigger } from "@/components/ui/drawer";
+import UserDrawerContent from "@/components/userDrawerContent";
+import { useData } from "@/hooks/useData";
 import { cn } from "@/lib/utils";
-import { CalendarDays, MessageCircleMore, Users } from "lucide-react";
+import {
+  ArrowRight,
+  CalendarDays,
+  MessageCircleMore,
+  Users,
+} from "lucide-react";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const types = [
   {
@@ -24,6 +33,7 @@ const types = [
 
 function Notifications() {
   const [type, setType] = useState("all");
+  const { data } = useData();
 
   return (
     <>
@@ -45,76 +55,151 @@ function Notifications() {
           ))}
         </div>
         <div className="mt-3 flex flex-col divide-y overflow-hidden rounded-md border bg-white shadow-sm">
-          <div className="flex items-start space-x-4 rounded-lg bg-card p-4 shadow-sm">
-            <div className="rounded-full bg-primary/10 p-2">
-              <MessageCircleMore />
-            </div>
-            <div className="flex-grow">
-              <h2 className="font-semibold">
-                <span className="text-primary">Sergio Barnes</span> sent a
-                message
-              </h2>
-              <p className="text-sm text-muted-foreground">
-                Hey, how are you doing?
-              </p>
-              <span className="text-xs text-muted-foreground">2m ago</span>
+          {data.currentUser!.notifications.map((notification) => {
+            return (
+              <>
+                <div className="flex items-start space-x-4 rounded-lg bg-card p-4 shadow-sm">
+                  <div className="rounded-full bg-primary/10 p-2">
+                    {notification.category === "chat" && <MessageCircleMore />}
+                    {notification.category === "group" && <Users />}
+                    {notification.category === "event" && <CalendarDays />}
+                  </div>
+                  <div className="flex-grow">
+                    {notification.type === "message" && (
+                      <>
+                        <h2 className="font-semibold">
+                          <Drawer>
+                            <DrawerTrigger className="shrink-0 pt-2" asChild>
+                              <span className="cursor-pointer text-primary">
+                                {
+                                  data.users.find(
+                                    (user) =>
+                                      user.id === notification.data.senderId,
+                                  )!.username
+                                }
+                              </span>
+                            </DrawerTrigger>
+                            <DrawerContent className="">
+                              <UserDrawerContent
+                                user={
+                                  data.users.find(
+                                    (user) =>
+                                      user.id === notification.data.senderId,
+                                  )!
+                                }
+                              />
+                            </DrawerContent>
+                          </Drawer>{" "}
+                          sent a message
+                        </h2>
+                        <p className="text-sm text-muted-foreground">
+                          {notification.data.message}
+                        </p>
 
-              <Button size={"sm"} className="mt-3 block w-full">
-                Reply
-              </Button>
-            </div>
-          </div>
+                        <div className="mt-2 flex items-center justify-between">
+                          <span className="shrink-0 text-xs text-muted-foreground">
+                            2m ago
+                          </span>
 
-          <div className="flex items-start space-x-4 rounded-lg bg-card p-4 shadow-sm">
-            <div className="rounded-full bg-primary/10 p-2">
-              <Users />
-            </div>
-            <div className="flex-grow">
-              <h2 className="font-semibold">
-                <span className="text-primary">Debbie Hopkins</span> requested
-                to join the{" "}
-                <span className="text-primary">Caffeine Crusaders</span> club
-              </h2>
+                          <Button
+                            size={"sm"}
+                            className="flex w-full items-center justify-end"
+                            variant={"link"}
+                          >
+                            Chat <ArrowRight />
+                          </Button>
+                        </div>
+                      </>
+                    )}
+                    {notification.type === "joinRequest" && (
+                      <>
+                        <h2 className="font-semibold">
+                          <Drawer>
+                            <DrawerTrigger className="shrink-0 pt-2" asChild>
+                              <span className="cursor-pointer text-primary">
+                                {
+                                  data.users.find(
+                                    (user) =>
+                                      user.id === notification.data.requesterId,
+                                  )!.username
+                                }
+                              </span>
+                            </DrawerTrigger>
+                            <DrawerContent className="">
+                              <UserDrawerContent
+                                user={
+                                  data.users.find(
+                                    (user) =>
+                                      user.id === notification.data.requesterId,
+                                  )!
+                                }
+                              />
+                            </DrawerContent>
+                          </Drawer>{" "}
+                          requested to join the{" "}
+                          <Link
+                            to={`/groups/${notification.data.clubId}`}
+                            className="text-primary"
+                          >
+                            {
+                              data.groups.find(
+                                (group) =>
+                                  group.id === notification.data.clubId,
+                              )!.name
+                            }
+                          </Link>{" "}
+                          club
+                        </h2>
 
-              <span className="block text-xs text-muted-foreground">
-                2m ago
-              </span>
+                        <div className="mt-2 flex items-center justify-between">
+                          <span className="shrink-0 text-xs text-muted-foreground">
+                            2m ago
+                          </span>
 
-              <div className="mt-3 grid grid-cols-2 gap-2">
-                <Button size={"sm"}>Accept</Button>
-                <Button size={"sm"} variant={"destructive"}>
-                  Reject
-                </Button>
-              </div>
-            </div>
-          </div>
+                          <Button
+                            size={"sm"}
+                            className="flex w-full items-center justify-end"
+                            variant={"link"}
+                          >
+                            Group <ArrowRight />
+                          </Button>
+                        </div>
+                      </>
+                    )}
+                    {notification.type === "eventReminder" && (
+                      <>
+                        <h2 className="font-semibold">
+                          <span className="text-primary">
+                            {
+                              data.events.find(
+                                (event) =>
+                                  event.id === notification.data.eventId,
+                              )!.title
+                            }
+                          </span>{" "}
+                          begins in 1 day
+                        </h2>
 
-          <div className="flex items-start space-x-4 rounded-lg bg-card p-4 shadow-sm">
-            <div className="rounded-full bg-primary/10 p-2">
-              <CalendarDays />
-            </div>
-            <div className="flex-grow">
-              <h2 className="font-semibold">
-                <span className="text-primary">Brenda Pease</span> requested to
-                attend the{" "}
-                <span className="text-primary">
-                  Late-Night Study Jam with Coffee Tasting
-                </span>{" "}
-                event
-              </h2>
+                        <div className="mt-2 flex items-center justify-between">
+                          <span className="shrink-0 text-xs text-muted-foreground">
+                            2m ago
+                          </span>
 
-              <span className="block text-xs text-muted-foreground">
-                2m ago
-              </span>
-
-              <div className="mt-3 grid grid-cols-2 gap-2">
-                <Button size={"sm"}>Accept</Button>
-                <Button size={"sm"} variant={"destructive"}>
-                  Reject
-                </Button>
-              </div>
-            </div>
-          </div>
+                          <Button
+                            size={"sm"}
+                            className="flex w-full items-center justify-end"
+                            variant={"link"}
+                          >
+                            Event <ArrowRight />
+                          </Button>
+                        </div>
+                      </>
+                    )}
+                  </div>
+                </div>
+              </>
+            );
+          })}
         </div>
       </Page>
     </>

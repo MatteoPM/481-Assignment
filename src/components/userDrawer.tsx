@@ -19,8 +19,15 @@ const UserDrawer = () => {
   return (
     <Drawer direction="right">
       <DrawerTrigger asChild>
-        <button className="shrink-0 overflow-hidden rounded-full border bg-white p-0 text-stone-600 shadow-sm">
-          <img src={testUser.avatarUrl} className="size-[35px] object-cover" />
+        <button className="relative shrink-0 rounded-full border bg-white p-0 text-stone-600 shadow-sm">
+          <img
+            src={testUser.avatarUrl}
+            className="size-[35px] rounded-full object-cover"
+          />
+
+          <div className="absolute right-[-5px] top-[-5px] flex size-[20px] items-center justify-center rounded-full bg-red-400 text-white shadow-sm">
+            3
+          </div>
         </button>
       </DrawerTrigger>
       <DrawerContent

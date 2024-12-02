@@ -14,6 +14,10 @@ function Dms() {
 
   const filteredDms = data.privateChats
     .filter((dm) => {
+      if (!dm.participantIds.includes(data.currentUser!.id)) {
+        return false;
+      }
+
       if (dm.messages.length === 0) {
         return false;
       }
