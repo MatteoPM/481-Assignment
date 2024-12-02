@@ -483,7 +483,11 @@ const privateChats: PrivateChat[] = [
         user: testUser,
         dateTime: new Date(Date.now() - 1.0 * hour).toISOString(),
         message: "No more",
-        read: Date.now(),
+      },
+      {
+        user: placeholderUser,
+        dateTime: new Date(Date.now() - 0.3 * hour).toISOString(),
+        message: ":)",
       },
     ],
     seenIds: [1],
