@@ -6,6 +6,7 @@ import {
   DrawerTrigger,
 } from "@/components/ui/drawer";
 import { useData } from "@/hooks/useData";
+import { cn } from "@/lib/utils";
 import { CircleHelp, LogOut, Settings } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useUnderDevelopment } from "./contexts/UnderDevelopmentContext";
@@ -16,6 +17,8 @@ const UserDrawer = () => {
   const { setShowUnderDevelopment } = useUnderDevelopment();
   const testUser = data.currentUser!;
 
+  const hasNotifications = data.currentUser!.notifications.length > 0;
+
   return (
     <Drawer direction="right">
       <DrawerTrigger asChild>
@@ -25,9 +28,11 @@ const UserDrawer = () => {
             className="size-[35px] rounded-full object-cover"
           />
 
-          <div className="absolute right-[-5px] top-[-5px] flex size-[20px] items-center justify-center rounded-full bg-red-400 text-white shadow-sm">
-            3
-          </div>
+          {hasNotifications && (
+            <div className="absolute right-[-5px] top-[-5px] flex size-[20px] items-center justify-center rounded-full bg-red-400 text-white shadow-sm">
+              {data.currentUser!.notifications.length}
+            </div>
+          )}
         </button>
       </DrawerTrigger>
       <DrawerContent
@@ -47,11 +52,26 @@ const UserDrawer = () => {
 
         <Link
           to={"/notifications"}
-          className="mx-auto flex items-center justify-center gap-2 rounded-full border border-orange-400 bg-orange-100 p-2 text-sm text-stone-500"
+          className={cn(
+            "mx-auto flex items-center justify-center gap-2 rounded-full border border-stone-400 bg-stone-100 p-2 text-sm text-stone-500",
+            hasNotifications && "border-orange-400 bg-orange-100",
+          )}
         >
-          <span className="text-orange-400">Notifications</span>{" "}
-          <span className="flex size-[20px] items-center justify-center rounded-full bg-red-400 text-white">
-            3
+          <span
+            className={cn(
+              "text-stone-400",
+              hasNotifications && "text-orange-400",
+            )}
+          >
+            Notifications
+          </span>{" "}
+          <span
+            className={cn(
+              "flex size-[20px] items-center justify-center rounded-full bg-stone-400 text-white",
+              hasNotifications && "bg-red-400",
+            )}
+          >
+            {data.currentUser!.notifications.length}
           </span>
         </Link>
 
