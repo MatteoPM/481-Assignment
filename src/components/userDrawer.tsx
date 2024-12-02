@@ -8,10 +8,12 @@ import {
 import { useData } from "@/hooks/useData";
 import { CircleHelp, LogOut, Settings } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useUnderDevelopment } from "./contexts/UnderDevelopmentContext";
 import { Separator } from "./ui/separator";
 
 const UserDrawer = () => {
   const { data, setData } = useData();
+  const { setShowUnderDevelopment } = useUnderDevelopment();
   const testUser = data.currentUser!;
 
   return (
@@ -47,9 +49,14 @@ const UserDrawer = () => {
         </Link>
 
         <div className="mt-auto">
-          <Link to={""} className="flex gap-4 p-3 font-medium text-stone-800">
+          <button
+            onClick={() => {
+              setShowUnderDevelopment(true);
+            }}
+            className="flex gap-4 p-3 font-medium text-stone-800"
+          >
             <CircleHelp /> <span>Help</span>
-          </Link>
+          </button>
           <Link
             to={"/settings"}
             className="flex gap-4 p-3 font-medium text-stone-800"

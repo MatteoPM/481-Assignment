@@ -1,3 +1,4 @@
+import { useUnderDevelopment } from "@/components/contexts/UnderDevelopmentContext";
 import Page from "@/components/page";
 import { Button } from "@/components/ui/button";
 import {
@@ -21,6 +22,7 @@ const formSchema = z.object({
 
 function Settings() {
   const { data } = useData();
+  const { setShowUnderDevelopment } = useUnderDevelopment();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -54,6 +56,9 @@ function Settings() {
                       <Button
                         size={"icon"}
                         className="absolute bottom-0 right-0 rounded-full"
+                        onClick={() => {
+                          setShowUnderDevelopment(true);
+                        }}
                       >
                         <Pencil className="size-[20px]" />
                       </Button>
@@ -84,7 +89,13 @@ function Settings() {
               )}
             />
 
-            <Button className="mt-auto" type="submit">
+            <Button
+              className="mt-auto"
+              type="submit"
+              onClick={() => {
+                setShowUnderDevelopment(true);
+              }}
+            >
               Save Changes
             </Button>
           </form>

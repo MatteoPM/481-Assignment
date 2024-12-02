@@ -13,12 +13,14 @@ import {
   UserX,
 } from "lucide-react";
 import { useNavigate, useParams } from "react-router-dom";
+import { useUnderDevelopment } from "./contexts/UnderDevelopmentContext";
 import SubHeader from "./subHeader";
 import { Separator } from "./ui/separator";
 
 const UserDrawerContent = ({ user }: { user: UserType }) => {
   const { data, setData } = useData();
   const navigate = useNavigate();
+  const { setShowUnderDevelopment } = useUnderDevelopment();
   const { groupId: groupIdString } = useParams();
   const groupId = Number(groupIdString);
 
@@ -111,60 +113,62 @@ const UserDrawerContent = ({ user }: { user: UserType }) => {
       {user.id !== data.currentUser!.id && (
         <>
           <Separator className="my-8" />
-          {groupId && data.currentUser?.leaderGroupIds.includes(groupId) && (
-            <div className="mt-6 flex w-full flex-col divide-y rounded-lg bg-stone-100">
-              <button
-                className="flex items-center justify-between p-4"
-                onClick={() => {
-                  console.log("hii");
+          {groupId !== undefined &&
+            data.currentUser?.leaderGroupIds.includes(groupId) && (
+              <div className="mt-6 flex w-full flex-col divide-y rounded-lg bg-stone-100">
+                <button
+                  className="flex items-center justify-between p-4"
+                  onClick={() => {
+                    console.log("hii");
 
-                  setData((draft) => {
-                    const currentUser = draft.users.find(
-                      (user) => user.id === draft.currentUser!.id,
-                    )!;
-                    draft.currentUser = currentUser;
+                    setData((draft) => {
+                      const currentUser = draft.users.find(
+                        (user) => user.id === draft.currentUser!.id,
+                      )!;
+                      draft.currentUser = currentUser;
 
-                    currentUser.leaderGroupIds =
-                      currentUser.leaderGroupIds.filter((id) => id !== groupId);
+                      currentUser.leaderGroupIds =
+                        currentUser.leaderGroupIds.filter(
+                          (id) => id !== groupId,
+                        );
 
-                    currentUser.memberGroupIds.push(groupId);
+                      currentUser.memberGroupIds.push(groupId);
 
-                    const userId = user.id;
-                    const otherUser = draft.users.find(
-                      (user) => user.id === userId,
-                    )!;
+                      const userId = user.id;
+                      const otherUser = draft.users.find(
+                        (user) => user.id === userId,
+                      )!;
 
-                    otherUser.leaderGroupIds.push(groupId);
-                    otherUser.memberGroupIds = otherUser.memberGroupIds.filter(
-                      (id) => id !== groupId,
-                    );
+                      otherUser.leaderGroupIds.push(groupId);
+                      otherUser.memberGroupIds =
+                        otherUser.memberGroupIds.filter((id) => id !== groupId);
 
-                    draft.groups.find(
-                      (group) => group.id === groupId,
-                    )!.leaderId = userId;
-                  });
-                }}
-              >
-                <span className="font-medium">Transfer Club Leadership</span>
-                <ArrowLeftRight />
-              </button>
-              <button
-                className="flex items-center justify-between p-4 text-destructive"
-                onClick={() => {
-                  const id = user.id;
-                  setData((draft) => {
-                    const user = draft.users.find((user) => user.id === id)!;
-                    user.memberGroupIds = user.memberGroupIds.filter(
-                      (id) => id !== Number(groupId),
-                    );
-                  });
-                }}
-              >
-                <span className="font-medium">Remove from Club</span>
-                <UserX />
-              </button>
-            </div>
-          )}
+                      draft.groups.find(
+                        (group) => group.id === groupId,
+                      )!.leaderId = userId;
+                    });
+                  }}
+                >
+                  <span className="font-medium">Transfer Club Leadership</span>
+                  <ArrowLeftRight />
+                </button>
+                <button
+                  className="flex items-center justify-between p-4 text-destructive"
+                  onClick={() => {
+                    const id = user.id;
+                    setData((draft) => {
+                      const user = draft.users.find((user) => user.id === id)!;
+                      user.memberGroupIds = user.memberGroupIds.filter(
+                        (id) => id !== Number(groupId),
+                      );
+                    });
+                  }}
+                >
+                  <span className="font-medium">Remove from Club</span>
+                  <UserX />
+                </button>
+              </div>
+            )}
 
           <div className="mt-6 flex w-full flex-col rounded-lg">
             <button
@@ -200,7 +204,10 @@ const UserDrawerContent = ({ user }: { user: UserType }) => {
           </div>
 
           <div className="mt-6 flex w-full flex-col rounded-lg">
-            <button className="flex items-center justify-between rounded-lg bg-stone-100 p-4 text-destructive">
+            <button
+              className="flex items-center justify-between rounded-lg bg-stone-100 p-4 text-destructive"
+              onClick={() => setShowUnderDevelopment(true)}
+            >
               <span className="font-medium">Block User</span>
               <Ban />
             </button>
