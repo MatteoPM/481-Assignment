@@ -1,3 +1,4 @@
+import { useUnderDevelopment } from "@/components/contexts/UnderDevelopmentContext";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -18,6 +19,7 @@ const Login = () => {
   const [step, setStep] = useState(1);
   const [email, setEmail] = useState("");
   const navigate = useNavigate();
+  const { setShowUnderDevelopment } = useUnderDevelopment();
 
   if (data.currentUser) {
     navigate("/");
@@ -84,7 +86,11 @@ const Login = () => {
                 onChange={(e) => setEmail(e.target.value)}
               />
 
-              <Button variant={"link"} className="p-0">
+              <Button
+                variant={"link"}
+                className="p-0"
+                onClick={() => setShowUnderDevelopment(true)}
+              >
                 Can't access your account?
               </Button>
             </div>
