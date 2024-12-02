@@ -3,7 +3,6 @@ import { ArrowLeft } from "lucide-react";
 import { ReactNode } from "react";
 import { useNavigate } from "react-router-dom";
 import FooterNav from "../components/footerNav";
-import { Separator } from "./ui/separator";
 import UserDrawer from "./userDrawer";
 
 const Page = ({
@@ -33,7 +32,7 @@ const Page = ({
         <div
           className={cn(
             "grid grid-cols-[auto_1fr_auto] items-center gap-3",
-            rightHeaderButtons && "grid-cols-[24px_1fr_auto]",
+            rightHeaderButtons && "grid-cols-[auto_1fr_auto]",
           )}
         >
           <div className="flex min-w-[32px] items-center">
@@ -49,17 +48,17 @@ const Page = ({
             )}
           </div>
 
-          <h1 className="truncate text-center font-semibold text-stone-700">
-            {title}
+          <h1 className="flex items-center justify-center truncate text-center font-semibold text-stone-700">
+            <span className="truncate">{title}</span>
+            <div className="shrink-0">{rightHeaderButtons}</div>
           </h1>
 
           <div className="flex items-center justify-self-end">
-            {rightHeaderButtons && (
+            {/* {rightHeaderButtons && (
               <>
-                {rightHeaderButtons}
                 <Separator orientation="vertical" className="mx-3 h-6" />
               </>
-            )}
+            )} */}
 
             <UserDrawer />
           </div>

@@ -11,13 +11,14 @@ import { cn } from "@/lib/utils";
 import GroupCard from "@/pages/groups/_components/groupCard";
 import { ChevronDown, Users } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import ChatMessage from "../_components/chatMessage";
 import MessageInput from "../_components/messageInput";
 
 function Forum() {
   const { data, setData } = useData();
   const { forumId } = useParams();
+  const navigate = useNavigate();
   const ref = useRef<HTMLDivElement>(null);
   const [accordion, setAccordion] = useState("");
 
@@ -111,7 +112,19 @@ function Forum() {
                   </div>
 
                   {forum.messages[0].user.id === data.currentUser!.id && (
-                    <Button className="mt-4 w-full" variant={"destructive"}>
+                    <Button
+                      className="mt-4 w-full"
+                      variant={"destructive"}
+                      onClick={() => {
+                        navigate(-1);
+                        setData((draft) => {
+                          const forumId = forum.id;
+                          draft.forums = draft.forums.filter(
+                            (forum) => forum.id !== forumId,
+                          );
+                        });
+                      }}
+                    >
                       Delete Forum
                     </Button>
                   )}
