@@ -161,14 +161,16 @@ function Event() {
           )}
 
           {group.leaderId !== data.currentUser!.id && (
-            <Button
-              className="sticky bottom-4 mt-auto w-full"
-              onClick={handleRSVP}
-              disabled={data.currentUser!.rsvpIds.includes(event.id)}
-            >
-              {!rsvpd && "RSVP"}
-              {rsvpd && "RSVP'd"}
-            </Button>
+            <div className="sticky bottom-4 mt-auto">
+              <Button
+                className="mt-4 w-full"
+                onClick={handleRSVP}
+                disabled={data.currentUser!.rsvpIds.includes(event.id)}
+              >
+                {!rsvpd && "RSVP"}
+                {rsvpd && "RSVP'd"}
+              </Button>
+            </div>
           )}
 
           <AlertDialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
