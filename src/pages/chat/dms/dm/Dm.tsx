@@ -1,3 +1,4 @@
+import { useUnderDevelopment } from "@/components/contexts/UnderDevelopmentContext";
 import Page from "@/components/page";
 import SubHeader from "@/components/subHeader";
 import {
@@ -19,6 +20,7 @@ function Dm() {
   const { data, setData } = useData();
   const { dmId } = useParams();
   const [accordion, setAccordion] = useState("");
+  const { setShowUnderDevelopment } = useUnderDevelopment();
 
   const dm = data.privateChats.find(
     (privateChat) => privateChat.id === Number(dmId),
@@ -125,6 +127,13 @@ function Dm() {
                       <User key={user.id} user={user} />
                     ))}
                   </div>
+                  <Button
+                    className="mt-4 w-full"
+                    variant={"destructive"}
+                    onClick={() => setShowUnderDevelopment(true)}
+                  >
+                    Close Conversation
+                  </Button>
                 </AccordionContent>
               </AccordionItem>
             </Accordion>
