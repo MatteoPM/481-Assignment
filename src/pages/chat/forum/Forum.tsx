@@ -6,10 +6,11 @@ import {
   AccordionItem,
 } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
+import { useToast } from "@/hooks/use-toast";
 import { useData } from "@/hooks/useData";
 import { cn } from "@/lib/utils";
 import GroupCard from "@/pages/groups/_components/groupCard";
-import { ChevronDown, Users } from "lucide-react";
+import { CheckCircle, ChevronDown, Users } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import ChatMessage from "../_components/chatMessage";
@@ -21,6 +22,7 @@ function Forum() {
   const navigate = useNavigate();
   const ref = useRef<HTMLDivElement>(null);
   const [accordion, setAccordion] = useState("");
+  const { toast } = useToast();
 
   const forum = data.forums.find((forum) => forum.id === Number(forumId));
 
@@ -122,6 +124,14 @@ function Forum() {
                           draft.forums = draft.forums.filter(
                             (forum) => forum.id !== forumId,
                           );
+                        });
+                        toast({
+                          title: (
+                            <div className="flex items-center gap-2">
+                              <CheckCircle className="text-green-400" />
+                              <span>Forum deleted successfully.</span>
+                            </div>
+                          ),
                         });
                       }}
                     >

@@ -3,6 +3,7 @@ import { createRoot } from "react-dom/client";
 import { createHashRouter, RouterProvider } from "react-router-dom";
 import AuthLayout from "./components/authLayout.tsx";
 import { UserDrawerProvider } from "./components/contexts/UserDrawerContext.tsx";
+import { Toaster } from "./components/ui/toaster.tsx";
 import { DataProvider } from "./hooks/useData.tsx";
 import "./index.css";
 import App from "./pages/App.tsx";
@@ -129,6 +130,7 @@ createRoot(document.getElementById("root")!).render(
         <div className="grid h-full bg-gray-950 sm:place-content-center">
           <div className="overflow-hidden bg-stone-100 sm:h-[667px] sm:w-[375px] sm:rounded-lg sm:border sm:shadow">
             <RouterProvider router={router} />
+            <Toaster />
           </div>
         </div>
       </UserDrawerProvider>
