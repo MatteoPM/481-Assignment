@@ -52,14 +52,13 @@ today.setHours(0, 0, 0, 0); // Ensure the time part is cleared for "current day"
 const formSchema = z
   .object({
     bannerUrl: z.string().min(1, { message: "Banner Image is required." }),
-    hostingClub: z.number(),
+    hostingClub: z.number({ required_error: "Hosting Club is required." }),
     title: z
       .string()
       .min(5, { message: "Event Title must be at least 5 characters." })
       .max(30, {
         message: "Event Title must not be longer than 30 characters.",
       }),
-
     description: z
       .string()
       .min(20, { message: "Description must be at least 20 characters." })
@@ -102,6 +101,12 @@ function CreateEvent() {
   const [searchParams] = useSearchParams();
   const initialGroupId = searchParams.get("groupId");
   const navigate = useNavigate();
+
+  const now = new Date();
+  now.setDate(now.getDate() + 1);
+  const tomorrow = now
+    .toISOString()
+    .slice(0, now.toISOString().lastIndexOf(":"));
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -344,7 +349,7 @@ function CreateEvent() {
                     Starts<span className="text-red-400">*</span>
                   </FormLabel>
                   <FormControl>
-                    <Input type="datetime-local" {...field} />
+                    <Input type="datetime-local" min={tomorrow} {...field} />
                   </FormControl>
                   {/* <FormDescription>
                     This is your public display name.
@@ -383,7 +388,7 @@ function CreateEvent() {
                   <div className="mt-2 grid grid-cols-2 gap-y-1">
                     {eventCategories.map((category) => (
                       <FormControl key={category}>
-                        <div className="flex items-center space-x-2">
+                        <label className="flex items-center space-x-2">
                           <Checkbox
                             value={category}
                             checked={field.value.includes(category)}
@@ -398,10 +403,9 @@ function CreateEvent() {
                             }}
                             id={category}
                           />
-                          <label htmlFor={category} className="text-sm">
-                            {category}
-                          </label>
-                        </div>
+
+                          <span className="text-sm">{category}</span>
+                        </label>
                       </FormControl>
                     ))}
                   </div>
