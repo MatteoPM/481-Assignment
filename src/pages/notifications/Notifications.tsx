@@ -35,6 +35,20 @@ function Notifications() {
   const [type, setType] = useState("all");
   const { data } = useData();
 
+  const filteredNotifications = data.currentUser!.notifications.filter(
+    (notification) => {
+      if (type === "all") {
+        return true;
+      } else if (type === "chat") {
+        return notification.category === "chat";
+      } else if (type === "group") {
+        return notification.category === "group";
+      } else if (type === "event") {
+        return notification.category === "event";
+      }
+    },
+  );
+
   return (
     <>
       <Page title="Notifications" showBackButton hideFooter>
@@ -55,7 +69,7 @@ function Notifications() {
           ))}
         </div>
         <div className="mt-3 flex flex-col divide-y overflow-hidden rounded-md border bg-white shadow-sm">
-          {data.currentUser!.notifications.map((notification) => {
+          {filteredNotifications.map((notification) => {
             return (
               <>
                 <div className="flex items-start space-x-4 rounded-lg bg-card p-4 shadow-sm">
@@ -106,7 +120,7 @@ function Notifications() {
                             className="flex w-full items-center justify-end"
                             variant={"link"}
                           >
-                            Chat <ArrowRight />
+                            <ArrowRight />
                           </Button>
                         </div>
                       </>
@@ -161,7 +175,7 @@ function Notifications() {
                             className="flex w-full items-center justify-end"
                             variant={"link"}
                           >
-                            Group <ArrowRight />
+                            <ArrowRight />
                           </Button>
                         </div>
                       </>
@@ -190,7 +204,7 @@ function Notifications() {
                             className="flex w-full items-center justify-end"
                             variant={"link"}
                           >
-                            Event <ArrowRight />
+                            <ArrowRight />
                           </Button>
                         </div>
                       </>
