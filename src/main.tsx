@@ -18,7 +18,10 @@ import Events from "./pages/events/Events.tsx";
 import Clubs from "./pages/groups/clubs/Clubs.tsx";
 import Courses from "./pages/groups/courses/Courses.tsx";
 import CreateGroup from "./pages/groups/create/CreateGroup.tsx";
+import GroupEvents from "./pages/groups/group/events/GroupEvents.tsx";
+import GroupForums from "./pages/groups/group/forums/GroupForums.tsx";
 import Group from "./pages/groups/group/Group.tsx";
+import GroupMembers from "./pages/groups/group/members/GroupMembers.tsx";
 import GroupStats from "./pages/groups/group/stats/GroupStats.tsx";
 import Login from "./pages/login/Login.tsx";
 import Notifications from "./pages/notifications/Notifications.tsx";
@@ -78,6 +81,18 @@ const router = createHashRouter([
       {
         path: "/groups/:groupId",
         element: <Group />,
+      },
+      {
+        path: "/groups/:groupId/members",
+        element: <GroupMembers />,
+      },
+      {
+        path: "/groups/:groupId/forums",
+        element: <GroupForums />,
+      },
+      {
+        path: "/groups/:groupId/events",
+        element: <GroupEvents />,
       },
       {
         path: "/groups/:groupId/stats",

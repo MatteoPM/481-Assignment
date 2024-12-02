@@ -31,11 +31,12 @@ import {
   X,
 } from "lucide-react";
 import { useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 function Group() {
   const { groupId } = useParams();
   const { data, setData } = useData();
+  const navigate = useNavigate();
   const group = data.groups.find((group) => group.id === Number(groupId));
   const [joinRequestConfirmOpen, setJoinRequestConfirmOpen] = useState(false);
   const [joinRequestSentOpen, setJoinRequestSentOpen] = useState(false);
@@ -235,6 +236,7 @@ function Group() {
                   size={"sm"}
                   className="w-full"
                   disabled={members.length === 0}
+                  onClick={() => navigate(`/groups/${groupId}/members`)}
                 >
                   <Expand className="size-[15px]" />
                   <span className="leading-none">View All</span>
@@ -345,6 +347,7 @@ function Group() {
                   size={"sm"}
                   className="w-full"
                   disabled={forums.length === 0}
+                  onClick={() => navigate(`/groups/${groupId}/forums`)}
                 >
                   <Expand className="size-[20px]" />
                   <span className="leading-none">View All</span>
@@ -395,6 +398,7 @@ function Group() {
                       size={"sm"}
                       className="w-full"
                       disabled={events.length === 0}
+                      onClick={() => navigate(`/groups/${groupId}/events`)}
                     >
                       <Expand className="size-[20px]" />
                       <span className="leading-none">View All</span>

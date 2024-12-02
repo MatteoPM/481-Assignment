@@ -24,18 +24,18 @@ function GroupMembers() {
 
   return (
     <>
-      <Page title={group.name} showBackButton bodyClassname="p-0 flex flex-col">
+      <Page title={`Members`} showBackButton bodyClassname="flex flex-col">
         <SubHeader
           Icon={Users}
           text={
             <span>
-              Members{" "}
+              {group.name} Members{" "}
               <span className="font-normal text-muted-foreground">
                 ({members.length})
               </span>
             </span>
           }
-          className="mt-6"
+          className="mt-0"
         />
 
         {members.length === 0 && (
