@@ -54,7 +54,7 @@ export type NotificationType = "chat" | "group" | "event";
 export type Notification = {
   id: number;
   category: NotificationType;
-  // time: string;
+  time: string;
 } & (
   | {
       category: "chat";
@@ -119,16 +119,18 @@ const testUser: UserType = {
       id: 0,
       category: "chat",
       type: "message",
+      time: new Date(Date.now() - 0.3 * hour).toISOString(),
       data: {
-        senderId: 0,
+        senderId: 1,
         chatId: 0,
-        message: "Wassup dude",
+        message: ":)",
       },
     },
     {
       id: 1,
       category: "group",
       type: "joinRequest",
+      time: new Date(Date.now() - 0.7 * hour).toISOString(),
       data: {
         requesterId: 0,
         clubId: 0,
@@ -138,6 +140,7 @@ const testUser: UserType = {
       id: 2,
       category: "event",
       type: "eventReminder",
+      time: new Date(Date.now() - 5 * hour).toISOString(),
       data: {
         eventId: 0,
       },

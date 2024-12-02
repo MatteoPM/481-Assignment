@@ -4,6 +4,7 @@ import { Drawer, DrawerContent, DrawerTrigger } from "@/components/ui/drawer";
 import UserDrawerContent from "@/components/userDrawerContent";
 import { useData } from "@/hooks/useData";
 import { cn } from "@/lib/utils";
+import { formatDistanceToNow } from "date-fns";
 import {
   ArrowRight,
   CalendarDays,
@@ -121,15 +122,22 @@ function Notifications() {
 
                           <div className="mt-2 flex items-center justify-between">
                             <span className="shrink-0 text-xs text-muted-foreground">
-                              2m ago
+                              {formatDistanceToNow(notification.time, {
+                                addSuffix: true,
+                              })}
                             </span>
 
                             <Button
                               size={"sm"}
                               className="flex w-full items-center justify-end"
                               variant={"link"}
+                              asChild
                             >
-                              <ArrowRight />
+                              <Link
+                                to={`/chat/dms/${notification.data.chatId}`}
+                              >
+                                <ArrowRight />
+                              </Link>
                             </Button>
                           </div>
                         </>
@@ -178,15 +186,20 @@ function Notifications() {
 
                           <div className="mt-2 flex items-center justify-between">
                             <span className="shrink-0 text-xs text-muted-foreground">
-                              2m ago
+                              {formatDistanceToNow(notification.time, {
+                                addSuffix: true,
+                              })}
                             </span>
 
                             <Button
                               size={"sm"}
                               className="flex w-full items-center justify-end"
                               variant={"link"}
+                              asChild
                             >
-                              <ArrowRight />
+                              <Link to={`/groups/${notification.data.clubId}`}>
+                                <ArrowRight />
+                              </Link>
                             </Button>
                           </div>
                         </>
@@ -210,7 +223,9 @@ function Notifications() {
 
                           <div className="mt-2 flex items-center justify-between">
                             <span className="shrink-0 text-xs text-muted-foreground">
-                              2m ago
+                              {formatDistanceToNow(notification.time, {
+                                addSuffix: true,
+                              })}
                             </span>
 
                             <Button
@@ -218,7 +233,9 @@ function Notifications() {
                               className="flex w-full items-center justify-end"
                               variant={"link"}
                             >
-                              <ArrowRight />
+                              <Link to={`/events/${notification.data.eventId}`}>
+                                <ArrowRight />
+                              </Link>
                             </Button>
                           </div>
                         </>
