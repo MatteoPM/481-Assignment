@@ -208,7 +208,10 @@ function CreateEvent() {
                             <CommandEmpty>No club found.</CommandEmpty>
                             <CommandGroup>
                               {clubs
-                                .filter((club) => club.leaderId === 0)
+                                .filter(
+                                  (club) =>
+                                    club.leaderId === data.currentUser!.id,
+                                )
                                 .map((club) => (
                                   <CommandItem
                                     value={club.name}
