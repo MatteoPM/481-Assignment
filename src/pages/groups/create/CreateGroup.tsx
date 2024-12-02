@@ -23,8 +23,8 @@ const formSchema = z.object({
   bannerUrl: z.string().min(1, { message: "Banner Image is required." }),
   name: z
     .string()
-    .min(5, { message: "Event Title must be at least 5 characters." })
-    .max(30, { message: "Event Title must not be longer than 30 characters." }),
+    .min(5, { message: "Club Name must be at least 5 characters." })
+    .max(30, { message: "Club Name must not be longer than 30 characters." }),
   description: z
     .string()
     .min(20, { message: "Description must be at least 20 characters." })
