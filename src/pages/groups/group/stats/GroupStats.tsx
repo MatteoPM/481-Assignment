@@ -1,3 +1,4 @@
+import { useUnderDevelopment } from "@/components/contexts/UnderDevelopmentContext";
 import Page from "@/components/page";
 import { Button } from "@/components/ui/button";
 import {
@@ -19,6 +20,8 @@ import { Clock, Download } from "lucide-react";
 import chartsUrl from "/charts.png";
 
 function GroupStats() {
+  const { setShowUnderDevelopment } = useUnderDevelopment();
+
   return (
     <>
       <Page title="Stats" showBackButton>
@@ -53,8 +56,12 @@ function GroupStats() {
             <DropdownMenuContent>
               <DropdownMenuLabel>Export as...</DropdownMenuLabel>
               <DropdownMenuSeparator />
-              <DropdownMenuItem>CSV</DropdownMenuItem>
-              <DropdownMenuItem>PDF</DropdownMenuItem>
+              <DropdownMenuItem onClick={() => setShowUnderDevelopment(true)}>
+                CSV
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => setShowUnderDevelopment(true)}>
+                PDF
+              </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
         </div>
