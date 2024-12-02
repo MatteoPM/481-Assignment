@@ -113,31 +113,32 @@ function Forum() {
                     <GroupCard group={group} showBorder />
                   </div>
 
-                  {forum.messages[0].user.id === data.currentUser!.id && (
-                    <Button
-                      className="mt-4 w-full"
-                      variant={"destructive"}
-                      onClick={() => {
-                        navigate(-1);
-                        setData((draft) => {
-                          const forumId = forum.id;
-                          draft.forums = draft.forums.filter(
-                            (forum) => forum.id !== forumId,
-                          );
-                        });
-                        toast({
-                          title: (
-                            <div className="flex items-center gap-2">
-                              <CheckCircle className="text-green-400" />
-                              <span>Forum deleted successfully.</span>
-                            </div>
-                          ),
-                        });
-                      }}
-                    >
-                      Delete Forum
-                    </Button>
-                  )}
+                  {forum.messages[0].user.id === data.currentUser!.id ||
+                    (group.leaderId === data.currentUser!.id && (
+                      <Button
+                        className="mt-4 w-full"
+                        variant={"destructive"}
+                        onClick={() => {
+                          navigate(-1);
+                          setData((draft) => {
+                            const forumId = forum.id;
+                            draft.forums = draft.forums.filter(
+                              (forum) => forum.id !== forumId,
+                            );
+                          });
+                          toast({
+                            title: (
+                              <div className="flex items-center gap-2">
+                                <CheckCircle className="text-green-400" />
+                                <span>Forum deleted successfully.</span>
+                              </div>
+                            ),
+                          });
+                        }}
+                      >
+                        Delete Forum
+                      </Button>
+                    ))}
                 </AccordionContent>
               </AccordionItem>
             </Accordion>
