@@ -28,7 +28,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { useData } from "@/hooks/useData";
 import { cn } from "@/lib/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Check, ChevronsUpDown, Edit } from "lucide-react";
+import { Camera, Check, ChevronsUpDown, Edit } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { z } from "zod";
@@ -118,8 +118,7 @@ function CreateEvent() {
       hostingClub: initialGroupId ? Number(initialGroupId) : undefined,
       location: "",
       categories: [],
-      bannerUrl:
-        "https://assets.ppy.sh/user-cover-presets/4/2fd772ad175c5687370e0aab50799a84adef7d0fff3f97dccfa5c94384ebb8af.jpeg",
+      bannerUrl: "",
     },
   });
 
@@ -254,16 +253,22 @@ function CreateEvent() {
               control={form.control}
               name="bannerUrl"
               render={({ field }) => (
-                <FormItem className="mt-6">
+                <FormItem className="">
                   <FormLabel>
                     Banner Image<span className="text-red-400">*</span>
                   </FormLabel>
                   <FormControl className="">
                     <div className="relative mt-2">
-                      <img
-                        className="h-[120px] w-full rounded-lg object-cover"
-                        src={field.value}
-                      />
+                      {field.value ? (
+                        <img
+                          className="h-[120px] w-full rounded-lg object-cover"
+                          src={field.value}
+                        />
+                      ) : (
+                        <div className="flex h-[120px] w-full items-center justify-center rounded-lg bg-stone-200 object-cover">
+                          <Camera className="size-[70px] text-stone-300" />
+                        </div>
+                      )}
                       <Button
                         className="absolute right-2 top-2 shadow"
                         size={"icon"}
@@ -285,7 +290,6 @@ function CreateEvent() {
                 </FormItem>
               )}
             />
-
             <FormField
               control={form.control}
               name="title"
