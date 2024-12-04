@@ -71,7 +71,7 @@ const ChatFilter = ({
               className="mt-2"
             >
               {courseFilters.map((courseType) => (
-                <div className="flex items-center space-x-2">
+                <div key={courseType} className="flex items-center space-x-2">
                   <RadioGroupItem value={courseType} id={courseType} />
                   <Label htmlFor={courseType}>{courseType}</Label>
                 </div>
@@ -87,7 +87,7 @@ const ChatFilter = ({
               className="mt-2"
             >
               {clubFilters.map((clubType) => (
-                <div className="flex items-center space-x-2">
+                <div key={clubType} className="flex items-center space-x-2">
                   <RadioGroupItem value={clubType} id={clubType} />
                   <Label htmlFor={clubType}>{clubType}</Label>
                 </div>
@@ -106,7 +106,10 @@ const ChatFilter = ({
             className="mt-2"
           >
             {involvementFilters.map((involvementType) => (
-              <div className="flex items-center space-x-2">
+              <div
+                key={involvementType}
+                className="flex items-center space-x-2"
+              >
                 <RadioGroupItem value={involvementType} id={involvementType} />
                 <Label htmlFor={involvementType}>{involvementType}</Label>
               </div>

@@ -5,10 +5,12 @@ import UserDrawerContent from "@/components/userDrawerContent";
 import { useData } from "@/hooks/useData";
 import { cn } from "@/lib/utils";
 import { formatDistanceToNow } from "date-fns";
+import { AnimatePresence, motion } from "framer-motion";
 import {
   ArrowRight,
   CalendarDays,
   MessageCircleMore,
+  Trash2,
   Users,
 } from "lucide-react";
 import { useState } from "react";
@@ -34,7 +36,7 @@ const types = [
 
 function Notifications() {
   const [type, setType] = useState("all");
-  const { data } = useData();
+  const { data, setData } = useData();
 
   const filteredNotifications = data.currentUser!.notifications.filter(
     (notification) => {
@@ -75,177 +77,235 @@ function Notifications() {
           ))}
         </div>
 
-        <div className="grow overflow-auto p-4 pt-0">
-          <div className="flex flex-col divide-y rounded-md border bg-white shadow-sm">
-            {filteredNotifications.map((notification) => {
-              return (
-                <>
-                  <div className="flex items-start space-x-4 rounded-lg bg-card p-4 shadow-sm">
-                    <div className="rounded-full bg-primary/10 p-2">
-                      {notification.category === "chat" && (
-                        <MessageCircleMore />
-                      )}
-                      {notification.category === "group" && <Users />}
-                      {notification.category === "event" && <CalendarDays />}
-                    </div>
-                    <div className="flex-grow">
-                      {notification.type === "message" && (
-                        <>
-                          <h2 className="font-semibold">
-                            <Drawer>
-                              <DrawerTrigger className="shrink-0 pt-2" asChild>
-                                <span className="cursor-pointer text-primary">
-                                  {
-                                    data.users.find(
-                                      (user) =>
-                                        user.id === notification.data.senderId,
-                                    )!.username
-                                  }
+        <div className="grow overflow-auto p-4 px-0 pt-0">
+          {filteredNotifications.length === 0 && (
+            <div className="mb-6 mt-3 text-center font-semibold text-muted-foreground">
+              No {type !== "all" && type} notifications.
+            </div>
+          )}
+          {filteredNotifications.length > 0 && (
+            <div className="isolate flex flex-col divide-y border bg-white shadow-sm">
+              <AnimatePresence>
+                {filteredNotifications.map((notification) => {
+                  return (
+                    <motion.div
+                      key={`notif-${notification.id}`}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{
+                        opacity: {
+                          transition: {
+                            duration: 0,
+                          },
+                        },
+                      }}
+                      className="relative"
+                    >
+                      <div className="absolute inset-y-0 right-0 -z-10 flex items-center justify-end bg-destructive px-[16px]">
+                        <Trash2 className="size-[30px] text-destructive-foreground" />
+                      </div>
+                      <motion.div
+                        drag="x"
+                        dragConstraints={{ left: -62, right: 0 }}
+                        dragElastic={{ left: 0, right: 0 }}
+                        dragSnapToOrigin
+                        onDragEnd={(_, info) => {
+                          if (info.offset.x <= -62) {
+                            setData((draft) => {
+                              const currentUser = draft.users.find(
+                                (user) => user.id === draft.currentUser!.id,
+                              )!;
+                              draft.currentUser = currentUser;
+
+                              currentUser.notifications =
+                                currentUser.notifications.filter(
+                                  (notif) => notif.id !== notification.id,
+                                );
+                            });
+                          }
+                        }}
+                        className="flex items-start space-x-4 overflow-hidden bg-card p-4"
+                      >
+                        <div className="rounded-full bg-primary/10 p-2">
+                          {notification.category === "chat" && (
+                            <MessageCircleMore />
+                          )}
+                          {notification.category === "group" && <Users />}
+                          {notification.category === "event" && (
+                            <CalendarDays />
+                          )}
+                        </div>
+                        <div className="flex-grow">
+                          {notification.type === "message" && (
+                            <>
+                              <h2 className="font-semibold">
+                                <Drawer>
+                                  <DrawerTrigger
+                                    className="shrink-0 pt-2"
+                                    asChild
+                                  >
+                                    <span className="cursor-pointer text-primary">
+                                      {
+                                        data.users.find(
+                                          (user) =>
+                                            user.id ===
+                                            notification.data.senderId,
+                                        )!.username
+                                      }
+                                    </span>
+                                  </DrawerTrigger>
+                                  <DrawerContent className="">
+                                    <UserDrawerContent
+                                      user={
+                                        data.users.find(
+                                          (user) =>
+                                            user.id ===
+                                            notification.data.senderId,
+                                        )!
+                                      }
+                                    />
+                                  </DrawerContent>
+                                </Drawer>{" "}
+                                sent a message
+                              </h2>
+                              <p className="text-sm text-muted-foreground">
+                                {notification.data.message}
+                              </p>
+
+                              <div className="mt-2 flex items-center justify-between">
+                                <span className="shrink-0 text-xs text-muted-foreground">
+                                  {formatDistanceToNow(notification.time, {
+                                    addSuffix: true,
+                                  })}
                                 </span>
-                              </DrawerTrigger>
-                              <DrawerContent className="">
-                                <UserDrawerContent
-                                  user={
-                                    data.users.find(
-                                      (user) =>
-                                        user.id === notification.data.senderId,
-                                    )!
-                                  }
-                                />
-                              </DrawerContent>
-                            </Drawer>{" "}
-                            sent a message
-                          </h2>
-                          <p className="text-sm text-muted-foreground">
-                            {notification.data.message}
-                          </p>
 
-                          <div className="mt-2 flex items-center justify-between">
-                            <span className="shrink-0 text-xs text-muted-foreground">
-                              {formatDistanceToNow(notification.time, {
-                                addSuffix: true,
-                              })}
-                            </span>
-
-                            <Button
-                              size={"sm"}
-                              className="flex w-full items-center justify-end"
-                              variant={"link"}
-                              asChild
-                            >
-                              <Link
-                                to={`/chat/dms/${notification.data.chatId}`}
-                              >
-                                <ArrowRight />
-                              </Link>
-                            </Button>
-                          </div>
-                        </>
-                      )}
-                      {notification.type === "joinRequest" && (
-                        <>
-                          <h2 className="font-semibold">
-                            <Drawer>
-                              <DrawerTrigger className="shrink-0 pt-2" asChild>
-                                <span className="cursor-pointer text-primary">
+                                <Button
+                                  size={"sm"}
+                                  className="flex w-full items-center justify-end"
+                                  variant={"link"}
+                                  asChild
+                                >
+                                  <Link
+                                    to={`/chat/dms/${notification.data.chatId}`}
+                                  >
+                                    <ArrowRight />
+                                  </Link>
+                                </Button>
+                              </div>
+                            </>
+                          )}
+                          {notification.type === "joinRequest" && (
+                            <>
+                              <h2 className="font-semibold">
+                                <Drawer>
+                                  <DrawerTrigger
+                                    className="shrink-0 pt-2"
+                                    asChild
+                                  >
+                                    <span className="cursor-pointer text-primary">
+                                      {
+                                        data.users.find(
+                                          (user) =>
+                                            user.id ===
+                                            notification.data.requesterId,
+                                        )!.username
+                                      }
+                                    </span>
+                                  </DrawerTrigger>
+                                  <DrawerContent className="">
+                                    <UserDrawerContent
+                                      user={
+                                        data.users.find(
+                                          (user) =>
+                                            user.id ===
+                                            notification.data.requesterId,
+                                        )!
+                                      }
+                                    />
+                                  </DrawerContent>
+                                </Drawer>{" "}
+                                requested to join the{" "}
+                                <Link
+                                  to={`/groups/${notification.data.clubId}`}
+                                  className="text-primary"
+                                >
                                   {
-                                    data.users.find(
-                                      (user) =>
-                                        user.id ===
-                                        notification.data.requesterId,
-                                    )!.username
+                                    data.groups.find(
+                                      (group) =>
+                                        group.id === notification.data.clubId,
+                                    )!.name
                                   }
+                                </Link>{" "}
+                                club
+                              </h2>
+
+                              <div className="mt-2 flex items-center justify-between">
+                                <span className="shrink-0 text-xs text-muted-foreground">
+                                  {formatDistanceToNow(notification.time, {
+                                    addSuffix: true,
+                                  })}
                                 </span>
-                              </DrawerTrigger>
-                              <DrawerContent className="">
-                                <UserDrawerContent
-                                  user={
-                                    data.users.find(
-                                      (user) =>
-                                        user.id ===
-                                        notification.data.requesterId,
-                                    )!
+
+                                <Button
+                                  size={"sm"}
+                                  className="flex w-full items-center justify-end"
+                                  variant={"link"}
+                                  asChild
+                                >
+                                  <Link
+                                    to={`/groups/${notification.data.clubId}`}
+                                  >
+                                    <ArrowRight />
+                                  </Link>
+                                </Button>
+                              </div>
+                            </>
+                          )}
+                          {notification.type === "eventReminder" && (
+                            <>
+                              <h2 className="font-semibold">
+                                <Link
+                                  to={`/events/${notification.data.eventId}`}
+                                  className="text-primary"
+                                >
+                                  {
+                                    data.events.find(
+                                      (event) =>
+                                        event.id === notification.data.eventId,
+                                    )!.title
                                   }
-                                />
-                              </DrawerContent>
-                            </Drawer>{" "}
-                            requested to join the{" "}
-                            <Link
-                              to={`/groups/${notification.data.clubId}`}
-                              className="text-primary"
-                            >
-                              {
-                                data.groups.find(
-                                  (group) =>
-                                    group.id === notification.data.clubId,
-                                )!.name
-                              }
-                            </Link>{" "}
-                            club
-                          </h2>
+                                </Link>{" "}
+                                begins in 1 day
+                              </h2>
 
-                          <div className="mt-2 flex items-center justify-between">
-                            <span className="shrink-0 text-xs text-muted-foreground">
-                              {formatDistanceToNow(notification.time, {
-                                addSuffix: true,
-                              })}
-                            </span>
+                              <div className="mt-2 flex items-center justify-between">
+                                <span className="shrink-0 text-xs text-muted-foreground">
+                                  {formatDistanceToNow(notification.time, {
+                                    addSuffix: true,
+                                  })}
+                                </span>
 
-                            <Button
-                              size={"sm"}
-                              className="flex w-full items-center justify-end"
-                              variant={"link"}
-                              asChild
-                            >
-                              <Link to={`/groups/${notification.data.clubId}`}>
-                                <ArrowRight />
-                              </Link>
-                            </Button>
-                          </div>
-                        </>
-                      )}
-                      {notification.type === "eventReminder" && (
-                        <>
-                          <h2 className="font-semibold">
-                            <Link
-                              to={`/events/${notification.data.eventId}`}
-                              className="text-primary"
-                            >
-                              {
-                                data.events.find(
-                                  (event) =>
-                                    event.id === notification.data.eventId,
-                                )!.title
-                              }
-                            </Link>{" "}
-                            begins in 1 day
-                          </h2>
-
-                          <div className="mt-2 flex items-center justify-between">
-                            <span className="shrink-0 text-xs text-muted-foreground">
-                              {formatDistanceToNow(notification.time, {
-                                addSuffix: true,
-                              })}
-                            </span>
-
-                            <Button
-                              size={"sm"}
-                              className="flex w-full items-center justify-end"
-                              variant={"link"}
-                            >
-                              <Link to={`/events/${notification.data.eventId}`}>
-                                <ArrowRight />
-                              </Link>
-                            </Button>
-                          </div>
-                        </>
-                      )}
-                    </div>
-                  </div>
-                </>
-              );
-            })}
-          </div>
+                                <Button
+                                  size={"sm"}
+                                  className="flex w-full items-center justify-end"
+                                  variant={"link"}
+                                >
+                                  <Link
+                                    to={`/events/${notification.data.eventId}`}
+                                  >
+                                    <ArrowRight />
+                                  </Link>
+                                </Button>
+                              </div>
+                            </>
+                          )}
+                        </div>
+                      </motion.div>
+                    </motion.div>
+                  );
+                })}
+              </AnimatePresence>
+            </div>
+          )}
         </div>
       </Page>
     </>

@@ -66,7 +66,7 @@ const EventFilter = ({
           <h2 className="mt-4 font-medium">Categories</h2>
           <div className="mt-2 grid grid-cols-2 gap-y-1">
             {eventCategories.map((category) => (
-              <label className="flex items-center space-x-2">
+              <label key={category} className="flex items-center space-x-2">
                 <Checkbox
                   id={category}
                   checked={categories.includes(category)}

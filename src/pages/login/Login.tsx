@@ -122,7 +122,9 @@ const Login = () => {
           <span>Try:</span>
           <ul className="list-disc">
             {data.users.map((user) => (
-              <li className="select-all">{user.email}</li>
+              <li key={user.id} className="select-all">
+                {user.email}
+              </li>
             ))}
           </ul>
         </div>

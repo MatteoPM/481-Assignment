@@ -61,7 +61,6 @@ function CreateForum() {
   });
 
   const groupId = form.watch("groupId");
-  console.log(groupId);
 
   const group = data.groups.find((group) => group.id === groupId);
 

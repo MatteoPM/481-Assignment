@@ -148,7 +148,10 @@ function Forum() {
         <div className="flex h-full flex-col">
           <div ref={ref} className="flex grow flex-col gap-4 overflow-auto">
             {forum.messages.map((chatMessage) => (
-              <ChatMessage chatMessage={chatMessage} />
+              <ChatMessage
+                key={chatMessage.dateTime}
+                chatMessage={chatMessage}
+              />
             ))}
           </div>
 

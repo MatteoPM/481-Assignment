@@ -47,6 +47,7 @@ function CreateDm() {
             <div className="divide-y divide-solid">
               {filteredUsers.map((user) => (
                 <label
+                  key={user.id}
                   className="flex items-center gap-2"
                   htmlFor={`dm-${user.id}`}
                 >

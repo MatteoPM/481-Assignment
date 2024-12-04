@@ -22,7 +22,6 @@ const UserDrawerContext = createContext<DataContextType | undefined>(undefined);
 export const UserDrawerProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<UserType | null>(null);
   const [isOpen, setIsOpen] = useState(false);
-  console.log(user);
 
   return (
     <UserDrawerContext.Provider value={{ user, setUser, isOpen, setIsOpen }}>

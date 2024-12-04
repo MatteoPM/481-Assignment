@@ -63,7 +63,7 @@ function Dms() {
                   )?.id ?? -1;
 
                 return (
-                  <Link to={`/chat/dms/${dmId}`}>
+                  <Link key={dm.id} to={`/chat/dms/${dmId}`}>
                     <DmCard dm={dm} key={dm.id} />
                   </Link>
                 );

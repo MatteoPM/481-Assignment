@@ -57,7 +57,7 @@ function App() {
         <h2 className="mt-6 text-xl font-semibold">Upcoming Events</h2>
         <div className="mt-3 space-y-3">
           {data.events.slice(0, 3).map((event) => (
-            <EventCard event={event} />
+            <EventCard key={event.id} event={event} />
           ))}
         </div>
 

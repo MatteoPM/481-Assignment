@@ -49,7 +49,7 @@ function Clubs() {
               <>
                 <div className="mt-3 flex flex-col divide-y overflow-hidden rounded-md border bg-white shadow-sm">
                   {filteredClubs.map((group) => (
-                    <GroupCard group={group} compact />
+                    <GroupCard key={group.id} group={group} compact />
                   ))}
                 </div>
                 {q && (

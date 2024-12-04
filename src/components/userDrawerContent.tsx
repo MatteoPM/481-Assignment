@@ -119,8 +119,6 @@ const UserDrawerContent = ({ user }: { user: UserType }) => {
                 <button
                   className="flex items-center justify-between p-4"
                   onClick={() => {
-                    console.log("hii");
-
                     setData((draft) => {
                       const currentUser = draft.users.find(
                         (user) => user.id === draft.currentUser!.id,
