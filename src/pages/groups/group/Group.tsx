@@ -24,7 +24,6 @@ import {
   Contact,
   Crown,
   DoorOpen,
-  Expand,
   Loader,
   MessageSquareText,
   Plus,
@@ -231,22 +230,20 @@ function Group() {
               )}
 
               <div className="mt-3 flex gap-3">
-                <Button
-                  size={"sm"}
-                  className="w-full"
-                  disabled={members.length === 0}
+                <button
+                  className="text-sm font-semibold text-primary disabled:opacity-50"
                   onClick={() => navigate(`/groups/${groupId}/members`)}
+                  disabled={members.length === 0}
                 >
-                  <Expand className="size-[15px]" />
-                  <span className="leading-none">View All</span>
-                </Button>
+                  View all
+                </button>
 
                 {group.leaderId === data.currentUser.id && (
                   <Dialog>
                     <DialogTrigger asChild>
                       <Button
                         size={"sm"}
-                        className="w-full bg-orange-400 hover:bg-orange-400/90"
+                        className="ml-auto bg-orange-400 hover:bg-orange-400/90"
                         disabled={group.applicationIds.length === 0}
                       >
                         <Contact className="size-[15px]" />
@@ -342,7 +339,14 @@ function Group() {
               )}
 
               <div className="mt-3 flex gap-3">
-                <Button
+                <button
+                  className="text-sm font-semibold text-primary disabled:opacity-50"
+                  onClick={() => navigate(`/groups/${groupId}/forums`)}
+                  disabled={forums.length === 0}
+                >
+                  View all
+                </button>
+                {/* <Button
                   size={"sm"}
                   className="w-full"
                   disabled={forums.length === 0}
@@ -350,9 +354,16 @@ function Group() {
                 >
                   <Expand className="size-[20px]" />
                   <span className="leading-none">View All</span>
-                </Button>
+                </Button> */}
+                <Link
+                  to={`/chat/create?groupId=${group.id}`}
+                  className="ml-auto rounded-full bg-white p-1 shadow disabled:opacity-50"
+                >
+                  <Plus className="text-green-400" />
+                  {/* <span className="text-green-400">Create</span> */}
+                </Link>
 
-                <Button
+                {/* <Button
                   size={"sm"}
                   className="w-full bg-green-400 hover:bg-green-400/90"
                   asChild
@@ -361,7 +372,7 @@ function Group() {
                     <Plus className="size-[20px]" />
                     <span className="leading-none">Create</span>
                   </Link>
-                </Button>
+                </Button> */}
               </div>
 
               {!group.isCourse && (
@@ -393,27 +404,22 @@ function Group() {
                   )}
 
                   <div className="mt-3 flex gap-3">
-                    <Button
-                      size={"sm"}
-                      className="w-full"
+                    <button
+                      className="text-sm font-semibold text-primary disabled:opacity-50"
                       disabled={events.length === 0}
                       onClick={() => navigate(`/groups/${groupId}/events`)}
                     >
-                      <Expand className="size-[20px]" />
-                      <span className="leading-none">View All</span>
-                    </Button>
+                      View all
+                    </button>
 
                     {group.leaderId === data.currentUser.id && (
-                      <Button
-                        size={"sm"}
-                        className="w-full bg-green-400 hover:bg-green-400/90"
-                        asChild
+                      <Link
+                        to={`/events/create?groupId=${group.id}`}
+                        className="ml-auto rounded-full bg-white p-1 shadow disabled:opacity-50"
                       >
-                        <Link to={`/events/create?groupId=${group.id}`}>
-                          <Plus className="size-[20px]" />
-                          <span className="leading-none">Create</span>
-                        </Link>
-                      </Button>
+                        <Plus className="text-green-400" />
+                        {/* <span className="text-green-400">Create</span> */}
+                      </Link>
                     )}
                   </div>
                 </>
