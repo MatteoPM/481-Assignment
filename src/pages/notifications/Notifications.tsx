@@ -180,7 +180,7 @@ function Notifications() {
 
                                 <Button
                                   size={"sm"}
-                                  className="flex w-full items-center justify-end"
+                                  className="flex w-full items-center justify-end p-0"
                                   variant={"link"}
                                   asChild
                                 >
@@ -247,7 +247,7 @@ function Notifications() {
 
                                 <Button
                                   size={"sm"}
-                                  className="flex w-full items-center justify-end"
+                                  className="flex w-full items-center justify-end p-0"
                                   variant={"link"}
                                   asChild
                                 >
@@ -286,7 +286,7 @@ function Notifications() {
 
                                 <Button
                                   size={"sm"}
-                                  className="flex w-full items-center justify-end"
+                                  className="flex w-full items-center justify-end p-0"
                                   variant={"link"}
                                 >
                                   <Link
