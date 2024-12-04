@@ -9,7 +9,7 @@ import { Link, useSearchParams } from "react-router-dom";
 
 function Dms() {
   const { data } = useData();
-  const [searchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
   const q = searchParams.get("q") || "";
 
   const filteredDms = data.privateChats
@@ -80,7 +80,17 @@ function Dms() {
 
         {filteredDms.length === 0 && (
           <div className="mt-8 text-balance text-center font-semibold text-muted-foreground">
-            No private messages found. Adjust your search query.
+            No private messages found. Adjust or{" "}
+            <button
+              className="text-primary"
+              onClick={() => {
+                searchParams.delete("q");
+                setSearchParams(searchParams);
+              }}
+            >
+              reset
+            </button>{" "}
+            your search query.
           </div>
         )}
       </Page>

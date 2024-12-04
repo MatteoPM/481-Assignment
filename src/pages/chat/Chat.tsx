@@ -114,7 +114,7 @@ function Chat() {
         )}
 
         {filteredForums.length === 0 && (
-          <div className="mt-8 text-center font-semibold text-muted-foreground">
+          <div className="mt-8 text-balance text-center font-semibold text-muted-foreground">
             No forums found. Adjust or{" "}
             <button
               className="text-primary"

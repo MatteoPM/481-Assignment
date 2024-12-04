@@ -6,7 +6,7 @@ import { useSearchParams } from "react-router-dom";
 import GroupTabs from "../_components/groupTabs";
 
 function Courses() {
-  const [searchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
   const q = searchParams.get("q") || "";
   const { data } = useData();
 
@@ -39,8 +39,18 @@ function Courses() {
           </>
         )}
         {filteredCourses.length === 0 && (
-          <div className="mt-8 text-center font-semibold text-muted-foreground">
-            No courses found. Adjust your search query.
+          <div className="mt-8 text-balance text-center font-semibold text-muted-foreground">
+            No courses found. Adjust or{" "}
+            <button
+              className="text-primary"
+              onClick={() => {
+                searchParams.delete("q");
+                setSearchParams(searchParams);
+              }}
+            >
+              reset
+            </button>{" "}
+            your search query.
           </div>
         )}
       </Page>
