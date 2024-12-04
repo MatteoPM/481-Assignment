@@ -132,8 +132,8 @@ const testUser: UserType = {
       type: "joinRequest",
       time: new Date(Date.now() - 0.7 * hour).toISOString(),
       data: {
-        requesterId: 0,
-        clubId: 0,
+        requesterId: 1,
+        clubId: 5,
       },
     },
     {
@@ -259,28 +259,6 @@ const events: Event[] = [
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4xK-EXpM8Pec036XLlu5crmx9fqFBM5sElg&s",
   },
 ];
-
-// export const notifications: (Notification | ChatNotification)[] = [
-//   {
-//     id: 1,
-//     type: "chat",
-//     title: "John Smeeth sent a message",
-//     description: "Hey, how are you doing?",
-//     time: "2m ago",
-//   },
-//   {
-//     id: 2,
-//     type: "group",
-//     title: "Guy Fieri requested to join the Jazz Band club",
-//     time: "15m ago",
-//   },
-//   {
-//     id: 3,
-//     type: "event",
-//     title: '"Beginner Python Workshop" starts in 1 hour',
-//     time: "1h ago",
-//   },
-// ];
 
 const groups: Group[] = [
   {

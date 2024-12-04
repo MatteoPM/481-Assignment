@@ -84,7 +84,7 @@ function Notifications() {
             </div>
           )}
           {filteredNotifications.length > 0 && (
-            <div className="isolate flex flex-col divide-y border bg-white shadow-sm">
+            <div className="isolate flex flex-col divide-y border bg-white">
               <AnimatePresence>
                 {filteredNotifications.map((notification) => {
                   return (
@@ -165,7 +165,7 @@ function Notifications() {
                                     />
                                   </DrawerContent>
                                 </Drawer>{" "}
-                                sent a message
+                                sent a message:
                               </h2>
                               <p className="text-sm text-muted-foreground">
                                 {notification.data.message}
@@ -223,7 +223,7 @@ function Notifications() {
                                     />
                                   </DrawerContent>
                                 </Drawer>{" "}
-                                requested to join the{" "}
+                                has joined{" "}
                                 <Link
                                   to={`/groups/${notification.data.clubId}`}
                                   className="text-primary"
@@ -234,8 +234,7 @@ function Notifications() {
                                         group.id === notification.data.clubId,
                                     )!.name
                                   }
-                                </Link>{" "}
-                                club
+                                </Link>
                               </h2>
 
                               <div className="mt-2 flex items-center justify-between">
