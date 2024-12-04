@@ -25,10 +25,11 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { Textarea } from "@/components/ui/textarea";
+import { useToast } from "@/hooks/use-toast";
 import { useData } from "@/hooks/useData";
 import { cn } from "@/lib/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Camera, Check, ChevronsUpDown, Edit } from "lucide-react";
+import { Camera, Check, CheckCircle, ChevronsUpDown, Edit } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { z } from "zod";
@@ -101,6 +102,7 @@ function CreateEvent() {
   const [searchParams] = useSearchParams();
   const initialGroupId = searchParams.get("groupId");
   const navigate = useNavigate();
+  const { toast } = useToast();
 
   const now = new Date();
   now.setDate(now.getDate() + 1);
@@ -156,6 +158,15 @@ function CreateEvent() {
 
     navigate(`/events/${id}`, {
       replace: true,
+    });
+
+    toast({
+      title: (
+        <div className="flex items-center gap-2">
+          <CheckCircle className="text-green-400" />
+          <span>Event created successfully.</span>
+        </div>
+      ),
     });
   };
 

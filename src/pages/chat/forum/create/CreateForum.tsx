@@ -25,10 +25,11 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { Textarea } from "@/components/ui/textarea";
+import { useToast } from "@/hooks/use-toast";
 import { useData } from "@/hooks/useData";
 import { cn } from "@/lib/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Check, ChevronsUpDown } from "lucide-react";
+import { Check, CheckCircle, ChevronsUpDown } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { z } from "zod";
@@ -50,6 +51,7 @@ function CreateForum() {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const initialGroupId = searchParams.get("groupId") || null;
+  const { toast } = useToast();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -89,6 +91,15 @@ function CreateForum() {
 
     navigate(`/chat/${id}`, {
       replace: true,
+    });
+
+    toast({
+      title: (
+        <div className="flex items-center gap-2">
+          <CheckCircle className="text-green-400" />
+          <span>Forum created successfully.</span>
+        </div>
+      ),
     });
   };
 

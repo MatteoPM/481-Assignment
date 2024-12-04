@@ -12,9 +12,10 @@ import {
 import { Input } from "@/components/ui/input";
 import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
+import { useToast } from "@/hooks/use-toast";
 import { useData } from "@/hooks/useData";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Camera, Edit } from "lucide-react";
+import { Camera, CheckCircle, Edit } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { z } from "zod";
@@ -35,6 +36,7 @@ const formSchema = z.object({
 function CreateGroup() {
   const navigate = useNavigate();
   const { data, setData } = useData();
+  const { toast } = useToast();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -71,6 +73,15 @@ function CreateGroup() {
     navigate(`/groups/${id}`, {
       replace: true,
     });
+
+    toast({
+      title: (
+        <div className="flex items-center gap-2">
+          <CheckCircle className="text-green-400" />
+          <span>Club created successfully.</span>
+        </div>
+      ),
+    });
   };
 
   return (
@@ -79,7 +90,7 @@ function CreateGroup() {
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(createGroup)}
-            className="flex h-full flex-col"
+            className="flex flex-col"
           >
             <FormField
               control={form.control}
