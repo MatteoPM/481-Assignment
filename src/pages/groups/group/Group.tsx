@@ -223,7 +223,7 @@ function Group() {
                   View all
                 </button>
 
-                {group.leaderId === data.currentUser.id && (
+                {group.leaderId === data.currentUser.id && group.isPrivate && (
                   <Dialog>
                     <DialogTrigger asChild>
                       <Button
