@@ -3,10 +3,8 @@ import { Button } from "@/components/ui/button";
 import { useData } from "@/hooks/useData";
 import ForumCard from "@/pages/chat/_components/forumCard";
 import EventCard from "@/pages/events/_components/eventCard";
-import GroupCard from "@/pages/groups/_components/groupCard";
-import { CalendarDays, MessageCircleMore, Users } from "lucide-react";
+import { CalendarDays, MessageCircleMore } from "lucide-react";
 import { Link } from "react-router-dom";
-
 function App() {
   const { data } = useData();
 
@@ -24,21 +22,9 @@ function App() {
           </div>
         }
       >
-        {/* <div className="mb-4 border-b pb-4">
-          <h2 className="text-center text-xl font-semibold text-muted-foreground">
-            Welcome back, {data.currentUser?.username.split(" ")[0]}.
-          </h2>
-
-          <Link
-            to={"/notifications"}
-            className="mx-auto mt-4 flex w-fit items-center justify-center gap-2 rounded-full border border-orange-400 bg-orange-100 p-2 text-sm text-stone-500"
-          >
-            <span className="text-orange-400">Notifications</span>{" "}
-            <span className="flex size-[20px] items-center justify-center rounded-full bg-red-400 text-white">
-              3
-            </span>
-          </Link>
-        </div> */}
+        <h2 className="mb-4 text-center text-sm font-semibold text-muted-foreground">
+          Welcome back, {data.currentUser?.username.split(" ")[0]}.
+        </h2>
 
         <h2 className="text-xl font-semibold">Recent Forums</h2>
         <div className="mt-3 flex flex-col divide-y overflow-hidden rounded-md border bg-white shadow-sm">
@@ -64,24 +50,6 @@ function App() {
         <Button size={"sm"} className="mt-3 w-full" asChild>
           <Link to={"/events"}>
             <CalendarDays className="size-[15px]" />
-            <span className="leading-none">View all</span>
-          </Link>
-        </Button>
-
-        <h2 className="mt-6 text-xl font-semibold">Suggested Clubs</h2>
-        <div className="mt-3 flex flex-col divide-y overflow-hidden rounded-md border bg-white shadow-sm">
-          {data.groups
-            .filter((group) => !group.isCourse)
-            .sort((a, b) => a.name.localeCompare(b.name))
-            .slice(0, 3)
-            .map((group) => (
-              <GroupCard key={group.id} group={group} />
-            ))}
-        </div>
-
-        <Button size={"sm"} className="mt-3 w-full" asChild>
-          <Link to={"/groups/clubs"}>
-            <Users className="size-[15px]" />
             <span className="leading-none">View all</span>
           </Link>
         </Button>

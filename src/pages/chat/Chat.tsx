@@ -17,14 +17,14 @@ function Chat() {
   const [searchParams, setSearchParams] = useSearchParams();
   const q = searchParams.get("q") || "";
   const [courseFilter, setCourseFilter] =
-    useState<(typeof courseFilters)[number]>("All Courses");
+    useState<(typeof courseFilters)[number]>("My Courses");
   const [clubFilter, setClubFilter] =
     useState<(typeof clubFilters)[number]>("All Clubs");
   const [involvementFilter, setInvolvementFilter] =
     useState<(typeof involvementFilters)[number]>("All Forums");
 
   const resetFilters = () => {
-    setCourseFilter("All Courses");
+    setCourseFilter("My Courses");
     setClubFilter("All Clubs");
     setInvolvementFilter("All Forums");
   };

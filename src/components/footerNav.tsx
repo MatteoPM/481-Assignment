@@ -27,6 +27,18 @@ const FooterNav = () => {
           Home
         </NavLink>
         <NavLink
+          to={"/groups"}
+          className={({ isActive }) =>
+            twMerge(
+              "flex flex-col items-center py-3",
+              isActive && "text-primary",
+            )
+          }
+        >
+          <Users />
+          Groups
+        </NavLink>
+        <NavLink
           to={"/chat"}
           className={({ isActive }) =>
             twMerge(
@@ -40,18 +52,6 @@ const FooterNav = () => {
           {hasUnreadMessages && (
             <div className="absolute right-[20px] top-[10px] size-[10px] rounded-full bg-red-400"></div>
           )}
-        </NavLink>
-        <NavLink
-          to={"/groups"}
-          className={({ isActive }) =>
-            twMerge(
-              "flex flex-col items-center py-3",
-              isActive && "text-primary",
-            )
-          }
-        >
-          <Users />
-          Groups
         </NavLink>
         <NavLink
           to={"/events"}

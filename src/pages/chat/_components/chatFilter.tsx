@@ -7,7 +7,7 @@ import { Dispatch, SetStateAction } from "react";
 import { Button } from "../../../components/ui/button";
 
 export const courseFilters = [
-  "All Courses",
+  // "All Courses",
   "My Courses",
   "No Courses",
 ] as const;
@@ -41,7 +41,7 @@ const ChatFilter = ({
   resetFilters: () => void;
 }) => {
   const filtersChanged =
-    courseFilter !== "All Courses" ||
+    courseFilter !== "My Courses" ||
     clubFilter !== "All Clubs" ||
     involvementFilter !== "All Forums";
 
