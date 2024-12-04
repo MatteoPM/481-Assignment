@@ -1,5 +1,12 @@
 import Page from "@/components/page";
 import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import { Drawer, DrawerContent, DrawerTrigger } from "@/components/ui/drawer";
 import UserDrawerContent from "@/components/userDrawerContent";
 import { useData } from "@/hooks/useData";
@@ -37,6 +44,7 @@ const types = [
 function Notifications() {
   const [type, setType] = useState("all");
   const { data, setData } = useData();
+  const [clearConfirmOpen, setClearConfirmOpen] = useState(false);
 
   const filteredNotifications = data.currentUser!.notifications.filter(
     (notification) => {
@@ -94,6 +102,8 @@ function Notifications() {
           size={"sm"}
           variant={"destructive"}
           className="mb-4 ml-auto mr-2 inline-block"
+          onClick={() => setClearConfirmOpen(true)}
+          disabled={data.currentUser!.notifications.length === 0}
         >
           Clear All
         </Button>
@@ -328,6 +338,39 @@ function Notifications() {
           )}
         </div>
       </Page>
+      <Dialog open={clearConfirmOpen} onOpenChange={setClearConfirmOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Clear all notifications?</DialogTitle>
+          </DialogHeader>
+          <DialogFooter>
+            <Button
+              onClick={() => {
+                setClearConfirmOpen(false);
+              }}
+              variant={"outline"}
+            >
+              Cancel
+            </Button>
+            <Button
+              onClick={() => {
+                setData((draft) => {
+                  const currentUser = draft.users.find(
+                    (user) => user.id === draft.currentUser!.id,
+                  )!;
+                  draft.currentUser = currentUser;
+
+                  draft.currentUser.notifications = [];
+                });
+
+                setClearConfirmOpen(false);
+              }}
+            >
+              Confirm
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </>
   );
 }
