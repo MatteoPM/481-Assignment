@@ -11,6 +11,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import User from "@/components/user";
+import { useToast } from "@/hooks/use-toast";
 import { useData } from "@/hooks/useData";
 import ForumCard from "@/pages/chat/_components/forumCard";
 import EventCard from "@/pages/events/_components/eventCard";
@@ -19,6 +20,7 @@ import {
   Calendar,
   ChartArea,
   Check,
+  CheckCircle,
   Contact,
   Crown,
   DoorOpen,
@@ -39,7 +41,9 @@ function Group() {
   const navigate = useNavigate();
   const group = data.groups.find((group) => group.id === Number(groupId));
   const [joinRequestConfirmOpen, setJoinRequestConfirmOpen] = useState(false);
-  const [joinRequestSentOpen, setJoinRequestSentOpen] = useState(false);
+  const [joinConfirmOpen, setJoinConfirmOpen] = useState(false);
+  const [leaveConfirmOpen, setLeaveConfirmOpen] = useState(false);
+  const { toast } = useToast();
 
   if (!group) {
     throw new Error();
@@ -110,16 +114,7 @@ function Group() {
                   size={"sm"}
                   className="w-full"
                   onClick={() => {
-                    setData((draft) => {
-                      const user = draft.users.find(
-                        (user) => user.id === draft.currentUser!.id,
-                      )!;
-                      draft.currentUser = user;
-
-                      user.memberGroupIds = user.memberGroupIds.filter(
-                        (id) => id !== group.id,
-                      );
-                    });
+                    setLeaveConfirmOpen(true);
                   }}
                   variant={"destructive"}
                 >
@@ -130,7 +125,11 @@ function Group() {
               {!group.isPrivate &&
                 group.leaderId !== data.currentUser.id &&
                 !data.currentUser.memberGroupIds.includes(group.id) && (
-                  <Button size={"sm"} className="w-full" onClick={joinClub}>
+                  <Button
+                    size={"sm"}
+                    className="w-full"
+                    onClick={() => setJoinConfirmOpen(true)}
+                  >
                     <SquarePlus className="size-[20px]" />
                     <span className="leading-none">Join</span>
                   </Button>
@@ -448,7 +447,17 @@ function Group() {
                 onClick={() => {
                   joinClub();
                   setJoinRequestConfirmOpen(false);
-                  setJoinRequestSentOpen(true);
+                  toast({
+                    title: (
+                      <div className="flex items-center gap-2">
+                        <CheckCircle className="text-green-400" />
+                        <span>Request sent successfully.</span>
+                      </div>
+                    ),
+                    description:
+                      "You will be notified when your request has been approved or denied.",
+                  });
+                  // setJoinRequestSentOpen(true);
                 }}
               >
                 Confirm
@@ -456,18 +465,88 @@ function Group() {
             </DialogFooter>
           </DialogContent>
         </Dialog>
-        <Dialog
-          open={joinRequestSentOpen}
-          onOpenChange={setJoinRequestSentOpen}
-        >
+        <Dialog open={joinConfirmOpen} onOpenChange={setJoinConfirmOpen}>
           <DialogContent>
             <DialogHeader>
-              <DialogTitle>Request sent successfully.</DialogTitle>
+              <DialogTitle>Join {group.name}?</DialogTitle>
+              <DialogDescription>You may leave at any time.</DialogDescription>
+            </DialogHeader>
+            <DialogFooter>
+              <Button
+                onClick={() => {
+                  setJoinConfirmOpen(false);
+                }}
+                variant={"outline"}
+              >
+                Cancel
+              </Button>
+              <Button
+                onClick={() => {
+                  joinClub();
+                  setJoinConfirmOpen(false);
+                  toast({
+                    title: (
+                      <div className="flex items-center gap-2">
+                        <CheckCircle className="text-green-400" />
+                        <span>Joined successfully</span>
+                      </div>
+                    ),
+                    description: `You are now a member of ${group.name}!`,
+                  });
+                  // setJoinRequestSentOpen(true);
+                }}
+              >
+                Confirm
+              </Button>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
+        <Dialog open={leaveConfirmOpen} onOpenChange={setLeaveConfirmOpen}>
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle>Leave {group.name}?</DialogTitle>
               <DialogDescription>
-                You will be notified when your request has been approved or
-                denied.
+                You may join again at any time.
               </DialogDescription>
             </DialogHeader>
+            <DialogFooter>
+              <Button
+                onClick={() => {
+                  setLeaveConfirmOpen(false);
+                }}
+                variant={"outline"}
+              >
+                Cancel
+              </Button>
+              <Button
+                onClick={() => {
+                  setData((draft) => {
+                    const user = draft.users.find(
+                      (user) => user.id === draft.currentUser!.id,
+                    )!;
+                    draft.currentUser = user;
+
+                    user.memberGroupIds = user.memberGroupIds.filter(
+                      (id) => id !== group.id,
+                    );
+                  });
+
+                  setLeaveConfirmOpen(false);
+                  toast({
+                    title: (
+                      <div className="flex items-center gap-2">
+                        <CheckCircle className="text-green-400" />
+                        <span>Left successfully</span>
+                      </div>
+                    ),
+                    description: `You are no longer a member of ${group.name}.`,
+                  });
+                  // setJoinRequestSentOpen(true);
+                }}
+              >
+                Confirm
+              </Button>
+            </DialogFooter>
           </DialogContent>
         </Dialog>
       </Page>

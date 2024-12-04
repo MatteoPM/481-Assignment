@@ -11,7 +11,6 @@ function App() {
   const unreadNotifications = data.currentUser!.notifications.filter(
     (notification) => !notification.read,
   );
-  const hasNotifications = unreadNotifications.length > 0;
 
   return (
     <>

@@ -90,6 +90,14 @@ function Notifications() {
           ))}
         </div>
 
+        <Button
+          size={"sm"}
+          variant={"destructive"}
+          className="mb-4 ml-auto mr-2 inline-block"
+        >
+          Clear All
+        </Button>
+
         <div className="grow overflow-auto p-4 px-0 pt-0">
           {filteredNotifications.length === 0 && (
             <div className="mb-6 mt-3 text-center font-semibold text-muted-foreground">

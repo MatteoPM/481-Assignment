@@ -9,6 +9,7 @@ import {
   Tags,
   UserIcon,
   Users,
+  X,
 } from "lucide-react";
 import { useParams } from "react-router-dom";
 
@@ -40,6 +41,7 @@ function Event() {
   const [isRSVPConfirmed, setIsRSVPConfirmed] = useState(false);
   const { eventId } = useParams();
   const event = data.events.find((event) => event.id === Number(eventId))!;
+  const [showMap, setShowMap] = useState(false);
 
   const startDate = new Date(event.startDateTime);
   const endDate = new Date(event.endDateTime);
@@ -71,12 +73,38 @@ function Event() {
     setIsDialogOpen(false);
   };
 
+  if (showMap) {
+    return (
+      <Page
+        title={event.title}
+        showBackButton
+        bodyClassname="p-0 flex flex-col relative"
+      >
+        <div className="h-full bg-red-400">
+          <img
+            src="/481-Assignment/map.png"
+            className="size-full object-cover"
+          />
+          <Button
+            onClick={() => {
+              setShowMap(false);
+            }}
+            className="absolute right-3 top-3 rounded-full shadow-sm"
+            size={"icon"}
+          >
+            <X />
+          </Button>
+        </div>
+      </Page>
+    );
+  }
+
   return (
     <>
       <Page
         title={event.title}
         showBackButton
-        bodyClassname="p-0 flex flex-col"
+        bodyClassname="p-0 flex flex-col relative"
       >
         <img
           className="h-[150px] shrink-0 rounded-b-xl object-cover shadow-lg"
@@ -103,6 +131,12 @@ function Event() {
           <SubHeader Icon={MapPin} text="Location" />
 
           <div className="mt-1 text-sm text-gray-500">{event.location}</div>
+          <button
+            className="mt-1.5 flex items-center gap-1 text-sm font-semibold text-primary"
+            onClick={() => setShowMap(true)}
+          >
+            View on map
+          </button>
 
           <SubHeader Icon={BookOpenText} text="Description" />
 
@@ -194,16 +228,20 @@ function Event() {
           <AlertDialog open={isRSVPConfirmed} onOpenChange={setIsRSVPConfirmed}>
             <AlertDialogContent className="max-w-[350px] rounded-lg">
               <AlertDialogHeader>
-                <AlertDialogTitle>
-                  RSVP Confirmed for {event.title}!
-                </AlertDialogTitle>
+                <AlertDialogTitle>RSVP Confirmed.</AlertDialogTitle>
               </AlertDialogHeader>
 
               <div>
+                <SubHeader Icon={MapPin} text="Location" className="mt-0" />
+
+                <div className="mt-1 text-sm text-gray-500">
+                  {event.location}
+                </div>
+
                 <SubHeader
                   Icon={Calendar}
                   text="Date and Time (MST)"
-                  className="mt-0"
+                  // className="mt-2"
                 />
                 <div className="mt-1 text-sm text-gray-500">
                   <div className="flex items-baseline">
