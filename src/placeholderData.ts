@@ -155,7 +155,7 @@ const placeholderUser: UserType = {
   username: "Debbie Hopkins",
   status: "online",
   leaderGroupIds: [],
-  memberGroupIds: [8],
+  memberGroupIds: [8, 5],
   rsvpIds: [],
   seenForumIds: [],
   bio: "Coffee cofeeeee cofFlfffe cOoofe CCCOOOOFFFFEEEE",

@@ -2,7 +2,7 @@ import Page from "@/components/page";
 import SubHeader from "@/components/subHeader";
 import User from "@/components/user";
 import { useData } from "@/hooks/useData";
-import { Users } from "lucide-react";
+import { Crown, Users } from "lucide-react";
 import { useParams } from "react-router-dom";
 
 function GroupMembers() {
@@ -19,6 +19,9 @@ function GroupMembers() {
   }
 
   const members = data.users.filter((user) =>
+    user.leaderGroupIds.concat(user.memberGroupIds).includes(group.id),
+  );
+  const nonLeaders = data.users.filter((user) =>
     user.memberGroupIds.includes(group.id),
   );
 
@@ -38,13 +41,17 @@ function GroupMembers() {
           className="mt-0"
         />
 
-        {members.length === 0 && (
-          <div className="mb-6 mt-3 text-center font-semibold text-muted-foreground">
-            No members.
+        {!group.isCourse && (
+          <div className="mt-3 grid grid-cols-2 items-center gap-2 rounded-md scrollbar">
+            <User
+              user={data.users.find((user) => user.id === group.leaderId)!}
+            />
+            <Crown className="size-4" />
           </div>
         )}
-        {members.length > 0 && (
-          <div className="mt-3 grid grid-cols-2 gap-2 rounded-md scrollbar">
+
+        {nonLeaders.length > 0 && (
+          <div className="mt-4 grid grid-cols-2 gap-2 rounded-md scrollbar">
             {data.users
               .filter((user) => user.memberGroupIds.includes(group.id))
               .map((user) => (
