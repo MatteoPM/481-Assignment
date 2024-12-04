@@ -36,7 +36,7 @@ function App() {
         <Button size={"sm"} className="mt-3 w-full" asChild>
           <Link to={"/chat"}>
             <MessageCircleMore className="size-[15px]" />
-            <span className="leading-none">View all</span>
+            <span className="leading-none">Chat</span>
           </Link>
         </Button>
 
@@ -50,7 +50,7 @@ function App() {
         <Button size={"sm"} className="mt-3 w-full" asChild>
           <Link to={"/events"}>
             <CalendarDays className="size-[15px]" />
-            <span className="leading-none">View all</span>
+            <span className="leading-none">Events</span>
           </Link>
         </Button>
       </Page>
