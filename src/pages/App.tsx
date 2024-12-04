@@ -8,6 +8,11 @@ import { Link } from "react-router-dom";
 function App() {
   const { data } = useData();
 
+  const unreadNotifications = data.currentUser!.notifications.filter(
+    (notification) => !notification.read,
+  );
+  const hasNotifications = unreadNotifications.length > 0;
+
   return (
     <>
       <Page
@@ -22,8 +27,12 @@ function App() {
           </div>
         }
       >
-        <h2 className="mb-4 text-center text-sm font-semibold text-muted-foreground">
-          Welcome back, {data.currentUser?.username.split(" ")[0]}.
+        <h2 className="mb-4 text-balance text-center text-sm font-semibold text-muted-foreground">
+          Welcome back, {data.currentUser?.username.split(" ")[0]}. You have{" "}
+          <Link to={"/notifications"} className="text-primary">
+            {unreadNotifications.length > 0 ? unreadNotifications.length : "no"}{" "}
+            unread notifications.
+          </Link>
         </h2>
 
         <h2 className="text-xl font-semibold">Recent Forums</h2>

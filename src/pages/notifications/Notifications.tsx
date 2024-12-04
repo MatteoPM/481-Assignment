@@ -13,7 +13,7 @@ import {
   Trash2,
   Users,
 } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 const types = [
@@ -51,6 +51,19 @@ function Notifications() {
       }
     },
   );
+
+  useEffect(() => {
+    setData((draft) => {
+      const currentUser = draft.users.find(
+        (user) => user.id === draft.currentUser!.id,
+      )!;
+      draft.currentUser = currentUser;
+
+      currentUser.notifications.forEach((notification) => {
+        notification.read = true;
+      });
+    });
+  }, [setData]);
 
   return (
     <>

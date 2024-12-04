@@ -17,7 +17,10 @@ const UserDrawer = () => {
   const { setShowUnderDevelopment } = useUnderDevelopment();
   const testUser = data.currentUser!;
 
-  const hasNotifications = data.currentUser!.notifications.length > 0;
+  const unreadNotifications = data.currentUser!.notifications.filter(
+    (notification) => !notification.read,
+  );
+  const hasNotifications = unreadNotifications.length > 0;
 
   return (
     <Drawer direction="right">
@@ -30,7 +33,7 @@ const UserDrawer = () => {
 
           {hasNotifications && (
             <div className="absolute right-[-5px] top-[-5px] flex size-[20px] items-center justify-center rounded-full bg-red-400 text-white shadow-sm">
-              {data.currentUser!.notifications.length}
+              {unreadNotifications.length}
             </div>
           )}
         </button>
@@ -71,7 +74,7 @@ const UserDrawer = () => {
               hasNotifications && "bg-red-400",
             )}
           >
-            {data.currentUser!.notifications.length}
+            {unreadNotifications.length}
           </span>
         </Link>
 

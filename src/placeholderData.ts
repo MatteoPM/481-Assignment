@@ -55,6 +55,7 @@ export type Notification = {
   id: number;
   category: NotificationType;
   time: string;
+  read?: boolean;
 } & (
   | {
       category: "chat";
@@ -96,7 +97,6 @@ export type Group = {
   applicationIds: number[];
 };
 
-// const now = new Date();
 const hour = 60 * 60 * 1000;
 const day = hour * 24;
 const week = day * 7;
@@ -123,7 +123,7 @@ const testUser: UserType = {
       data: {
         senderId: 1,
         chatId: 0,
-        message: ":)",
+        message: "Joined :)",
       },
     },
     {
@@ -447,28 +447,18 @@ const privateChats: PrivateChat[] = [
     messages: [
       {
         user: placeholderUser,
-        dateTime: new Date(Date.now() - 1.4 * hour).toISOString(),
-        message: "What is love",
-      },
-      {
-        user: placeholderUser,
-        dateTime: new Date(Date.now() - 1.3 * hour).toISOString(),
-        message: "Baby don't hurt me",
-      },
-      {
-        user: placeholderUser,
-        dateTime: new Date(Date.now() - 1.2 * hour).toISOString(),
-        message: "Don't hurt me",
+        dateTime: new Date(Date.now() - 2.2 * hour).toISOString(),
+        message: "I heard you like coffee :)",
       },
       {
         user: testUser,
-        dateTime: new Date(Date.now() - 1.0 * hour).toISOString(),
-        message: "No more",
+        dateTime: new Date(Date.now() - 2 * hour).toISOString(),
+        message: "You heard right! Join the Caffeine Crusaders.",
       },
       {
         user: placeholderUser,
         dateTime: new Date(Date.now() - 0.3 * hour).toISOString(),
-        message: ":)",
+        message: "Joined :)",
       },
     ],
     seenIds: [1],
