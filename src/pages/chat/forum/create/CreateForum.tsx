@@ -136,7 +136,7 @@ function CreateForum() {
                       <PopoverContent className="w-[300px] p-0">
                         <Command>
                           <CommandInput
-                            placeholder="Search club..."
+                            placeholder="Search group..."
                             className="h-9"
                           />
                           <CommandList>
