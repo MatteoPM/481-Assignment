@@ -106,7 +106,7 @@ function Group() {
           {!group.isCourse && (
             <div className="mt-6 flex gap-3">
               {group.leaderId === data.currentUser.id && (
-                <Button size={"sm"} disabled className="w-full">
+                <Button size={"sm"} disabled>
                   <Crown className="size-[20px]" />
                   <span className="leading-none">Leading</span>
                 </Button>
@@ -114,7 +114,6 @@ function Group() {
               {data.currentUser.memberGroupIds.includes(group.id) && (
                 <Button
                   size={"sm"}
-                  className="w-full"
                   onClick={() => {
                     setLeaveConfirmOpen(true);
                   }}
@@ -127,11 +126,7 @@ function Group() {
               {!group.isPrivate &&
                 group.leaderId !== data.currentUser.id &&
                 !data.currentUser.memberGroupIds.includes(group.id) && (
-                  <Button
-                    size={"sm"}
-                    className="w-full"
-                    onClick={() => setJoinConfirmOpen(true)}
-                  >
+                  <Button size={"sm"} onClick={() => setJoinConfirmOpen(true)}>
                     <SquarePlus className="size-[20px]" />
                     <span className="leading-none">Join</span>
                   </Button>
@@ -142,7 +137,6 @@ function Group() {
                 !group.applicationIds.includes(data.currentUser!.id) && (
                   <Button
                     size={"sm"}
-                    className="w-full"
                     onClick={() => setJoinRequestConfirmOpen(true)}
                   >
                     <SquarePlus className="size-[20px]" />
@@ -155,7 +149,6 @@ function Group() {
                 group.applicationIds.includes(data.currentUser!.id) && (
                   <Button
                     size={"sm"}
-                    className="w-full"
                     disabled
                     onClick={() => setJoinRequestConfirmOpen(true)}
                   >
@@ -166,12 +159,7 @@ function Group() {
                   </Button>
                 )}
               {group.leaderId === data.currentUser.id && (
-                <Button
-                  size={"sm"}
-                  variant={"outline"}
-                  asChild
-                  className="w-full"
-                >
+                <Button size={"sm"} variant={"outline"} asChild>
                   <Link to={`/groups/${group.id}/stats`}>
                     <ChartArea className="size-[20px]" />
                     <span className="leading-none">Stats</span>
@@ -240,7 +228,7 @@ function Group() {
                     <DialogTrigger asChild>
                       <Button
                         size={"sm"}
-                        className="ml-auto bg-orange-400 hover:bg-orange-400/90"
+                        className="bg-orange-400 hover:bg-orange-400/90"
                         disabled={group.applicationIds.length === 0}
                       >
                         <Contact className="size-[15px]" />
@@ -343,33 +331,13 @@ function Group() {
                 >
                   View all
                 </button>
-                {/* <Button
-                  size={"sm"}
-                  className="w-full"
-                  disabled={forums.length === 0}
-                  onClick={() => navigate(`/groups/${groupId}/forums`)}
-                >
-                  <Expand className="size-[20px]" />
-                  <span className="leading-none">View All</span>
-                </Button> */}
                 <Link
                   to={`/chat/create?groupId=${group.id}`}
-                  className="ml-auto rounded-full bg-white p-1 shadow disabled:opacity-50"
+                  className="flex items-center gap-1 rounded-full bg-white p-1 shadow disabled:opacity-50"
                 >
-                  <Plus className="text-green-400" />
-                  {/* <span className="text-green-400">Create</span> */}
+                  <Plus className="size-[20px] text-green-400" />
+                  <span className="pr-1 text-green-400">Create</span>
                 </Link>
-
-                {/* <Button
-                  size={"sm"}
-                  className="w-full bg-green-400 hover:bg-green-400/90"
-                  asChild
-                >
-                  <Link to={`/chat/create?groupId=${group.id}`}>
-                    <Plus className="size-[20px]" />
-                    <span className="leading-none">Create</span>
-                  </Link>
-                </Button> */}
               </div>
 
               {!group.isCourse && (
@@ -412,10 +380,10 @@ function Group() {
                     {group.leaderId === data.currentUser.id && (
                       <Link
                         to={`/events/create?groupId=${group.id}`}
-                        className="ml-auto rounded-full bg-white p-1 shadow disabled:opacity-50"
+                        className="flex items-center gap-1 rounded-full bg-white p-1 shadow disabled:opacity-50"
                       >
-                        <Plus className="text-green-400" />
-                        {/* <span className="text-green-400">Create</span> */}
+                        <Plus className="size-[20px] text-green-400" />
+                        <span className="pr-1 text-green-400">Create</span>
                       </Link>
                     )}
                   </div>
