@@ -386,7 +386,9 @@ function CreateEvent() {
               name="categories"
               render={({ field }) => (
                 <FormItem className="mt-6">
-                  <FormLabel>Categories</FormLabel>
+                  <FormLabel>
+                    Categories<span className="text-red-400">*</span>
+                  </FormLabel>
 
                   <div className="mt-2 grid grid-cols-2 gap-y-1">
                     {eventCategories.map((category) => (
