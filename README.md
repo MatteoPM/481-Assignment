@@ -43,7 +43,7 @@ Steps:\
     13. Click the send icon (paper airplane) on the bottom right of the screen\
     14. Click the text box at the bottom of the screen\
     15. Type "Hi everyone"\
-    16. Hit the enter key or click the send button
+    16. Hit the enter key or click the send button\
     17. Click the back arrow in the top left of the screen
 #
 #### 2. Starting a Club
