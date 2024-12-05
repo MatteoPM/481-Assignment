@@ -12,6 +12,10 @@ function Dms() {
   const [searchParams, setSearchParams] = useSearchParams();
   const q = searchParams.get("q") || "";
 
+  const hasDms = data.privateChats.some((dm) => {
+    return dm.participantIds.includes(data.currentUser!.id);
+  });
+
   const filteredDms = data.privateChats
     .filter((dm) => {
       if (!dm.participantIds.includes(data.currentUser!.id)) {
@@ -50,7 +54,13 @@ function Dms() {
           </Link>
         </div>
 
-        {filteredDms.length > 0 && (
+        {!hasDms && (
+          <div className="mt-8 text-balance text-center font-semibold text-muted-foreground">
+            No private messages found.{" "}
+          </div>
+        )}
+
+        {hasDms && filteredDms.length > 0 && (
           <>
             <div className="mt-3 flex flex-col divide-y overflow-hidden rounded-md border bg-white shadow-sm">
               {filteredDms.map((dm) => {
@@ -78,7 +88,7 @@ function Dms() {
           </>
         )}
 
-        {filteredDms.length === 0 && (
+        {hasDms && filteredDms.length === 0 && (
           <div className="mt-8 text-balance text-center font-semibold text-muted-foreground">
             No private messages found. Adjust or{" "}
             <button

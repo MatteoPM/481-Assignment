@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import { useParams } from "react-router-dom";
 
+import { useUnderDevelopment } from "@/components/contexts/UnderDevelopmentContext";
 import {
   AlertDialog,
   AlertDialogContent,
@@ -42,6 +43,7 @@ function Event() {
   const { eventId } = useParams();
   const event = data.events.find((event) => event.id === Number(eventId))!;
   const [showMap, setShowMap] = useState(false);
+  const { setShowUnderDevelopment } = useUnderDevelopment();
 
   const startDate = new Date(event.startDateTime);
   const endDate = new Date(event.endDateTime);
@@ -196,14 +198,20 @@ function Event() {
 
           {group.leaderId !== data.currentUser!.id && (
             <div className="sticky bottom-4 mt-auto">
-              <Button
-                className="mt-4 w-full"
-                onClick={handleRSVP}
-                disabled={data.currentUser!.rsvpIds.includes(event.id)}
-              >
-                {!rsvpd && "RSVP"}
-                {rsvpd && "RSVP'd"}
-              </Button>
+              {rsvpd && (
+                <Button
+                  className="mt-4 w-full"
+                  onClick={() => setShowUnderDevelopment(true)}
+                  variant={"destructive"}
+                >
+                  Cancel RSVP
+                </Button>
+              )}
+              {!rsvpd && (
+                <Button className="mt-4 w-full" onClick={handleRSVP}>
+                  RSVP
+                </Button>
+              )}
             </div>
           )}
 
