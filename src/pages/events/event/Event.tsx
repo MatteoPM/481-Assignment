@@ -215,6 +215,18 @@ function Event() {
             </div>
           )}
 
+          {group.leaderId === data.currentUser!.id && (
+            <div className="sticky bottom-4 mt-auto">
+              <Button
+                className="mt-4 w-full bg-orange-400"
+                onClick={() => setShowUnderDevelopment(true)}
+                variant={"destructive"}
+              >
+                Edit Event
+              </Button>
+            </div>
+          )}
+
           <AlertDialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
             <AlertDialogContent className="max-w-[350px] rounded-lg">
               <AlertDialogHeader>
