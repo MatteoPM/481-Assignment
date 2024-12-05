@@ -56,7 +56,7 @@ function Dms() {
 
         {!hasDms && (
           <div className="mt-8 text-balance text-center font-semibold text-muted-foreground">
-            No private messages found.{" "}
+            You have no private messages.
           </div>
         )}
 
