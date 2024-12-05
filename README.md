@@ -43,7 +43,7 @@ Steps:\
     13. Click the send icon (paper airplane) on the bottom right of the screen\
     14. Click the text box at the bottom of the screen\
     15. Type "Hi everyone"\
-    16. Hit the enter key or click the send button
+    16. Hit the enter key or click the send button\
     17. Click the back arrow in the top left of the screen
 #
 #### 2. Starting a Club
@@ -64,7 +64,24 @@ Steps:\
     12. Feel free to scroll through these demo graphs (not reflecting real data)\
     13. Click the back arrow in the top left of the screen
 #
-#### 3. Logging In & Out
+#### 3. Creating an Event
+Joseph wants to host the first ever photography club meeting for all of its (0) members!
+
+Steps:\
+    1. Click the "Events" button from the bottom nav bar\
+    2. Click the green plus icon next to the search bar\
+    3. Click the "Select Hosting Club" dropdown\
+    4. Select the applicable club ("Shutter Bugs" in this case)\
+    5. Tap the edit icon resembling a pencil in the "Banner Image" section (this will auto-populate a demo image)\
+    6. In the "Event Title" field, type "1st Shutter Bugs Meetup!"\
+    7. In the "Description" field, type "Can't wait to meet each and every one of you"\
+    8. In the "Location" field, type "122 Baltic Avenue"\
+    9. In the "Starts" field, click the calendar icon and select a date & time\
+    10. In the "Ends" field, click the calendar icon and select a date & time\
+    11. Check at least one relevant "Categories" box\
+    12. Click the "Create" button
+#
+#### 4. Logging In & Out
 We have several accounts enabled for this demonstration.  We'll first walk you through signing out of the "Joseph Ballance" account and into the "Debbie Hopkins" account.
 
 Steps:\
@@ -74,7 +91,7 @@ Steps:\
     4. Demo emails are at the bottom of the screen, copy Debbie's ("debbie.hopkins@ucalgary.ca") and paste it into the text field\
     5. Click the "Next" button
 #
-#### 4. Joining Clubs
+#### 5. Joining Clubs
 It just so happens that Debbie also has a keen interest in photography and is also on the lookout for exciting clubs to join.  Here we'll get to experience joining two clubs that already exists, both private and public.  Note that Courses function the same as clubs except members cannot join or leave them, as they are auto-enrolled in whichever courses they are a student of my.ucalgary.ca
 
 Steps:\
@@ -93,4 +110,33 @@ Steps:\
     13. Note that Debbie is now included under the "Members" heading\
     14. Feel free to scroll through and check out this event's forum(s) and event(s)
 #
-#### 5. 
+#### 6. Forum Creation
+Debbie has some thoughts on a new book she's reading and wants to discuess with other Bookmarked members!
+
+Steps:\
+    1. Click the "Chat" button from the bottom nav bar\
+    2. From the default Forums section, click the green plus icon next to the search bar\
+    3. Click the "Select Group" dropdown\
+    4. Select the applicable group ("Bookmarked" in this case)\
+    5. In the "Forum Topic" field, type "The Very Hungry Caterpillar"\
+    6. In the "Your Message" field, type a message to kickstart the conversation.  We'll say "Why did the caterpillar follow up chocolate cake and ice cream with Swiss cheese?"\
+    7. Click the "Create" button\
+    8. Click the back arrow in the top left of the screen
+#
+#### 7. RSVPing for an Event
+Debbie happens to be free any day this month and happens to love coffee.
+
+Steps:\
+    1. Click the "Events" button from the bottom nav bar\
+    2. Click on the "Filters" button\
+    3. Click the "Date" dropdown and select "This Month"\
+    4. Click anywhere outside of the popup on the screen\
+    5. Click on the search bar and type "coffee"\
+    6. Click on the "Late Night Study Jam with Coffee Tasting" event\
+    7. Click the "RSVP" button\
+    8. Click the "Confirm" button\
+    9. Click the "Done" button\
+    10. Resist the urge to click the "Cancel RSVP" button for this event\
+    11. Click the "Events" button from the bottom nav bar\
+    12. Select the "Your RSVPs"section at the top of the screen\
+    13. Scroll through the event(s) you've chosen to attend
