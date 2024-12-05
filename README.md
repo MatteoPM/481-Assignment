@@ -124,4 +124,19 @@ Steps:\
     8. Click the back arrow in the top left of the screen
 #
 #### 7. RSVPing for an Event
+Debbie happens to be free any day this month and happens to love coffee.
 
+Steps:\
+    1. Click the "Events" button from the bottom nav bar\
+    2. Click on the "Filters" button\
+    3. Click the "Date" dropdown and select "This Month"\
+    4. Click anywhere outside of the popup on the screen\
+    5. Click on the search bar and type "coffee"\
+    6. Click on the "Late Night Study Jam with Coffee Tasting" event\
+    7. Click the "RSVP" button\
+    8. Click the "Confirm" button\
+    9. Click the "Done" button\
+    10. Resist the urge to click the "Cancel RSVP" button for this event\
+    11. Click the "Events" button from the bottom nav bar\
+    12. Select the "Your RSVPs"section at the top of the screen\
+    13. Scroll through the event(s) you've chosen to attend
