@@ -44,25 +44,31 @@ function Chat() {
       if (group.isCourse) {
         if (courseFilter === "No Courses") {
           return false;
-        } else if (courseFilter === "My Courses") {
-          return data.currentUser!.memberGroupIds.includes(group.id);
+        } else if (courseFilter === "My Courses" && !isUserInGroup) {
+          return false;
         }
       }
 
       if (!group.isCourse) {
         if (clubFilter === "No Clubs") {
           return false;
-        } else if (clubFilter === "My Clubs") {
+        } else if (clubFilter === "My Clubs" && !isUserInGroup) {
           return isUserInGroup;
         }
       }
 
-      if (involvementFilter === "Forums I Started") {
-        return forum.messages[0].user.id === data.currentUser!.id;
-      } else if (involvementFilter === "Forums I Participated In") {
-        return forum.messages.some(
+      if (
+        involvementFilter === "Forums I Started" &&
+        forum.messages[0].user.id !== data.currentUser!.id
+      ) {
+        return false;
+      } else if (
+        involvementFilter === "Forums I Participated In" &&
+        !forum.messages.some(
           (message) => message.user.id === data.currentUser!.id,
-        );
+        )
+      ) {
+        return false;
       }
 
       return (
