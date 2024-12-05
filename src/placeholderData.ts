@@ -170,7 +170,7 @@ const placeholderUser2: UserType = {
     "https://www.fakepersongenerator.com/Face/male/male1085778558166.jpg",
   username: "Sergio Barnes",
   status: "offline",
-  leaderGroupIds: [3, 4, 7, 6, 2],
+  leaderGroupIds: [0, 1, 2, 3, 4, 6, 7],
   memberGroupIds: [5, 8],
   rsvpIds: [],
   seenForumIds: [],

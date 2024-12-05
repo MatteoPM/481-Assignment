@@ -194,24 +194,33 @@ function Group() {
               />
 
               {!group.isCourse && (
-                <div className="mt-3 grid grid-cols-2 items-center gap-2 rounded-md scrollbar">
-                  <User
-                    user={
-                      data.users.find((user) => user.id === group.leaderId)!
-                    }
-                  />
-                  <Crown className="size-4" />
-                </div>
+                <>
+                  <div className="mt-2 text-sm text-muted-foreground">
+                    Leader
+                  </div>
+                  <div className="mt-1 grid grid-cols-2 items-center gap-2 rounded-md scrollbar">
+                    <User
+                      user={
+                        data.users.find((user) => user.id === group.leaderId)!
+                      }
+                    />
+                  </div>
+                </>
               )}
 
               {nonLeaders.length > 0 && (
-                <div className="mt-4 grid grid-cols-2 gap-2 rounded-md scrollbar">
-                  {data.users
-                    .filter((user) => user.memberGroupIds.includes(group.id))
-                    .map((user) => (
-                      <User key={user.id} user={user} />
-                    ))}
-                </div>
+                <>
+                  <div className="mt-2 text-sm text-muted-foreground">
+                    Others
+                  </div>
+                  <div className="mt-1 grid grid-cols-2 gap-2 rounded-md scrollbar">
+                    {data.users
+                      .filter((user) => user.memberGroupIds.includes(group.id))
+                      .map((user) => (
+                        <User key={user.id} user={user} />
+                      ))}
+                  </div>
+                </>
               )}
 
               <div className="mt-3 flex gap-3">
