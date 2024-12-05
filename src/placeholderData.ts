@@ -312,7 +312,8 @@ const groups: Group[] = [
     name: "Caffeine Crusaders",
     description:
       "If you’re a coffee enthusiast, Caffeine Crusaders is the group for you! We explore Calgary’s best coffee spots, talk all things caffeine, and host study jams to keep the energy flowing. Join us for a unique blend of coffee culture and camaraderie!",
-    bannerUrl: BASE_URL + "/Caffeine Crusaders.jpg",
+    bannerUrl:
+      "https://media.istockphoto.com/id/1007194468/photo/people-drinking-coffee-high-angle-view.jpg?s=612x612&w=0&k=20&c=dIdvLUd5X_QB1Zjf0noSuno0OpZqyIN4uhzL0mLi-u8=",
     applicationIds: [],
     leaderId: 0,
   },
@@ -379,48 +380,92 @@ const groups: Group[] = [
 const forums: Forum[] = [
   {
     id: 0,
-    title: "I LOVE COFFEE",
+    title: "Best Type of Coffee",
     groupId: 5,
     messages: [
       {
         user: placeholderUser,
-        message: "RRRRRGH COFFEEEEEE",
+        message:
+          "What’s the best type of coffee? I’m torn between a classic espresso and a good ol’ cappuccino.",
         dateTime: new Date(Date.now() - 2 * hour).toISOString(),
       },
       {
         user: testUser,
-        message: "Bro chill",
+        message:
+          "Espresso, hands down! Pure flavor, no distractions. Plus, you can really taste the bean’s profile.",
         dateTime: new Date(Date.now() - 0.5 * hour).toISOString(),
+      },
+      {
+        user: placeholderUser2,
+        message:
+          "Espresso is great, but nothing beats a pour-over for me. The flavors are so clean and complex—totally different vibe!",
+        dateTime: new Date(Date.now() - 2 * hour).toISOString(),
+      },
+      {
+        user: placeholderUser,
+        message: "Y'all are heretics.",
+        dateTime: new Date(Date.now() - 1 * hour).toISOString(),
       },
     ],
   },
   {
     id: 1,
-    title: "How to Create Minecraft?",
+    title: "Getting Into Web Dev - Help?",
     groupId: 0,
     messages: [
       {
         user: placeholderUser2,
         message:
-          "like i learned how to print hellow world so i think i'm ready to make minecraft?",
+          "Just starting web dev and feeling lost! Should I focus on tools, languages, or frameworks first?",
         dateTime: new Date(Date.now() - 1.5 * day).toISOString(),
       },
       {
-        user: placeholderUser3,
-        message: 'Just do "import Minecraft" smh my head',
-        dateTime: new Date(Date.now() - 1.4 * day).toISOString(),
+        user: placeholderUser,
+        message:
+          "Start with HTML, CSS, and JavaScript. Learn the basics first; frameworks like React come later. Build small projects to practice!",
+        dateTime: new Date(Date.now() - 1.2 * day).toISOString(),
+      },
+      {
+        user: testUser,
+        message:
+          "Agree! Also, learn Git for version control. Once you’re good with basics, try responsive design and deployment tools like Netlify.",
+        dateTime: new Date(Date.now() - 1.1 * day).toISOString(),
       },
     ],
   },
   {
     id: 2,
-    title: "Dictionary Speed-reading",
+    title: '"The Night Circus"',
     groupId: 3,
     messages: [
       {
         user: placeholderUser3,
         message:
-          "If I learned how to read faster, could I theoretically speed-read a dictionary and learn the entire English vocabulary?",
+          "Just finished The Night Circus! What did you all think? I loved the magical atmosphere, but I’m still processing that ending.",
+        dateTime: new Date(Date.now() - 1.5 * day).toISOString(),
+      },
+      {
+        user: testUser,
+        message:
+          "Same here! The writing was so vivid, it felt like I was there. But the romance felt a bit underdeveloped, don’t you think?",
+        dateTime: new Date(Date.now() - 1.5 * day).toISOString(),
+      },
+      {
+        user: placeholderUser,
+        message:
+          "Agreed. I loved the magic and the circus itself—it was like another character! But I wanted more action in the plot.",
+        dateTime: new Date(Date.now() - 1.5 * day).toISOString(),
+      },
+      {
+        user: placeholderUser3,
+        message:
+          "Good point about the plot. It was more about the vibe than the story. Who was your favorite character?",
+        dateTime: new Date(Date.now() - 1.5 * day).toISOString(),
+      },
+      {
+        user: testUser,
+        message:
+          "Celia, for sure. Her journey with the magic and her dad was so intense.",
         dateTime: new Date(Date.now() - 1.5 * day).toISOString(),
       },
     ],
