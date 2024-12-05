@@ -64,6 +64,21 @@ const EventFilter = ({
           </Select>
 
           <h2 className="mt-4 font-medium">Categories</h2>
+
+          <div className="flex gap-2">
+            <button
+              className="text-sm font-semibold text-primary"
+              onClick={() => setCategories(eventCategories)}
+            >
+              All
+            </button>
+            <button
+              className="text-sm font-semibold text-primary"
+              onClick={() => setCategories([])}
+            >
+              None
+            </button>
+          </div>
           <div className="mt-2 grid grid-cols-2 gap-y-1">
             {eventCategories.map((category) => (
               <label key={category} className="flex items-center space-x-2">
