@@ -6,12 +6,21 @@ import {
   AccordionItem,
 } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import { useToast } from "@/hooks/use-toast";
 import { useData } from "@/hooks/useData";
 import { cn } from "@/lib/utils";
 import GroupCard from "@/pages/groups/_components/groupCard";
 import { CheckCircle, ChevronDown, Users } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
+
 import { useNavigate, useParams } from "react-router-dom";
 import ChatMessage from "../_components/chatMessage";
 import MessageInput from "../_components/messageInput";
@@ -23,6 +32,7 @@ function Forum() {
   const ref = useRef<HTMLDivElement>(null);
   const [accordion, setAccordion] = useState("");
   const { toast } = useToast();
+  const [deleteConfirmOpen, setDeleteConfirmOpen] = useState(false);
 
   const forum = data.forums.find((forum) => forum.id === Number(forumId));
 
@@ -119,21 +129,7 @@ function Forum() {
                       className="mt-4 w-full"
                       variant={"destructive"}
                       onClick={() => {
-                        navigate(-1);
-                        setData((draft) => {
-                          const forumId = forum.id;
-                          draft.forums = draft.forums.filter(
-                            (forum) => forum.id !== forumId,
-                          );
-                        });
-                        toast({
-                          title: (
-                            <div className="flex items-center gap-2">
-                              <CheckCircle className="text-green-400" />
-                              <span>Forum deleted successfully.</span>
-                            </div>
-                          ),
-                        });
+                        setDeleteConfirmOpen(true);
                       }}
                     >
                       Delete Forum
@@ -158,6 +154,47 @@ function Forum() {
           <MessageInput sendMessage={sendMessage} className="mt-4 grow-0" />
         </div>
       </Page>
+      <Dialog open={deleteConfirmOpen} onOpenChange={setDeleteConfirmOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Delete Forum?</DialogTitle>
+            <DialogDescription>This action cannot be undone.</DialogDescription>
+          </DialogHeader>
+          <DialogFooter>
+            <Button
+              onClick={() => {
+                setDeleteConfirmOpen(false);
+              }}
+              variant={"outline"}
+            >
+              Cancel
+            </Button>
+            <Button
+              onClick={() => {
+                navigate(-1);
+                setData((draft) => {
+                  const forumId = forum.id;
+                  draft.forums = draft.forums.filter(
+                    (forum) => forum.id !== forumId,
+                  );
+                });
+                toast({
+                  title: (
+                    <div className="flex items-center gap-2">
+                      <CheckCircle className="text-green-400" />
+                      <span>Forum deleted successfully.</span>
+                    </div>
+                  ),
+                });
+
+                setDeleteConfirmOpen(false);
+              }}
+            >
+              Confirm
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </>
   );
 }
