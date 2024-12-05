@@ -173,10 +173,9 @@ function Forum() {
               onClick={() => {
                 navigate(-1);
                 setData((draft) => {
-                  const forumId = forum.id;
-                  draft.forums = draft.forums.filter(
-                    (forum) => forum.id !== forumId,
-                  );
+                  draft.forums.find(
+                    (forum) => forum.id === Number(forumId),
+                  )!.deleted = true;
                 });
                 toast({
                   title: (

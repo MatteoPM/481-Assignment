@@ -40,6 +40,7 @@ export type Forum = {
   title: string;
   groupId: number;
   messages: ChatMessageType[];
+  deleted?: boolean;
 };
 
 export type PrivateChat = {

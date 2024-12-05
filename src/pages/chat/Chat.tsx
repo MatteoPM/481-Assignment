@@ -31,6 +31,10 @@ function Chat() {
 
   const filteredForums = data.forums
     .filter((forum) => {
+      if (forum.deleted) {
+        return false;
+      }
+
       const group = data.groups.find((group) => group.id === forum.groupId)!;
 
       const isUserInGroup = data
