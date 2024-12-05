@@ -24,8 +24,30 @@ The terminal will now tell you which port to use when navigating to localhost in
 
 As requested, we have several pre-planned sequences of operations you may perform on the application to get a feel for its functions.  To get the full uCal Engage experience, please perform the following walkthroughs in order!
 #
-#### 1. Starting a Club
-When you first visit the application, you'll be logged in as "Joseph Ballance", our primary user for demo purposes.  Joseph has a passion for photography, and thus has an interest in started a photography club for likeminded students.
+#### 1. Sending Direct Messages
+When you first visit the application, you'll be logged in as "Joseph Ballance", our primary user for demo purposes.  Joseph happens to have already received a DM from a friend, as indicated by the red notification dots.  We'll first respond to our friend, then message some others.
+
+Steps:\
+    1. Click the "Chat" button from the bottom nav bar\
+    2. Select the "Private Messages" section at the top of the screen\
+    3. Click on "Debbie Hopkins" (note that Debbie's name is bolded at first due to the unread message)\
+    4. Click the text box at the bottom of the screen\
+    5. Type a message, in this case "I hereby declare that I'm going to give this group 100% on this entire project and this is legally binding agreement, no take-backs"\
+    6. Hit the enter key or click the send button (paper airplane icon)\
+    7. Click the back arrow in the top left of the screen\
+    8. Click the green plus icon next to the search bar\
+    9. Because there are far too many users to count (3), we'll search for a friend by typing "Sergio" in the search bar\
+    10. Click the checkbox to the right of Sergio's name\
+    11. Clear our search from the bar by clicking the circular "x" button in the search bar\
+    12. Click the checkbox to the right of Brenda Pease's name\
+    13. Click the send icon (paper airplane) on the bottom right of the screen\
+    14. Click the text box at the bottom of the screen\
+    15. Type "Hi everyone"\
+    16. Hit the enter key or click the send button
+    17. Click the back arrow in the top left of the screen
+#
+#### 2. Starting a Club
+Joseph has a passion for photography, and thus has an interest in started a photography club for likeminded students.
 
 Steps:\
     1. Click the "Groups" button from the bottom nav bar\
@@ -38,9 +60,11 @@ Steps:\
     8. In the "Description" field, type "Photography club for my friends!"\
     9. Click the button next to the "Private Club" label, enabling it\
     10. Click the "Create" button\
-    11. Click the back arrow in the top left of the screen
+    11. Click the white "Stats" button to get a feel for how statistics would appear\
+    12. Feel free to scroll through these demo graphs (not reflecting real data)\
+    13. Click the back arrow in the top left of the screen
 #
-#### 2. Logging In & Out
+#### 3. Logging In & Out
 We have several accounts enabled for this demonstration.  We'll first walk you through signing out of the "Joseph Ballance" account and into the "Debbie Hopkins" account.
 
 Steps:\
@@ -50,4 +74,23 @@ Steps:\
     4. Demo emails are at the bottom of the screen, copy Debbie's ("debbie.hopkins@ucalgary.ca") and paste it into the text field\
     5. Click the "Next" button
 #
-#### 3. Joining a Club
+#### 4. Joining Clubs
+It just so happens that Debbie also has a keen interest in photography and is also on the lookout for exciting clubs to join.  Here we'll get to experience joining two clubs that already exists, both private and public.  Note that Courses function the same as clubs except members cannot join or leave them, as they are auto-enrolled in whichever courses they are a student of my.ucalgary.ca
+
+Steps:\
+    1. Click the "Groups" button from the bottom nav bar\
+    2. Select the "Clubs" section at the top of the screen\
+    3. Scroll down until you find a club that interests you ("Shutter Bugs" in this case)\
+    4. Click the "Shutter Bugs" club\
+    5. Click the "Request to Join" button\
+    6. Click "Confirm" on the popup\
+    7. Click the "Groups" button from the bottom nav bar\
+    8. Select the "Clubs" section at the top of the screen\
+    9. Scroll down until you find another club that interests you ("Bookmarked" in this case)\
+    10. Click the "Bookmarked" club\
+    11. Click the "Join" button\
+    12. Click "Confirm" on the popup\
+    13. Note that Debbie is now included under the "Members" heading\
+    14. Feel free to scroll through and check out this event's forum(s) and event(s)
+#
+#### 5. 
