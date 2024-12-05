@@ -184,7 +184,7 @@ const placeholderUser3: UserType = {
   username: "Brenda Pease",
   status: "away",
   leaderGroupIds: [],
-  memberGroupIds: [],
+  memberGroupIds: [11],
   rsvpIds: [],
   seenForumIds: [],
   bio: "Nice to meet you!",
