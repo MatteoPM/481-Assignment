@@ -333,10 +333,10 @@ function Group() {
                 </button>
                 <Link
                   to={`/chat/create?groupId=${group.id}`}
-                  className="flex items-center gap-1 rounded-full bg-white p-1 shadow disabled:opacity-50"
+                  className="flex items-center gap-1 rounded-full bg-white p-1 pr-2 text-sm text-green-400 shadow disabled:opacity-50"
                 >
-                  <Plus className="size-[20px] text-green-400" />
-                  <span className="pr-1 text-green-400">Create</span>
+                  <Plus className="size-[20px]" />
+                  <span className="">Create</span>
                 </Link>
               </div>
 
@@ -380,10 +380,10 @@ function Group() {
                     {group.leaderId === data.currentUser.id && (
                       <Link
                         to={`/events/create?groupId=${group.id}`}
-                        className="flex items-center gap-1 rounded-full bg-white p-1 shadow disabled:opacity-50"
+                        className="flex items-center gap-1 rounded-full bg-white p-1 pr-2 text-sm text-green-400 shadow disabled:opacity-50"
                       >
-                        <Plus className="size-[20px] text-green-400" />
-                        <span className="pr-1 text-green-400">Create</span>
+                        <Plus className="size-[20px]" />
+                        <span className="">Create</span>
                       </Link>
                     )}
                   </div>
