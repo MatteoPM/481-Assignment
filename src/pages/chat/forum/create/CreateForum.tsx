@@ -66,7 +66,15 @@ function CreateForum() {
 
   const group = data.groups.find((group) => group.id === groupId);
 
-  const clubs = data.groups;
+  const clubs = data.groups.filter((group) => {
+    if (group.isPrivate) {
+      return data
+        .currentUser!.leaderGroupIds.concat(data.currentUser!.memberGroupIds)
+        .includes(group.id);
+    }
+
+    return true;
+  });
 
   const createForum = (values: z.infer<typeof formSchema>) => {
     const now = new Date();
