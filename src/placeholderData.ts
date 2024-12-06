@@ -14,6 +14,7 @@ export type UserType = {
   seenForumIds: number[];
   bio: string;
   notifications: Notification[];
+  isSuMember?: boolean;
 };
 
 export type ChatMessageType = {
@@ -190,6 +191,7 @@ const placeholderUser3: UserType = {
   seenForumIds: [],
   bio: "Nice to meet you!",
   notifications: [],
+  isSuMember: true,
 };
 
 const users = [testUser, placeholderUser, placeholderUser2, placeholderUser3];

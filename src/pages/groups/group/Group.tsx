@@ -158,14 +158,15 @@ function Group() {
                     </span>
                   </Button>
                 )}
-              {group.leaderId === data.currentUser.id && (
-                <Button size={"sm"} variant={"outline"} asChild>
-                  <Link to={`/groups/${group.id}/stats`}>
-                    <ChartArea className="size-[20px]" />
-                    <span className="leading-none">Stats</span>
-                  </Link>
-                </Button>
-              )}
+              {group.leaderId === data.currentUser.id ||
+                (data.currentUser!.isSuMember && (
+                  <Button size={"sm"} variant={"outline"} asChild>
+                    <Link to={`/groups/${group.id}/stats`}>
+                      <ChartArea className="size-[20px]" />
+                      <span className="leading-none">Stats</span>
+                    </Link>
+                  </Button>
+                ))}
             </div>
           )}
 
