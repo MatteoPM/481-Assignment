@@ -15,6 +15,7 @@ import { useToast } from "@/hooks/use-toast";
 import { useData } from "@/hooks/useData";
 import ForumCard from "@/pages/chat/_components/forumCard";
 import EventCard from "@/pages/events/_components/eventCard";
+import { UserType } from "@/placeholderData";
 import {
   BookOpenText,
   Calendar,
@@ -42,6 +43,9 @@ function Group() {
   const [joinRequestConfirmOpen, setJoinRequestConfirmOpen] = useState(false);
   const [joinConfirmOpen, setJoinConfirmOpen] = useState(false);
   const [leaveConfirmOpen, setLeaveConfirmOpen] = useState(false);
+  const [acceptJoinOpen, setAcceptJoinOpen] = useState(false);
+  const [rejectJoinOpen, setRejectJoinOpen] = useState(false);
+  const [joiningUser, setJoiningUser] = useState<UserType | null>(null);
   const { toast } = useToast();
 
   if (!group) {
@@ -263,16 +267,8 @@ function Group() {
                               variant={"destructive"}
                               className="ml-auto"
                               onClick={() => {
-                                setData((draft) => {
-                                  const group = draft.groups.find(
-                                    (group) => group.id === Number(groupId),
-                                  )!;
-
-                                  group.applicationIds =
-                                    group.applicationIds.filter(
-                                      (id) => id !== user.id,
-                                    );
-                                });
+                                setJoiningUser(user);
+                                setRejectJoinOpen(true);
                               }}
                             >
                               <X />
@@ -280,20 +276,8 @@ function Group() {
                             <Button
                               size={"icon"}
                               onClick={() => {
-                                setData((draft) => {
-                                  draft.users
-                                    .find((user) => user.id === user.id)!
-                                    .memberGroupIds.push(Number(groupId));
-
-                                  const group = draft.groups.find(
-                                    (group) => group.id === Number(groupId),
-                                  )!;
-
-                                  group.applicationIds =
-                                    group.applicationIds.filter(
-                                      (id) => id !== user.id,
-                                    );
-                                });
+                                setJoiningUser(user);
+                                setAcceptJoinOpen(true);
                               }}
                             >
                               <Check />
@@ -523,6 +507,100 @@ function Group() {
                     description: `You are no longer a member of ${group.name}.`,
                   });
                   // setJoinRequestSentOpen(true);
+                }}
+              >
+                Confirm
+              </Button>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
+        <Dialog open={acceptJoinOpen} onOpenChange={setAcceptJoinOpen}>
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle>
+                Accept {joiningUser!.username.split(" ")[0]}'s join request?
+              </DialogTitle>
+            </DialogHeader>
+            <DialogFooter>
+              <Button
+                onClick={() => {
+                  setAcceptJoinOpen(false);
+                }}
+                variant={"outline"}
+              >
+                Cancel
+              </Button>
+              <Button
+                onClick={() => {
+                  setData((draft) => {
+                    draft.users
+                      .find((user) => user.id === joiningUser!.id)!
+                      .memberGroupIds.push(Number(groupId));
+
+                    const group = draft.groups.find(
+                      (group) => group.id === Number(groupId),
+                    )!;
+
+                    group.applicationIds = group.applicationIds.filter(
+                      (id) => id !== joiningUser!.id,
+                    );
+                  });
+
+                  setAcceptJoinOpen(false);
+                  toast({
+                    title: (
+                      <div className="flex items-center gap-2">
+                        <CheckCircle className="text-green-400" />
+                        <span>User accepted successfully</span>
+                      </div>
+                    ),
+                    description: `${joiningUser!.username} is now a member of ${group.name}.`,
+                  });
+                }}
+              >
+                Confirm
+              </Button>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
+        <Dialog open={rejectJoinOpen} onOpenChange={setRejectJoinOpen}>
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle>
+                Reject {joiningUser!.username.split(" ")[0]}'s join request?
+              </DialogTitle>
+            </DialogHeader>
+            <DialogFooter>
+              <Button
+                onClick={() => {
+                  setRejectJoinOpen(false);
+                }}
+                variant={"outline"}
+              >
+                Cancel
+              </Button>
+              <Button
+                onClick={() => {
+                  setData((draft) => {
+                    const group = draft.groups.find(
+                      (group) => group.id === Number(groupId),
+                    )!;
+
+                    group.applicationIds = group.applicationIds.filter(
+                      (id) => id !== joiningUser!.id,
+                    );
+                  });
+
+                  setRejectJoinOpen(false);
+                  toast({
+                    title: (
+                      <div className="flex items-center gap-2">
+                        <CheckCircle className="text-green-400" />
+                        <span>User rejected successfully</span>
+                      </div>
+                    ),
+                    // description: `${joiningUser!.username} is now a member of ${group.name}.`,
+                  });
                 }}
               >
                 Confirm
