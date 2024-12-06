@@ -60,7 +60,7 @@ const UserDrawer = () => {
               description={
                 'As a member of the Student Union, you are able to access the stats of any club. On a club\'s page, tap the "Stats" button. '
               }
-              className="bg-purple-400/10 text-purple-400"
+              className="bg-yellow-400/10 text-yellow-400"
             />
           )}
         </div>
