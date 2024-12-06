@@ -78,10 +78,13 @@ const UserDrawer = () => {
           </span>
         </Link>
 
-        <p className="p-4 text-sm text-muted-foreground">
-          As a member of the Student Union, you are able to access the stats of
-          any club. On a club's page, tap the "Stats" button.
-        </p>
+        {data.currentUser!.isSuMember && (
+          <p className="p-4 text-sm text-muted-foreground">
+            {" "}
+            As a member of the Student Union, you are able to access the stats
+            of any club. On a club's page, tap the "Stats" button.
+          </p>
+        )}
 
         <div className="mt-auto">
           <button
