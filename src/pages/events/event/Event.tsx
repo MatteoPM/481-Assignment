@@ -218,7 +218,7 @@ function Event() {
           {group.leaderId === data.currentUser!.id && (
             <div className="sticky bottom-4 mt-auto">
               <Button
-                className="mt-4 w-full bg-orange-400"
+                className="mt-4 w-full bg-orange-400 hover:bg-orange-400/90"
                 onClick={() => setShowUnderDevelopment(true)}
                 variant={"destructive"}
               >
