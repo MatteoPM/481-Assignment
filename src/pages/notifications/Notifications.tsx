@@ -101,7 +101,7 @@ function Notifications() {
         <Button
           size={"sm"}
           variant={"destructive"}
-          className="mb-4 ml-auto mr-2 inline-block"
+          className="mb-4 ml-4 inline-block self-start"
           onClick={() => setClearConfirmOpen(true)}
           disabled={data.currentUser!.notifications.length === 0}
         >
