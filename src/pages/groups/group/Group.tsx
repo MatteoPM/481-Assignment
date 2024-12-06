@@ -477,7 +477,9 @@ function Group() {
             <DialogHeader>
               <DialogTitle>Leave {group.name}?</DialogTitle>
               <DialogDescription>
-                You may join again at any time.
+                {group.isPrivate &&
+                  "You must apply again if you want to re-join this club."}
+                {!group.isPrivate && "You may join again at any time."}
               </DialogDescription>
             </DialogHeader>
             <DialogFooter>
