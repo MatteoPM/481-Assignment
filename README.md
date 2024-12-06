@@ -41,7 +41,7 @@ Data is persisted for the duration of your browser session. If you need to reset
 3. Refresh to regenerate the default data.
 
 
-#### 1. Sending Direct Messages
+### 1. Sending Direct Messages
 When you first visit the application, you'll be logged in as "Joseph Ballance", our primary user for demo purposes.  Joseph happens to have already received a DM from a friend, as indicated by the red notification dots.  We'll first respond to our friend, then message some others.
 
 Steps:\
@@ -63,7 +63,7 @@ Steps:\
     16. Hit the enter key or click the send button\
     17. Click the back arrow in the top left of the screen
 
-#### 2. Manage Notifications
+### 2. Manage Notifications
 Joseph wants to stay up-to-date on the happenings in the app, so he checks his notifications.
 
 Steps:
@@ -73,7 +73,7 @@ Steps:
 4. Dismiss the first notification by swiping it left.
 5. Dismiss the rest by clicking the "Clear All" buttona and clicking "Confirm".
     
-#### 3. Starting a Club
+### 3. Starting a Club
 Joseph has a passion for photography, and thus has an interest in started a photography club for likeminded students.
 
 Steps:\
@@ -92,7 +92,7 @@ Steps:\
     13. Click the back arrow in the top left of the screen
 
 
-#### 4. Creating an Event
+### 4. Creating an Event
 Joseph wants to host the first ever photography club meeting for all of its members (totaling 0, excluding himself)!
 
 Steps:\
@@ -110,7 +110,7 @@ Steps:\
     12. Click the "Create" button. Whoops, you get error feedback saying the end time should be after the start time! Correct the end time to 6 PM.
     13. Click the "Create" button once more. You are now brought to the event page.
 
-#### 5. Logging In & Out
+### 5. Logging In & Out
 We have several accounts enabled for this demonstration.  We'll first walk you through signing out of the "Joseph Ballance" account and into the "Debbie Hopkins" account.
 
 Steps:\
@@ -120,7 +120,7 @@ Steps:\
     4. Demo emails are at the bottom of the screen, copy Debbie's ("debbie.hopkins@ucalgary.ca") and paste it into the text field\
     5. Click the "Next" button
 
-#### 6. Joining Clubs
+### 6. Joining Clubs
 It just so happens that Debbie also has a keen interest in photography and is also on the lookout for exciting clubs to join.  Here we'll get to experience joining two clubs that already exists, both private and public.  Note that Courses function the same as clubs except that members cannot join or leave them, as they are auto-enrolled in whichever courses they are a student of my.ucalgary.ca
 
 Steps:\
@@ -138,8 +138,9 @@ Steps:\
     12. Click "Confirm" on the popup\
     13. Note that Debbie is now included under the "Members" heading\
     14. Feel free to scroll through and check out this event's forum(s) and event(s)
-#
-#### 7. Forum Creation
+
+
+### 7. Forum Creation
 Debbie has some thoughts on a new book she's reading and wants to discuss it with other Bookmarked members!
 
 Steps:\
@@ -151,8 +152,9 @@ Steps:\
     6. In the "Your Message" field, type a message to kickstart the conversation.  We'll say "Why did the caterpillar follow up chocolate cake and ice cream with Swiss cheese?"\
     7. Click the "Create" button. You are then brought to the forum you just created.
     8. Click the back arrow in the top left of the screen
-#
-#### 8. RSVPing for an Event
+
+
+### 8. RSVPing for an Event
 Debbie happens to be free any day this month and happens to love coffee.
 
 Steps:\
@@ -162,7 +164,7 @@ Steps:\
     4. Close the filters by dragging the drawer down or clicking the empty area above it.
     5. Click on the search bar and type "coffee"\
     6. Click on the "Late Night Study Jam with Coffee Tasting" event\
-    7. Scroll down and view the event details. Show the event location by clicking "View on map", then press the X on the top-right to close the map.
+    7. Scroll down and view the event details. Show the event location by clicking "View on map", then press the X on the top-right to close the map
     8. Click the "RSVP" button\
     9. Click the "Confirm" button\
     10. Click the "Done" button\
@@ -171,4 +173,4 @@ Steps:\
     12. Select the "Your RSVPs" section at the top of the screen\
     13. Scroll through the event(s) you've chosen to attend
 
-These are the primary tasks of the app, but we have implemented more that you are free to explore. Anything we have not implemented for the sake of time will be indicated by an "Under Development" message.
+These are the primary features of the app, but we have implemented more that you are free to explore. Anything we have not implemented for the sake of time will be indicated by an "Under Development" message.
