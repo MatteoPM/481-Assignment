@@ -15,9 +15,9 @@ You can easily follow the planned walkthroughs from there, as the site is fully 
 
 However, the project document mentions "run(ing) from the installation directory" which implies you wish to test this locally.  
 
-To do so, simply clone the repo as you usually would, and navigate to the project directory.\
-From here, you can open a shell and type `npm install` (make sure you have npm installed).\
-Upon that command's completion, you can enter `npm run dev`.\
+To do so, simply clone the repo as you usually would, and navigate to the project directory.
+From here, you can open a shell and type `npm install` (make sure you have npm installed).
+Upon that command's completion, you can enter `npm run dev`.
 The terminal will now tell you which port to use when navigating to localhost in your browser, likely `http://localhost:5173`.
 
 To get the intended experience of using a mobile app, do the following:
@@ -45,7 +45,7 @@ As requested, we have several pre-planned sequences of operations you may perfor
 ### 1. Sending Direct Messages
 When you first visit the application, you'll be logged in as "Joseph Ballance", our primary user for demo purposes.  Joseph happens to have already received a DM from a friend, as indicated by the red notification dots.  We'll first respond to our friend, then message some others.
 
-Steps:\
+Steps:
 1. Click the "Chat" button from the bottom nav bar
 2. Select the "Private Messages" section at the top of the screen
 3. Click on "Debbie Hopkins" (note that Debbie's name is bolded at first due to the unread message)
@@ -124,19 +124,19 @@ Steps:
 It just so happens that Debbie also has a keen interest in photography and is also on the lookout for exciting clubs to join.  Here we'll get to experience joining two clubs that already exists, both private and public.  Note that Courses function the same as clubs except that members cannot join or leave them, as they are auto-enrolled in whichever courses they are a student of my.ucalgary.ca
 
 Steps:
-1. Click the "Groups" button from the bottom nav bar\
-2. Select the "Clubs" section at the top of the screen\
-3. Scroll down until you find a club that interests you ("Shutter Bugs" in this case)\
-4. Click the "Shutter Bugs" club\
-5. Click the "Request to Join" button\
+1. Click the "Groups" button from the bottom nav bar
+2. Select the "Clubs" section at the top of the screen
+3. Scroll down until you find a club that interests you ("Shutter Bugs" in this case)
+4. Click the "Shutter Bugs" club
+5. Click the "Request to Join" button
 6. Click "Confirm" on the popup.
-7. Click the "Groups" button from the bottom nav bar\
-8. Select the "Clubs" section at the top of the screen\
-9. Scroll down until you find another club that interests you ("Bookmarked" in this case)\
-10. Click the "Bookmarked" club\
-11. Click the "Join" button\
-12. Click "Confirm" on the popup\
-13. Note that Debbie is now included under the "Members" heading\
+7. Click the "Groups" button from the bottom nav bar
+8. Select the "Clubs" section at the top of the screen
+9. Scroll down until you find another club that interests you ("Bookmarked" in this case)
+10. Click the "Bookmarked" club
+11. Click the "Join" button
+12. Click "Confirm" on the popup
+13. Note that Debbie is now included under the "Members" heading
 14. Feel free to scroll through and check out this event's forum(s) and event(s)
 
 
