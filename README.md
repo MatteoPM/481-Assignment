@@ -67,6 +67,8 @@ Steps:
 ### 2. Manage Notifications
 Joseph wants to stay up-to-date on the happenings in the app, so he checks his notifications.
 
+**NOTE**: we did not have enough time to implement sending new notifications. If you'd like to test them again, [reset the data](#resetting).
+
 Steps:
 1. Click the user button on the top-right
 2. Click the notifications button.
