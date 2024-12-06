@@ -7,7 +7,7 @@ Daniel Park
 
 ## Using the System
 
-We strongly recommend visiting the applications hosted page: 
+We strongly recommend visiting the deployed website:
 
 https://matteopm.github.io/481-Assignment/ 
 
@@ -16,7 +16,7 @@ You can easily follow the planned walkthroughs from there, as the site is fully 
 However, the project document mentions "run(ing) from the installation directory" which implies you wish to test this locally.  
 
 To do so, simply clone the repo as you usually would, and navigate to the project directory.\
-From here, you can open a shell and type `npm install`.\
+From here, you can open a shell and type `npm install` (make sure you have npm installed).\
 Upon that command's completion, you can enter `npm run dev`.\
 The terminal will now tell you which port to use when navigating to localhost in your browser, likely `http://localhost:5173`.
 
@@ -69,7 +69,7 @@ Joseph wants to stay up-to-date on the happenings in the app, so he checks his n
 Steps:
 1. Click the user button on the top-right
 2. Click the notifications button.
-3. View the notifications. Click on each of the filter buttons to see that category of notification. Click back on All.
+3. View the notifications. Click on each of the filter buttons (Chat, Group, Event) to see that category of notification. Click back on All.
 4. Dismiss the first notification by swiping it left.
 5. Dismiss the rest by clicking the "Clear All" buttona and clicking "Confirm".
     
@@ -104,7 +104,7 @@ Steps:\
     6. In the "Event Title" field, type "1st Shutter Bugs Meetup!"\
     7. In the "Description" field, type "Can't wait to meet each and every one of you"\
     8. In the "Location" field, type "122 Baltic Avenue"\
-    9. In the "Starts" field, click the calendar icon and select December 27, 2024 at 5 PM.
+    9. In the "Starts" field, click the calendar icon and select December 27, 2024 at 5 PM. Note that the date-time selector that appears comes from your operating system. If you do this on your phone, you would get your phone's date-time picker
     10. In the "Ends" field, click the calendar icon and select  December 27, 2024 at 3 PM (uh oh).
     11. Check off the Social category.
     12. Click the "Create" button. Whoops, you get error feedback saying the end time should be after the start time! Correct the end time to 6 PM.
@@ -173,4 +173,4 @@ Steps:\
     12. Select the "Your RSVPs" section at the top of the screen\
     13. Scroll through the event(s) you've chosen to attend
 
-These are the primary features of the app, but we have implemented more that you are free to explore. Anything we have not implemented for the sake of time will be indicated by an "Under Development" message.
+These are the primary features of the app, but we have implemented more that you are free to explore. We didn't include the extra features in the steps as it would make this README far longer than it already is. Anything we have not implemented for the sake of time will be indicated by an "Under Development" message. You can reset the data (instructions above) if you would like to start over with the default data.
