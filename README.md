@@ -15,9 +15,9 @@ You can easily follow the planned walkthroughs from there, as the site is fully 
 
 However, the project document mentions "run(ing) from the installation directory" which implies you wish to test this locally.  
 
-To do so, simply clone the repo as you usually would, and navigate to the project directory.
-From here, you can open a shell and type `npm install` (make sure you have npm installed).
-Upon that command's completion, you can enter `npm run dev`.
+To do so, simply clone the repo as you usually would, and navigate to the project directory.\
+From here, you can open a shell and type `npm install` (make sure you have npm installed).\
+Upon that command's completion, you can enter `npm run dev`.\
 The terminal will now tell you which port to use when navigating to localhost in your browser, likely `http://localhost:5173`.
 
 To get the intended experience of using a mobile app, do the following:
