@@ -28,9 +28,7 @@ To get the intended experience of using a mobile app, do the following:
 3. Another bar will appear at the top of the browser window. Open the Dimensions dropdown and select iPhone SE.
    ![image](https://github.com/user-attachments/assets/7b555c8f-cf4b-4e00-bb8a-e807e36e66a3)
 
-## Planned Walkthroughs
-
-As requested, we have several pre-planned sequences of operations you may perform on the application to get a feel for its functions.  To get the full uCal Engage experience, please perform the following walkthroughs in order!
+## Resetting
 
 Data is persisted for the duration of your browser session. If you need to reset the data to its original state, do the following:
 
@@ -40,6 +38,9 @@ Data is persisted for the duration of your browser session. If you need to reset
    ![image](https://github.com/user-attachments/assets/e9052e97-2804-4a3b-ac57-b6295217bfa4)
 3. Refresh to regenerate the default data.
 
+## Planned Walkthroughs
+
+As requested, we have several pre-planned sequences of operations you may perform on the application to get a feel for its functions.  To get the full uCal Engage experience, please perform the following walkthroughs in order!
 
 ### 1. Sending Direct Messages
 When you first visit the application, you'll be logged in as "Joseph Ballance", our primary user for demo purposes.  Joseph happens to have already received a DM from a friend, as indicated by the red notification dots.  We'll first respond to our friend, then message some others.
