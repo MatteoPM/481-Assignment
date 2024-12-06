@@ -248,13 +248,14 @@ function Group() {
                     <DialogTrigger asChild>
                       <Button
                         size={"sm"}
-                        className="bg-orange-400 hover:bg-orange-400/90"
+                        className="relative bg-orange-400 hover:bg-orange-400/90"
                         disabled={group.applicationIds.length === 0}
                       >
                         <Contact className="size-[15px]" />
                         <span className="leading-none">
                           Applications ({group.applicationIds.length})
                         </span>
+                        <div className="absolute right-[-5px] top-[-5px] size-[10px] rounded-full bg-red-400"></div>
                       </Button>
                     </DialogTrigger>
                     <DialogContent className="max-w-[350px] rounded-lg">

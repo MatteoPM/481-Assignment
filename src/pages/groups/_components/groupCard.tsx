@@ -19,6 +19,9 @@ const GroupCard = ({
     return user.leaderGroupIds.concat(user.memberGroupIds).includes(group.id);
   }).length;
 
+  const hasJoinRequests =
+    group.leaderId === data.currentUser!.id && group.applicationIds.length > 0;
+
   if (compact) {
     return (
       <Link
@@ -37,7 +40,12 @@ const GroupCard = ({
           </div>
         </div>
 
-        <ChevronRight className="self-center text-stone-500" />
+        <div className="flex items-center">
+          {hasJoinRequests && (
+            <div className="size-[10px] rounded-full bg-red-400"></div>
+          )}
+          <ChevronRight className="self-center text-stone-500" />
+        </div>
       </Link>
     );
   }

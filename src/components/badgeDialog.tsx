@@ -9,6 +9,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { cn } from "@/lib/utils";
+import { Button } from "./ui/button";
 
 const BadgeDialog = ({
   label,
@@ -40,7 +41,9 @@ const BadgeDialog = ({
             <DialogDescription>{description}</DialogDescription>
           </DialogHeader>
           <DialogFooter>
-            <DialogClose>Okay</DialogClose>
+            <DialogClose asChild>
+              <Button>Okay</Button>
+            </DialogClose>
           </DialogFooter>
         </DialogContent>
       </Dialog>

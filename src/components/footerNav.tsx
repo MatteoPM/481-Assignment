@@ -11,6 +11,11 @@ const FooterNav = () => {
     .filter((dm) => dm.participantIds.includes(data.currentUser!.id))
     .some((dm) => !dm.seenIds.includes(data.currentUser!.id));
 
+  const hasJoinRequests =
+    data.groups
+      .filter((group) => group.leaderId === data.currentUser!.id)
+      .filter((group) => group.applicationIds.length > 0).length > 0;
+
   return (
     <>
       <footer className="mt-auto grid w-full grid-flow-col border-t-2 bg-white">
@@ -30,13 +35,16 @@ const FooterNav = () => {
           to={"/groups"}
           className={({ isActive }) =>
             twMerge(
-              "flex flex-col items-center py-3",
+              "relative flex flex-col items-center py-3",
               isActive && "text-primary",
             )
           }
         >
           <Users />
-          Groups
+          <span>Groups</span>
+          {hasJoinRequests && (
+            <div className="absolute right-[20px] top-[10px] size-[10px] rounded-full bg-red-400"></div>
+          )}
         </NavLink>
         <NavLink
           to={"/chat"}
@@ -47,7 +55,7 @@ const FooterNav = () => {
             )
           }
         >
-          <MessageCircleMore className="relative"></MessageCircleMore>
+          <MessageCircleMore />
           <span>Chat</span>
           {hasUnreadMessages && (
             <div className="absolute right-[20px] top-[10px] size-[10px] rounded-full bg-red-400"></div>
