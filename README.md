@@ -170,3 +170,5 @@ Steps:\
     11. Click the "Events" button from the bottom nav bar\
     12. Select the "Your RSVPs" section at the top of the screen\
     13. Scroll through the event(s) you've chosen to attend
+
+These are the primary tasks of the app, but we have implemented more that you are free to explore. Anything we have not implemented for the sake of time will be indicated by an "Under Development" message.
