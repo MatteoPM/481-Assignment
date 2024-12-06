@@ -14,6 +14,7 @@ import {
 import User from "@/components/user";
 import { useToast } from "@/hooks/use-toast";
 import { useData } from "@/hooks/useData";
+import { cn } from "@/lib/utils";
 import ForumCard from "@/pages/chat/_components/forumCard";
 import EventCard from "@/pages/events/_components/eventCard";
 import { UserType } from "@/placeholderData";
@@ -221,10 +222,17 @@ function Group() {
 
               {nonLeaders.length > 0 && (
                 <>
-                  <div className="mt-2 text-sm text-muted-foreground">
-                    Others
-                  </div>
-                  <div className="mt-1 grid grid-cols-2 gap-2 rounded-md scrollbar">
+                  {!group.isCourse && (
+                    <div className="mt-2 text-sm text-muted-foreground">
+                      Others
+                    </div>
+                  )}
+                  <div
+                    className={cn(
+                      "mt-1 grid grid-cols-2 gap-2 rounded-md scrollbar",
+                      group.isCourse && "mt-2",
+                    )}
+                  >
                     {data.users
                       .filter((user) => user.memberGroupIds.includes(group.id))
                       .map((user) => (
