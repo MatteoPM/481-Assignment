@@ -28,10 +28,7 @@ function CreateDm() {
             <SearchBar placeholder="Search users..." />
           </div>
 
-          <div className="flex items-center justify-end gap-4 px-4 text-sm text-muted-foreground">
-            <span>
-              {ids.length} user{ids.length !== 1 ? "s" : ""} selected
-            </span>
+          <div className="flex items-center gap-4 px-4 text-sm text-muted-foreground">
             <Button
               size={"icon"}
               variant={"destructive"}
@@ -41,6 +38,9 @@ function CreateDm() {
             >
               <RotateCw className="size-[18px]" />
             </Button>
+            <span>
+              {ids.length} user{ids.length !== 1 ? "s" : ""} selected
+            </span>
           </div>
 
           {filteredUsers.length > 0 && (
