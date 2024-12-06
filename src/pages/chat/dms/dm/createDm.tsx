@@ -44,17 +44,17 @@ function CreateDm() {
           </div>
 
           {filteredUsers.length > 0 && (
-            <div className="divide-y divide-solid">
+            <div className="mt-4 divide-y divide-solid border-y">
               {filteredUsers.map((user) => (
                 <label
                   key={user.id}
-                  className="flex items-center gap-2"
+                  className="flex items-center gap-2 bg-white"
                   htmlFor={`dm-${user.id}`}
                 >
-                  <div className="flex items-center gap-2 p-3 transition-colors hover:bg-muted/50">
+                  <div className="flex items-center gap-2 p-3 transition-colors">
                     <img
                       src={user.avatarUrl}
-                      className="size-[40px] rounded-full object-cover"
+                      className="size-[40px] rounded-full object-cover shadow-sm"
                     />
 
                     <div>
