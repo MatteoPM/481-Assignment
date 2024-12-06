@@ -518,7 +518,7 @@ function Group() {
           <DialogContent>
             <DialogHeader>
               <DialogTitle>
-                Accept {joiningUser!.username.split(" ")[0]}'s join request?
+                Accept {joiningUser?.username.split(" ")[0]}'s join request?
               </DialogTitle>
             </DialogHeader>
             <DialogFooter>
@@ -534,7 +534,7 @@ function Group() {
                 onClick={() => {
                   setData((draft) => {
                     draft.users
-                      .find((user) => user.id === joiningUser!.id)!
+                      .find((user) => user.id === joiningUser?.id)!
                       .memberGroupIds.push(Number(groupId));
 
                     const group = draft.groups.find(
@@ -542,7 +542,7 @@ function Group() {
                     )!;
 
                     group.applicationIds = group.applicationIds.filter(
-                      (id) => id !== joiningUser!.id,
+                      (id) => id !== joiningUser?.id,
                     );
                   });
 
@@ -554,7 +554,7 @@ function Group() {
                         <span>User accepted successfully</span>
                       </div>
                     ),
-                    description: `${joiningUser!.username} is now a member of ${group.name}.`,
+                    description: `${joiningUser?.username} is now a member of ${group.name}.`,
                   });
                 }}
               >
@@ -567,7 +567,7 @@ function Group() {
           <DialogContent>
             <DialogHeader>
               <DialogTitle>
-                Reject {joiningUser!.username.split(" ")[0]}'s join request?
+                Reject {joiningUser?.username.split(" ")[0]}'s join request?
               </DialogTitle>
             </DialogHeader>
             <DialogFooter>
@@ -587,7 +587,7 @@ function Group() {
                     )!;
 
                     group.applicationIds = group.applicationIds.filter(
-                      (id) => id !== joiningUser!.id,
+                      (id) => id !== joiningUser?.id,
                     );
                   });
 
