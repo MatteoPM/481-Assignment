@@ -8,7 +8,9 @@ import {
 import { useData } from "@/hooks/useData";
 import { cn } from "@/lib/utils";
 import { CircleHelp, LogOut, Settings } from "lucide-react";
+
 import { Link } from "react-router-dom";
+import BadgeDialog from "./badgeDialog";
 import { useUnderDevelopment } from "./contexts/UnderDevelopmentContext";
 import { Separator } from "./ui/separator";
 
@@ -51,6 +53,16 @@ const UserDrawer = () => {
           />
 
           <div className="text-xl font-semibold">{testUser.username}</div>
+          {data.currentUser!.isSuMember && (
+            <BadgeDialog
+              label="SU Member"
+              title="SU Member"
+              description={
+                'As a member of the Student Union, you are able to access the stats of any club. On a club\'s page, tap the "Stats" button. '
+              }
+              className="bg-purple-400/10 text-purple-400"
+            />
+          )}
         </div>
 
         <Link
@@ -77,14 +89,6 @@ const UserDrawer = () => {
             {unreadNotifications.length}
           </span>
         </Link>
-
-        {data.currentUser!.isSuMember && (
-          <p className="p-4 text-sm text-muted-foreground">
-            {" "}
-            As a member of the Student Union, you are able to access the stats
-            of any club. On a club's page, tap the "Stats" button.
-          </p>
-        )}
 
         <div className="mt-auto">
           <button

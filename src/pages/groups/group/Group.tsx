@@ -1,3 +1,4 @@
+import BadgeDialog from "@/components/badgeDialog";
 import Page from "@/components/page";
 import SubHeader from "@/components/subHeader";
 import { Button } from "@/components/ui/button";
@@ -97,9 +98,14 @@ function Group() {
           <div className="mb-4 border-b pb-4">
             <h2 className="text-2xl font-bold">{group.name}</h2>
             {group.isPrivate && (
-              <span className="rounded-full bg-purple-400/10 px-2 py-1 text-xs text-purple-400">
-                Private
-              </span>
+              <BadgeDialog
+                label="Private"
+                title="Private Club"
+                description={
+                  "This club is private and requires an application to join. Members, forums, and events in this club are only visible to its members."
+                }
+                className="bg-purple-400/10 text-purple-400"
+              />
             )}
           </div>
 
