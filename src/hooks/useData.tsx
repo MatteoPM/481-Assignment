@@ -35,11 +35,11 @@ export const DataProvider = ({ children }: { children: ReactNode }) => {
 
       setData(data);
 
-      setData((draft) => {
-        draft.currentUser = draft.users.find(
-          (user) => user.id === data.currentUser!.id,
-        )!;
-      });
+      // setData((draft) => {
+      //   draft.currentUser = draft.users.find(
+      //     (user) => user.id === data.currentUser!.id,
+      //   )!;
+      // });
     } else {
       setData(defaultData);
     }

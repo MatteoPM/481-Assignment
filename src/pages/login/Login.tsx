@@ -7,23 +7,59 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormMessage,
+} from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useData } from "@/hooks/useData";
 import { BASE_URL } from "@/placeholderData";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { ArrowRight } from "lucide-react";
 import { useState } from "react";
+import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import { z } from "zod";
+
+const formSchema = z.object({
+  email: z.string().min(1, { message: "Email is Required." }).email({
+    message: "Email is not valid.",
+  }),
+});
 
 const Login = () => {
   const { data, setData } = useData();
   const [step, setStep] = useState(1);
-  const [email, setEmail] = useState("");
   const navigate = useNavigate();
   const { setShowUnderDevelopment } = useUnderDevelopment();
+
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      email: "",
+    },
+  });
 
   if (data.currentUser) {
     navigate("/");
   }
+
+  const submitEmail = (values: z.infer<typeof formSchema>) => {
+    setData((draft) => {
+      const user = draft.users.find((user) => user.email === values.email);
+
+      if (user) {
+        draft.currentUser = user;
+      } else {
+        form.setError("email", {
+          message: "Email does not exist. (use one of the emails below)",
+        });
+      }
+    });
+  };
 
   if (step === 1) {
     return (
@@ -63,51 +99,58 @@ const Login = () => {
     return (
       <div className="flex h-full flex-col items-center justify-center p-4">
         <Card className="w-full max-w-md">
-          <CardHeader className="text-center">
-            <CardTitle className="">
-              {/* Pretend you're going through the UofC SSO... */}
-            </CardTitle>
+          <CardHeader className="pb-0 text-center">
+            <CardTitle className="sr-only"></CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
-            <div className="mx-auto">
-              <img
-                src="https://aadcdn.msauthimages.net/dbd5a2dd-jbenuqrdektjjix2vbx-4j3kuj-pick7-wpf7gg39fm/logintenantbranding/0/bannerlogo?ts=638392464903350491"
-                alt="University of Calgary logo"
-                className="w-[150px] object-contain"
-              />
+            <Form {...form}>
+              <form onSubmit={form.handleSubmit(submitEmail)}>
+                <div className="mx-auto">
+                  <img
+                    src="https://aadcdn.msauthimages.net/dbd5a2dd-jbenuqrdektjjix2vbx-4j3kuj-pick7-wpf7gg39fm/logintenantbranding/0/bannerlogo?ts=638392464903350491"
+                    alt="University of Calgary logo"
+                    className="w-[150px] object-contain"
+                  />
 
-              <h1 className="mt-4 text-xl font-semibold">Sign in</h1>
+                  <h1 className="mt-4 text-xl font-semibold">Sign in</h1>
 
-              <Input
-                type="text"
-                placeholder="someone@ucalgary.ca"
-                className="mt-3"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
+                  <FormField
+                    control={form.control}
+                    name="email"
+                    render={({ field }) => (
+                      <FormItem className="mt-3">
+                        {/* <FormLabel>
+                          Forum Topic<span className="text-red-400">*</span>
+                        </FormLabel> */}
+                        <FormControl>
+                          <Input
+                            placeholder="someone@ucalgary.ca"
+                            className=""
+                            {...field}
+                          />
+                        </FormControl>
+                        {/* <FormDescription>
+                    This is your public display name.
+                  </FormDescription> */}
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
 
-              <Button
-                variant={"link"}
-                className="p-0"
-                onClick={() => setShowUnderDevelopment(true)}
-              >
-                Can't access your account?
-              </Button>
-            </div>
-            <Button
-              className="w-full"
-              onClick={() => {
-                setData((draft) => {
-                  const user = draft.users.find((user) => user.email === email);
-
-                  if (user) {
-                    draft.currentUser = user;
-                  }
-                });
-              }}
-            >
-              Next
-            </Button>
+                  <Button
+                    variant={"link"}
+                    className="p-0"
+                    onClick={() => setShowUnderDevelopment(true)}
+                    type="button"
+                  >
+                    Can't access your account?
+                  </Button>
+                </div>
+                <Button className="w-full" type="submit">
+                  Next
+                </Button>
+              </form>
+            </Form>
           </CardContent>
           <CardFooter className="text-start text-xs text-gray-500">
             <img
